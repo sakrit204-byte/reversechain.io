@@ -111,6 +111,36 @@ CREATE TABLE IF NOT EXISTS `{prefix}rc_module_flags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ─────────────────────────────────────────────────────────────────────────────
+-- Legal notices and disclosures, versioned per locale. [M§4]
+--
+-- The mandatory no-offer disclosure lives here rather than in a template, for
+-- two reasons. Legal review will revise the wording, and that must not require
+-- a code deployment. And consent evidence has to be reproducible: when a
+-- registrant is asked years later what they agreed to, the platform must be
+-- able to show the exact text that was on screen on that date, which is only
+-- possible if every version is retained.
+-- ─────────────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `{prefix}rc_legal_notices` (
+  `id`                BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `key`               VARCHAR(64)     NOT NULL,
+  `locale`            VARCHAR(10)     NOT NULL DEFAULT 'en',
+  `version`           INT UNSIGNED    NOT NULL DEFAULT 1,
+  `title`             VARCHAR(255)    NOT NULL,
+  `body`              LONGTEXT        NOT NULL,
+  `source_reference`  VARCHAR(255)    NULL,
+  `publication_state` ENUM('draft','under_review','approved','published','unpublished','archived') NOT NULL DEFAULT 'draft',
+  `effective_from`    DATETIME        NULL,
+  `effective_to`      DATETIME        NULL,
+  `approved_by`       BIGINT UNSIGNED NULL,
+  `approved_at`       DATETIME        NULL,
+  `created_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`        DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_notice_locale_version` (`key`,`locale`,`version`),
+  KEY `idx_notice_state` (`key`,`publication_state`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ─────────────────────────────────────────────────────────────────────────────
 -- Jurisdiction controls. [M§5]
 -- Default is 'undetermined': the permitted-jurisdiction list is owner and
 -- adviser input that has not been supplied, and missing information is never
