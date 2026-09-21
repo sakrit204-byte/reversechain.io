@@ -23,17 +23,30 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 # --- PHP extensions ----------------------------------------------------------
+# opcache is already compiled into the official WordPress image; installing it
+# again produces "Cannot load Zend OPcache - it was already loaded" on every
+# invocation.
 RUN set -eux; \
     docker-php-ext-configure intl; \
-    docker-php-ext-install -j"$(nproc)" zip intl opcache bcmath
+    docker-php-ext-install -j"$(nproc)" zip intl bcmath
 
 # --- Composer ----------------------------------------------------------------
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # --- WP-CLI ------------------------------------------------------------------
+# The web SAPI runs with proc_open() and friends disabled (see php.ini). WP-CLI
+# legitimately needs proc_open, so rather than weakening the hardening for the
+# whole container, `wp` is a wrapper that lifts the restriction for that one
+# CLI process. Apache keeps the hardened configuration.
 RUN set -eux; \
-    curl -fsSL -o /usr/local/bin/wp \
+    curl -fsSL -o /usr/local/bin/wp-cli.phar \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
+    chmod +x /usr/local/bin/wp-cli.phar; \
+    printf '%s\n' \
+        '#!/bin/sh' \
+        '# ReserveChain: run WP-CLI with the CLI-only function allowance.' \
+        'exec php -d disable_functions= -d opcache.enable_cli=0 /usr/local/bin/wp-cli.phar "$@"' \
+        > /usr/local/bin/wp; \
     chmod +x /usr/local/bin/wp; \
     wp --info --allow-root
 

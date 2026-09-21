@@ -92,13 +92,22 @@ final class Plugin {
 	 * Runtime boot. Runs on every request.
 	 */
 	public function boot(): void {
-		load_plugin_textdomain( 'reservechain', false, dirname( plugin_basename( PLUGIN_FILE ) ) . '/languages' );
+		// Translations must load on `init`, not earlier. WordPress 6.7 warns
+		// when a text domain is requested during `plugins_loaded`, because
+		// locale determination is not complete at that point.
+		add_action(
+			'init',
+			static function (): void {
+				load_plugin_textdomain( 'reservechain', false, dirname( plugin_basename( PLUGIN_FILE ) ) . '/languages' );
+			},
+			0
+		);
 
 		// The six publication states the brief mandates, registered as real
 		// WordPress post statuses so editors work in the native editor.
-		WorkflowStates::register();
+		add_action( 'init', array( WorkflowStates::class, 'register' ), 1 );
 
-		add_action( 'init', array( $this, 'maybe_upgrade' ), 1 );
+		add_action( 'init', array( $this, 'maybe_upgrade' ), 2 );
 		add_action( 'admin_notices', array( $this, 'render_migration_drift_notice' ) );
 	}
 

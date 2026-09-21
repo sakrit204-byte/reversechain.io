@@ -98,7 +98,7 @@ services:
       - "${WP_PORT:-8080}:80"
 
   minio:
-    image: minio/minio:latest
+    image: quay.io/minio/minio:latest
     container_name: rc-minio
     restart: unless-stopped
     command: server /data --console-address ":9001"
