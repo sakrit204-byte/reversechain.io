@@ -109,6 +109,11 @@ final class Plugin {
 
 		add_action( 'init', array( $this, 'maybe_upgrade' ), 2 );
 		add_action( 'admin_notices', array( $this, 'render_migration_drift_notice' ) );
+
+		// Operational commands. Registered early and unconditionally under CLI
+		// so that `wp reservechain migrate` works even when the schema is
+		// behind the code — which is exactly when an operator needs it.
+		Cli\Commands::register();
 	}
 
 	/**
