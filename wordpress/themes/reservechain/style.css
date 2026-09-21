@@ -1,0 +1,293 @@
+/*
+Theme Name:   ReserveChain
+Theme URI:    https://reservechain.io
+Author:       ReserveChain.io
+Description:  Institutional block theme for the ReserveChain.io real-world-asset tokenization platform. Deep navy and graphite with controlled gold, copper and nickel accents; built for dense technical content — asset registries, evidence panels, reserve dashboards and Digital Asset Passports — rather than marketing pages.
+Version:      0.1.0
+Requires at least: 6.6
+Tested up to: 6.7
+Requires PHP: 8.2
+License:      Proprietary
+Text Domain:  reservechain
+Tags:         full-site-editing, block-theme, accessibility-ready
+*/
+
+/*
+ * Design tokens live in theme.json, not here, so that the block editor and the
+ * front end resolve from one source and the client's editors get the real
+ * palette in their colour pickers.
+ *
+ * This file carries only what theme.json cannot express: base element
+ * behaviour, the status-badge system, evidence panels and the reduced-motion
+ * contract. Component styles are compiled from src/ by Vite into
+ * assets/build/ and enqueued separately.
+ */
+
+/* ---------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
+}
+
+/* The brief requires visible keyboard focus. A transparent outline plus a
+   box-shadow ring keeps the indicator visible in forced-colours mode, where a
+   box-shadow alone would disappear. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	box-shadow:
+		0 0 0 2px var(--wp--preset--color--base),
+		0 0 0 4px var(--wp--preset--color--gold-bright);
+	border-radius: var(--wp--custom--radius--sm);
+}
+
+@media (forced-colors: active) {
+	:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+		outline: 2px solid CanvasText;
+	}
+}
+
+/* Skip link — first tab stop, per the accessible-navigation requirement. */
+.rc-skip-link {
+	position: absolute;
+	left: -9999px;
+	z-index: 999;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--base);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.rc-skip-link:focus {
+	left: var(--wp--preset--spacing--40);
+	top: var(--wp--preset--spacing--40);
+}
+
+/* Readable measure for long-form legal and documentation pages. */
+.rc-prose {
+	max-width: var(--wp--custom--measure);
+}
+
+/* ---------------------------------------------------------------------------
+   Status badges
+
+   Status is the most load-bearing element on this site. The brief is explicit:
+   "Do not label an asset Verified, Certified, Secured, In Custody, Tokenized,
+   Available, or Redeemable unless that status is actually supported and
+   authorized for publication."
+
+   So badges never rely on colour alone — each carries a text label and a
+   distinct dot, which also satisfies the contrast and colour-blindness
+   requirements. The default, used whenever a status is absent, is "pending".
+   ------------------------------------------------------------------------ */
+
+.rc-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45em;
+	padding: 0.28em 0.7em;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	line-height: 1.4;
+}
+
+.rc-badge::before {
+	content: "";
+	width: 0.5em;
+	height: 0.5em;
+	border-radius: 50%;
+	background: currentColor;
+	flex: none;
+}
+
+.rc-badge--pending    { color: var(--wp--preset--color--status-pending); }
+.rc-badge--review     { color: var(--wp--preset--color--status-review); }
+.rc-badge--verified   { color: var(--wp--preset--color--status-verified); }
+.rc-badge--attention  { color: var(--wp--preset--color--status-attention); }
+.rc-badge--critical   { color: var(--wp--preset--color--status-critical); }
+
+/* Future asset categories must never read as an active programme. [W-6] */
+.rc-badge--future {
+	color: var(--wp--preset--color--contrast-subtle);
+	border-style: dashed;
+}
+
+/* ---------------------------------------------------------------------------
+   Illustrative-data marker
+
+   Any demonstration record must be "clearly marked ILLUSTRATIVE / DEMO DATA
+   and visually distinguishable from live production data". A hatched border
+   plus a persistent label makes that unmistakable in a screenshot, which is
+   how most people will encounter it.
+   ------------------------------------------------------------------------ */
+
+.rc-illustrative {
+	position: relative;
+	border: 1px dashed var(--wp--preset--color--status-review);
+	border-radius: var(--wp--custom--radius--md);
+	background-image: repeating-linear-gradient(
+		135deg,
+		transparent,
+		transparent 9px,
+		rgba(201, 162, 39, 0.045) 9px,
+		rgba(201, 162, 39, 0.045) 18px
+	);
+}
+
+.rc-illustrative__label {
+	display: inline-block;
+	margin-bottom: var(--wp--preset--spacing--30);
+	padding: 0.2em 0.6em;
+	background: var(--wp--preset--color--status-review);
+	color: var(--wp--preset--color--base);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   Evidence panel
+
+   Used wherever the platform shows a claim that rests on a document: purity,
+   custody, ownership, reserve coverage. The panel always has room for the
+   source reference, so a figure is never presented without its provenance.
+   ------------------------------------------------------------------------ */
+
+.rc-evidence {
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+	padding: var(--wp--preset--spacing--50);
+}
+
+.rc-evidence__source {
+	margin-top: var(--wp--preset--spacing--30);
+	padding-top: var(--wp--preset--spacing--30);
+	border-top: var(--wp--custom--hairline);
+	color: var(--wp--preset--color--contrast-subtle);
+	font-size: var(--wp--preset--font-size--xs);
+}
+
+/* Declared figures are visually distinct from independently verified ones, so
+   a reader can never mistake a supplier's declaration for a measurement. */
+.rc-figure--declared .rc-figure__value {
+	color: var(--wp--preset--color--contrast-muted);
+	border-bottom: 1px dotted var(--wp--preset--color--status-pending);
+}
+
+.rc-figure--verified .rc-figure__value {
+	color: var(--wp--preset--color--contrast);
+}
+
+.rc-figure__value {
+	font-family: var(--wp--preset--font-family--mono);
+	font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------------
+   Data tables
+
+   Must stay usable on mobile without horizontal clipping. [W-2]
+   ------------------------------------------------------------------------ */
+
+.rc-table-scroll {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+.rc-table-scroll table {
+	min-width: 38rem;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.rc-table-scroll :is(th, td) {
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border-bottom: var(--wp--custom--hairline);
+	text-align: left;
+	font-variant-numeric: tabular-nums;
+}
+
+.rc-table-scroll th {
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+
+   "Controlled animation." Every transition is opt-out, and the 3D scenes check
+   this same query before initialising rather than rendering and then stopping.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Print — documentation and passport pages are printed and filed.
+   ------------------------------------------------------------------------ */
+
+@media print {
+	body {
+		background: #fff;
+		color: #000;
+	}
+
+	.rc-skip-link,
+	.rc-canvas,
+	nav {
+		display: none !important;
+	}
+
+	.rc-illustrative {
+		border: 2px solid #000;
+		background-image: none;
+	}
+
+	.rc-illustrative__label {
+		background: #000;
+		color: #fff;
+	}
+}
