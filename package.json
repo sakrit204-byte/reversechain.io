@@ -1,0 +1,26 @@
+{
+  "name": "reservechain",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ReserveChain.io — institutional real-world-asset tokenization platform (pre-launch)",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @reservechain/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "stack:up": "docker compose up -d",
+    "stack:down": "docker compose down",
+    "stack:logs": "docker compose logs -f",
+    "stack:reset": "docker compose down -v && docker compose up -d",
+    "lint:language": "node scripts/prelaunch-language-lint.mjs"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

@@ -1,0 +1,48 @@
+# dependencies
+node_modules/
+.pnpm-store/
+vendor/
+
+# build output
+.next/
+out/
+dist/
+build/
+packages/contracts/out/
+packages/contracts/cache/
+packages/contracts/broadcast/*/31337/
+
+# env & secrets — NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+!packages/contracts/**/*.key.example
+secrets/
+
+# wordpress runtime (only our plugin/theme are versioned)
+wordpress/html/
+wordpress/uploads/
+
+# database dumps & backups
+*.sql.gz
+backups/
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# logs & coverage
+*.log
+coverage/
+lcov.info
+playwright-report/
+test-results/
+
+# large client reference material is kept locally, not in git history
+docs/brief/attachments/reference-site/
+docs/brief/attachments/*.zip

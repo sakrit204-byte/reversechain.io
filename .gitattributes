@@ -1,0 +1,43 @@
+# Normalise line endings so the repository is identical on Windows, macOS and
+# Linux. The delivered platform is deployed on Linux; a CRLF that sneaks into a
+# shell script or a SQL migration breaks it there and nowhere else, which is a
+# miserable class of bug to debug after handover.
+
+* text=auto eol=lf
+
+# Files that must stay LF regardless of platform.
+*.sh        text eol=lf
+*.sql       text eol=lf
+*.php       text eol=lf
+*.ts        text eol=lf
+*.js        text eol=lf
+*.json      text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.md        text eol=lf
+*.css       text eol=lf
+*.scss      text eol=lf
+*.sol       text eol=lf
+Dockerfile  text eol=lf
+.env.example text eol=lf
+
+# Binary assets — never touch.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.pdf   binary
+*.zip   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.docx  binary
+*.xlsx  binary
+*.pptx  binary
+
+# Keep generated lockfiles out of diff noise in reviews.
+pnpm-lock.yaml   -diff
+composer.lock    -diff

@@ -1,0 +1,151 @@
+# ReserveChain.io — local development stack
+#
+#   docker compose up -d
+#
+# Services
+#   db       MySQL 8    — system of record (WordPress content + registry tables)
+#   wp       WordPress 6 / PHP 8.3 — CMS, admin, asset registry, REST API
+#   minio    S3-compatible object storage for certificates and evidence
+#   mail     Mailpit    — captures transactional mail (double opt-in) :8025
+#   anvil    Local EVM node                     (profile: chain)
+#   adminer  DB inspector :8081                 (profile: tools, dev only)
+#
+# The blockchain indexer (services/chain-sync) runs on the host during
+# development. Production images and compose files live in infra/docker.
+
+name: reservechain
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: rc-db
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      # Required so migrations can install the audit-trail immutability triggers.
+      - --log-bin-trust-function-creators=1
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpw_dev_only}
+      MYSQL_DATABASE: ${DB_NAME:-reservechain}
+      MYSQL_USER: ${DB_USER:-reservechain}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-reservechain_dev_only}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./infra/docker/mysql-init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_PORT:-3307}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_ROOT_PASSWORD:-rootpw_dev_only}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  wp:
+    build:
+      context: ./infra/docker/wordpress
+      args:
+        WP_VERSION: ${WP_VERSION:-6.7}
+    image: reservechain/wordpress:dev
+    container_name: rc-wp
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-reservechain}
+      WORDPRESS_DB_USER: ${DB_USER:-reservechain}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-reservechain_dev_only}
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: ${WP_DEBUG:-1}
+      WORDPRESS_CONFIG_EXTRA: |
+        /* --- ReserveChain.io environment ------------------------------- */
+        define('WP_ENVIRONMENT_TYPE', '${APP_ENV:-development}');
+        define('RC_ENV',              '${APP_ENV:-development}');
+        define('WP_HOME',    '${WP_URL:-http://localhost:8080}');
+        define('WP_SITEURL', '${WP_URL:-http://localhost:8080}');
+
+        /* --- Hardening -------------------------------------------------- */
+        /* No code editing or plugin installation through the admin UI:
+           every change arrives through version control and deployment.      */
+        define('DISALLOW_FILE_EDIT', true);
+        define('DISALLOW_FILE_MODS', ${WP_DISALLOW_FILE_MODS:-false});
+        define('FORCE_SSL_ADMIN',    ${WP_FORCE_SSL_ADMIN:-false});
+        define('AUTOMATIC_UPDATER_DISABLED', true);
+        define('WP_AUTO_UPDATE_CORE', false);
+
+        /* Records are unpublished or archived, never hard-deleted. [M-16]  */
+        define('EMPTY_TRASH_DAYS', 0);
+        define('WP_POST_REVISIONS', 30);
+
+        /* --- Services ---------------------------------------------------- */
+        define('RC_MAIL_HOST', 'mail');
+        define('RC_MAIL_PORT', 1025);
+        define('RC_S3_ENDPOINT',   'http://minio:9000');
+        define('RC_S3_BUCKET',     '${S3_BUCKET:-reservechain-documents}');
+        define('RC_S3_KEY',        '${S3_ACCESS_KEY:-reservechain}');
+        define('RC_S3_SECRET',     '${S3_SECRET_KEY:-reservechain_dev_only}');
+        define('RC_S3_REGION',     'us-east-1');
+        define('RC_S3_PATH_STYLE', true);
+    volumes:
+      - wp_core:/var/www/html
+      - ./wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core
+      - ./wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain
+      - ./wordpress/uploads:/var/www/html/wp-content/uploads
+    ports:
+      - "${WP_PORT:-8080}:80"
+
+  minio:
+    image: minio/minio:latest
+    container_name: rc-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-reservechain}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-reservechain_dev_only}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "${S3_PORT:-9000}:9000"
+      - "${S3_CONSOLE_PORT:-9001}:9001"
+
+  mail:
+    image: axllent/mailpit:latest
+    container_name: rc-mail
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    ports:
+      - "${MAIL_SMTP_PORT:-1025}:1025"
+      - "${MAIL_UI_PORT:-8025}:8025"
+
+  anvil:
+    image: ghcr.io/foundry-rs/foundry:latest
+    container_name: rc-anvil
+    restart: unless-stopped
+    entrypoint: ["anvil", "--host", "0.0.0.0", "--chain-id", "31337", "--block-time", "2"]
+    ports:
+      - "${ANVIL_PORT:-8545}:8545"
+    profiles: ["chain"]
+
+  adminer:
+    image: adminer:latest
+    container_name: rc-adminer
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DESIGN: dracula
+    ports:
+      - "${ADMINER_PORT:-8081}:8080"
+    profiles: ["tools"]
+
+volumes:
+  db_data:
+  minio_data:
+  wp_core:
