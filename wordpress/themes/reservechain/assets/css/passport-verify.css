@@ -1,0 +1,392 @@
+/*
+ * ReserveChain — Digital Asset Passport and document verifier
+ *
+ * A passport is a record that gets printed, filed and emailed during due
+ * diligence, so it is laid out as a document rather than a web page: one
+ * column, generous measure, and a print stylesheet that survives a black and
+ * white office printer.
+ */
+
+/* ---------------------------------------------------------------------------
+   Passport
+   ------------------------------------------------------------------------ */
+
+.rc-passport-page {
+	background: var(--wp--preset--color--base, #070a12);
+	color: var(--wp--preset--color--contrast, #eef1f6);
+	font-family: var(--wp--preset--font-family--body, system-ui, sans-serif);
+	line-height: 1.6;
+	margin: 0;
+	padding: clamp(1rem, 4vw, 3rem);
+}
+
+.rc-passport {
+	max-width: 52rem;
+	margin: 0 auto;
+	padding: clamp(1.25rem, 3vw, 2.5rem);
+	border: 1px solid var(--wp--preset--color--hairline, #27303f);
+	border-radius: 10px;
+	background: var(--wp--preset--color--surface, #0c111c);
+}
+
+.rc-passport__header {
+	padding-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid var(--wp--preset--color--hairline, #27303f);
+}
+
+.rc-passport__eyebrow {
+	margin: 0 0 0.35rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	color: var(--wp--preset--color--gold, #c9a227);
+}
+
+/* The identifier is the thing a warehouse operator reads off the screen and
+   matches to a physical label, so it gets monospace and generous tracking —
+   0 and O, 1 and I must not be confusable. */
+.rc-passport__id {
+	margin: 0 0 0.4rem;
+	font-family: var(--wp--preset--font-family--mono, ui-monospace, monospace);
+	font-size: clamp(1.5rem, 4vw, 2.25rem);
+	letter-spacing: 0.04em;
+	line-height: 1.1;
+	word-break: break-all;
+}
+
+.rc-passport__program {
+	margin: 0;
+	color: var(--wp--preset--color--contrast-muted, #9ba6b7);
+}
+
+.rc-passport__state {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.6rem;
+	margin: 0 0 1.75rem;
+	padding: 0.85rem 1rem;
+	border-left: 2px solid var(--wp--preset--color--status-review, #c9a227);
+	background: rgb(201 162 39 / 6%);
+	font-size: 0.85rem;
+	color: var(--wp--preset--color--contrast-muted, #9ba6b7);
+}
+
+.rc-passport__section {
+	margin-bottom: 2.25rem;
+}
+
+.rc-passport__section h2 {
+	margin: 0 0 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--wp--preset--color--hairline, #27303f);
+	font-family: var(--wp--preset--font-family--display, Georgia, serif);
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.rc-passport__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+	gap: 1.25rem;
+	margin: 0;
+}
+
+.rc-passport__grid dt {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle, #6b7689);
+}
+
+.rc-passport__grid dd {
+	margin: 0.3rem 0 0;
+	font-family: var(--wp--preset--font-family--mono, ui-monospace, monospace);
+}
+
+.rc-passport__statuses {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.rc-passport__statuses li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.6rem 0.85rem;
+	border: 1px solid var(--wp--preset--color--hairline, #27303f);
+	border-radius: 4px;
+	font-size: 0.85rem;
+}
+
+.rc-passport__evidence {
+	padding: 1.1rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--wp--preset--color--hairline, #27303f);
+	border-radius: 6px;
+	background: var(--wp--preset--color--surface-raised, #131a28);
+}
+
+.rc-passport__evidence h3 {
+	margin: 0 0 0.9rem;
+	font-size: 1rem;
+}
+
+/* Digests wrap rather than overflow: 64 characters do not fit a phone, and a
+   truncated digest is worse than useless because it looks checkable. */
+.rc-passport__digest {
+	margin: 1rem 0 0;
+	font-size: 0.8rem;
+}
+
+.rc-passport__digest-label {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle, #6b7689);
+}
+
+.rc-passport__digest code,
+.rc-verify__digest code {
+	display: block;
+	padding: 0.5rem 0.65rem;
+	border: 1px solid var(--wp--preset--color--hairline, #27303f);
+	border-radius: 4px;
+	background: var(--wp--preset--color--base, #070a12);
+	font-family: var(--wp--preset--font-family--mono, ui-monospace, monospace);
+	font-size: 0.75rem;
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+	word-break: break-all;
+}
+
+.rc-passport__footer {
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--wp--preset--color--hairline, #27303f);
+}
+
+.rc-passport__url {
+	margin: 0 0 0.75rem;
+	font-family: var(--wp--preset--font-family--mono, ui-monospace, monospace);
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--contrast-subtle, #6b7689);
+	overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------------------
+   Verifier
+   ------------------------------------------------------------------------ */
+
+.rc-verify {
+	max-width: 46rem;
+	margin: var(--wp--preset--spacing--60) 0;
+}
+
+.rc-verify__dropzone {
+	padding: var(--wp--preset--spacing--60);
+	border: 2px dashed var(--wp--preset--color--hairline);
+	border-radius: var(--wp--custom--radius--lg);
+	background: var(--wp--preset--color--surface);
+	text-align: center;
+	transition: border-color var(--wp--custom--transition--base),
+		background-color var(--wp--custom--transition--base);
+}
+
+.rc-verify__dropzone.is-dragover {
+	border-color: var(--wp--preset--color--gold);
+	background: rgb(201 162 39 / 6%);
+}
+
+.rc-verify__file-label {
+	display: block;
+	margin-bottom: var(--wp--preset--spacing--30);
+	font-weight: 600;
+}
+
+.rc-verify__file {
+	display: block;
+	margin: 0 auto var(--wp--preset--spacing--30);
+	max-width: 100%;
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-verify__privacy {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--status-verified);
+}
+
+.rc-verify__form {
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+.rc-verify__digest-label {
+	display: block;
+	margin-bottom: var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-verify__row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.rc-verify__input {
+	flex: 1 1 22rem;
+	min-width: 0;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border: 1px solid var(--wp--preset--color--hairline);
+	border-radius: var(--wp--custom--radius--sm);
+	background: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-verify__submit {
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--60);
+	border: 0;
+	border-radius: var(--wp--custom--radius--sm);
+	background: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--base);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.rc-verify__submit:hover {
+	background: var(--wp--preset--color--gold-bright);
+}
+
+/* `display` must not override the `hidden` attribute, or the result panel
+   renders as an empty box before any verification has run. The user-agent
+   rule for [hidden] is `display: none`, and any author `display` beats it. */
+.rc-verify__output[hidden] {
+	display: none;
+}
+
+.rc-verify__output {
+	display: block;
+	margin-top: var(--wp--preset--spacing--50);
+	padding: var(--wp--preset--spacing--50);
+	border: 1px solid var(--wp--preset--color--hairline);
+	border-left-width: 3px;
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-verify__output--match    { border-left-color: var(--wp--preset--color--status-verified); }
+.rc-verify__output--partial  { border-left-color: var(--wp--preset--color--status-review); }
+.rc-verify__output--nomatch  { border-left-color: var(--wp--preset--color--status-attention); }
+.rc-verify__output--error    { border-left-color: var(--wp--preset--color--status-critical); }
+.rc-verify__output--busy,
+.rc-verify__output--notice   { border-left-color: var(--wp--preset--color--contrast-subtle); }
+
+.rc-verify__heading {
+	margin: 0 0 var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: 600;
+}
+
+.rc-verify__output--match   .rc-verify__heading { color: var(--wp--preset--color--status-verified); }
+.rc-verify__output--partial .rc-verify__heading { color: var(--wp--preset--color--status-review); }
+.rc-verify__output--nomatch .rc-verify__heading { color: var(--wp--preset--color--status-attention); }
+
+.rc-verify__message {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-verify__digest span {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-verify__meta {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	gap: var(--wp--preset--spacing--40);
+	margin: var(--wp--preset--spacing--40) 0 0;
+}
+
+.rc-verify__meta dt {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-verify__meta dd {
+	margin: 0.25rem 0 0;
+}
+
+.rc-verify__manual {
+	margin-top: var(--wp--preset--spacing--50);
+	padding: var(--wp--preset--spacing--40);
+	border: 1px solid var(--wp--preset--color--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-verify__manual summary {
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.rc-verify__manual pre {
+	overflow-x: auto;
+	padding: var(--wp--preset--spacing--40);
+	border-radius: var(--wp--custom--radius--sm);
+	background: var(--wp--preset--color--base);
+	font-size: var(--wp--preset--font-size--xs);
+}
+
+/* ---------------------------------------------------------------------------
+   Print — passports are printed and filed
+   ------------------------------------------------------------------------ */
+
+@media print {
+	.rc-passport-page {
+		background: #fff;
+		color: #000;
+		padding: 0;
+	}
+
+	.rc-passport {
+		max-width: none;
+		border: 0;
+		background: #fff;
+	}
+
+	.rc-passport__digest code {
+		border: 1px solid #999;
+		background: #fff;
+		color: #000;
+	}
+
+	.rc-passport__section h2,
+	.rc-passport__header {
+		border-color: #999;
+	}
+
+	.rc-badge {
+		border-color: #000 !important;
+		color: #000 !important;
+	}
+}

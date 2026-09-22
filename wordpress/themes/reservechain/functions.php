@@ -88,6 +88,13 @@ add_action(
 			(string) filemtime( $theme_dir . '/assets/css/asset-pages.css' )
 		);
 
+		wp_enqueue_style(
+			'reservechain-passport-verify',
+			$theme_uri . '/assets/css/passport-verify.css',
+			array( 'reservechain-components' ),
+			(string) filemtime( $theme_dir . '/assets/css/passport-verify.css' )
+		);
+
 		$manifest_path = $theme_dir . '/assets/build/.vite/manifest.json';
 
 		if ( ! is_readable( $manifest_path ) ) {

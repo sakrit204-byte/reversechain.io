@@ -92,6 +92,20 @@ final class Blocks {
 		);
 
 		register_block_type(
+			'reservechain/document-verifier',
+			array(
+				'api_version'     => 3,
+				'title'           => __( 'Document verifier', 'reservechain' ),
+				'description'     => __( 'Lets anyone confirm a document they hold is byte-identical to the registry record. The file is hashed in the browser and never uploaded.', 'reservechain' ),
+				'category'        => 'reservechain',
+				'icon'            => 'search',
+				'attributes'      => array(),
+				'render_callback' => array( self::class, 'render_verifier' ),
+				'supports'        => array( 'align' => array( 'wide' ), 'html' => false ),
+			)
+		);
+
+		register_block_type(
 			'reservechain/pending-notice',
 			array(
 				'api_version'     => 3,
@@ -343,6 +357,81 @@ final class Blocks {
 		$html .= '</section>';
 
 		return $html;
+	}
+
+	/**
+	 * The public document verifier.
+	 *
+	 * The markup works without JavaScript: the digest field and submit button
+	 * are a plain form path, and the page documents how to compute a digest
+	 * with `sha256sum` and query the endpoint directly. A verification tool
+	 * that only works in a modern browser is not much use to the auditor or
+	 * compliance officer most likely to want it.
+	 *
+	 * @param array<string,mixed> $attributes Block attributes.
+	 */
+	public static function render_verifier( array $attributes ): string {
+		unset( $attributes );
+
+		wp_enqueue_script(
+			'reservechain-verifier',
+			RC_PLUGIN_URL . 'assets/js/verifier.js',
+			array(),
+			(string) filemtime( RC_PLUGIN_DIR . 'assets/js/verifier.js' ),
+			true
+		);
+
+		$endpoint = esc_url( rest_url( 'rc/v1/verify/document' ) );
+
+		ob_start();
+		?>
+		<div class="rc-verify"
+			data-rc-verify
+			data-rc-endpoint="<?php echo esc_attr( rest_url( 'rc/v1/verify/document' ) ); ?>"
+			data-rc-hashing="<?php esc_attr_e( 'Hashing locally — the file is not uploaded…', 'reservechain' ); ?>"
+			data-rc-checking="<?php esc_attr_e( 'Checking the registry…', 'reservechain' ); ?>"
+			data-rc-invalid="<?php esc_attr_e( 'Enter a 64-character SHA-256 digest, or choose a file.', 'reservechain' ); ?>"
+			data-rc-network="<?php esc_attr_e( 'The registry could not be reached.', 'reservechain' ); ?>"
+			data-rc-insecure="<?php esc_attr_e( 'In-browser hashing needs a secure connection (HTTPS). Compute the digest yourself and paste it below.', 'reservechain' ); ?>">
+
+			<div class="rc-verify__dropzone" data-rc-verify-dropzone>
+				<label class="rc-verify__file-label" for="rc-verify-file">
+					<?php esc_html_e( 'Choose a document, or drop one here', 'reservechain' ); ?>
+				</label>
+				<input type="file" id="rc-verify-file" class="rc-verify__file" data-rc-verify-file>
+				<p class="rc-verify__privacy">
+					<?php esc_html_e( 'The file stays on your device. Only its SHA-256 digest is sent.', 'reservechain' ); ?>
+				</p>
+			</div>
+
+			<form class="rc-verify__form" data-rc-verify-form method="get" action="">
+				<label class="rc-verify__digest-label" for="rc-verify-digest">
+					<?php esc_html_e( 'Or paste a SHA-256 digest', 'reservechain' ); ?>
+				</label>
+				<div class="rc-verify__row">
+					<input type="text" id="rc-verify-digest" class="rc-verify__input"
+						data-rc-verify-digest
+						inputmode="latin" autocomplete="off" spellcheck="false"
+						pattern="[a-fA-F0-9]{64}" maxlength="64"
+						placeholder="<?php esc_attr_e( '64 hexadecimal characters', 'reservechain' ); ?>">
+					<button type="submit" class="rc-verify__submit"><?php esc_html_e( 'Verify', 'reservechain' ); ?></button>
+				</div>
+			</form>
+
+			<output class="rc-verify__output" data-rc-verify-output hidden></output>
+
+			<details class="rc-verify__manual">
+				<summary><?php esc_html_e( 'Verify from the command line instead', 'reservechain' ); ?></summary>
+				<p><?php esc_html_e( 'No browser required, and nothing to trust about this page:', 'reservechain' ); ?></p>
+				<pre><code>sha256sum your-certificate.png
+
+curl <?php echo esc_html( $endpoint ); ?>/&lt;digest&gt;</code></pre>
+				<p><?php esc_html_e( 'A match means the file is byte-identical to the document the registry record is built on. A mismatch means the file differs in at least one byte — it may have been edited, re-saved, or may be a different version.', 'reservechain' ); ?></p>
+			</details>
+		</div>
+		<?php
+
+		return (string) ob_get_clean();
 	}
 
 	/**

@@ -10,6 +10,7 @@ declare( strict_types = 1 );
 namespace ReserveChain\Core\Seed;
 
 use ReserveChain\Core\Plugin;
+use ReserveChain\Core\Registry\Passports;
 
 /**
  * Loads registry content.
@@ -97,7 +98,9 @@ final class RegistrySeeder {
 		$summary['spec_fields']  = $this->seed_spec_fields();
 		$summary['lots']         = $this->seed_lots();
 		$summary['units']        = $this->seed_units();
+		$summary['documents']    = $this->seed_documents();
 		$summary['certificates'] = $this->seed_certificates();
+		$summary['passports']    = Passports::issue_missing();
 		$summary['illustrative'] = $this->seed_illustrative_template();
 
 		Plugin::instance()->audit()->log(
@@ -396,6 +399,99 @@ final class RegistrySeeder {
 	}
 
 	/**
+	 * Register the supplied certificate files as documents.
+	 *
+	 * Only the digest and the file's identifying metadata are recorded. The
+	 * certificate images themselves are confidential material belonging to the
+	 * project owner, and publishing them on a demonstration deployment would
+	 * disclose documents that have not been approved for publication — so
+	 * `storage_key` records where the file is expected to live once upload is
+	 * authorised, and `visibility` stays `pending`.
+	 *
+	 * The digests are real, computed from the files attached to the brief.
+	 * That is what makes the public verifier meaningful: the project owner can
+	 * drop their own copy of either certificate onto the verifier and watch it
+	 * match, without ever uploading it.
+	 *
+	 * @return int Number of documents recorded.
+	 */
+	private function seed_documents(): int {
+		$documents = array(
+			array(
+				'public_id'         => '01JCOPPERCOA0004512AAAAAAA',
+				'title'             => 'Certificate of Analysis 0004512 — Ultrafine Copper Powder, Lot 03-K-07',
+				'category'          => 'certificate_of_analysis',
+				'original_filename' => 'Ultrafine Copper powder - IGAS Analysis.png',
+				'mime_type'         => 'image/png',
+				'byte_size'         => 1936931,
+				'sha256'            => '398f2de542ac855f6a099efd18f84209dffc4ad086b786afecc32d908c58a3ea',
+				'document_number'   => '0004512',
+				'issuer'            => 'IGAS research — Independent Global Assaying Services',
+				'issued_on'         => '2022-07-04',
+			),
+			array(
+				'public_id'         => '01JNICKELCOA0004368AAAAAA',
+				'title'             => 'Certificate of Analysis 0004368 — Nickel Wire 0.025 mm, Lot 120/NP1',
+				'category'          => 'certificate_of_analysis',
+				'original_filename' => 'IGAS Analysis Nickel Wire.png',
+				'mime_type'         => 'image/png',
+				'byte_size'         => 822173,
+				'sha256'            => 'f1d0fd92102e751c8f69033bfcf087eeedfea71028a80c080b617221425da46a',
+				'document_number'   => '0004368',
+				'issuer'            => 'IGAS research — Independent Global Assaying Services',
+				'issued_on'         => '2021-10-19',
+			),
+		);
+
+		$count = 0;
+
+		foreach ( $documents as $document ) {
+			$this->upsert(
+				'documents',
+				'sha256',
+				$document + array(
+					'storage_key'       => 'pending-upload/certificates/' . $document['document_number'] . '.png',
+					'visibility'        => 'pending',
+					'publication_state' => 'under_review',
+					'version'           => 1,
+					'usage_rights'      => 'Supplied by the project owner with the development brief. Not licensed for publication.',
+					'source_reference'  => 'Attachment to the ReserveChain.io development brief',
+				)
+			);
+
+			$count++;
+		}
+
+		$this->link_documents_to_certificates();
+
+		return $count;
+	}
+
+	/**
+	 * Attach documents to certificates that do not yet reference one.
+	 *
+	 * Run separately from certificate creation because the seeder is
+	 * idempotent: on a database where certificates were created before the
+	 * document records existed, the upsert correctly skips them, and the link
+	 * would otherwise never be made. Matching on the certificate number is
+	 * safe here — it is the number printed on the document itself.
+	 */
+	private function link_documents_to_certificates(): void {
+		global $wpdb;
+
+		$certificates = $this->table( 'certificates' );
+		$documents    = $this->table( 'documents' );
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery
+		$wpdb->query(
+			"UPDATE `{$certificates}` c
+			 JOIN `{$documents}` d ON d.`document_number` = c.`certificate_number`
+			 SET c.`document_id` = d.`id`
+			 WHERE c.`document_id` IS NULL"
+		);
+	}
+
+	/**
 	 * The two lots described by the supplied certificates.
 	 */
 	private function seed_lots(): int {
@@ -576,12 +672,22 @@ final class RegistrySeeder {
 		$copper_lot = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$this->table( 'lots' )} WHERE slug = %s", 'copper-powder-lot-03-k-07' ) ); // phpcs:ignore
 		$nickel_lot = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$this->table( 'lots' )} WHERE slug = %s", 'nickel-wire-lot-120-np1' ) ); // phpcs:ignore
 
+		$doc_table = $this->table( 'documents' );
+
+		$document_for = function ( string $sha ) use ( $wpdb, $doc_table ): ?int {
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery
+			$id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$doc_table}` WHERE sha256 = %s", $sha ) );
+
+			return null === $id ? null : (int) $id;
+		};
+
 		$copper_cert = $this->upsert(
 			'certificates',
 			'certificate_number',
 			array(
 				'laboratory_id'       => $lab,
 				'lot_id'              => $copper_lot,
+				'document_id'         => $document_for( '398f2de542ac855f6a099efd18f84209dffc4ad086b786afecc32d908c58a3ea' ),
 				'certificate_number'  => '0004512',
 				'certificate_date'    => '2022-07-04',
 				'sample_date'         => '2022-07-01',
@@ -604,6 +710,7 @@ final class RegistrySeeder {
 			array(
 				'laboratory_id'       => $lab,
 				'lot_id'              => $nickel_lot,
+				'document_id'         => $document_for( 'f1d0fd92102e751c8f69033bfcf087eeedfea71028a80c080b617221425da46a' ),
 				'certificate_number'  => '0004368',
 				'certificate_date'    => '2021-10-19',
 				'sample_date'         => '2021-10-14',

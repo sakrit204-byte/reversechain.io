@@ -116,6 +116,10 @@ final class Plugin {
 		Blocks\Blocks::register();
 		Blocks\AssetBlocks::register();
 
+		// Public verification endpoints and the passport permalink.
+		Rest\VerifyController::register();
+		Registry\PassportRoute::register();
+
 		// A dedicated block category keeps platform blocks distinguishable from
 		// core blocks in the inserter.
 		add_filter( 'block_categories_all', array( $this, 'register_block_category' ) );
