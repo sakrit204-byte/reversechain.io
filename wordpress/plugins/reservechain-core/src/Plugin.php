@@ -110,10 +110,38 @@ final class Plugin {
 		add_action( 'init', array( $this, 'maybe_upgrade' ), 2 );
 		add_action( 'admin_notices', array( $this, 'render_migration_drift_notice' ) );
 
+		// Registry-backed blocks. Server-rendered so the publication gate runs
+		// before anything is serialised: an unapproved status never reaches the
+		// browser, rather than being hidden once it gets there.
+		Blocks\Blocks::register();
+
+		// A dedicated block category keeps platform blocks distinguishable from
+		// core blocks in the inserter.
+		add_filter( 'block_categories_all', array( $this, 'register_block_category' ) );
+
 		// Operational commands. Registered early and unconditionally under CLI
 		// so that `wp reservechain migrate` works even when the schema is
 		// behind the code — which is exactly when an operator needs it.
 		Cli\Commands::register();
+	}
+
+	/**
+	 * Add the platform's own block category to the inserter.
+	 *
+	 * @param array<int,array<string,mixed>> $categories Existing categories.
+	 * @return array<int,array<string,mixed>>
+	 */
+	public function register_block_category( array $categories ): array {
+		array_unshift(
+			$categories,
+			array(
+				'slug'  => 'reservechain',
+				'title' => __( 'ReserveChain', 'reservechain' ),
+				'icon'  => null,
+			)
+		);
+
+		return $categories;
 	}
 
 	/**

@@ -1,0 +1,469 @@
+/*
+ * ReserveChain — component styles
+ *
+ * style.css carries base element behaviour, the status-badge system and the
+ * reduced-motion contract. This file carries the composed components used by
+ * the block patterns. Split because the base layer is stable and the component
+ * layer changes with every new page, and mixing the two makes review harder.
+ *
+ * Design tokens come from theme.json. No literal colour, size or spacing value
+ * should appear below except where a value is genuinely one-off geometry.
+ */
+
+/* ---------------------------------------------------------------------------
+   Hero
+
+   The 3D canvas sits behind the content and is purely decorative. No content
+   lives inside it, so the page reads identically with JavaScript disabled,
+   with WebGL unavailable, or when the visitor prefers reduced motion.
+   ------------------------------------------------------------------------ */
+
+.rc-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+
+.rc-hero__canvas {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	/* Until the scene mounts — or forever, if it never does — a static
+	   gradient carries the same visual weight, so there is no flash of empty
+	   space on a slow connection or an unsupported device. */
+	background:
+		radial-gradient(70ch 40ch at 78% 18%, rgba(201, 162, 39, 0.10), transparent 70%),
+		radial-gradient(50ch 32ch at 12% 82%, rgba(180, 102, 58, 0.08), transparent 70%);
+}
+
+.rc-hero__content {
+	position: relative;
+}
+
+.rc-hero__eyebrow {
+	margin-bottom: var(--wp--preset--spacing--30);
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	font-weight: 600;
+}
+
+/* A constrained layout centres every child narrower than the content width:
+   core emits `.is-layout-constrained > :where(...) { margin-left: auto
+   !important }`. These blocks set their own max-width for readability, so
+   without an override they drift right of the eyebrow and buttons above them
+   and the hero loses its left edge.
+   `!important` is required to beat core's own `!important`, not because of
+   specificity carelessness — the :where() selector is deliberately zero
+   specificity, so this is the intended way for a theme to opt a block out. */
+.rc-hero__headline,
+.rc-hero__subhead,
+.rc-hero__microcopy {
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
+}
+
+.rc-hero__headline {
+	max-width: 20ch;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.rc-hero__subhead {
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.rc-hero__actions {
+	margin-bottom: var(--wp--preset--spacing--40);
+	gap: var(--wp--preset--spacing--30);
+}
+
+.rc-hero__microcopy {
+	max-width: 62ch;
+	/* Sits over the decorative canvas gradient; a touch of contrast keeps it
+	   legible without introducing a visible panel. */
+	text-shadow: 0 1px 2px rgb(7 10 18 / 80%);
+}
+
+/* Trust bar --------------------------------------------------------------- */
+
+.rc-trustbar {
+	gap: var(--wp--preset--spacing--50);
+	padding-top: var(--wp--preset--spacing--50);
+	border-top: var(--wp--custom--hairline);
+}
+
+.rc-trustbar__item h3 {
+	margin: 0 0 var(--wp--preset--spacing--20);
+	font-family: var(--wp--preset--font-family--body);
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+
+.rc-trustbar__item p {
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Stage cards — the seven-step proposed model
+   ------------------------------------------------------------------------ */
+
+.rc-stages {
+	gap: var(--wp--preset--spacing--50);
+}
+
+.rc-stage {
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+}
+
+.rc-stage__index {
+	margin: 0 0 var(--wp--preset--spacing--20);
+	font-family: var(--wp--preset--font-family--mono);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.rc-stage h3 {
+	margin: 0 0 var(--wp--preset--spacing--30);
+}
+
+.rc-stage p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Chain of trust
+
+   An ordered list, so a screen reader announces it as a sequence and it
+   degrades to a readable list with no CSS at all. The connector is a
+   pseudo-element, not an image.
+   ------------------------------------------------------------------------ */
+
+.rc-chain {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	margin: var(--wp--preset--spacing--50) 0;
+	padding: 0;
+	list-style: none;
+}
+
+.rc-chain__link {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-muted);
+	white-space: nowrap;
+}
+
+.rc-chain__link::after {
+	content: "";
+	width: var(--wp--preset--spacing--50);
+	height: 1px;
+	margin-left: var(--wp--preset--spacing--20);
+	background: linear-gradient(90deg, var(--wp--preset--color--hairline), transparent);
+}
+
+.rc-chain__link:last-child::after {
+	display: none;
+}
+
+.rc-chain__dot {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: var(--wp--preset--color--gold);
+	flex: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Programme cards
+   ------------------------------------------------------------------------ */
+
+.rc-program-grid {
+	gap: var(--wp--preset--spacing--60);
+}
+
+.rc-program-card {
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-top: 3px solid var(--wp--preset--color--gold);
+	border-radius: var(--wp--custom--radius--lg);
+	background: var(--wp--preset--color--surface-raised);
+}
+
+.rc-program-card--copper { border-top-color: var(--wp--preset--color--copper); }
+.rc-program-card--nickel { border-top-color: var(--wp--preset--color--nickel); }
+
+.rc-program-card__name {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--lg);
+}
+
+.rc-program-card__summary {
+	margin: 0 0 var(--wp--preset--spacing--50);
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-program-card__statuses {
+	display: grid;
+	gap: 0;
+	margin: 0 0 var(--wp--preset--spacing--40);
+	padding: 0;
+	list-style: none;
+}
+
+.rc-program-card__status {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--30) 0;
+	border-bottom: var(--wp--custom--hairline);
+}
+
+.rc-program-card__status:last-child {
+	border-bottom: 0;
+}
+
+.rc-program-card__status-label {
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-program-card__specs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--50);
+	margin: 0;
+	padding-top: var(--wp--preset--spacing--40);
+	border-top: var(--wp--custom--hairline);
+}
+
+.rc-program-card__specs dt {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-program-card__specs dd {
+	margin: 0.15em 0 0;
+	font-size: var(--wp--preset--font-size--md);
+}
+
+.rc-program-card__specs--pending {
+	color: var(--wp--preset--color--contrast-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	font-style: italic;
+}
+
+/* ---------------------------------------------------------------------------
+   Registry summary
+   ------------------------------------------------------------------------ */
+
+.rc-registry-summary__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+	gap: var(--wp--preset--spacing--50);
+	margin: var(--wp--preset--spacing--50) 0;
+}
+
+.rc-metric {
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface);
+}
+
+.rc-metric__label {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-metric__value {
+	margin: var(--wp--preset--spacing--20) 0 0;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--2xl);
+	font-variant-numeric: tabular-nums;
+	color: var(--wp--preset--color--gold-bright);
+}
+
+.rc-registry-summary__note {
+	max-width: var(--wp--custom--measure);
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+/* ---------------------------------------------------------------------------
+   Disclosure
+
+   The missing-notice variant is deliberately loud. A disclosure that silently
+   vanishes because of a data problem is the worst failure this site could
+   have, so it fails visibly instead.
+   ------------------------------------------------------------------------ */
+
+.rc-disclosure {
+	max-width: var(--wp--custom--measure);
+	margin-inline: auto;
+}
+
+.rc-disclosure--panel {
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-left: 3px solid var(--wp--preset--color--gold);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface);
+}
+
+.rc-disclosure__title {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--md);
+}
+
+.rc-disclosure__body {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-disclosure--missing {
+	max-width: none;
+	padding: var(--wp--preset--spacing--50);
+	border: 2px solid var(--wp--preset--color--status-critical);
+	color: var(--wp--preset--color--status-critical);
+}
+
+.rc-pending-notice {
+	margin-top: var(--wp--preset--spacing--50);
+	padding: var(--wp--preset--spacing--40);
+	border: 1px dashed var(--wp--preset--color--status-review);
+	border-radius: var(--wp--custom--radius--sm);
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-pending-notice p {
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Framework cards
+   ------------------------------------------------------------------------ */
+
+.rc-framework-grid {
+	gap: var(--wp--preset--spacing--50);
+}
+
+.rc-framework {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+}
+
+.rc-framework--alert {
+	border-color: var(--wp--preset--color--status-attention);
+}
+
+.rc-framework__title {
+	margin: 0 0 var(--wp--preset--spacing--20);
+	font-family: var(--wp--preset--font-family--display);
+	font-size: var(--wp--preset--font-size--lg);
+	line-height: 1.2;
+}
+
+.rc-framework__lead {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	color: var(--wp--preset--color--gold-bright);
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: 600;
+}
+
+.rc-framework__body {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+/* `margin-top: auto` pins the status line to the bottom so cards in a row
+   align on their status, which is the line a reader compares across cards. */
+.rc-framework__status {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: var(--wp--preset--spacing--20);
+	margin: auto 0 var(--wp--preset--spacing--40);
+	padding-top: var(--wp--preset--spacing--40);
+	border-top: var(--wp--custom--hairline);
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-framework__cta {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: 600;
+}
+
+.rc-framework .rc-risks {
+	margin: 0 0 var(--wp--preset--spacing--40);
+}
+
+/* ---------------------------------------------------------------------------
+   Risk lists
+   ------------------------------------------------------------------------ */
+
+.rc-risks {
+	margin: var(--wp--preset--spacing--40) 0;
+	padding-left: 1.2em;
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-risks li {
+	margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.rc-risks li::marker {
+	color: var(--wp--preset--color--status-attention);
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+   ------------------------------------------------------------------------ */
+
+.rc-section + .rc-section {
+	border-top: var(--wp--custom--hairline);
+}
+
+.rc-section h2 {
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.rc-illustrative .rc-program-card {
+	border-top-color: var(--wp--preset--color--status-review);
+}
+
+/* Screen-reader-only text, used for table captions. */
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

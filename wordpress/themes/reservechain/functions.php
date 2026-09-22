@@ -71,6 +71,16 @@ add_action(
 			(string) filemtime( $theme_dir . '/style.css' )
 		);
 
+		// Components are a separate layer: the base stylesheet is stable, the
+		// component layer changes with every new page, and reviewing them
+		// together makes both harder to follow.
+		wp_enqueue_style(
+			'reservechain-components',
+			$theme_uri . '/assets/css/components.css',
+			array( 'reservechain' ),
+			(string) filemtime( $theme_dir . '/assets/css/components.css' )
+		);
+
 		$manifest_path = $theme_dir . '/assets/build/.vite/manifest.json';
 
 		if ( ! is_readable( $manifest_path ) ) {
@@ -209,7 +219,7 @@ add_action(
 add_action(
 	'after_setup_theme',
 	static function (): void {
-		add_editor_style( 'style.css' );
+		add_editor_style( array( 'style.css', 'assets/css/components.css' ) );
 	}
 );
 
