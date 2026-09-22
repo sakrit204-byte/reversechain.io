@@ -114,6 +114,7 @@ final class Plugin {
 		// before anything is serialised: an unapproved status never reaches the
 		// browser, rather than being hidden once it gets there.
 		Blocks\Blocks::register();
+		Blocks\AssetBlocks::register();
 
 		// A dedicated block category keeps platform blocks distinguishable from
 		// core blocks in the inserter.

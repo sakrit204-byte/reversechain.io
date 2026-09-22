@@ -10,6 +10,7 @@ declare( strict_types = 1 );
 namespace ReserveChain\Core\Cli;
 
 use ReserveChain\Core\Plugin;
+use ReserveChain\Core\Seed\PageSeeder;
 use ReserveChain\Core\Seed\RegistrySeeder;
 use Throwable;
 use WP_CLI;
@@ -199,9 +200,19 @@ final class Commands {
 	 * [--registry]
 	 * : Load the supplied evidence and the illustrative template.
 	 *
+	 * [--pages]
+	 * : Create the 51 pages the Website Development brief assigns. Genuinely
+	 * built pages are published; the rest are drafts carrying their assigned
+	 * scope, because the brief prohibits placeholder shells on public pages.
+	 *
+	 * [--all]
+	 * : Run every seeder.
+	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp reservechain seed --registry
+	 *     wp reservechain seed --pages
+	 *     wp reservechain seed --all
 	 *
 	 * @param array<int,string>    $args       Positional arguments.
 	 * @param array<string,string> $assoc_args Associative arguments.
@@ -209,23 +220,37 @@ final class Commands {
 	public function seed( array $args, array $assoc_args ): void {
 		unset( $args );
 
-		if ( ! isset( $assoc_args['registry'] ) ) {
-			WP_CLI::error( 'Specify what to seed, e.g. --registry' );
+		$all      = isset( $assoc_args['all'] );
+		$registry = $all || isset( $assoc_args['registry'] );
+		$pages    = $all || isset( $assoc_args['pages'] );
+
+		if ( ! $registry && ! $pages ) {
+			WP_CLI::error( 'Specify what to seed: --registry, --pages or --all' );
 			return;
 		}
 
 		try {
-			$summary = ( new RegistrySeeder() )->run();
+			if ( $registry ) {
+				WP_CLI::line( 'Registry' );
+
+				foreach ( ( new RegistrySeeder() )->run() as $key => $value ) {
+					WP_CLI::line( sprintf( '  %-14s %d', $key, $value ) );
+				}
+			}
+
+			if ( $pages ) {
+				WP_CLI::line( 'Sitemap' );
+
+				foreach ( ( new PageSeeder() )->run() as $key => $value ) {
+					WP_CLI::line( sprintf( '  %-14s %d', $key, $value ) );
+				}
+			}
 		} catch ( Throwable $e ) {
 			WP_CLI::error( $e->getMessage() );
 			return;
 		}
 
-		foreach ( $summary as $key => $value ) {
-			WP_CLI::line( sprintf( '%-14s %d', $key, $value ) );
-		}
-
-		WP_CLI::success( 'Registry seeded. Supplied certificates are in "under_review"; publication requires approval.' );
+		WP_CLI::success( 'Seeding complete. Supplied certificates remain in "under_review"; publication requires approval.' );
 	}
 
 	/**

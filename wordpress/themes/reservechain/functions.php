@@ -81,6 +81,13 @@ add_action(
 			(string) filemtime( $theme_dir . '/assets/css/components.css' )
 		);
 
+		wp_enqueue_style(
+			'reservechain-asset-pages',
+			$theme_uri . '/assets/css/asset-pages.css',
+			array( 'reservechain-components' ),
+			(string) filemtime( $theme_dir . '/assets/css/asset-pages.css' )
+		);
+
 		$manifest_path = $theme_dir . '/assets/build/.vite/manifest.json';
 
 		if ( ! is_readable( $manifest_path ) ) {
@@ -219,7 +226,7 @@ add_action(
 add_action(
 	'after_setup_theme',
 	static function (): void {
-		add_editor_style( array( 'style.css', 'assets/css/components.css' ) );
+		add_editor_style( array( 'style.css', 'assets/css/components.css', 'assets/css/asset-pages.css' ) );
 	}
 );
 

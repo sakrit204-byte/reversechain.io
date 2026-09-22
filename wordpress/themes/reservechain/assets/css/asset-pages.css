@@ -1,0 +1,339 @@
+/*
+ * ReserveChain — asset-programme page styles
+ *
+ * These pages are evidence hubs, not product pages. The visual job is to make
+ * provenance legible: what was measured, by whom, from which physical units,
+ * and which figures are declarations rather than measurements.
+ */
+
+/* ---------------------------------------------------------------------------
+   Programme header
+   ------------------------------------------------------------------------ */
+
+.rc-asset-header {
+	padding: var(--wp--preset--spacing--60) 0 var(--wp--preset--spacing--50);
+	border-bottom: var(--wp--custom--hairline);
+}
+
+.rc-asset-header.rc-illustrative {
+	padding: var(--wp--preset--spacing--50);
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.rc-asset-header__name {
+	margin: 0 0 var(--wp--preset--spacing--20);
+	font-size: var(--wp--preset--font-size--3xl);
+	line-height: 1.1;
+}
+
+.rc-asset-header__product {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-asset-header__summary {
+	max-width: var(--wp--custom--measure);
+	margin: 0 0 var(--wp--preset--spacing--50);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+/* Purity is the number a buyer looks for first, so it gets display weight —
+   but never without the standard it was measured against directly beneath it. */
+.rc-asset-header__purity {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: var(--wp--preset--spacing--30);
+	margin-bottom: var(--wp--preset--spacing--50);
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-left: 3px solid var(--wp--preset--color--gold);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface);
+}
+
+.rc-asset-header__purity-value {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--2xl);
+	font-variant-numeric: tabular-nums;
+	color: var(--wp--preset--color--gold-bright);
+	line-height: 1;
+}
+
+.rc-asset-header__purity-meta {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-asset-header__statuses {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: var(--wp--preset--spacing--30);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.rc-asset-header__statuses li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--30);
+	padding: var(--wp--preset--spacing--30);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--sm);
+	background: var(--wp--preset--color--surface);
+}
+
+.rc-asset-header__status-label {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+   ------------------------------------------------------------------------ */
+
+.rc-asset-section {
+	margin: var(--wp--preset--spacing--80) 0;
+}
+
+.rc-asset-section__heading {
+	margin: 0 0 var(--wp--preset--spacing--50);
+	font-size: var(--wp--preset--font-size--xl);
+	padding-bottom: var(--wp--preset--spacing--30);
+	border-bottom: var(--wp--custom--hairline);
+}
+
+/* A stated absence, not an empty panel. */
+.rc-asset-empty {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--wp--preset--spacing--30);
+	padding: var(--wp--preset--spacing--50);
+	border: 1px dashed var(--wp--preset--color--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-asset-note {
+	max-width: var(--wp--custom--measure);
+	margin: var(--wp--preset--spacing--40) 0 0;
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--contrast-subtle);
+	line-height: 1.6;
+}
+
+.rc-asset-note--attention {
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border-left: 2px solid var(--wp--preset--color--status-attention);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Specification tables
+   ------------------------------------------------------------------------ */
+
+.rc-spec-group {
+	margin: var(--wp--preset--spacing--60) 0 var(--wp--preset--spacing--30);
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--wp--preset--color--gold);
+}
+
+.rc-spec-table,
+.rc-element-table,
+.rc-unit-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-spec-table :is(th, td),
+.rc-element-table :is(th, td),
+.rc-unit-table :is(th, td) {
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border-bottom: var(--wp--custom--hairline);
+	text-align: left;
+	vertical-align: top;
+}
+
+.rc-spec-table th[scope="row"],
+.rc-unit-table th[scope="row"] {
+	width: 40%;
+	font-weight: 400;
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.rc-spec-table td,
+.rc-element-table td {
+	font-family: var(--wp--preset--font-family--mono);
+	font-variant-numeric: tabular-nums;
+}
+
+.rc-spec-source {
+	display: block;
+	margin-top: 0.3em;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+/* ---------------------------------------------------------------------------
+   Certificates
+   ------------------------------------------------------------------------ */
+
+.rc-certificate {
+	margin-bottom: var(--wp--preset--spacing--60);
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+}
+
+.rc-certificate__title {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	font-size: var(--wp--preset--font-size--lg);
+}
+
+.rc-certificate__meta {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: var(--wp--preset--spacing--40);
+	margin: 0 0 var(--wp--preset--spacing--50);
+	padding-bottom: var(--wp--preset--spacing--40);
+	border-bottom: var(--wp--custom--hairline);
+}
+
+.rc-certificate__meta dt {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-certificate__meta dd {
+	margin: 0.25em 0 0;
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.rc-element-table caption {
+	padding-bottom: var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--xs);
+	text-align: left;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+/* The assay table is long and narrow; columns let it read without a scroll
+   marathon, and it collapses to one column when there is no room. */
+@media (min-width: 48em) {
+	.rc-certificate .rc-table-scroll {
+		column-count: 2;
+		column-gap: var(--wp--preset--spacing--60);
+	}
+
+	.rc-certificate .rc-table-scroll table {
+		min-width: 0;
+	}
+}
+
+@media (min-width: 72em) {
+	.rc-certificate .rc-table-scroll {
+		column-count: 3;
+	}
+}
+
+.rc-certificate__purity {
+	margin: var(--wp--preset--spacing--40) 0 0;
+	font-size: var(--wp--preset--font-size--md);
+}
+
+.rc-certificate__findings {
+	max-width: var(--wp--custom--measure);
+	margin: var(--wp--preset--spacing--30) 0 0;
+	font-size: var(--wp--preset--font-size--sm);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Lots and units
+   ------------------------------------------------------------------------ */
+
+.rc-lot {
+	margin-bottom: var(--wp--preset--spacing--60);
+	padding: var(--wp--preset--spacing--50);
+	border: var(--wp--custom--hairline);
+	border-radius: var(--wp--custom--radius--md);
+	background: var(--wp--preset--color--surface-raised);
+}
+
+.rc-lot__title {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	font-size: var(--wp--preset--font-size--lg);
+}
+
+/* Declared and verified figures must never be mistaken for one another, so
+   they differ in colour, weight and underline treatment, and the declared
+   variant always carries its qualifier in visible text. */
+.rc-figure {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25em;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.rc-figure__label {
+	font-size: var(--wp--preset--font-size--xs);
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: var(--wp--preset--color--contrast-subtle);
+}
+
+.rc-figure__value {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--xl);
+	font-variant-numeric: tabular-nums;
+	width: max-content;
+}
+
+.rc-figure__qualifier {
+	font-size: var(--wp--preset--font-size--xs);
+	color: var(--wp--preset--color--status-attention);
+}
+
+.rc-figure--verified .rc-figure__value {
+	color: var(--wp--preset--color--contrast);
+	border-bottom: 0;
+}
+
+.rc-figure--verified .rc-figure__qualifier {
+	color: var(--wp--preset--color--status-verified);
+}
+
+.rc-figure--declared .rc-figure__value {
+	color: var(--wp--preset--color--contrast-muted);
+	border-bottom: 1px dotted var(--wp--preset--color--status-attention);
+}
+
+.rc-lot__units {
+	margin-top: var(--wp--preset--spacing--50);
+	padding-top: var(--wp--preset--spacing--40);
+	border-top: var(--wp--custom--hairline);
+}
+
+.rc-unit-table th[scope="row"] {
+	width: auto;
+	font-family: var(--wp--preset--font-family--mono);
+	color: var(--wp--preset--color--contrast);
+}
