@@ -1,0 +1,393 @@
+/*
+ * ReserveChain — motion, depth and pointer affordances
+ *
+ * The brief asks for "controlled animation" and rules out anything that
+ * degrades loading or mobile performance. Every rule here therefore obeys
+ * three constraints:
+ *
+ *   1. Nothing loops. Each effect is a one-way transition between two resting
+ *      states, triggered by the visitor scrolling or pointing.
+ *   2. Nothing animates a property that triggers layout. Only transform,
+ *      opacity and custom properties, so effects stay on the compositor.
+ *   3. Everything is additive. The page is complete and readable before any
+ *      of it runs, and the reduced-motion block at the end switches all of it
+ *      off without leaving anything hidden.
+ *
+ * The `.rc-enhanced` guard matters: reveal targets start visible, and only
+ * become hidden once JavaScript has confirmed it is there to reveal them.
+ * Without that, a JS failure would leave half the page permanently invisible.
+ */
+
+/* ---------------------------------------------------------------------------
+   Hero layout and the 3D canvas
+   ------------------------------------------------------------------------ */
+
+.rc-hero {
+	--rc-hero-visual: 0;
+	position: relative;
+	isolation: isolate;
+	overflow: clip;
+}
+
+/* Base: the visual is a full-bleed wash behind the copy. Declared before the
+   desktop rules below, because these are equal-specificity selectors and the
+   later one wins — putting the base case after the media query would silently
+   undo the two-column layout. */
+.rc-hero__visual {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+}
+
+/* Two columns once there is room for both. Below that the visual stays behind
+   the text as an atmospheric wash, which is the only honest way to keep an
+   abstract render on a phone without eating the fold. */
+@media (min-width: 62em) {
+	/* An explicit two-column grid rather than an absolutely positioned visual.
+	   Absolute positioning inside a full-bleed, padded, constrained-layout
+	   section makes the containing block ambiguous — the offsets resolve
+	   against the padding box and end up over-constrained against the base
+	   `inset: 0`, which put the render on top of the copy. A grid states the
+	   intent directly and cannot drift.
+
+	   Padding the section to where the wide container begins keeps the hero's
+	   left edge aligned with the site title above it and the trust bar below. */
+	.rc-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+		column-gap: var(--wp--preset--spacing--70);
+		align-items: center;
+		padding-inline: max(
+			var(--wp--preset--spacing--50),
+			calc((100vw - var(--wp--style--global--wide-size, 1340px)) / 2)
+		);
+	}
+
+	/* Both pinned to row 1. The visual precedes the copy in the DOM so that a
+	   screen reader meets the labelled decorative region before the headline
+	   rather than in the middle of it; without an explicit row, auto-placement
+	   would push the copy into a second row once the visual claimed column 2. */
+	.rc-hero > .rc-hero__content {
+		grid-row: 1;
+		grid-column: 1;
+		max-width: 36rem;
+		margin-inline: 0 !important;
+	}
+
+	.rc-hero__visual {
+		position: static;
+		grid-row: 1;
+		grid-column: 2;
+		display: grid;
+		align-content: center;
+	}
+
+	/* Keep the render proportionate to the copy beside it. */
+	.rc-hero__canvas {
+		max-height: 34rem;
+		aspect-ratio: 1 / 1;
+	}
+
+	/* Everything else in the hero — the spacer and the trust bar — spans the
+	   full row, so the two-column treatment applies only to the fold. */
+	.rc-hero > *:not(.rc-hero__content):not(.rc-hero__visual) {
+		grid-column: 1 / -1;
+		max-width: none;
+	}
+}
+
+.rc-hero__canvas {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	min-height: 22rem;
+	/* Present before, during and after the scene: if WebGL is unavailable or
+	   the device is filtered out, this is the finished state, not a
+	   placeholder waiting for something that never arrives. */
+	background:
+		radial-gradient(60% 55% at 62% 38%, rgb(201 162 39 / 13%), transparent 72%),
+		radial-gradient(48% 46% at 34% 72%, rgb(180 102 58 / 11%), transparent 74%),
+		radial-gradient(38% 38% at 72% 76%, rgb(155 164 174 / 7%), transparent 76%);
+}
+
+.rc-hero__canvas canvas {
+	opacity: 0;
+	transition: opacity 900ms ease;
+}
+
+.rc-hero__canvas[data-rc-scene-state='ready'] canvas {
+	opacity: 1;
+}
+
+/* Honest labelling, per the rule that conceptual imagery must never be
+   presented as evidence of a held asset. */
+.rc-hero__visual-caption {
+	margin: var(--wp--preset--spacing--30) 0 0;
+	font-size: var(--wp--preset--font-size--xs);
+	line-height: 1.5;
+	color: var(--wp--preset--color--contrast-subtle);
+	text-align: center;
+	max-width: 32rem;
+	margin-inline: auto;
+}
+
+@media (max-width: 61.99em) {
+	.rc-hero__visual-caption {
+		display: none;
+	}
+
+	.rc-hero__canvas {
+		position: absolute;
+		inset: 0;
+		aspect-ratio: auto;
+		opacity: 0.55;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveals
+   ------------------------------------------------------------------------ */
+
+.rc-enhanced .rc-reveal {
+	opacity: 0;
+	transform: translate3d(0, 14px, 0);
+	transition:
+		opacity 620ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--rc-reveal-delay, 0ms),
+		transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--rc-reveal-delay, 0ms);
+	will-change: opacity, transform;
+}
+
+.rc-enhanced .rc-reveal.is-revealed {
+	opacity: 1;
+	transform: none;
+	will-change: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Chain of trust
+   ------------------------------------------------------------------------ */
+
+.rc-chain__link {
+	transition: color 420ms ease;
+}
+
+.rc-chain__dot {
+	transform: scale(0.65);
+	background: var(--wp--preset--color--contrast-subtle);
+	transition: transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1), background-color 420ms ease,
+		box-shadow 420ms ease;
+}
+
+.rc-chain__link.is-active {
+	color: var(--wp--preset--color--contrast);
+}
+
+.rc-chain__link.is-active .rc-chain__dot {
+	transform: scale(1);
+	background: var(--wp--preset--color--gold);
+	box-shadow: 0 0 0 4px rgb(201 162 39 / 12%);
+}
+
+.rc-chain__link::after {
+	transition: background 520ms ease;
+}
+
+.rc-chain__link.is-active::after {
+	background: linear-gradient(90deg, var(--wp--preset--color--gold), transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Pointer light on cards
+   ------------------------------------------------------------------------ */
+
+.rc-framework,
+.rc-stage,
+.rc-program-card,
+.rc-metric,
+.rc-trustbar__item,
+.rc-certificate,
+.rc-lot {
+	position: relative;
+	transition: transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1),
+		border-color 260ms ease, box-shadow 260ms ease;
+}
+
+/* The light is a pseudo-element so it can never interfere with the card's own
+   background, and pointer-events are off so it cannot eat a click. */
+.rc-framework::after,
+.rc-stage::after,
+.rc-program-card::after,
+.rc-metric::after,
+.rc-trustbar__item::after,
+.rc-certificate::after,
+.rc-lot::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 260ms ease;
+	background: radial-gradient(
+		22rem circle at var(--rc-pointer-x, 50%) var(--rc-pointer-y, 50%),
+		rgb(201 162 39 / 9%),
+		transparent 62%
+	);
+}
+
+.is-lit::after {
+	opacity: 1;
+}
+
+.rc-framework.is-lit,
+.rc-stage.is-lit,
+.rc-program-card.is-lit,
+.rc-metric.is-lit,
+.rc-certificate.is-lit,
+.rc-lot.is-lit {
+	transform: translate3d(0, -2px, 0);
+	border-color: rgb(201 162 39 / 34%);
+	box-shadow: 0 10px 34px rgb(0 0 0 / 28%);
+}
+
+/* The copper and nickel programme cards keep their own accent when lit,
+   because the accent is how a reader tells the two programmes apart. */
+.rc-program-card--copper.is-lit::after {
+	background: radial-gradient(
+		22rem circle at var(--rc-pointer-x, 50%) var(--rc-pointer-y, 50%),
+		rgb(180 102 58 / 12%),
+		transparent 62%
+	);
+}
+
+.rc-program-card--nickel.is-lit::after {
+	background: radial-gradient(
+		22rem circle at var(--rc-pointer-x, 50%) var(--rc-pointer-y, 50%),
+		rgb(155 164 174 / 10%),
+		transparent 62%
+	);
+}
+
+/* ---------------------------------------------------------------------------
+   Sticky, condensing header
+   ------------------------------------------------------------------------ */
+
+.rc-header {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	backdrop-filter: saturate(140%) blur(10px);
+	transition: padding 240ms ease, background-color 240ms ease, box-shadow 240ms ease;
+}
+
+.rc-header.is-condensed {
+	padding-top: var(--wp--preset--spacing--20) !important;
+	padding-bottom: var(--wp--preset--spacing--20) !important;
+	background: rgb(7 10 18 / 86%);
+	box-shadow: 0 1px 0 var(--wp--preset--color--hairline), 0 12px 30px rgb(0 0 0 / 34%);
+}
+
+/* The tagline is the first thing to go when space is tight — the site title
+   carries the identity on its own. */
+.rc-header.is-condensed .rc-header__tagline,
+.rc-header.is-condensed p:has(+ .wp-block-navigation) {
+	opacity: 0;
+	visibility: hidden;
+	height: 0;
+	margin: 0;
+	transition: opacity 180ms ease, visibility 180ms;
+}
+
+/* ---------------------------------------------------------------------------
+   Links, buttons and focus
+   ------------------------------------------------------------------------ */
+
+.wp-block-button__link {
+	transition: transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1), background-color 200ms ease,
+		border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.wp-block-button__link:hover {
+	transform: translate3d(0, -1px, 0);
+	box-shadow: 0 8px 22px rgb(0 0 0 / 30%);
+}
+
+.is-style-outline .wp-block-button__link:hover {
+	border-color: var(--wp--preset--color--gold);
+	color: var(--wp--preset--color--gold-bright);
+}
+
+/* An underline that grows from the left reads as a deliberate affordance,
+   where a whole-link colour change reads as a state. */
+.rc-framework__cta a,
+.rc-prose a {
+	position: relative;
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-size: 0% 1px;
+	background-repeat: no-repeat;
+	background-position: 0 100%;
+	transition: background-size 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.rc-framework__cta a:hover,
+.rc-framework__cta a:focus-visible,
+.rc-prose a:hover,
+.rc-prose a:focus-visible {
+	background-size: 100% 1px;
+}
+
+/* ---------------------------------------------------------------------------
+   Section rhythm
+   ------------------------------------------------------------------------ */
+
+/* A short accent rule above each section heading gives the long homepage a
+   readable beat without adding another colour or box. */
+.rc-section > h2:first-of-type::before,
+.rc-asset-section__heading::before {
+	content: '';
+	display: block;
+	width: 2.5rem;
+	height: 2px;
+	margin-bottom: var(--wp--preset--spacing--30);
+	background: linear-gradient(90deg, var(--wp--preset--color--gold), transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+	.rc-enhanced .rc-reveal,
+	.rc-enhanced .rc-reveal.is-revealed {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.rc-chain__dot {
+		transform: scale(1);
+		background: var(--wp--preset--color--gold);
+		transition: none;
+	}
+
+	.rc-chain__link::after {
+		background: linear-gradient(90deg, var(--wp--preset--color--gold), transparent);
+	}
+
+	.rc-header,
+	.wp-block-button__link,
+	.rc-framework,
+	.rc-stage,
+	.rc-program-card,
+	.rc-metric,
+	.rc-certificate,
+	.rc-lot {
+		transition: none;
+	}
+
+	.rc-hero__canvas canvas {
+		transition: none;
+	}
+}

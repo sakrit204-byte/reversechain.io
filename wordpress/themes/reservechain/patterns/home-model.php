@@ -42,8 +42,8 @@
 	<!-- wp:group {"align":"wide","className":"rc-stages","layout":{"type":"grid","minimumColumnWidth":"20rem"}} -->
 	<div class="wp-block-group alignwide rc-stages">
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">01</p>
 			<!-- /wp:paragraph -->
@@ -56,8 +56,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">02</p>
 			<!-- /wp:paragraph -->
@@ -70,8 +70,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">03</p>
 			<!-- /wp:paragraph -->
@@ -84,8 +84,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">04</p>
 			<!-- /wp:paragraph -->
@@ -98,8 +98,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">05</p>
 			<!-- /wp:paragraph -->
@@ -112,8 +112,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">06</p>
 			<!-- /wp:paragraph -->
@@ -126,8 +126,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-stage","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-stage">
+		<!-- wp:group {"className":"rc-stage rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-stage rc-reveal">
 			<!-- wp:paragraph {"className":"rc-stage__index","fontSize":"xs","textColor":"gold"} -->
 			<p class="rc-stage__index has-gold-color has-text-color has-xs-font-size">07</p>
 			<!-- /wp:paragraph -->

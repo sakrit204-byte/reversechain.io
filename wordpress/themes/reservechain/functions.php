@@ -95,6 +95,15 @@ add_action(
 			(string) filemtime( $theme_dir . '/assets/css/passport-verify.css' )
 		);
 
+		// Motion and pointer affordances load last so they can refine anything
+		// the earlier layers establish.
+		wp_enqueue_style(
+			'reservechain-motion',
+			$theme_uri . '/assets/css/motion.css',
+			array( 'reservechain-components' ),
+			(string) filemtime( $theme_dir . '/assets/css/motion.css' )
+		);
+
 		$manifest_path = $theme_dir . '/assets/build/.vite/manifest.json';
 
 		if ( ! is_readable( $manifest_path ) ) {
@@ -118,7 +127,7 @@ add_action(
 				'reservechain-app-' . $index,
 				$theme_uri . '/assets/build/' . $css,
 				array( 'reservechain' ),
-				VERSION
+				null
 			);
 		}
 
@@ -127,7 +136,7 @@ add_action(
 				'reservechain-app',
 				$theme_uri . '/assets/build/' . $entry['file'],
 				array(),
-				VERSION,
+				null,
 				array(
 					'strategy'  => 'defer',
 					'in_footer' => true,
@@ -233,7 +242,7 @@ add_action(
 add_action(
 	'after_setup_theme',
 	static function (): void {
-		add_editor_style( array( 'style.css', 'assets/css/components.css', 'assets/css/asset-pages.css' ) );
+		add_editor_style( array( 'style.css', 'assets/css/components.css', 'assets/css/asset-pages.css', 'assets/css/motion.css' ) );
 	}
 );
 

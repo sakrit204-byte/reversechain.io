@@ -88,7 +88,7 @@ $rc_frameworks = array(
 	<div class="wp-block-group alignwide rc-framework-grid">
 		<?php foreach ( $rc_frameworks as $rc_item ) : ?>
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title"><?php echo esc_html( $rc_item['title'] ); ?></h3>
 			<p class="rc-framework__lead"><?php echo esc_html( $rc_item['lead'] ); ?></p>
 			<p class="rc-framework__body"><?php echo esc_html( $rc_item['body'] ); ?></p>

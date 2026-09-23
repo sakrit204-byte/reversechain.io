@@ -46,3 +46,6 @@ test-results/
 # large client reference material is kept locally, not in git history
 docs/brief/attachments/reference-site/
 docs/brief/attachments/*.zip
+
+# theme build output is generated; the manifest is rebuilt by `pnpm build`
+wordpress/themes/*/assets/build/

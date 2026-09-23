@@ -194,7 +194,7 @@ final class Blocks {
 		$is_public = Publication::can_display( $program );
 
 		$html = sprintf(
-			'<article class="rc-program-card rc-program-card--%s%s">',
+			'<article class="rc-program-card rc-reveal rc-program-card--%s%s">',
 			esc_attr( $accent ),
 			$is_public ? '' : ' rc-illustrative'
 		);
@@ -341,7 +341,7 @@ final class Blocks {
 
 		foreach ( $metrics as $metric ) {
 			$html .= sprintf(
-				'<div class="rc-metric"><dt class="rc-metric__label">%s</dt><dd class="rc-metric__value">%s</dd></div>',
+				'<div class="rc-metric rc-reveal"><dt class="rc-metric__label">%s</dt><dd class="rc-metric__value">%s</dd></div>',
 				esc_html( $metric['label'] ),
 				esc_html( number_format_i18n( $metric['value'] ) )
 			);

@@ -35,7 +35,7 @@
 	<div class="wp-block-group alignwide">
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Enterprise Tokenization Services</h3>
 			<p class="rc-framework__body">For institutions seeking real-world asset tokenization infrastructure: asset onboarding, data models, smart contracts, a compliance rule engine, custody and reserve integration, participant controls, reporting, APIs, portals, deployment and governance. Technology licensing and white-label delivery are part of the proposed model.</p>
 			<p class="rc-framework__cta"><a href="/enterprise-services/">Request enterprise information</a></p>
@@ -43,7 +43,7 @@
 		<!-- /wp:html -->
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Asset Owners and Originators</h3>
 			<p class="rc-framework__body">For producers, asset owners, suppliers, custodians and institutional asset holders: submission, due diligence, verification, valuation, custody, registry and passport creation, reserve controls, the tokenization path and the commercial enquiry process.</p>
 			<p class="rc-framework__cta"><a href="/asset-owners-and-originators/">Submit an asset for assessment</a></p>
@@ -94,7 +94,7 @@
 	<div class="wp-block-group alignwide">
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Documentation Centre</h3>
 			<p class="rc-framework__body">Platform, technology, asset programme, certificate, verification, custody, reserve, compliance and legal documents, released under version control as they are approved.</p>
 			<p class="rc-framework__status">
@@ -106,7 +106,7 @@
 		<!-- /wp:html -->
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Frequently Asked Questions</h3>
 			<p class="rc-framework__body">Questions about the platform, the asset programmes, verification, custody, Proof of Reserves, Digital Asset Passports, tokenization, eligibility, redemption, enterprise services, technology, and legal and risk matters.</p>
 			<p class="rc-framework__cta"><a href="/faq/">Read the FAQ</a></p>
@@ -114,7 +114,7 @@
 		<!-- /wp:html -->
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Corporate Development Status</h3>
 			<p class="rc-framework__body">A transparent view of what is complete, what is in progress and what is planned across corporate, technology, platform, legal, asset onboarding, verification, custody, tokenization, documentation and launch readiness.</p>
 			<p class="rc-framework__cta"><a href="/corporate-development-status/">View development status</a></p>
@@ -162,7 +162,7 @@
 	<div class="wp-block-group alignwide">
 
 		<!-- wp:html -->
-		<article class="rc-framework">
+		<article class="rc-framework rc-reveal">
 			<h3 class="rc-framework__title">Official Contact</h3>
 			<p class="rc-framework__body">Enquiries are handled through the official ReserveChain channels only. Verified contact addresses and the official channels directory are published on the contact page.</p>
 			<p class="rc-framework__status">
@@ -174,7 +174,7 @@
 		<!-- /wp:html -->
 
 		<!-- wp:html -->
-		<article class="rc-framework rc-framework--alert">
+		<article class="rc-framework rc-framework--alert rc-reveal">
 			<h3 class="rc-framework__title">Anti-Fraud Notice</h3>
 			<p class="rc-framework__body"><strong>Protect yourself. Verify official communications.</strong></p>
 			<ul class="rc-risks">

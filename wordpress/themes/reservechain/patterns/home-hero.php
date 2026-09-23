@@ -25,7 +25,13 @@
 <section class="wp-block-group alignfull rc-hero" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
 
 	<!-- wp:html -->
-	<div class="rc-hero__canvas" data-rc-scene="hero" aria-hidden="true"></div>
+	<div class="rc-hero__visual">
+		<div class="rc-hero__canvas" data-rc-scene="hero" aria-hidden="true"></div>
+		<p class="rc-hero__visual-caption">
+			Abstract material study: ultrafine copper powder and 0.025&nbsp;mm nickel wire.
+			Illustrative rendering — not a photograph of held material.
+		</p>
+	</div>
 	<!-- /wp:html -->
 
 	<!-- wp:group {"className":"rc-hero__content","layout":{"type":"constrained"}} -->
@@ -78,8 +84,8 @@
 	<!-- wp:group {"className":"rc-trustbar","align":"wide","layout":{"type":"grid","minimumColumnWidth":"15rem"}} -->
 	<div class="wp-block-group alignwide rc-trustbar">
 
-		<!-- wp:group {"className":"rc-trustbar__item","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-trustbar__item">
+		<!-- wp:group {"className":"rc-trustbar__item rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-trustbar__item rc-reveal">
 			<!-- wp:heading {"level":3,"fontSize":"sm"} -->
 			<h3 class="wp-block-heading has-sm-font-size">Industrial Asset Verification Framework</h3>
 			<!-- /wp:heading -->
@@ -89,8 +95,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-trustbar__item","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-trustbar__item">
+		<!-- wp:group {"className":"rc-trustbar__item rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-trustbar__item rc-reveal">
 			<!-- wp:heading {"level":3,"fontSize":"sm"} -->
 			<h3 class="wp-block-heading has-sm-font-size">Custody Structure in Development</h3>
 			<!-- /wp:heading -->
@@ -100,8 +106,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-trustbar__item","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-trustbar__item">
+		<!-- wp:group {"className":"rc-trustbar__item rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-trustbar__item rc-reveal">
 			<!-- wp:heading {"level":3,"fontSize":"sm"} -->
 			<h3 class="wp-block-heading has-sm-font-size">Reserve Reconciliation Architecture</h3>
 			<!-- /wp:heading -->
@@ -111,8 +117,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-trustbar__item","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-trustbar__item">
+		<!-- wp:group {"className":"rc-trustbar__item rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-trustbar__item rc-reveal">
 			<!-- wp:heading {"level":3,"fontSize":"sm"} -->
 			<h3 class="wp-block-heading has-sm-font-size">Planned ERC-20 Infrastructure</h3>
 			<!-- /wp:heading -->

@@ -40,8 +40,8 @@
 	<!-- wp:group {"align":"wide","className":"rc-program-grid","layout":{"type":"grid","minimumColumnWidth":"26rem"}} -->
 	<div class="wp-block-group alignwide rc-program-grid">
 
-		<!-- wp:group {"className":"rc-program-block","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-program-block">
+		<!-- wp:group {"className":"rc-program-block rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-program-block rc-reveal">
 			<!-- wp:reservechain/program-card {"programCode":"RC-CU-POWDER","accent":"copper"} /-->
 
 			<!-- wp:paragraph {"fontSize":"sm","textColor":"contrast-muted"} -->
@@ -58,8 +58,8 @@
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:group {"className":"rc-program-block","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group rc-program-block">
+		<!-- wp:group {"className":"rc-program-block rc-reveal","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group rc-program-block rc-reveal">
 			<!-- wp:reservechain/program-card {"programCode":"RC-NI-WIRE-0025","accent":"nickel"} /-->
 
 			<!-- wp:paragraph {"fontSize":"sm","textColor":"contrast-muted"} -->
