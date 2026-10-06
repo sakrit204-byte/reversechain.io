@@ -69,6 +69,7 @@ final class Rest {
 		self::route( '/me/notifications/(?P<id>\d+)/read', 'POST', array( __CLASS__, 'notification_read' ), $bearer );
 		self::route( '/me/devices', 'POST', array( __CLASS__, 'device' ), $bearer );
 		self::route( '/support', 'POST', array( __CLASS__, 'support' ), $bearer );
+		self::route( '/me/delete', 'POST', array( __CLASS__, 'delete_account' ), $bearer );
 	}
 
 	/* ------------------------------------------------------------ gates */
@@ -447,6 +448,56 @@ final class Rest {
 			update_user_meta( get_current_user_id(), 'rc_push_tokens', array_slice( array_values( array_filter( $list ) ), -5 ) );
 		}
 		return array( 'ok' => true );
+	}
+
+	/**
+	 * Account deletion (Apple 5.1.1(v), Google Play account-deletion policy, GDPR/FADP erasure).
+	 * Body: { password, confirm: "DELETE" }. Staff accounts are never deleted through the API.
+	 * Accounts without compliance history are deleted. Accounts with KYC/KYB/AML/sanctions outcomes are
+	 * anonymised and locked; only the minimum compliance record required by law is retained, without
+	 * contact details, and is scheduled for erasure when the retention period ends.
+	 */
+	public static function delete_account( \WP_REST_Request $r ) {
+		$u = wp_get_current_user();
+		$p = $r->get_json_params();
+		if ( 'DELETE' !== ( $p['confirm'] ?? '' ) || ! wp_check_password( (string) ( $p['password'] ?? '' ), $u->user_pass, $u->ID ) ) {
+			return new \WP_Error( 'rc_delete_confirm', 'Confirm with your password and the word DELETE.', array( 'status' => 422 ) );
+		}
+		if ( Auth::is_staff( $u ) ) {
+			return new \WP_Error( 'rc_delete_staff', 'Staff accounts are closed by an administrator.', array( 'status' => 403 ) );
+		}
+		$uid      = $u->ID;
+		$email_h  = hash( 'sha256', strtolower( $u->user_email ) );
+		$has_kyc  = false;
+		foreach ( array_keys( Compliance::CHECKS ) as $check ) {
+			$v = get_user_meta( $uid, 'rc_' . $check, true );
+			if ( $v && ! in_array( $v, array( 'not_started', 'not_applicable' ), true ) ) {
+				$has_kyc = true;
+			}
+		}
+		Auth::revoke_all( $uid );
+		foreach ( array( 'rc_mfa_secret', 'rc_mfa_enabled', 'rc_mfa_recovery', 'rc_mfa_pending', 'rc_push_tokens', 'rc_language' ) as $k ) {
+			delete_user_meta( $uid, $k );
+		}
+		global $wpdb;
+		$wpdb->delete( $wpdb->prefix . 'rc_notifications', array( 'user_id' => $uid ) );
+		$wpdb->update( $wpdb->prefix . 'rc_support', array( 'name' => '', 'email' => '', 'message' => '[erased on account deletion]' ), array( 'user_id' => $uid ) );
+
+		if ( $has_kyc ) {
+			$anon = 'deleted-' . substr( $email_h, 0, 16 );
+			wp_update_user( array( 'ID' => $uid, 'user_email' => $anon . '@deleted.invalid', 'display_name' => 'Deleted account', 'first_name' => '', 'last_name' => '', 'user_pass' => wp_generate_password( 64 ) ) );
+			$wpdb->update( $wpdb->users, array( 'user_login' => $anon, 'user_nicename' => $anon ), array( 'ID' => $uid ) );
+			( new \WP_User( $uid ) )->set_role( '' );
+			update_user_meta( $uid, 'rc_deleted_at', gmdate( 'c' ) );
+			update_user_meta( $uid, 'rc_retention_until', gmdate( 'Y-m-d', strtotime( '+10 years' ) ) );
+			$mode = 'anonymised';
+		} else {
+			require_once ABSPATH . 'wp-admin/includes/user.php';
+			wp_delete_user( $uid );
+			$mode = 'deleted';
+		}
+		Audit_Log::record( 'account.deleted', 'user', $uid, 'Account ' . $mode . ' at the user\'s request', array( 'email_hash' => $email_h, 'mode' => $mode ), $uid );
+		return array( 'ok' => true, 'mode' => $mode, 'message' => 'anonymised' === $mode ? 'Your account has been closed and your personal details erased. A minimal compliance record is retained as required by law.' : 'Your account and personal data have been deleted.' );
 	}
 
 	public static function support( \WP_REST_Request $r ) {

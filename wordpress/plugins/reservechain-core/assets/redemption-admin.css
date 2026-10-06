@@ -1,0 +1,24 @@
+/* ReserveChain — Redemptions admin (module: redemption) */
+.rc-rdm .rc-rdm-status.is-off{border-left:4px solid #b26200}
+.rc-rdm .rc-rdm-status.is-live{border-left:4px solid #1e7e4f}
+.rc-rdm-test{display:inline-block;padding:2px 8px;border-radius:4px;background:#fff4d6;color:#7a5200;border:1px dashed #d9a400;font-size:11px;font-weight:600;vertical-align:middle}
+.rc-rdm-card{text-decoration:none;color:inherit}
+.rc-rdm-pill.rc-rdm-requested,.rc-rdm-pill.rc-rdm-compliance_review{background:#eef2f5;color:#45606f;border-color:#cbd8e1}
+.rc-rdm-pill.rc-rdm-approved,.rc-rdm-pill.rc-rdm-tokens_burned,.rc-rdm-pill.rc-rdm-custody_released,.rc-rdm-pill.rc-rdm-in_logistics{background:#e8f0fb;color:#1d4f91;border-color:#bcd0ee}
+.rc-rdm-pill.rc-rdm-delivered{background:#e7f6ee;color:#1e7e4f;border-color:#b7e3cb}
+.rc-rdm-pill.rc-rdm-on_hold{background:#fdf5e1;color:#8a6100;border-color:#f1dca2}
+.rc-rdm-pill.rc-rdm-rejected{background:#fbeaea;color:#a12d22;border-color:#f0c2bd}
+.rc-rdm-pill.rc-rdm-cancelled{background:#f6f7f7;color:#787c82}
+.rc-rdm-kv th{width:38%;text-align:left;font-weight:600}
+.rc-rdm-multi{min-width:min(420px,100%)}
+.rc-rdm-doc{max-width:100%}
+.rc-rdm-addr{white-space:pre-wrap;margin:0;font-size:12px}
+.rc-rdm-actions .rc-rdm-act{margin:0 0 8px}
+.rc-rdm-actions .rc-rdm-act>summary{list-style:none;display:inline-block}
+.rc-rdm-actions .rc-rdm-act>summary::-webkit-details-marker{display:none}
+.rc-rdm-actions .rc-rdm-act[open]{padding:10px;border:1px solid #dcdcde;border-radius:6px;background:#f9f9f9}
+.rc-rdm-blocked{margin:4px 0;color:#646970}
+.rc-rdm-timeline{margin:0 0 0 18px}
+.rc-rdm-timeline li{margin-bottom:10px;padding-left:4px}
+.rc-rdm-timeline pre{max-width:100%;white-space:pre-wrap;font-size:11px;background:#f6f7f7;padding:6px;border-radius:4px}
+.rc-rdm-at{color:#646970;font-size:12px}

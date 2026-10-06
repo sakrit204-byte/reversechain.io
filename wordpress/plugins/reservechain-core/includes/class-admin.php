@@ -371,6 +371,10 @@ final class Admin {
 		}
 		echo '</div></div>';
 
+		echo '<div class="rc-panel"><h2>Redemption terms <small>(empty = not determined; live requests are refused)</small></h2>';
+		printf( '<p><label>Fee schedule (approved wording)<br><textarea name="s[redemption_fee_schedule]" rows="3" class="large-text">%s</textarea></label></p>', esc_textarea( (string) $s['redemption_fee_schedule'] ) );
+		printf( '<p><label>Minimum redemption (token units)<br><input name="s[redemption_min]" class="regular-text" value="%s"></label></p><p class="description">Only enter values that have written approval. They are never defaulted.</p>', esc_attr( (string) $s['redemption_min'] ) );
+		echo '</div>';
 		echo '<div class="rc-panel"><h2>Security & contact</h2>';
 		printf( '<label class="rc-check"><input type="checkbox" name="s[mfa_enforce_staff]" value="1"%s> Enforce MFA for all staff roles</label>', checked( $s['mfa_enforce_staff'], true, false ) );
 		printf( '<p><label>Contact / support inbox email<br><input type="email" name="s[contact_email]" class="regular-text" value="%s"></label></p>', esc_attr( $s['contact_email'] ) );
@@ -410,6 +414,8 @@ final class Admin {
 		$new['restrict_eu_eea']      = ! empty( $in['restrict_eu_eea'] );
 		$new['restricted_countries'] = array_values( array_filter( array_map( static fn( $c ) => strtoupper( trim( $c ) ), explode( ',', (string) ( $in['restricted_countries'] ?? '' ) ) ), static fn( $c ) => isset( Schema::countries()[ $c ] ) ) );
 		$new['mfa_enforce_staff']    = ! empty( $in['mfa_enforce_staff'] );
+		$new['redemption_fee_schedule'] = sanitize_textarea_field( $in['redemption_fee_schedule'] ?? '' );
+		$new['redemption_min']          = '' === trim( (string) ( $in['redemption_min'] ?? '' ) ) ? '' : (string) max( 0, (float) $in['redemption_min'] );
 		$new['contact_email']        = sanitize_email( $in['contact_email'] ?? '' );
 		foreach ( array( 'chain_id', 'name', 'explorer', 'token_address', 'anchor_address' ) as $k ) {
 			$v                      = sanitize_text_field( $in['network'][ $k ] ?? '' );

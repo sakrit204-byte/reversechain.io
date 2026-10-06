@@ -127,6 +127,8 @@ final class Settings {
 			'eu_notice'            => self::EU_NOTICE,
 			'provisional_notice'   => self::PROVISIONAL_NOTICE,
 			'mode_authorizations'  => array(),
+			'redemption_fee_schedule' => '',
+			'redemption_min'       => '',
 			'restrict_eu_eea'      => true,
 			'restricted_countries' => self::DEFAULT_RESTRICTED,
 			'mfa_enforce_staff'    => true,
