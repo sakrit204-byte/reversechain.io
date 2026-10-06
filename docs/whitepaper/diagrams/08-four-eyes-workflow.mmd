@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> UnderReview: submit
+    UnderReview --> Draft: request changes
+    UnderReview --> Approved: approve (approver ≠ author)
+    Approved --> Published: publish
+    Published --> Unpublished: unpublish
+    Unpublished --> Draft: revise
+    Unpublished --> Published: republish
+    Published --> Archived: archive
+    Unpublished --> Archived: archive

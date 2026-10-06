@@ -1,0 +1,24 @@
+flowchart TB
+    subgraph Evidence["Evidence layer — off-chain system of record"]
+      reg["Asset Registry<br/>lots · batches · containers · coils"]
+      docs["Evidence documents<br/>CoA · custody · insurance · valuation · reserve reports<br/>SHA-256 fingerprints"]
+      dap["Digital Asset Passports<br/>timeline · evidence ledger · Merkle root"]
+      audit["Hash-chained audit trail"]
+    end
+    subgraph Control["Control layer"]
+      wf["Four-eyes workflow"]
+      rbac["Roles & MFA"]
+      comp["Compliance controls<br/>jurisdiction · KYC/KYB · AML · sanctions"]
+      flags["Site modes & module flags<br/>sensitive modules OFF"]
+    end
+    subgraph Rep["Representation layer — testnet only"]
+      tok["ReserveToken (ERC-20)"]
+      cr["ComplianceRegistry"]
+      rg["ReserveGuard"]
+      rm["RedemptionManager"]
+      tr["Treasury"]
+      aa["AuditAnchor"]
+    end
+    Evidence --> Control --> Rep
+    audit -. chain head .-> aa
+    docs -. report hash .-> rg

@@ -1,0 +1,19 @@
+flowchart TB
+    subgraph Clients
+      web["Website<br/>EN · ES · IT"]
+      app["iOS / Android app<br/>Expo · React Native"]
+    end
+    subgraph Platform
+      cdn["CDN + WAF"]
+      wp["WordPress + reservechain-core<br/>registry · passports · workflow · audit · compliance · REST API"]
+      db[("MySQL 8<br/>append-only audit table")]
+      obj[("Private object storage<br/>evidence documents")]
+    end
+    subgraph Chain["EVM test network"]
+      sc["Contract suite"]
+    end
+    web --> cdn --> wp
+    app --> cdn
+    wp --> db
+    wp --> obj
+    wp -. read state / anchor .-> sc

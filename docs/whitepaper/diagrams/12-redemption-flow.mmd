@@ -1,0 +1,20 @@
+sequenceDiagram
+    autonumber
+    actor H as Eligible holder (future)
+    participant RM as RedemptionManager
+    participant C as Compliance review
+    participant O as Operations / custodian
+    participant T as ReserveToken
+    H->>RM: request(amount) — tokens escrowed
+    RM-->>C: RedemptionRequested
+    C->>C: re-screen KYC/AML/sanctions,<br/>check thresholds & delivery terms
+    alt approved
+        C->>RM: approve(id, fulfilmentRef)
+        RM->>T: burn escrowed tokens
+        RM-->>O: RedemptionApproved
+        O->>O: release & deliver registered units<br/>(terms TBD)
+        O-->>H: delivery evidence recorded in passport
+    else rejected
+        C->>RM: reject(id, reasonHash)
+        RM-->>H: escrowed tokens returned
+    end

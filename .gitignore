@@ -1,0 +1,29 @@
+# Dependencies & builds
+node_modules/
+dist/
+build/output/
+.expo/
+web-build/
+coverage/
+coverage.json
+artifacts/
+cache/
+typechain-types/
+contracts/deployments/hardhat.json
+contracts/deployments/localhost.json
+*.log
+# Secrets — never commit live credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.keystore
+*.jks
+google-services.json
+GoogleService-Info.plist
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

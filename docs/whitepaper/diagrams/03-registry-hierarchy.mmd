@@ -1,0 +1,16 @@
+flowchart TB
+    P["Metal Program<br/>Cu 29 · Ni 28"] --> L["Lot"]
+    L --> B["Batch<br/>(powder)"]
+    B --> C["Container<br/>drum · box · pallet"]
+    L --> K["Coil / Spool<br/>(wire)"]
+    subgraph Evidence["Evidence linked to any unit"]
+      COA["Certificate of Analysis"]
+      CUS["Custody & ownership record"]
+      INS["Insurance record"]
+      VAL["Valuation"]
+      RSV["Reserve report"]
+    end
+    L -.-> Evidence
+    B -.-> Evidence
+    C -.-> Evidence
+    K -.-> Evidence

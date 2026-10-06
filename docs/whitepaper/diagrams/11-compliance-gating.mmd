@@ -1,0 +1,11 @@
+flowchart LR
+    u["Prospective participant"] --> j{"Jurisdiction<br/>eligible?"}
+    j -- "EU/EEA or restricted" --> x["Not eligible<br/>EU/EEA notice shown"]
+    j -- "pending / eligible" --> k["KYC / KYB"]
+    k --> a["AML risk assessment"]
+    a --> s["Sanctions & PEP screening"]
+    s --> d{"All approved?"}
+    d -- no --> x2["Not eligible"]
+    d -- yes --> f["Eligibility flag mirrored on-chain<br/>(no personal data)"]
+    f --> g{"Module authorised<br/>& offering documentation final?"}
+    g -- "no (current state)" --> w["Waitlist / information only"]

@@ -1,0 +1,127 @@
+{
+  "_comment": "ReserveChain.io deploy config (TESTNET ONLY). See contracts/README.md#configuration. Keys starting with '_' are comments and ignored. null = unset. 'deployer' resolves to the deployer address.",
+  "network": "sepolia",
+  "adminTransferDelaySeconds": 86400,
+  "safeMultisig": null,
+  "_safeMultisig": "Set to the Safe address that will accept DEFAULT_ADMIN_ROLE (two-step, after adminTransferDelaySeconds). null keeps the deployer as admin.",
+  "revokeDeployerWiringRoles": true,
+  "compliance": {
+    "enabled": true,
+    "_blockedJurisdictions": "EU/EEA ISO-3166 alpha-2 codes per SPEC.md waitlist rules. ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.",
+    "blockedJurisdictions": [
+      "AT",
+      "BE",
+      "BG",
+      "HR",
+      "CY",
+      "CZ",
+      "DK",
+      "EE",
+      "FI",
+      "FR",
+      "DE",
+      "GR",
+      "HU",
+      "IE",
+      "IT",
+      "LV",
+      "LT",
+      "LU",
+      "MT",
+      "NL",
+      "PL",
+      "PT",
+      "RO",
+      "SK",
+      "SI",
+      "ES",
+      "SE",
+      "IS",
+      "LI",
+      "NO"
+    ],
+    "kycOperators": [],
+    "jurisdictionAdmins": []
+  },
+  "reserveGuard": {
+    "enabled": true,
+    "_maxAttestationAgeSeconds": "Staleness window. null = UNSET => minting blocked while the guard is enabled.",
+    "maxAttestationAgeSeconds": null,
+    "attestors": [],
+    "guardAdmins": []
+  },
+  "treasury": {
+    "timelockDelaySeconds": null,
+    "gracePeriodSeconds": null,
+    "treasurers": [],
+    "limitAdmins": [],
+    "pausers": []
+  },
+  "auditAnchor": {
+    "anchorers": []
+  },
+  "tokens": [
+    {
+      "_comment": "Name/symbol are TESTNET PLACEHOLDERS pending final approval. All tokenomics fields are null (unset).",
+      "key": "cu",
+      "name": "ReserveChain Copper Powder (TESTNET)",
+      "symbol": "tCU",
+      "decimals": 18,
+      "supplyCap": null,
+      "_mintingEnabled": "Static-cap-mode switch. Minting succeeds only if (a) the reserve guard is enabled and permits it, OR (b) supplyCap is non-null/non-zero AND mintingEnabled is true. Default false (fail-closed).",
+      "mintingEnabled": false,
+      "programId": "RC-PROGRAM-CU",
+      "document": {
+        "uri": null,
+        "hash": null
+      },
+      "tokensPerUnit": null,
+      "roles": {
+        "minters": [],
+        "burners": [],
+        "pausers": [],
+        "complianceAdmins": [],
+        "treasuryOperators": []
+      },
+      "redemption": {
+        "enabled": false,
+        "minAmount": null,
+        "maxAmount": null,
+        "operators": [],
+        "pausers": []
+      },
+      "treasuryDailyLimit": null
+    },
+    {
+      "_comment": "Name/symbol are TESTNET PLACEHOLDERS pending final approval. All tokenomics fields are null (unset).",
+      "key": "ni",
+      "name": "ReserveChain Nickel Wire (TESTNET)",
+      "symbol": "tNI",
+      "decimals": 18,
+      "supplyCap": null,
+      "_mintingEnabled": "Static-cap-mode switch. Minting succeeds only if (a) the reserve guard is enabled and permits it, OR (b) supplyCap is non-null/non-zero AND mintingEnabled is true. Default false (fail-closed).",
+      "mintingEnabled": false,
+      "programId": "RC-PROGRAM-NI",
+      "document": {
+        "uri": null,
+        "hash": null
+      },
+      "tokensPerUnit": null,
+      "roles": {
+        "minters": [],
+        "burners": [],
+        "pausers": [],
+        "complianceAdmins": [],
+        "treasuryOperators": []
+      },
+      "redemption": {
+        "enabled": false,
+        "minAmount": null,
+        "maxAmount": null,
+        "operators": [],
+        "pausers": []
+      },
+      "treasuryDailyLimit": null
+    }
+  ]
+}

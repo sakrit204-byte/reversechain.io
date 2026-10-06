@@ -1,0 +1,16 @@
+flowchart TB
+    safe["Safe multisig<br/>(intended admin)<br/>signers TBD"]
+    tok["ReserveToken<br/>ERC-20 · Permit · Pausable<br/>AccessControl"]
+    cr["ComplianceRegistry<br/>status · jurisdiction · frozen · expiry"]
+    rg["ReserveGuard<br/>attestations · tokensPerUnit<br/>fail-closed ceiling"]
+    rm["RedemptionManager<br/>escrow → review → burn / return<br/>disabled by default"]
+    tr["Treasury<br/>daily limits · timelock"]
+    aa["AuditAnchor<br/>chainHead · seq · uri"]
+    att["Attestor<br/>(to be appointed)"]
+    cms["CMS anchor job"]
+    safe --> tok & cr & rg & rm & tr & aa
+    tok -- "canTransfer()" --> cr
+    tok -- "maxMintable()" --> rg
+    rm -- "burn()" --> tok
+    att -- "postAttestation()" --> rg
+    cms -- "anchor()" --> aa

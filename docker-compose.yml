@@ -1,0 +1,71 @@
+# Local development stack for ReserveChain.io (DEV environment only — never use these credentials elsewhere)
+# Usage: docker compose up -d  →  http://localhost:8088  (phpMyAdmin: http://localhost:8081)
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: reservechain
+      MYSQL_USER: rc_dev
+      MYSQL_PASSWORD: rc_dev_password
+      MYSQL_ROOT_PASSWORD: rc_root_password
+    command: ["--log-bin-trust-function-creators=1", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prc_root_password"]
+      interval: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:6-php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8088:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: reservechain
+      WORDPRESS_DB_USER: rc_dev
+      WORDPRESS_DB_PASSWORD: rc_dev_password
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: &wpextra |
+        define('RC_ENV', 'development');
+        define('RC_TOKEN_SECRET', 'dev-only-change-me-in-staging-and-production');
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+    volumes:
+      - wp_data:/var/www/html
+      - ./wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain
+      - ./wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    profiles: ["tools"]
+    user: "33:33"
+    depends_on: [wordpress]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: reservechain
+      WORDPRESS_DB_USER: rc_dev
+      WORDPRESS_DB_PASSWORD: rc_dev_password
+      WORDPRESS_CONFIG_EXTRA: *wpextra
+    volumes:
+      - wp_data:/var/www/html
+      - ./wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain
+      - ./wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    profiles: ["tools"]
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+
+volumes:
+  db_data:
+  wp_data:

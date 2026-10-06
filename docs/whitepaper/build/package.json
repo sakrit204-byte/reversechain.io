@@ -1,0 +1,13 @@
+{
+  "name": "reservechain-whitepaper-build",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python extract_diagrams.py && node render_diagrams.mjs && python build_html.py && node build_pdf.mjs && python build_docx.py"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.0",
+    "pdf-lib": "^1.17.1",
+    "playwright-core": "^1.50.0"
+  }
+}

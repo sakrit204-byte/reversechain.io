@@ -1,0 +1,9 @@
+flowchart LR
+    reg["Registered units<br/>(passports)"] --> att["Independent attestor<br/>(to be appointed)"]
+    cust["Custodian statements<br/>(custodian TBD)"] --> att
+    att --> rep["Reserve report<br/>SHA-256 fingerprint"]
+    rep --> cms["Registry: Reserve Report record<br/>four-eyes publication"]
+    rep --> rg["ReserveGuard.postAttestation<br/>(units, reportHash, uri, asOf)"]
+    rg --> ceil["Mint ceiling<br/>units × tokensPerUnit (unset)"]
+    cms --> pub["Public reserves page<br/>(module OFF)"]
+    rg --> pub

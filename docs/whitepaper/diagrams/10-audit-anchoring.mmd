@@ -1,0 +1,6 @@
+flowchart LR
+    e1["Entry n-1<br/>row_hash = H(n-1)"] --> e2["Entry n<br/>prev_hash = H(n-1)<br/>row_hash = H(n)"]
+    e2 --> e3["Entry n+1<br/>prev_hash = H(n)<br/>row_hash = H(n+1)"]
+    e3 --> head["Chain head<br/>(seq, row_hash)"]
+    head -- "anchor(chainHead, seq, uri)" --> aa["AuditAnchor<br/>(testnet)"]
+    trig["DB triggers<br/>block UPDATE / DELETE"] -. protect .- e2

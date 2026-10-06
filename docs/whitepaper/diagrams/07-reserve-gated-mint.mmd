@@ -1,0 +1,12 @@
+flowchart TB
+    m["mint(to, amount) — MINTER role only<br/>(intended: multisig)"] --> c2{"ReserveGuard enabled?"}
+    c2 -- yes --> c3{"Token bound to program,<br/>tokensPerUnit set,<br/>max attestation age set,<br/>fresh attestation exists?"}
+    c3 -- "no (default)" --> z["maxMintable = 0<br/>revert ReserveGuardExceeded"]
+    c3 -- yes --> c4{"amount ≤ headroom<br/>(units × tokensPerUnit − supply)?"}
+    c4 -- no --> z
+    c4 -- yes --> c1
+    c2 -- no --> c1{"Recipient eligible<br/>(if compliance enabled)?"}
+    c1 -- no --> r0["revert TransferNotCompliant"]
+    c1 -- yes --> c5{"Static supply cap set<br/>and exceeded?"}
+    c5 -- yes --> r1["revert SupplyCapExceeded"]
+    c5 -- no --> ok["mint"]

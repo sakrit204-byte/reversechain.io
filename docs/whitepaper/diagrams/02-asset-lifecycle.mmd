@@ -1,0 +1,10 @@
+flowchart LR
+    A["Production / sourcing<br/>(producer TBD)"] --> B["Sampling & laboratory analysis<br/>(lab TBD)"]
+    B --> C["Packaging, sealing<br/>& registration"]
+    C --> D["Custody intake<br/>(custodian TBD)"]
+    D --> E["Insurance<br/>(insurer TBD)"]
+    E --> F["Reserve reporting<br/>(attestor TBD)"]
+    F --> G{"Written authorization<br/>& legal structure final?"}
+    G -- "No (current state)" --> H["Registry & passports only<br/>no tokens"]
+    G -- "Yes (future, if ever)" --> I["Reserve-gated issuance<br/>to eligible holders"]
+    I --> J["Proposed redemption<br/>or continued custody"]

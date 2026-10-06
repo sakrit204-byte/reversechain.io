@@ -1,0 +1,10 @@
+sequenceDiagram
+    autonumber
+    participant U as Holder of a document
+    participant B as Browser / app
+    participant R as ReserveChain registry API
+    U->>B: Select file
+    B->>B: SHA-256 computed locally (file never leaves device)
+    B->>R: GET /verify?hash=<sha256>
+    R-->>B: match: true/false, document, passport_no
+    B-->>U: "Matches registered document X in passport Y" or "No match"

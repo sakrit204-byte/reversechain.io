@@ -1,0 +1,8 @@
+flowchart BT
+    d1["CoA.pdf<br/>sha256 = h1"] --> n12["H(h1 ‖ h2)"]
+    d2["Custody receipt.pdf<br/>sha256 = h2"] --> n12
+    d3["Insurance cert.pdf<br/>sha256 = h3"] --> n34["H(h3 ‖ h4)"]
+    d4["Reserve report.pdf<br/>sha256 = h4"] --> n34
+    n12 --> root["Passport Merkle root"]
+    n34 --> root
+    root -. optional .-> anchor["On-chain anchor<br/>(testnet)"]
