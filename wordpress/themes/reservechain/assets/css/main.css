@@ -1075,3 +1075,80 @@ html, body { overflow-x: clip; }
 .rc-pill--proposed { --c: var(--s-proposed); }
 .rc-pill--not_applicable, .rc-pill--pending { --c: var(--s-na); }
 .rc-pill--restricted { --c: var(--red); }
+
+/* =====================================================================
+   Atmosphere — background artifacts that rotate across sections:
+   copper FCC lattice · topographic contours · assay-grid blueprint ·
+   hex evidence network · metallic glows · ghost element symbols · grain.
+   All decorative, masked away from text, drift slowly on scroll.
+   ===================================================================== */
+.rc-content > .rc-section:not(.rc-section--cream):not(.rc-section--tight), .rc-content--home > .rc-section:not(.rc-section--cream):not(.rc-section--tight) { isolation: isolate; overflow: hidden; }
+.rc-content .rc-section > .rc-wrap { position: relative; z-index: 1; }
+.rc-content > .rc-section:not(.rc-section--cream):not(.rc-section--tight)::before {
+	content: ""; position: absolute; inset: -12% -4%; z-index: -1; pointer-events: none;
+	transform: translate3d(0, var(--py, 0px), 0);
+	background-repeat: no-repeat;
+	opacity: .5;
+}
+/* 1 — copper crystal lattice, upper right, copper glow */
+.rc-content > .rc-section:nth-of-type(5n+1)::before {
+	background-image: url("../img/bg/lattice.svg"), radial-gradient(closest-side, rgba(201, 119, 63, .16), transparent);
+	background-size: 640px auto, 900px 700px;
+	background-position: calc(100% + 60px) 8%, 105% -10%;
+	-webkit-mask-image: radial-gradient(70% 80% at 88% 22%, #000 30%, transparent 75%); mask-image: radial-gradient(70% 80% at 88% 22%, #000 30%, transparent 75%);
+}
+/* 2 — topographic contours across the section */
+.rc-content > .rc-section:nth-of-type(5n+2)::before {
+	background-image: url("../img/bg/contours.svg"), radial-gradient(closest-side, rgba(213, 177, 103, .1), transparent);
+	background-size: 1500px auto, 1100px 800px;
+	background-position: 30% 40%, -10% 120%;
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
+	opacity: .42;
+}
+/* 3 — assay-grid blueprint, left, nickel glow */
+.rc-content > .rc-section:nth-of-type(5n+3)::before {
+	background-image: url("../img/bg/assay-grid.svg"), radial-gradient(closest-side, rgba(169, 187, 200, .13), transparent);
+	background-size: 1200px auto, 900px 700px;
+	background-position: -120px 30%, -15% 110%;
+	-webkit-mask-image: radial-gradient(60% 70% at 12% 55%, #000 25%, transparent 72%); mask-image: radial-gradient(60% 70% at 12% 55%, #000 25%, transparent 72%);
+}
+/* 4 — hex evidence network, full width, faint */
+.rc-content > .rc-section:nth-of-type(5n+4)::before {
+	background-image: url("../img/bg/hexnet.svg"), radial-gradient(closest-side, rgba(213, 177, 103, .1), transparent);
+	background-size: 1440px auto, 1000px 700px;
+	background-position: 50% 50%, 110% 0;
+	-webkit-mask-image: radial-gradient(80% 90% at 50% 50%, #000 20%, transparent 80%); mask-image: radial-gradient(80% 90% at 50% 50%, #000 20%, transparent 80%);
+	opacity: .38;
+}
+/* 5 — lattice again, lower left, nickel glow */
+.rc-content > .rc-section:nth-of-type(5n+5)::before {
+	background-image: url("../img/bg/lattice.svg"), radial-gradient(closest-side, rgba(169, 187, 200, .14), transparent);
+	background-size: 520px auto, 900px 700px;
+	background-position: -80px 95%, -10% 110%;
+	-webkit-mask-image: radial-gradient(60% 70% at 10% 85%, #000 25%, transparent 72%); mask-image: radial-gradient(60% 70% at 10% 85%, #000 25%, transparent 72%);
+}
+/* ghost element symbols on alternating sections */
+.rc-content > .rc-section:nth-of-type(6n+2)::after,
+.rc-content > .rc-section:nth-of-type(6n+5)::after {
+	position: absolute; z-index: -1; pointer-events: none;
+	font: 400 clamp(14rem, 28vw, 26rem)/.8 var(--f-serif); letter-spacing: -.06em;
+	background: linear-gradient(160deg, rgba(232, 160, 106, .09), rgba(232, 160, 106, 0) 70%); -webkit-background-clip: text; background-clip: text; color: transparent;
+	transform: translate3d(0, calc(var(--py, 0px) * -1.6), 0);
+}
+.rc-content > .rc-section:nth-of-type(6n+2)::after { content: "Cu"; right: -2vw; bottom: -4vw; }
+.rc-content > .rc-section:nth-of-type(6n+5)::after { content: "Ni"; left: -2vw; top: -3vw; background-image: linear-gradient(200deg, rgba(210, 221, 229, .08), rgba(210, 221, 229, 0) 70%); }
+
+/* hairline divider glow between sections */
+.rc-content > .rc-section + .rc-section:not(.rc-section--cream) { border-top: 1px solid transparent; border-image: linear-gradient(90deg, transparent, rgba(213, 177, 103, .22), transparent) 1; }
+
+/* page-wide film grain + vignette for a printed, material feel */
+body::after { content: ""; position: fixed; inset: 0; z-index: 59; pointer-events: none; background-image: url("../img/bg/grain.svg"); background-size: 220px; opacity: .045; mix-blend-mode: overlay; }
+.rc-pagehero { background-image: radial-gradient(120% 90% at 85% 0%, rgba(213, 177, 103, .1), transparent 55%), url("../img/bg/lattice.svg"); background-repeat: no-repeat; background-size: auto, 560px auto; background-position: 0 0, calc(100% + 80px) 40%; }
+.page-copper-powder .rc-pagehero { background-image: radial-gradient(120% 90% at 85% 0%, rgba(201, 119, 63, .22), transparent 55%), url("../img/bg/lattice.svg"); }
+.page-nickel-wire .rc-pagehero { background-image: radial-gradient(120% 90% at 85% 0%, rgba(169, 187, 200, .2), transparent 55%), url("../img/bg/contours.svg"); background-size: auto, 1200px auto; }
+
+/* tighter rhythm after the disclosure band */
+.rc-section--tight + .rc-section { padding-top: clamp(40px, 5vw, 72px); }
+@media (prefers-reduced-motion: reduce) { .rc-content > .rc-section::before, .rc-content > .rc-section::after { transform: none !important; } }
+@media (max-width: 700px) { .rc-content > .rc-section::before { opacity: .3; } .rc-content > .rc-section::after { font-size: 11rem; } }
+.rc-content > .rc-section:nth-of-type(5n+4)::before { opacity: .3; -webkit-mask-image: radial-gradient(75% 85% at 50% 50%, transparent 35%, #000 80%); mask-image: radial-gradient(75% 85% at 50% 50%, transparent 35%, #000 80%); }

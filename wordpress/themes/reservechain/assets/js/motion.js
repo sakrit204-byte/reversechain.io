@@ -120,6 +120,8 @@
   var steps = $$('.rc-steps, .rc-timeline');
   steps.forEach(function (s) { s.classList.add('rc-track'); });
 
+  var sectionsBg = $$('.rc-content > .rc-section');
+
   /* ---------- frame loop ---------- */
   var lastY = -1;
   function frame() {
@@ -138,6 +140,12 @@
         if (l.o.rotate) t += ' rotate(' + (c * 0.008).toFixed(2) + 'deg)';
         l.el.style.transform = t + (l.el.dataset.tilt || '');
         if (l.o.fade) l.el.style.opacity = clamp(1 - Math.max(0, -r.top) / (r.height * 0.9), 0, 1).toFixed(3);
+      });
+
+      sectionsBg.forEach(function (sec) {
+        var r = sec.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        sec.style.setProperty('--py', ((r.top + r.height / 2 - vh / 2) * -0.12).toFixed(1) + 'px');
       });
 
       chains.forEach(function (c) {
