@@ -41,6 +41,7 @@ services:
       - wp_data:/var/www/html
       - ./wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain
       - ./wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core
+      - ./deploy/php-uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
 
   wpcli:
     image: wordpress:cli-php8.3

@@ -31,3 +31,8 @@ Thumbs.db
 # Local artefacts
 scripts/shots/
 mobile/dist-live/
+
+# Deploy: operator-filled environment files and backup keys
+deploy/env/*.env
+rc-backup*.key
+*.age

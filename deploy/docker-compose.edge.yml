@@ -1,0 +1,26 @@
+# Shared edge proxy: ONE Caddy fronting every environment on the server (automatic HTTPS via Let's Encrypt).
+# Lives in ~/reservechain/edge. Site blocks are generated per environment by deploy.sh into ./sites/<env>.caddy
+# and imported by ./Caddyfile. Usage on the server:
+#   docker network create rc_edge   (once; deploy.sh does this)
+#   docker compose -p rc-edge -f docker-compose.edge.yml up -d
+#   docker compose -p rc-edge -f docker-compose.edge.yml exec caddy caddy reload --config /etc/caddy/Caddyfile
+services:
+  caddy:
+    image: caddy:2
+    restart: always
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./sites:/etc/caddy/sites:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [edge]
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  edge:
+    name: ${RC_EDGE_NETWORK:-rc_edge}
+    external: true

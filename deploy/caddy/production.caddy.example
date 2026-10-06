@@ -1,0 +1,7 @@
+# Example of what deploy.sh generates into ~/reservechain/edge/sites/production.caddy
+reservechain.example.com {
+	import rc_common
+	reverse_proxy wp-production:80 {
+		header_up X-Forwarded-Proto https
+	}
+}

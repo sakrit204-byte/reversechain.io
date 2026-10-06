@@ -1,0 +1,18 @@
+# Example of what deploy.sh generates into ~/reservechain/edge/sites/staging.caddy
+# (hash below = bcrypt of the placeholder 'example-only'; basic_auth block only when STAGING_BASIC_AUTH="user:<bcrypt hash>" is set in staging .env)
+staging.reservechain.example.com {
+	import rc_common
+	header X-Robots-Tag "noindex, nofollow, noarchive"
+	handle /robots.txt {
+		respond "User-agent: *
+Disallow: /
+" 200
+	}
+	@protected not path /wp-json/rc/v1/health /wp-json/rc/v1/health/full
+	basic_auth @protected {
+		reviewer $2a$14$vIAVYP.Gs6YJfSL5g4A6..7PfIP43Fl5LRwVKEozGR./I8FsmlOvi
+	}
+	reverse_proxy wp-staging:80 {
+		header_up X-Forwarded-Proto https
+	}
+}

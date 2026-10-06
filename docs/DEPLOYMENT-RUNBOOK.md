@@ -13,7 +13,7 @@
 git clone <reservechain-repo> && cd reservechain.io
 cp contracts/.env.example contracts/.env; cp mobile/.env.example mobile/.env   # local-only values; never commit .env
 docker compose up -d              # WordPress, MySQL 8, phpMyAdmin
-# open http://localhost:8080 → complete WP install → activate theme "reservechain" and plugin "ReserveChain Core"
+# open http://localhost:8088 (or run: bash scripts/dev-reset.sh) → complete WP install → activate theme "reservechain" and plugin "ReserveChain Core"
 
 # contracts
 cd contracts && npm ci && npx hardhat test
@@ -79,6 +79,73 @@ flowchart LR
 - [ ] Admin → Audit Trail → Verify chain integrity: **OK**; triggers status **active**.
 - [ ] Error rate and latency normal for 30 minutes.
 - [ ] Record deployment in the release log.
+- [ ] `GET /wp-json/rc/v1/health` returns `"status":"ok"` and the WordPress dashboard **Operations** widget is all green ([OPERATIONS.md](OPERATIONS.md)).
+
+### 3.4 Single-server deployment (staging + production side by side) — exact commands
+
+`deploy/deploy.sh` deploys either environment to one Linux host. Each environment is its own compose project
+with its own volumes; one shared Caddy terminates HTTPS for both:
+
+```
+~/reservechain/edge/        docker-compose.edge.yml, Caddyfile, sites/<env>.caddy        project rc-edge
+~/reservechain/production/  docker-compose.prod.yml, .env, app -> releases/<stamp>-<ref>  project rc-production
+~/reservechain/staging/     (same layout)                                                 project rc-staging
+   each also holds: backup.sh restore.sh rollback.sh ops-common.sh mu-plugins/rc-smtp.php logs/ releases.log
+```
+
+```bash
+# from the workstation (repository root); SSH key default ~/.ssh/reservechain_deploy
+SITE_HOST=staging.reservechain.io ADMIN_EMAIL=ops@reservechain.io deploy/deploy.sh --env staging ubuntu@SERVER_IP
+deploy/deploy.sh --env production --ref v1.2.3 --host reservechain.io ubuntu@SERVER_IP
+deploy/deploy.sh --env production --cron-only ubuntu@SERVER_IP     # (re)install crontab only
+deploy/deploy.sh --env staging --push-env ubuntu@SERVER_IP         # upload edited deploy/env/staging.env
+```
+
+* **First deploy of an environment** generates `~/reservechain/<env>/.env` (mode 600) with random DB passwords,
+  `RC_TOKEN_SECRET`, the 8 WordPress salts and `RC_HEALTH_TOKEN`, unless `deploy/env/<env>.env` exists locally
+  (git-ignored; start from `deploy/env/<env>.env.example`). Missing keys are appended on later deploys; existing
+  values are never overwritten. Without `--host`, hosts default to `<ip>.sslip.io` / `staging.<ip>.sslip.io`.
+* **Releases:** `--ref <tag|commit>` builds the release with `git archive`; otherwise the working tree is shipped.
+  Each release is unpacked to `releases/<UTC-stamp>-<ref>/`, the `app` symlink is swapped atomically and the
+  WordPress container recreated; the 5 newest releases are kept for rollback (`releases.log` records history).
+* **Install / upgrade:** first install runs `wp core install`, activates theme + plugin, seeds pages (full demo
+  seed on staging, `--pages-only` on production unless `--seed-demo`); upgrades run `RC\Install::upgrade()` and
+  `wp rc seed --pages-only`. Then `wp rc tamper-test` and `wp rc-ops check --no-alerts`.
+* **Staging is never indexed:** Caddy adds `X-Robots-Tag: noindex, nofollow, noarchive`, serves a disallow-all
+  `robots.txt`, and deploy.sh sets `blog_public=0`. Optional password protection: set
+  `STAGING_BASIC_AUTH='reviewer:<bcrypt>'` in the staging `.env` (hash with
+  `docker run --rm caddy:2 caddy hash-password --plaintext '…'`) and redeploy; `/wp-json/rc/v1/health*` stays
+  reachable for uptime monitors. Note: basic auth also blocks the mobile app's API calls against staging.
+* **Mail:** `WORDPRESS_SMTP_*` in `.env` are read by the mu-plugin `deploy/mu-plugins/rc-smtp.php` (mounted into
+  `wp-content/mu-plugins`); empty `WORDPRESS_SMTP_HOST` = PHP `mail()`. Test: `wp rc-ops test-alert`.
+* **Crontab** (installed per environment unless `--skip-cron`; times UTC converted to server time):
+  backup 02:30 (production) / 03:00 (staging) via `backup.sh`; WP-cron every 5 minutes via
+  `docker compose … run --rm -T wpcli wp cron event run --due-now` (`DISABLE_WP_CRON` is true in
+  `docker-compose.prod.yml`); weekly truncation of logs over 20 MB. Inspect with `crontab -l | grep rc-ops`.
+* **WP-CLI on the server:**
+  `cd ~/reservechain/production && docker compose -p rc-production -f docker-compose.prod.yml --env-file .env run --rm wpcli wp <command>`.
+
+**Migrating from the earlier single-stack layout** (`~/reservechain/docker-compose.prod.yml`, project
+`reservechain`, Caddy inside the stack): deploy.sh stops with a "LEGACY" message. Migrate once:
+
+```bash
+# from the workstation: ship the backup tooling
+ssh ubuntu@SERVER_IP 'mkdir -p ~/legacy' && scp deploy/backup.sh deploy/ops-common.sh ubuntu@SERVER_IP:legacy/
+# on the server
+cd ~/reservechain && cp docker-compose.prod.yml .env ~/legacy/
+umask 077; tr -dc A-Za-z0-9 </dev/urandom | head -c 48 > ~/legacy/pass
+RC_HOME=~/legacy COMPOSE_FILE=~/legacy/docker-compose.prod.yml COMPOSE_PROJECT=reservechain ENV_FILE=~/legacy/.env \
+  BACKUP_DIR=~/legacy-backup BACKUP_PASSPHRASE_FILE=~/legacy/pass BACKUP_MARK=0 bash ~/legacy/backup.sh
+sudo docker compose -p reservechain -f docker-compose.prod.yml --env-file .env down    # keeps the old volumes
+mv ~/reservechain ~/reservechain.legacy
+# from the workstation
+deploy/deploy.sh --env production --host <same SITE_HOST as before> ubuntu@SERVER_IP
+# on the server: restore the legacy data into the new production stack
+cd ~/reservechain/production && BACKUP_PASSPHRASE_FILE=~/legacy/pass ./restore.sh \
+  --archive ~/legacy-backup/daily/rc-*.tar.enc --restore-wp-config --i-know --no-pre-backup
+```
+(`--restore-wp-config` keeps the legacy salts so existing sessions, MFA and signed links keep working; delete
+`~/legacy/pass` and the legacy volumes once verified.)
 
 ## 4. Rollback
 
@@ -94,6 +161,23 @@ Decision rule: roll back if a SEV-1/SEV-2 regression is detected and a forward f
 
 **Audit-log note:** a PITR restore discards audit entries written after the restore point. Before restoring, export the audit log (JSONL) and archive it with the incident record so the discarded entries remain evidenced; the post-restore chain is verified independently.
 
+### 4.1 Rollback on the single-server deployment — exact commands
+
+```bash
+cd ~/reservechain/production
+./rollback.sh --list                          # kept releases, live one marked *
+./rollback.sh --to previous                   # code only: swap the app symlink, recreate WordPress, re-run migrations
+./rollback.sh --to v1.2.2                     # newest kept release built from that ref
+./rollback.sh --to previous --with-db ~/reservechain-backups/production/daily/rc-production-20261006T023000Z.tar.age --i-know
+                                              # code + database (BACKUP_AGE_IDENTITY / BACKUP_PASSPHRASE_FILE must be set)
+# a ref no longer kept on the server: redeploy it from the workstation
+deploy/deploy.sh --env production --ref v1.2.2 ubuntu@SERVER_IP
+```
+
+`rollback.sh` ends with `wp rc tamper-test`, `wp rc audit-verify` and `wp rc-ops health`. Before a database
+rollback in production, follow the audit-log note above (export the audit log first); `restore.sh` additionally
+takes an automatic safety backup of production unless `--no-pre-backup` is given.
+
 ## 5. Maintenance
 
 ### 5.1 Routine
@@ -104,7 +188,7 @@ Decision rule: roll back if a SEV-1/SEV-2 regression is detected and a forward f
 | Review WAF events, failed logins, integrity job | Daily (automated alerts) | Ops |
 | Review module flags and site mode audit entries | Weekly | Compliance officer |
 | Access review (roles, MFA enrolment) | Quarterly | Compliance officer |
-| Restore drill | Quarterly | Ops |
+| Restore drill (`deploy/restore.sh` into staging — BACKUP-DR §9.3) | Quarterly | Ops |
 | Certificate / domain expiry check | Monthly (automated) | Ops |
 | Secrets rotation | Per SECURITY §8 | Ops |
 | Audit anchor (if enabled) | Daily / on demand | System |
