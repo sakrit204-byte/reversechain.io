@@ -22,10 +22,13 @@ final class CLI {
 	 * Seed demonstration data.
 	 *
 	 * [--pages-only]
-	 * : Only resynchronise website pages and menus.
+	 * : Only create missing website pages and menus.
+	 *
+	 * [--force]
+	 * : Overwrite existing pages (EN/ES/IT) and rebuild menus from seed files. Discards CMS edits to those pages.
 	 */
 	public function seed( $args, $assoc ): void {
-		Seed::run( ! empty( $assoc['pages-only'] ) );
+		Seed::run( ! empty( $assoc['pages-only'] ), ! empty( $assoc['force'] ) );
 		\WP_CLI::success( 'Seed complete.' );
 	}
 

@@ -119,7 +119,7 @@ final class Workflow {
 		}
 		$meta = array();
 		foreach ( get_post_meta( $post_id ) as $k => $v ) {
-			if ( 0 === strpos( $k, '_rc_' ) && ! in_array( $k, array( '_rc_approved_fp', '_rc_workflow_history', '_rc_submitted_by', '_rc_approved_by' ), true ) ) {
+			if ( ( 0 === strpos( $k, '_rc_' ) || 0 === strpos( $k, '_rct_' ) ) && ! in_array( $k, array( '_rc_approved_fp', '_rc_workflow_history', '_rc_submitted_by', '_rc_approved_by' ), true ) ) {
 				$meta[ $k ] = $v;
 			}
 		}

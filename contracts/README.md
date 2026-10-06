@@ -127,7 +127,7 @@ npm run deploy:hardhat   # in-process network, uses config/localhost.json
 # persistent local chain
 npx hardhat node                          # terminal 1
 npm run deploy:localhost                  # terminal 2 -> deployments/localhost.json
-WP_URL=http://localhost:8080 npm run anchor:localhost
+WP_URL=http://localhost:8088 npm run anchor:localhost
 ```
 
 `config/localhost.json` grants operational roles to the local `deployer` account so that every flow can be exercised by hand. The tokenomics fields in it are still unset.

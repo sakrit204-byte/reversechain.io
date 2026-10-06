@@ -1,0 +1,381 @@
+# ReserveChain — Recorded Training Program
+
+**Purpose:** a set of 10 recorded video modules that let ReserveChain staff, or a replacement developer, learn to run the platform without the original developer. Each module has learning goals, a target length, a **complete narration script with on-screen actions (shot list)** so the video can be recorded directly, and a short knowledge check.
+**Related:** the operator manuals [01](01-CMS-ADMIN-MANUAL.md)–[07](07-OPERATIONS-BACKUP-DR-MANUAL.md) and [Troubleshooting](TROUBLESHOOTING-AND-KNOWN-ISSUES.md). Each module names the manual sections it teaches.
+
+---
+
+## 1. Recording guide
+
+**Environment**
+- Record on the **local stack** (`http://localhost:8088`), freshly reset with `bash scripts/dev-reset.sh`. That gives the seeded demo data and the review queue.
+- For Module 8 (deployment) and Module 9 (backups), record against **staging**. Hide the server IP and hostnames, or blur them in editing.
+
+**Accounts**
+- Administrator: `rcadmin`.
+- Demo roles: `demo.editor`, `demo.registry`, `demo.reviewer`, `demo.compliance`, `demo.auditor`, `demo.app`.
+- **Passwords are provided separately. Never show a password, a TOTP secret, a recovery code, an `.env` file or a private key on screen.** When typing a password, cut away or blur.
+- Pre-enrol MFA for the accounts you will use, on a phone that is not shown on camera.
+
+**Screen and audio**
+- 1920×1080, browser zoom 110 %, a clean browser profile with no bookmarks bar or extensions visible.
+- Use two browser profiles side by side when two roles are needed (for example a registry manager in one, a reviewer in the other).
+- Narration at a calm pace, about 140 words per minute. Use British/International English, and the same calm, precise tone as the website.
+- Each module starts with a 10-second title card (module number, title, "ReserveChain — in development; no tokens are offered or sold") and ends with the knowledge-check slide.
+
+**Script conventions**
+- Each **Shot** has two parts: **On screen** (what the recorder does and shows, with the exact URL) and **Narration** (the words to read). Read the narration text verbatim; it has already been checked against the code.
+- `[CUT]` marks where the editor removes waiting time or a password entry.
+- `[CALLOUT: …]` marks an on-screen text box or highlight added in editing.
+
+**After recording**
+- Store the videos in ReserveChain-owned storage (handover item 3.18).
+- Record the platform version shown on the System health page (`RC_VERSION`, DB schema) in each video's description.
+- Re-record a module when its screens change (see the [README](README.md#5-keeping-these-manuals-current)).
+
+## 2. Program overview
+
+| # | Module | Audience | Length | Manuals |
+|---|---|---|---|---|
+| 1 | The ReserveChain website | All staff | 12 min | README, 01 §8–9 |
+| 2 | CMS essentials: sign-in, MFA, pages, the four-eyes workflow | All staff | 20 min | 01 §1–7 |
+| 3 | Registry and Digital Asset Passports | Registry, reviewers | 22 min | 02 |
+| 4 | Proof of Reserves | Reviewers, compliance | 15 min | 03 |
+| 5 | Compliance, waitlist, support and the audit trail | Compliance, auditors | 18 min | 01 §9–14, 04 §8 |
+| 6 | Token and smart-contract administration | Safe signers, technical operator | 20 min | 05 |
+| 7 | The mobile app and Participant Portal | Release owner, support | 15 min | 06, 04 §6 |
+| 8 | Deployment and rollback | Ops / developer | 18 min | 07 §3–4 |
+| 9 | Backups, restore and security | Ops / developer | 18 min | 07 §5–9 |
+| 10 | Troubleshooting and incidents | Ops, compliance, administrators | 15 min | Troubleshooting, 07 §8 |
+
+Total: about 3 hours. Suggested paths:
+- **Content editor:** 1, 2.
+- **Registry manager:** 1, 2, 3.
+- **Compliance officer:** 1, 2, 3, 4, 5, 10.
+- **Replacement developer or ops:** all 10.
+
+---
+
+## Module 1 — The ReserveChain website (12 min)
+
+**Learning goals.** After this module you can:
+- explain what the public site shows and what it deliberately does not show;
+- find the programs, registry, passports, Verify tool and waitlist;
+- recognise the claim-status pills and pending states;
+- explain what site modes and sections do.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 1.1 | Title card. Then the homepage `http://localhost:8088/` scrolled slowly to the disclosure banner. `[CALLOUT: mandatory disclosure]` | "Welcome to ReserveChain. In this first module we look at the public website the way a visitor sees it. Before anything else, notice this banner. It is the mandatory disclosure. ReserveChain is in development, and no tokens are offered or sold. The disclosure and the EU/EEA notice appear on every page, in the app and in emails, and you will never remove them. Everything you do in the CMS must stay consistent with these two statements." |
+| 1.2 | Hover over the main navigation; open the mega menu groups one by one | "The navigation is grouped into Platform, Assets, Enterprise, Participation, Company and Resources. These menus are generated by code on every deployment, so if you want a permanent change to the menu, it is made in the repository, not in Appearance, Menus. We cover why in module two." |
+| 1.3 | Open `http://localhost:8088/assets/industrial-metals/copper-powder/`. Point at the Cu 29 element tile, then scroll to the Certificate of Analysis panel and its assay grid | "These are the two initial programs: ultra-high-purity copper powder, shown with the element tile Cu 29, and high-purity nickel wire, Ni 28. On the copper page you see the owner-supplied Certificate of Analysis, transcribed exactly as printed, with its results grid. Grey cells were below the detection limit. Coloured cells were detected. Read the label carefully: owner-supplied, not independently verified." |
+| 1.4 | Zoom in on several status pills (Proposed, In development, Pending verification). `[CALLOUT: claim-status legend]` | "Every factual claim carries one of five statuses: proposed, in development, pending verification, verified, and not applicable. These pills come from the registry records themselves. Nobody types them into page text. When information is missing, the site says so, for example 'Pending: weight certificate required'. We never estimate." |
+| 1.5 | Open `http://localhost:8088/passport/RC-CU-LOT-000001/`. Scroll through the identity fields, timeline, evidence, documents and Merkle root. Click **Print / PDF** and cancel | "This is a Digital Asset Passport for copper lot 03-K-07. It is assembled automatically from registry records. You see the identity fields, a lifecycle timeline, the evidence, a document ledger with SHA-256 fingerprints, a completeness score, a QR code, and an evidence Merkle root that changes if any field or document changes. Module three shows where each element comes from." |
+| 1.6 | Open `http://localhost:8088/platform/verification/`. Drag a seeded specimen PDF into the Verify tool and show the match | "The Verify tool lets anyone check a document. The file is hashed inside the visitor's browser. It is never uploaded. If the fingerprint matches a published document, the site shows which one. A re-saved or re-scanned copy will not match, and that is the point." |
+| 1.7 | Open `http://localhost:8088/participation/waitlist/`. Fill the form with a test identity; choose Germany; show the EU/EEA notice and the general-updates option. Do not submit | "The waitlist is a registration of interest only. It never creates an allocation or a reservation. If someone selects an EU or EEA country, they see the EU/EEA notice, and they can only opt in to general updates. Without that opt-in, nothing is stored." |
+| 1.8 | Open `http://localhost:8088/platform/proof-of-reserves/` and point at the locked-module panel "Inactive — subject to final approval" | "Some sections show modules that are built but locked: wallet, purchase, proof-of-reserves publication, redemption. They display this inactive state until ReserveChain gives written authorization. Locked is the normal state today." |
+| 1.9 | Sign in as `rcadmin` `[CUT password and code]`. Open `http://localhost:8088/wp-admin/admin.php?page=rc-settings`. Show the Website mode radios and the Website sections list without saving | "Behind the scenes, administrators control the site mode and the visible sections. Pre-Launch is the default. Maintenance shows a holding page. Four modes are locked: Eligibility, Early Participation, Live Offering and Redemption. They need both a server-side switch and a written authorization reference. Sections can be hidden without deleting content." |
+| 1.10 | Knowledge-check slide | "Let's check what you learned." |
+
+**Knowledge check**
+1. Where do the claim-status pills on a page come from? *(From the registry records. They are never typed into page text.)*
+2. Does the Verify tool upload the visitor's file? *(No. It hashes the file in the browser.)*
+3. An EU resident registers without ticking general updates. What is stored? *(Nothing, apart from a `waitlist.restricted` audit entry.)*
+4. Name two things a locked mode needs. *(A server constant `RC_ALLOW_MODE_<MODE>` and a written authorization reference entered by an administrator.)*
+
+---
+
+## Module 2 — CMS essentials: sign-in, MFA, pages, four-eyes (20 min)
+
+**Learning goals.** After this module you can:
+- sign in with MFA and store recovery codes;
+- know your role's permissions;
+- edit a page and a translation correctly;
+- run submit → approve → publish;
+- explain why an approval was invalidated;
+- know when a CMS edit will be overwritten by a deploy.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 2.1 | `http://localhost:8088/wp-login.php`. Type the username; `[CUT password]`; point at the "Authentication code" field | "Staff sign in at wp-login. Below the password there is an Authentication code field. Every staff account must use multi-factor authentication. You type the six-digit code from your authenticator app, or one of your recovery codes if you lost the phone." |
+| 2.2 | Sign in as a fresh user with no MFA. Show the redirect to `profile.php?rc_mfa_required=1#rc-mfa` and the QR block. `[Blur the QR and the key]` | "If you have not set up MFA yet, you are sent straight to your profile. Scan this QR code with an authenticator app, type the current code, and click Enable MFA." |
+| 2.3 | Show the green recovery-codes box, with the codes blurred. `[CALLOUT: shown once]` | "Now the most important step. These eight recovery codes are shown once. Store them in the ReserveChain password manager immediately. If you lose both the phone and the codes, an administrator has to reset your MFA from the server, with identity checks. That is deliberately inconvenient." |
+| 2.4 | Open `http://localhost:8088/wp-admin/admin.php?page=reservechain` as `demo.editor`, then as `rcadmin`. Scroll to "Your role & permissions" | "The control centre shows your role's permissions at the bottom. Compare a content editor with an administrator. Editors and registry managers can write and submit. Reviewers approve. Compliance officers approve and publish. Only administrators change settings. Nobody, not even an administrator, can approve their own work." |
+| 2.5 | Open `http://localhost:8088/wp-admin/edit.php?post_type=page`. Open the FAQ page. Point at the HTML content, the Four-eyes workflow box, the Translations box and the SEO box | "Pages are HTML built from the theme's components, described in the Content Authoring Guide. On the right is the Four-eyes workflow box. Below the editor are the Spanish and Italian translations. The SEO box holds the search title and description." |
+| 2.6 | Show the folder `wordpress/plugins/reservechain-core/seed/pages/` in a file explorer: `resources__faq.html` and the `.es` and `.it` files. `[CALLOUT: deploy overwrites seeded pages]` | "Here is something you must remember. Standard pages also live as files in the repository, and every deployment copies those files back into WordPress. If you edit a standard page only in the CMS, your change disappears at the next deploy, and so do menu edits. For permanent changes, edit the seed file through a pull request. Use CMS edits for urgent fixes, and mirror them in the repository at once." |
+| 2.7 | As `demo.editor`: Pages → Add New. Title "Training: draft notice", one paragraph. Click **Save Draft**, then **Submit for review** | "Let's run the workflow. As the editor, I create a page, save the draft, and submit it for review. Notice there is no Publish button for me. If I try to publish, the system routes the page to review anyway." |
+| 2.8 | Switch to the second browser profile as `demo.reviewer`. Open `http://localhost:8088/wp-admin/admin.php?page=rc-review`. Hover over the disabled Approve on an item the reviewer edited; then click **Approve** on the editor's page | "As the reviewer, I open the Review queue. Read the item in full, and do not change anything while reviewing, because if you save, you become the last editor and can no longer approve. If the Approve button is grey, hover over it to see why. Here I approve the editor's page." |
+| 2.9 | As `demo.editor`, change one word in the approved page and click Update. Show the State back at Under Review and the history entry "auto_return" | "Watch what happens if anyone changes an approved item. The approval is bound to a fingerprint of the exact content, so it is invalidated and the item goes back to review. The history says: content changed after approval, approval invalidated. This guarantees that what is published is exactly what was approved." |
+| 2.10 | As `demo.reviewer`, approve again. As `demo.compliance`, open the queue and click **Publish**. Open the page on the site | "The reviewer approves again, and a compliance officer publishes. Only published content appears on the website, in the API and in the app." |
+| 2.11 | In the published page's workflow box, show **Unpublish** and **Archive** | "If something wrong is ever published, a publisher clicks Unpublish. That is the fastest safe response. Archive is for superseded items. We never delete registry records." |
+| 2.12 | In the Translations box, open Español and show the "missing" pill. Visit the page with `?lang=es` and show the fallback notice | "Translations work the same way. English is authoritative. A missing translation falls back to English with a visible notice. Translation changes also reset approval." |
+| 2.13 | Knowledge-check slide | "Time for a quick check." |
+
+**Knowledge check**
+1. You reviewed an item and fixed a typo. Can you still approve it? *(No. You are now the last editor, so another reviewer must approve it.)*
+2. Why did an approved item return to Under Review? *(Its content changed after approval. The approval is fingerprint-bound.)*
+3. Where do you make a permanent change to a standard page's text? *(In the seed file in the repository, through a pull request.)*
+4. What do you store immediately after enabling MFA? *(The 8 recovery codes, in the password manager.)*
+
+---
+
+## Module 3 — Registry and Digital Asset Passports (22 min)
+
+**Learning goals.** After this module you can:
+- describe the data model;
+- create a lot, a container and a coil with the right record number;
+- enter a CoA and its assay results exactly;
+- set provenance and verification status correctly;
+- read and check a passport, including the Merkle root;
+- apply the QC checklist.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 3.1 | `http://localhost:8088/wp-admin/admin.php?page=reservechain`. Show the Asset Registry table | "The Asset Registry is the system of record. Tokens, if they ever exist, are only a projection of it. Programs contain lots. Lots contain batches, containers and coils. Evidence records, such as certificates of analysis, custody, valuation, insurance and reserve reports, apply to those assets and link to fingerprinted documents." |
+| 3.2 | As `demo.registry`, open `http://localhost:8088/wp-admin/post-new.php?post_type=rc_lot`. Point at the note "Leave a field empty…" | "The first rule of the registry: nothing is invented. If a value has not been provided by a document, leave the field empty. The public site will show an explicit pending text instead. And name the source of every value in the Data source reference field." |
+| 3.3 | Title "Training Copper Powder: Lot TR-01". Select Metal program **Copper Powder** first. `[CALLOUT: choose the program before the first save]` | "Choose the metal program first, before the first save. The record number is assigned on first save and never changes. With the copper program, it becomes R-C, C-U, LOT, followed by a number. Without a program, it would stay an R-C number forever." |
+| 3.4 | Scroll through the Cu-only fields (particle size, densities). Briefly switch the program to Nickel Wire to show the Ni fields; switch back | "Program-specific fields follow the program's element symbol. Copper shows particle size, density, oxygen and moisture. Nickel shows wire diameter, tolerance, temper and tensile properties. If the certificate does not cover a property, leave it empty. Never copy values from a brochure or from another lot." |
+| 3.5 | Fill in Producer lot reference, Data source reference "Training data — not real". Leave weights empty. Status *In development*. Click **Save Draft**. Show the Registry record box: record number, completeness, Merkle root | "I save the draft. The Registry record box now shows the record number, a link to the passport, the evidence completeness score and the evidence Merkle root. Completeness is low, and that is honest: gaps stay visible." |
+| 3.6 | Add a Container (`post-new.php?post_type=rc_container`) with Parent lot TR-01 and Container ID "Box TR-1". Save | "Containers belong to a batch, or directly to a lot. Coils for wire belong to a lot. Type the container or bobbin identifier exactly as it is marked on the object." |
+| 3.7 | Open `http://localhost:8088/wp-admin/post.php?post=<CoA 0004512 ID>&action=edit` (the seeded copper CoA). Walk through the fields; then focus on **Results of analysis** | "Here is a real example: certificate 0004512 for the copper lot, transcribed exactly. Purity is written as printed, with a comma: 99,9999 percent. The sample, the sampling place and date, the isotopic composition and the radioactivity statement are copied word for word." |
+| 3.8 | Zoom in on the assay textarea lines `Ag: 8`, `Al: <1`, `Bi: <0,5`. `[CALLOUT: one element per line — Symbol: value]` | "The assay results use a strict format: one element per line, the symbol, a colon, then the value exactly as printed. Keep the less-than sign for values below the detection limit, and keep comma decimals. For the base metal, write Matrix. Lines in any other form are silently ignored, so never add headings or comments here." |
+| 3.9 | Show the **Evidence provenance** select with its three options | "Provenance matters. Owner-supplied means the asset owner gave us the certificate. That is what we have today, and it raises an information exception in Proof of Reserves. Received directly from the laboratory is stronger. Independently verified needs an attached attestation, and only then may a certificate be marked verified." |
+| 3.10 | Open the Verification status select on a record; show the warning text under it | "Verification status is the most sensitive field. Pending verification means evidence is recorded but not independently verified. Verified requires a published, fingerprinted document, independent verification, and a review by someone who did not prepare the record. The software shows a warning but does not block the choice, so the reviewer and the publisher are the control." |
+| 3.11 | Open `http://localhost:8088/passport/RC-CU-CTN-000001/`. Point at "inherited from RC-CU-LOT-000001" on the evidence, and at the timeline stages | "Back on a public passport, this time for box number 20. The certificate applies to the lot, and the box inherits it. The passport says so explicitly. The timeline stages are verified only when a verified evidence record exists. Otherwise they show pending verification, or pending." |
+| 3.12 | Open the same URL with `?format=json`. Highlight `record_fingerprint`, `documents[].sha256` and `merkle_root` | "The JSON export contains everything needed to recompute the Merkle root: the record fingerprint, plus the SHA-256 of every document. Sort them, then hash pairs upward. If anyone changes a field or a document, the root changes." |
+| 3.13 | Open `docs/manuals/02-REGISTRY-AND-PASSPORT-MANUAL.md` §10 on screen | "Before you submit, and again before a reviewer approves, run the QC checklist in manual 02, section 10. Paste the ticked list into the ticket." |
+| 3.14 | As `demo.registry`, click **Submit for review** on lot TR-01. Afterwards, as compliance, **Archive** the training records | "Submit the record. When training is over, archive the training records so they never reach the public site." |
+| 3.15 | Knowledge-check slide | "Let's check." |
+
+**Knowledge check**
+1. Why must the program be chosen before the first save? *(The record-number scope is fixed on first save and never changes.)*
+2. Write the assay line for a value printed as "less than 0,5 ppm silver". *(`Ag: <0,5`)*
+3. Can an owner-supplied CoA be marked Verified? *(No. It needs independent verification with an attestation attached.)*
+4. What two kinds of input make up a passport's Merkle root? *(The record fingerprint, and the SHA-256 of each linked document.)*
+
+---
+
+## Module 4 — Proof of Reserves (15 min)
+
+**Learning goals.** After this module you can:
+- read the reconciliation;
+- resolve each exception code by fixing the source record;
+- run the snapshot four-eyes cycle;
+- record an attestation;
+- state what may never be published.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 4.1 | As `demo.reviewer`, open `http://localhost:8088/wp-admin/admin.php?page=rc-por`. Show "Publication module: locked" | "Proof of Reserves reconciles what the registry can prove against what is declared and, if tokens ever exist, against on-chain supply. Publication is locked until written authorization. Everything else works today." |
+| 4.2 | Point at each card: Declared kg (owner), Verified kg, Units in custody, Coverage "not computed" | "Read the cards carefully. Declared kilograms are the owner's figures. They are not reserves. Verified kilograms count only lots marked verified. Coverage is computed only from a verified attestation, an approved ratio and a known supply. Otherwise it says not computed. We never estimate it." |
+| 4.3 | Scroll the exceptions table: owner_supplied_only, no_attestation, and any warnings | "Exceptions surface problems instead of hiding them. Critical ones, such as reserve status without custody, an unfingerprinted document, expired insurance, or supply without a verified attestation, need action the same day. Information exceptions such as owner-supplied-only are expected in this phase." |
+| 4.4 | Open manual 03 §3 on screen and scroll the code table | "Every code and its fix is listed in manual 03, section 3. The rule is always the same: you fix the underlying registry record through the normal workflow. You never edit a snapshot and you never hide an exception." |
+| 4.5 | Click **Create snapshot** on Copper Powder. Show the new draft row: SHA-256, Merkle root, integrity *intact* | "A snapshot freezes the reconciliation as canonical JSON, with its SHA-256 and the units' Merkle root. It starts as a draft. Every step goes into the audit chain with the snapshot hash." |
+| 4.6 | Still as `demo.reviewer`, click **Approve** on your own snapshot and show the error. Switch to `demo.compliance`; click **JSON**; run `certutil -hashfile … SHA256` in a terminal; compare; click **Approve** | "The creator cannot approve their own snapshot. A second person downloads the JSON, checks that its hash equals the hash on screen, reviews the content, and approves." |
+| 4.7 | As `demo.compliance`, click **Publish**. Show the message "Publication is locked…" | "Publishing needs the publish capability and the authorized proof-of-reserves module. Today you see this message, which is correct. When it is authorized, publishing makes the snapshot public and marks the previous one superseded." |
+| 4.8 | Scroll to **Record a reserve attestation**. Fill in the fields with a specimen PDF; submit; open the Review queue to show the two new items | "When an independent attestor is appointed, their report is recorded here. The form fingerprints the file, creates a reserve report and its document as drafts, and sends both to review. They count only after a different reviewer approves and a publisher publishes them." |
+| 4.9 | Show the alert email sample, or the audit entry `por.exceptions_changed` (filter `por`) | "Every day the system recomputes the exceptions. When the set changes, it emails the contact address and writes an audit entry. No email means nothing changed. It does not mean there are no exceptions." |
+| 4.10 | Slide: "Never publish" list from manual 03 §9 | "Finally, what may never be published: declared quantities presented as reserves; any coverage or percent-backed figure that the engine did not compute from a verified attestation; the words verified, audited, insured or in custody without evidence; unappointed attestors or custodians; restricted documents; and any edited snapshot." |
+| 4.11 | Knowledge-check slide | "Quick check." |
+
+**Knowledge check**
+1. Which exception code means a unit is reserve-eligible without custody evidence, and how severe is it? *(`reserve_without_custody`, critical.)*
+2. Who may approve a snapshot? *(A user with `rc_approve` who did not create it.)*
+3. Under what conditions is coverage computed? *(A verified attestation with units, an approved numeric ratio, and on-chain supply greater than zero.)*
+4. How do you remove a `missing_weight` exception? *(Enter the net weight from a weight certificate on the lot, through the workflow.)*
+
+---
+
+## Module 5 — Compliance, waitlist, support and the audit trail (18 min)
+
+**Learning goals.** After this module you can:
+- record eligibility outcomes;
+- manage jurisdictions and disclosures;
+- export the waitlist and handle unsubscribe and erasure requests;
+- work the support inbox;
+- verify, export and anchor the audit trail;
+- run data-room access.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 5.1 | As `demo.compliance`, open `http://localhost:8088/wp-admin/admin.php?page=rc-compliance` | "The Compliance page lists users with their country, jurisdiction, entity type, the four checks (KYC, KYB, AML and sanctions), MFA, linked wallets and the overall status. ReserveChain does not verify identity itself. We record the outcomes from an external provider, which is still to be selected." |
+| 5.2 | Click `demo.app` → user-edit, section **ReserveChain eligibility**. Set country Switzerland; KYC, AML and Sanctions Approved; Update. Show Overall "eligible subject to final approval" | "To record outcomes, open the user and set each check from the provider's report. An individual needs KYC, AML and sanctions approved. An institution needs KYB instead of KYC. The overall status then reads eligible, subject to final approval. That never confers a right to participate. Keep the provider's documents in the provider's system, never in WordPress." |
+| 5.3 | As `rcadmin`, open `http://localhost:8088/wp-admin/admin.php?page=rc-settings#jurisdictions`. Show the EU/EEA box and the additional restricted list | "Jurisdictions are set by administrators from a counsel-approved list. EU and EEA restriction stays on. The additional list is a placeholder until counsel confirms it." |
+| 5.4 | Scroll to **Mandatory disclosures**. Point at the consent fingerprint | "The disclosures can be extended but never emptied. When the wording changes, the consent fingerprint changes, and each new waitlist registration stores the version it agreed to. Record the old and new fingerprints in the compliance file." |
+| 5.5 | Open `http://localhost:8088/wp-admin/admin.php?page=rc-waitlist`. Point at the counters, the jurisdiction and status pills; click **Export CSV** | "The waitlist shows totals and the latest two hundred entries. Export CSV gives you the full list, and the export is logged. The file contains personal data, so keep it only in approved storage and delete local copies." |
+| 5.6 | Show manual 01 §10.3–10.4 on screen | "There is no admin button for unsubscribe or erasure requests. An administrator runs the documented command on the server, which also writes an audit entry. Unconfirmed registrations are purged automatically after thirty days." |
+| 5.7 | Open `http://localhost:8088/wp-admin/admin.php?page=rc-support` | "The support inbox collects website contact messages and app and portal support requests, each with a ticket number. It is read-only. Reply from the support mailbox and quote the ticket number. Escalate security or fraud reports to operations immediately." |
+| 5.8 | As `demo.auditor`, open `http://localhost:8088/wp-admin/admin.php?page=rc-audit`. Filter `workflow`; expand one row's data | "The audit trail records every material action. It is append-only, hash-chained, and protected by database triggers, so no one can edit or delete it, administrators included. Filter by an action prefix such as workflow, auth, settings or compliance." |
+| 5.9 | Click **Verify entire chain now**. Show "Intact — N entries" | "Verify recomputes every hash from the very first entry. It runs automatically every night as well. A failure is a serious incident: never try to fix the data, and follow the runbook in module ten." |
+| 5.10 | Click **Export (JSONL…)**; open the file in a text editor and show one row | "The JSONL export lets an external auditor recompute the chain independently. The verification formula is documented in manual 01, section 14." |
+| 5.11 | As `rcadmin`, show the On-chain anchoring panel with the anchor form | "Anchoring writes the current chain head to a testnet contract, so that even a full database rewrite would be detectable. It is normally done by a script, covered in module six." |
+| 5.12 | Open an rc_document and show the **Audience** select; set it to *Investors (data room)* on a specimen document; Save. Show the audit entry `document.restricted` | "Documents have an audience. Anything other than public is moved to private storage automatically and is served only through signed links that expire after ten minutes. The investor and enterprise rooms also need their gated modules authorized." |
+| 5.13 | Knowledge-check slide | "Check your understanding." |
+
+**Knowledge check**
+1. Which checks must be approved for an institution to be eligible? *(KYB, AML and sanctions, plus an eligible jurisdiction.)*
+2. Where do you handle an erasure request for a waitlist entry? *(The documented WP-CLI command on the server, with a ticket. There is no admin button.)*
+3. What does an audit verification error of type `gap` suggest? *(A removed row, or an auto-increment jump after a bad restore.)*
+4. How long is a data-room download link valid? *(10 minutes.)*
+
+---
+
+## Module 6 — Token and smart-contract administration (20 min)
+
+**Learning goals.** After this module you can:
+- explain the six contracts and the role model;
+- deploy to testnet and verify;
+- hand admin over to the Safe;
+- explain why minting is blocked;
+- push compliance calldata;
+- anchor the audit trail;
+- run the incident pause.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 6.1 | Slide with the red banner "Testnet only — never mainnet without written authorization" | "Everything in this module happens on testnets only: Sepolia, Polygon Amoy or a local Hardhat chain. The deploy script refuses any other chain. Never set the mainnet override. That requires written board and legal authorization and an independent audit, and it is outside the current engagement." |
+| 6.2 | Show the contracts architecture diagram from `contracts/README.md` | "There are six contracts. ReserveToken, one per program. ComplianceRegistry, which holds eligibility flags with no personal data. ReserveGuard, which holds attestations and the mint limit. RedemptionManager, Treasury, and AuditAnchor. Every contract has exactly one admin, intended to be the ReserveChain Safe multisig, and transferring that admin takes two steps and a delay." |
+| 6.3 | Terminal in `contracts/`: `npm ci`, `npm test` → "83 passing" | "Start every session by installing dependencies and running the tests. You should see eighty-three passing tests." |
+| 6.4 | Open `config/sepolia.example.json` in the editor; highlight the `null` tokenomics fields | "Configuration lives in a JSON file per network. Notice the null values: the supply cap, tokens per unit, the attestation window, and the redemption thresholds. They stay null until written approval exists. With these defaults, minting is blocked and redemption is disabled." |
+| 6.5 | Terminal: `npm run deploy:localhost` against `npx hardhat node`; show `deployments/localhost.json` | "We rehearse on a local chain. On Sepolia the command is deploy colon sepolia, after a second person has reviewed the configuration. The script deploys, wires the hooks, grants the configured roles, revokes its own temporary roles, starts the admin transfer to the Safe, and writes the deployment record." |
+| 6.6 | Terminal: `npx hardhat run scripts/admin-status.ts --network localhost` | "During the handover, admin-status shows each contract's admin and the pending admin. On Sepolia, the Safe signers then batch acceptDefaultAdminTransfer on every contract in the Safe Transaction Builder. Afterwards, every line must show the Safe as admin with nothing pending." |
+| 6.7 | Hardhat console: call `token.mint(…)` and show the revert `MintingDisabled` | "Minting is fail-closed. Even someone holding the minter role cannot mint until the guard is bound, a ratio and a staleness window are set, and a fresh attestation exists, or until the Safe explicitly enables a static cap. Each of those needs written approval." |
+| 6.8 | Browser: `http://localhost:8088/wp-admin/admin.php?page=rc-web3` → **Download calldata (JSON)**; open the file and highlight `batch.data` | "To mirror eligible users on-chain, compliance downloads unsigned calldata from Web3 settings. The server never signs anything. A second person checks the records, then the KYC operator or the Safe submits the batch in the Transaction Builder." |
+| 6.9 | Terminal: `WP_URL=http://localhost:8088 DRY_RUN=true npm run anchor:localhost`, then the real run; browser: Audit trail → Latest anchor | "Audit anchoring reads the CMS chain head and writes it to the AuditAnchor contract. Use a dry run first. With an administrator's application password, the script reports the transaction back to the CMS, and here it is as the latest anchor. Locally, remember the site runs on port 8088." |
+| 6.10 | Slide: incident steps (pause → freeze → assess → rotate → recover) | "If a key is compromised or supply looks wrong: pausers pause the token, the redemption manager and the treasury; the KYC operator freezes affected addresses; you anchor the current audit head and export the logs; the Safe rotates the roles. Unpause only after two signers have reviewed the fix." |
+| 6.11 | Knowledge-check slide | "Let's check." |
+
+**Knowledge check**
+1. What happens if you call `mint` with the shipped configuration? *(It reverts with `MintingDisabled`.)*
+2. Which script confirms the Safe handover? *(`scripts/admin-status.ts`.)*
+3. Does the CMS sign the compliance-registry transactions? *(No. It exports unsigned calldata, and the Safe or KYC operator signs it.)*
+4. What is the first containment step in a contract incident? *(The PAUSER calls `pause()` on the token, redemption manager and treasury.)*
+
+---
+
+## Module 7 — The mobile app and Participant Portal (15 min)
+
+**Learning goals.** After this module you can:
+- run the app in mock mode;
+- explain the build profiles;
+- produce and submit builds;
+- use the store pack and review notes;
+- ship an OTA update correctly;
+- test account deletion;
+- support portal users.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 7.1 | Terminal in `mobile/`: `npm run start:mock`, press `w`; show the onboarding disclosure acknowledgement | "The app is built with Expo and React Native. In mock mode it runs without a backend and shows an amber MOCK DATA banner. On first launch, the user must acknowledge the disclosure and the EU/EEA notice." |
+| 7.2 | Click through Programs → Passports → `RC-CU-LOT-000001` → the Assets tab with locked modules | "Users can browse programs and passports as guests. Wallet, purchase, proof of reserves, redemption, holdings and transactions are shown as locked. The app unlocks nothing by itself. Even if the server enables a module, this build has no flow for it." |
+| 7.3 | Show `eas.json` with the three profiles highlighted | "There are three build profiles. Development uses mock data. Preview points at staging for QA devices. Production points at the live API and produces store binaries, with build numbers incremented automatically by EAS." |
+| 7.4 | Slide: the accounts list from manual 06 §1 | "Before the first build, ReserveChain must own the Apple Developer organisation, the App Store Connect record, the Google Play Console, the Google Cloud service account, the Expo organisation and Firebase. Contractors are only invited members." |
+| 7.5 | Terminal: `eas build --profile preview --platform all`; then the expo.dev build page `[CUT waiting]` | "A preview build runs in the cloud. Install it on real devices from the build page and run the smoke test in the release checklist." |
+| 7.6 | Terminal: `eas submit --platform ios --profile production --latest`; App Store Connect TestFlight page, with the export-compliance answer | "Production builds go to TestFlight with eas submit. For Android, the very first upload to Play Console is manual. After that, eas submit sends drafts to the internal testing track." |
+| 7.7 | Open `mobile/store/review-and-compliance.md`, reviewer-notes template | "The store pack has the listings in three languages, the privacy answers, the screenshots, and this reviewer-notes template. Demo credentials go only into the stores' private fields, never into the notes text." |
+| 7.8 | App: Account → Danger zone → Delete account; type DELETE; stop before the final confirmation | "Both stores require in-app account deletion. Test it on staging with a disposable account before every release. The web alternative is the support/delete-account page." |
+| 7.9 | Terminal: `eas update --channel preview --message "Copy fix"` | "Over-the-air updates can only change JavaScript and assets for the same app version. They go through the same four-eyes approval as a store release, and they are never used to switch on gated features." |
+| 7.10 | Browser: `http://localhost:8088/portal/` → sign in as `demo.app` `[CUT credentials]` → tabs: Eligibility, Security & MFA, Documents, Support | "The Participant Portal on the website offers the same account features: eligibility, MFA, documents including data rooms, notifications and support. Users are signed out after fifteen minutes of inactivity. We never ask for a private key or a seed phrase." |
+| 7.11 | Knowledge-check slide | "Quick check." |
+
+**Knowledge check**
+1. You added a native permission. OTA update or store build? *(A store build with an app version bump.)*
+2. Where do reviewer demo credentials go? *(Only in the stores' private sign-in fields.)*
+3. Which profile points at staging? *(`preview`.)*
+4. Name the two account-deletion paths. *(In-app Account → Delete account, and the web page `/support/delete-account/`.)*
+
+---
+
+## Module 8 — Deployment and rollback (18 min)
+
+**Learning goals.** After this module you can:
+- deploy to staging and production with `deploy.sh`;
+- run the post-deploy checks;
+- understand the release layout;
+- roll back code, or code and database, safely.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 8.1 | Slide: the server layout from manual 07 (edge, production, staging) | "One Linux server runs staging and production side by side, each as its own Docker Compose project, behind one shared Caddy that handles HTTPS. Each environment keeps its releases, its .env file with secrets, and its backup, restore and rollback scripts." |
+| 8.2 | Workstation Git Bash in the repository root: `git checkout main && git pull`; `deploy/deploy.sh --help` | "Deployments run from your workstation. Always start from an up-to-date main branch. The help text lists the options." |
+| 8.3 | Run `deploy/deploy.sh --env staging ubuntu@<blurred>`; scroll through the output: release packed, symlink swapped, upgrade, seed --pages-only, tamper-test, rc-ops check | "Deploying to staging packs the release, swaps the app symlink atomically, recreates WordPress, runs the database upgrade, re-syncs the pages from the seed files, proves the audit trail is immutable with the tamper test, and runs the operational checks. Remember: the page re-sync overwrites CMS edits to standard pages." |
+| 8.4 | Browser: `https://staging…/wp-json/rc/v1/health` and `/config`; the Operations widget | "After every deploy, run the post-deploy checks. Health must say ok, with triggers true. Config must show the expected site mode, with gated modules still false. Then check the key pages, verify the audit chain, and look at the Operations widget." |
+| 8.5 | Terminal: `git tag v1.2.3 && git push origin v1.2.3`; ssh `./backup.sh`; `deploy/deploy.sh --env production --ref v1.2.3 --host reservechain.io …` | "Production only receives a tagged release that has passed staging and user acceptance. Take a safety backup first, then deploy the tag. Production never gets demo users." |
+| 8.6 | Server: `cd ~/reservechain/production && ./rollback.sh --list` | "If a release causes a serious regression that cannot be fixed within thirty minutes, roll back. The list shows the five kept releases, and the live one is marked with a star." |
+| 8.7 | Server: `./rollback.sh --to previous`; show the final tamper-test, audit-verify and health lines | "A code rollback swaps the symlink back and recreates WordPress. It finishes by proving the audit triggers, verifying the chain and checking health." |
+| 8.8 | Slide: code+DB rollback steps (export JSONL first; `--with-db … --i-know`) | "A database rollback is a bigger step. First export the audit log, because entries written after the backup will be discarded. Then run rollback with the archive and the I-know flag. For bad content, never roll back: unpublish instead." |
+| 8.9 | Knowledge-check slide | "Check." |
+
+**Knowledge check**
+1. What runs on every deploy that can overwrite CMS work? *(`wp rc seed --pages-only`.)*
+2. Name three post-deploy checks. *(Health ok and triggers true; config site mode and gated modules; chain verified intact. Also the key pages and the Operations widget.)*
+3. What must you do before a database rollback? *(Export the audit log as JSONL.)*
+4. How do you deploy a ref that is no longer kept on the server? *(`deploy.sh --env production --ref <tag>` from the workstation.)*
+
+---
+
+## Module 9 — Backups, restore and security (18 min)
+
+**Learning goals.** After this module you can:
+- explain what is backed up and how it is encrypted;
+- run the quarterly restore drill;
+- restore production;
+- rebuild on a new server;
+- apply the key security controls and secret rotations.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 9.1 | Server: `crontab -l \| grep rc-ops`; `ls ~/reservechain-backups/production/daily` | "Backups run every night: production at two-thirty UTC, staging at three. Each run produces one encrypted archive with the database including its triggers, the uploads, the environment file and checksums. Seven daily, four weekly and six monthly copies are kept, and an off-site copy is made when rclone is configured." |
+| 9.2 | Slide: age vs openssl comparison | "Two encryption options. Age with a public key is preferred: the server can encrypt but never decrypt, and the private key stays offline. The openssl fallback uses a passphrase file on the server. If you use it, copy that passphrase into the vault on day one, because without it no backup can ever be restored." |
+| 9.3 | `[CUT key handling]` Server: `cd ~/reservechain/staging && BACKUP_AGE_IDENTITY=~/rc-backup.key ./restore.sh --archive … --url https://staging… --yes`; scroll to "RESTORE OK: env=staging triggers=2 chain verified, site HTTP 200"; then `shred -u ~/rc-backup.key` | "Every quarter we prove the backups work by restoring last night's production archive into staging. Copy the private key to the server only for the drill. The restore script checks the checksums, decrypts, imports, confirms the audit triggers, restores the uploads, rewrites the URL, runs the tamper test and full chain verification, and checks that the site answers. It must end with RESTORE OK. Then shred the key and record the timing in the drill log." |
+| 9.4 | Slide: production restore steps (maintenance → export → restore --i-know → compare anchor → mode back) | "Restoring production follows the incident process: switch to maintenance mode, export the audit log, run restore with the I-know flag, which also takes a safety backup first, compare with the last on-chain anchor, then return to the normal mode." |
+| 9.5 | Slide: DR rebuild sequence from manual 07 §6.2 | "If the whole server is lost: deploy the code to a new server without cron, discard the fresh volumes, restore the archive together with its environment file, install cron, and point DNS at the new address. Keep DNS time-to-live at five minutes so the switch is quick." |
+| 9.6 | Admin: `http://localhost:8088/wp-admin/admin.php?page=rc-health` | "On the security side, System health shows the essentials: HTTPS, the audit triggers, a non-default token secret, the file editor disabled, debug display off, staff MFA enforced, and gated modules locked. Anything marked action required needs attention." |
+| 9.7 | Slide: rotation table (DB passwords, `RC_TOKEN_SECRET`, salts, health token, SMTP, backup key) and its effects | "Rotate secrets on schedule and after any staff change or incident. Be aware of the effects: changing the token secret invalidates all app sessions, MFA secrets and signed links, and changing the WordPress salts signs everyone out." |
+| 9.8 | Knowledge-check slide | "Check." |
+
+**Knowledge check**
+1. Where is the age private key kept? *(Offline, in the password manager and a sealed copy. It is on the server only during a restore.)*
+2. What line must a successful restore print? *(`RESTORE OK: env=… triggers=2 chain verified, site HTTP 200`.)*
+3. Why does `restore.sh` strip `AUTO_INCREMENT`? *(To avoid id gaps that would fail audit chain verification.)*
+4. What breaks if `RC_TOKEN_SECRET` changes? *(API sessions, MFA secret decryption and signed links. Users must re-enrol MFA.)*
+
+---
+
+## Module 10 — Troubleshooting and incidents (15 min)
+
+**Learning goals.** After this module you can:
+- triage an alert using health and the logs;
+- run the runbooks for site down, audit chain failure, suspected compromise and lost admin MFA;
+- use the known-issues register.
+
+| Shot | On screen | Narration |
+|---|---|---|
+| 10.1 | Dashboard Operations widget; click **Run full checks now** | "Most problems announce themselves here, in the Operations widget, or by an alert email. Each check is OK, WARN or FAIL. Run full checks now verifies the whole chain and sends alerts for anything failing." |
+| 10.2 | Terminal: `curl -s -H "X-RC-Health-Token: <blurred>" https://staging…/wp-json/rc/v1/health/full \| jq .checks` | "The detailed health endpoint, protected by the health token, shows exactly which check failed and why. Start every investigation there." |
+| 10.3 | Slide: severity table | "Classify first. SEV-1 is an active compromise or unauthorised offer-like content. SEV-2 is an integrity failure or suspected data exposure. SEV-3 is degraded service or a failed backup. Open an incident log entry, and preserve evidence before changing anything." |
+| 10.4 | Server: `docker ps`; the `up -d` commands; `logs --tail=50 wordpress` | "Site down: confirm from outside, check the containers, restart the environment and the edge, then read the logs. The usual causes are a full disk, a TLS or DNS change, or a bad release, in which case you roll back." |
+| 10.5 | Admin Audit trail showing a FAILED verification (staged on a throwaway local copy) | "Audit chain failure is at least SEV-2. Do not fix data. Read the error type, export the log, back up, and compare with the last anchor. If the triggers are simply missing, re-create them and run the tamper test. A gap error right after a restore points to an outdated restore script." |
+| 10.6 | Slide: compromise checklist (maintenance, unpublish, revoke sessions, rotate, preserve, pause contracts, counsel) | "Suspected compromise: switch to maintenance, unpublish anything unauthorised, switch off unauthorised modules, reset affected accounts and their MFA, rotate secrets, preserve evidence, pause the contracts if they are involved, and let counsel decide on notifications." |
+| 10.7 | Terminal: `W user get demo.reviewer --field=ID`; `W eval 'RC\Auth::disable_mfa( <ID> );'`; Audit trail entry `auth.mfa_disabled` by wp-cli | "Lost administrator MFA: confirm the identity out of band, with two people involved, then reset MFA from the server. The user sets it up again immediately. Keep at least two administrators so this never blocks you." |
+| 10.8 | Open `docs/manuals/TROUBLESHOOTING-AND-KNOWN-ISSUES.md` Part B; scroll to KI-01, KI-03, KI-09, KI-12, KI-16 | "Finally, the known-issues register. Read it once completely. Highlights: deploys overwrite seeded pages; Docker upload limits; Git Bash path conversion on Windows; the intake capability after deploys; and Safari and Firefox testing that is still to be done. When you find something new, add a row in the same pull request as the fix." |
+| 10.9 | Closing slide: "Manuals: docs/manuals/README.md · Disclosure" | "That completes the training program. The manuals in docs/manuals are your reference. Keep them current, and keep the disclosure in mind in everything you publish. Thank you." |
+
+**Knowledge check**
+1. The `backup` check fails. What severity, and what is your first step? *(SEV-3, fixed the same day. Read `logs/backup.log`, then run `./backup.sh` manually.)*
+2. During a chain failure, may you correct the modified row? *(No. Never fix the data. Preserve the evidence and follow the runbook.)*
+3. What is the fastest safe response to wrong content on the live site? *(Unpublish it.)*
+4. WP-CLI commands from Git Bash fail with strange Windows paths. What fixes it? *(Prefix the command with `MSYS_NO_PATHCONV=1`.)*
+
+---
+
+## 3. Completion record
+
+| Trainee | Role | Modules completed | Knowledge-check score | Hands-on sign-off (trainer) | Date |
+|---|---|---|---|---|---|
+| | | | | | |
+
+Hands-on sign-off required before production access:
+- **Editors and registry:** perform a full submit → approve → publish cycle on staging with another trainee (Modules 2–3).
+- **Compliance:** record an eligibility outcome, export the waitlist, verify the audit chain (Module 5).
+- **Ops / developer:** deploy to staging and roll back unaided; run the restore drill unaided (Modules 8–9). These match handover checklist §6.

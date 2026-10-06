@@ -502,7 +502,7 @@ final class Por {
 	   ===================================================================== */
 
 	public static function menu(): void {
-		add_submenu_page( 'reservechain', 'Proof of Reserves', 'Proof of Reserves', 'rc_view_audit', 'rc-por', array( __CLASS__, 'page' ) );
+		add_submenu_page( 'reservechain', 'Proof of Reserves', 'Proof of Reserves', 'edit_rc_entities', 'rc-por', array( __CLASS__, 'page' ) );
 	}
 
 	private static function url( string $do, array $extra = array() ): string {

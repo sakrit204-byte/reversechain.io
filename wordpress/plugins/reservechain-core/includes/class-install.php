@@ -240,8 +240,17 @@ final class Install {
 		);
 
 		foreach ( $roles as $slug => $role ) {
-			remove_role( $slug );
-			add_role( $slug, $role['name'], $role['caps'] );
+			$existing = get_role( $slug );
+			if ( ! $existing ) {
+				add_role( $slug, $role['name'], $role['caps'] );
+				continue;
+			}
+			// Merge only: never strip capabilities granted later by modules or administrators.
+			foreach ( $role['caps'] as $cap => $grant ) {
+				if ( $grant && ! $existing->has_cap( $cap ) ) {
+					$existing->add_cap( $cap );
+				}
+			}
 		}
 
 		$admin = get_role( 'administrator' );

@@ -17,6 +17,7 @@ final class Admin {
 		add_action( 'admin_post_rc_audit_anchor', array( __CLASS__, 'do_anchor' ) );
 		add_action( 'admin_post_rc_audit_export', array( __CLASS__, 'do_audit_export' ) );
 		add_action( 'admin_post_rc_waitlist_export', array( __CLASS__, 'do_waitlist_export' ) );
+		add_action( 'admin_post_rc_waitlist_row', array( __CLASS__, 'do_waitlist_row' ) );
 		add_action( 'admin_post_rc_save_settings', array( __CLASS__, 'do_save_settings' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'env_banner' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
@@ -244,10 +245,10 @@ final class Admin {
 		echo '<div class="wrap rc-wrap"><h1 class="rc-h1">Waitlist <small>registration of interest — not an allocation or reservation</small></h1><div class="rc-cards">';
 		printf( '<div class="rc-card"><span>Total</span><strong>%d</strong></div><div class="rc-card"><span>Confirmed (double opt-in)</span><strong>%d</strong></div><div class="rc-card"><span>Institutions</span><strong>%d</strong></div><div class="rc-card"><span>Restricted jurisdictions (updates only)</span><strong>%d</strong></div>', (int) $s['total'], (int) $s['confirmed'], (int) $s['institutions'], (int) $s['restricted'] );
 		echo '</div><p><a class="button button-primary" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rc_waitlist_export' ), 'rc_waitlist_export' ) ) . '">Export CSV</a> <span class="description">Exports are logged in the audit trail.</span></p>';
-		echo '<table class="widefat striped"><thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Country</th><th>Type</th><th>Interest</th><th>Lang</th><th>Jurisdiction</th><th>Status</th><th>Consent</th></tr></thead><tbody>';
+		echo '<table class="widefat striped"><thead><tr><th>#</th><th>Registered</th><th>Name</th><th>Email</th><th>Country</th><th>Type</th><th>Interest</th><th>Lang</th><th>Jurisdiction</th><th>Status</th><th>Consent</th><th>Actions</th></tr></thead><tbody>';
 		foreach ( $rows as $r ) {
 			printf(
-				'<tr><td>%d</td><td>%s</td><td>%s%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><code title="%s">%s</code></td></tr>',
+				'<tr><td>%d</td><td>%s</td><td>%s%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><code title="%s">%s</code></td><td>%s</td></tr>',
 				(int) $r['id'],
 				esc_html( substr( $r['created_at'], 0, 16 ) ),
 				esc_html( $r['name'] ),
@@ -260,10 +261,32 @@ final class Admin {
 				self::pill( 'restricted' === $r['jurisdiction_status'] ? 'restricted' : 'verified', $r['jurisdiction_status'] ), // phpcs:ignore
 				self::pill( 'confirmed' === $r['status'] ? 'verified' : 'pending_verification', $r['status'] ), // phpcs:ignore
 				esc_attr( $r['consent_hash'] ),
-				esc_html( $r['consent_version'] )
+				esc_html( $r['consent_version'] ),
+				'<a class="button button-small" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rc_waitlist_row&do=unsubscribe&id=' . (int) $r['id'] ), 'rc_wl_' . (int) $r['id'] ) ) . '">Unsubscribe</a> <a class="button button-small" onclick="return confirm(\'Erase this registration permanently?\')" href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=rc_waitlist_row&do=erase&id=' . (int) $r['id'] ), 'rc_wl_' . (int) $r['id'] ) ) . '">Erase</a>' // phpcs:ignore
 			);
 		}
 		echo '</tbody></table></div>';
+	}
+
+	public static function do_waitlist_row(): void {
+		$id = absint( $_GET['id'] ?? 0 );
+		check_admin_referer( 'rc_wl_' . $id );
+		if ( ! current_user_can( 'rc_manage_waitlist' ) ) {
+			wp_die( 'Forbidden', 403 );
+		}
+		global $wpdb;
+		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT email_hash FROM ' . Waitlist::table() . ' WHERE id = %d', $id ), ARRAY_A ); // phpcs:ignore
+		if ( $row ) {
+			if ( 'erase' === ( $_GET['do'] ?? '' ) ) {
+				$wpdb->delete( Waitlist::table(), array( 'id' => $id ) );
+				Audit_Log::record( 'waitlist.erased', 'waitlist', $id, 'Waitlist registration erased on request', array( 'email_hash' => $row['email_hash'] ) );
+			} else {
+				$wpdb->update( Waitlist::table(), array( 'status' => 'unsubscribed', 'consent_updates' => 0, 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $id ) );
+				Audit_Log::record( 'waitlist.unsubscribed', 'waitlist', $id, 'Waitlist registration unsubscribed by staff', array( 'email_hash' => $row['email_hash'] ) );
+			}
+		}
+		wp_safe_redirect( admin_url( 'admin.php?page=rc-waitlist' ) );
+		exit;
 	}
 
 	public static function do_waitlist_export(): void {

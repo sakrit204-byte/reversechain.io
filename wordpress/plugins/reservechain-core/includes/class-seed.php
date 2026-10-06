@@ -29,7 +29,10 @@ final class Seed {
 		}
 	}
 
-	public static function run( bool $pages_only = false ): void {
+	private static bool $force = false;
+
+	public static function run( bool $pages_only = false, bool $force = false ): void {
+		self::$force = $force;
 		kses_remove_filters();
 		Workflow::bypass(
 			static function () use ( $pages_only ) {
@@ -567,6 +570,10 @@ final class Seed {
 				continue;
 			}
 			$existing = get_page_by_path( $path );
+			if ( $existing && ! self::$force ) {
+				$ids[ $path ] = (int) $existing->ID; // CMS edits win; use --force to resynchronise from seed files.
+				continue;
+			}
 			$args     = array(
 				'post_type'     => 'page',
 				'post_name'     => $slug,
@@ -636,6 +643,10 @@ final class Seed {
 	);
 
 	private static function menus(): void {
+		if ( ! self::$force && wp_get_nav_menu_object( 'Primary' ) ) {
+			self::say( 'Menus exist: left unchanged (use --force to rebuild).' );
+			return;
+		}
 		$locations = (array) get_theme_mod( 'nav_menu_locations', array() );
 		$reset     = static function ( string $name ) {
 			$menu = wp_get_nav_menu_object( $name );

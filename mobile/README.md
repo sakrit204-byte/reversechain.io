@@ -38,7 +38,7 @@ The `EXPO_PUBLIC_*` variables are inlined when the bundle is built. Set them in 
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `EXPO_PUBLIC_API_URL` | `http://localhost:8080/wp-json/rc/v1` | Base URL of the WordPress plugin REST namespace `rc/v1` |
+| `EXPO_PUBLIC_API_URL` | `http://localhost:8088/wp-json/rc/v1` | Base URL of the WordPress plugin REST namespace `rc/v1` |
 | `EXPO_PUBLIC_API_MOCK` | `0` | `1` = built-in placeholder data, no network calls |
 | `EXPO_PUBLIC_INACTIVITY_MINUTES` | `5` | Auto sign-out after this much inactivity |
 | `EXPO_PUBLIC_HIDE_MOCK_BANNER` | `0` | Store-screenshot builds only: `1` hides the MOCK DATA banner in a mock build. Never set it in EAS profiles or `.env` |

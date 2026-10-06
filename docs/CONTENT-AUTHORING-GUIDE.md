@@ -1,7 +1,7 @@
 # Content Authoring Guide — ReserveChain website pages
 
 Pages live in `wordpress/plugins/reservechain-core/seed/pages/` and are synchronised into WordPress with
-`wp rc seed --pages-only` (they then remain fully editable in the CMS, under the four-eyes workflow).
+`wp rc seed --pages-only --force` (overwrites those pages and menus from the seed files; without `--force` only missing pages are created, so CMS edits are never lost on deploy). Pages then remain fully editable in the CMS, under the four-eyes workflow.
 
 ## 1. File format
 

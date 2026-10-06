@@ -282,6 +282,10 @@ final class Registry {
 				$errors[] = 'The file of a published document cannot be replaced.';
 				continue;
 			}
+			if ( 'status' === $field['type'] && 'verified' === $new && $old !== 'verified' && ! current_user_can( 'rc_approve' ) && ! ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+				$errors[] = __( 'Only an approver may mark a record as Verified. The previous status was kept.', 'reservechain' );
+				continue;
+			}
 			if ( ! empty( $field['required'] ) && ( '' === $new || array() === $new ) ) {
 				$errors[] = sprintf( '“%s” is required.', $field['label'] );
 			}

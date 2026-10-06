@@ -10,7 +10,7 @@
  *      using WordPress Application Password basic auth (WP_USER / WP_APP_PASSWORD; capability rc_anchor_audit).
  *
  * Environment:
- *   WP_URL            (required) WordPress base URL, e.g. http://localhost:8080
+ *   WP_URL            (required) WordPress base URL, e.g. http://localhost:8088
  *   WP_USER           (optional) WordPress username for the report-back POST
  *   WP_APP_PASSWORD   (optional) WordPress Application Password for the report-back POST
  *   ANCHOR_ADDRESS    (optional) AuditAnchor address; defaults to deployments/<network>.json
