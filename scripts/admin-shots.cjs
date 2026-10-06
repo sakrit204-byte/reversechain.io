@@ -16,6 +16,7 @@ const { chromium } = require(path.join(__dirname, '../docs/whitepaper/build/node
     'admin-waitlist': '/wp-admin/admin.php?page=rc-waitlist',
     'admin-health': '/wp-admin/admin.php?page=rc-health',
     'admin-lots': '/wp-admin/edit.php?post_type=rc_lot',
+    'admin-por': '/wp-admin/admin.php?page=rc-por',
   };
   for (const [name, url] of Object.entries(pages)) {
     await p.goto('http://localhost:8088' + url, { waitUntil: 'networkidle' });
