@@ -1,0 +1,196 @@
+<!--
+title: Redemption Portal
+excerpt: The planned Redemption Portal: eligible holdings, request creation, container- and coil-level unit selection, compliance re-checks, token lock and burn, custody release, delivery or collection, documents and history. Every module is built but inactive, and this page describes a proposed framework only.
+kicker: Portal · Proposed framework, inactive
+order: 31
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Redemption Portal concept</p>
+      <h2>From a token record <em>to a specific physical unit</em></h2>
+      <p class="rc-lead">This page describes a proposed framework, subject to final legal, contractual, technical and operational confirmation. Physical redemption is not available. No tokens have been issued, so nothing can be redeemed.</p>
+      <p>The portal is designed around one idea: a redemption request should name the exact container or coil to be released, show every check it must pass, and leave a complete record (burn, release instruction, delivery and title documents) attached to that unit's Digital Asset Passport.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Portal status</dt><dd>[rc_status s="proposed" label="Inactive"]</dd></div>
+      <div><dt>Redemption unit, copper</dt><dd>Container by container (proposed)</dd></div>
+      <div><dt>Redemption unit, nickel</dt><dd>Coil by coil (proposed)</dd></div>
+      <div><dt>Thresholds and fees</dt><dd>Shown only when approved</dd></div>
+      <div><dt>Governing terms</dt><dd>Final token terms and redemption terms, not yet issued</dd></div>
+      <div><dt>Activation</dt><dd>Written authorization and a deployment action</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Module state</p>
+      <h2>Three modules, <em>all locked</em></h2>
+      <p class="rc-lead">These panels are read live from the platform's module settings. They cannot switch on automatically.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <div data-reveal>[rc_module module="redemption" title="Redemption requests"]</div>
+      <div data-reveal>[rc_module module="unit_selection" title="Container / coil selection"]</div>
+      <div data-reveal>[rc_module module="logistics" title="Logistics & delivery"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Request lifecycle</p>
+      <h2>Seven stages, <em>each visible to the participant</em></h2>
+      <p class="rc-lead">Proposed workflow. Every stage would show its current state in the portal and in the apps, with maker-checker approval on the operator side.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Redemption request</h3><p>Select eligible holdings, program and specific units; accept the applicable terms by e-signature.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Eligibility</h3><p>KYC/KYB, sanctions and jurisdiction re-checked at the time of request, not relied on from onboarding.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verification</h3><p>Balance and wallet ownership confirmed; unit availability and packaging constraints checked against the registry.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Settlement and burn</h3><p>Tokens locked on approval, then burned; the burn transaction is recorded against the request.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Custody release</h3><p>A release instruction issued to the custodian for the named units, with seal numbers checked at release.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Logistics or collection</h3><p>Handling assessment, customs and export or import fields, shipment or collection, tracking.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Completion</h3><p>Delivery confirmation and title-transfer documents; registry, reserve and supply records updated and reconciled.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Unit selection</p>
+      <h2>Physical units, <em>not fractions of a pool</em></h2>
+      <p class="rc-lead">Both initial programs are packaged in discrete units, so redemption is proposed at unit level. Minimum units and packaging rules are configurable and subject to approval.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">CU 29 · CONTAINER LEVEL</span>
+        <h3>Ultrafine Copper Powder</h3>
+        <p>Owner-supplied records describe glass ampoules packed in cardboard boxes. Redemption is proposed box by box, each box identified by its own passport (for example <a href="/passport/RC-CU-CTN-000001/">Box no. 20</a>). Ultrafine powder requires a handling and transport assessment before any release.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/assets/industrial-metals/copper-powder/">View Copper Program →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">NI 28 · COIL LEVEL</span>
+        <h3>Nickel Wire 0.025 mm</h3>
+        <p>Owner-supplied records describe 30 bobbins in one box. Redemption is proposed bobbin by bobbin, each with its own passport (for example <a href="/passport/RC-NI-COL-000008/">bobbin 8</a>). Packaging rules for wire of this diameter are to be confirmed with the custodian.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/assets/industrial-metals/nickel-wire/">View Nickel Program →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Mock UI walkthrough</p>
+      <h2>Four screens, <em>no real data</em></h2>
+      <p class="rc-lead"><span class="rc-demo-badge">Illustrative / demo data</span> These screens show layout and states only. Unit identifiers are masked, quantities are deliberately omitted, and nothing here represents an actual holding or request.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">SCREEN 1 · ELIGIBLE HOLDINGS</span>
+        <span class="rc-demo-badge">Illustrative / demo data</span>
+        <div class="rc-table-wrap">
+          <table class="rc-table">
+            <thead><tr><th>Program</th><th>Unit type</th><th>Eligible units</th></tr></thead>
+            <tbody>
+              <tr><td>Copper Powder</td><td>Container</td><td>—</td></tr>
+              <tr><td>Nickel Wire 0.025 mm</td><td>Coil</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">SCREEN 2 · CREATE REQUEST</span>
+        <span class="rc-demo-badge">Illustrative / demo data</span>
+        <dl class="rc-kv">
+          <div><dt>Program</dt><dd>Nickel Wire 0.025 mm</dd></div>
+          <div><dt>Unit type</dt><dd>Coil (bobbin)</dd></div>
+          <div><dt>Unit selected</dt><dd><span class="rc-mono">RC-NI-COL-••••••</span></dd></div>
+          <div><dt>Quantity</dt><dd>—</dd></div>
+          <div><dt>Fulfilment</dt><dd>Delivery or collection, to be selected</dd></div>
+        </dl>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">SCREEN 3 · COMPLIANCE AND SETTLEMENT</span>
+        <span class="rc-demo-badge">Illustrative / demo data</span>
+        <div class="rc-claims">
+          <div><strong>KYC / sanctions re-check</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Jurisdiction check</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Operator approval (maker-checker)</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Token lock, then burn</strong>[rc_status s="pending" label="Not started"]</div>
+        </div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">SCREEN 4 · RELEASE AND DELIVERY</span>
+        <span class="rc-demo-badge">Illustrative / demo data</span>
+        <div class="rc-claims">
+          <div><strong>Custody release instruction</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Seal check at release</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Shipment or collection tracking</strong>[rc_status s="pending" label="Not started"]</div>
+          <div><strong>Title-transfer documents</strong>[rc_status s="pending" label="Not started"]</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Charges and thresholds</p>
+      <h2>Shown <em>only when approved</em></h2>
+      <p>Each charge is a configurable field. None has been set, and the portal would display a total cost before the participant confirms any request.</p>
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead><tr><th>Item</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Minimum redemption unit</td><td class="rc-pending">Pending approval</td></tr>
+            <tr><td>Redemption fee</td><td class="rc-pending">Pending approval</td></tr>
+            <tr><td>Custody release and packaging</td><td class="rc-pending">Pending approval</td></tr>
+            <tr><td>Shipping and transit insurance</td><td class="rc-pending">Pending approval</td></tr>
+            <tr><td>Taxes, duties and customs</td><td class="rc-pending">Pending approval</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div data-reveal>
+      <h3>Documents and history</h3>
+      <p class="rc-fine">Each completed request would leave these records, fingerprinted and linked to the unit's passport and to the tamper-evident audit trail.</p>
+      <ul class="rc-checks">
+        <li>Signed request and terms acceptance (version, time, account)</li>
+        <li>Eligibility re-check outcome</li>
+        <li>Token lock and burn record with transaction reference</li>
+        <li>Custody release instruction and seal verification</li>
+        <li>Customs, export and delivery documents</li>
+        <li>Delivery or collection confirmation</li>
+        <li>Title-transfer documentation</li>
+        <li>Registry and reserve reconciliation entry</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Read the full redemption framework</h2>
+        <p>Eligibility, unit rules, custody release and the reconciliation that follows each redemption, as currently proposed.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/redemption/">How Redemption Works</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/custody/">Explore Custody</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/portal/">Access Portal</a>
+      </div>
+    </div>
+  </div>
+</section>

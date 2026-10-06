@@ -1,0 +1,179 @@
+<!--
+title: 20% Discount Methodology (proposed)
+excerpt: A proposed framework for how an early-participation discount parameter could be defined, calculated, limited and governed. The 20 % figure appears in the project brief only; it is not approved, not offered and subject to legal review and written approval.
+kicker: Participation · Proposed methodology · Not approved
+order: 3
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Status of this methodology</p>
+        <h2>A parameter under review, <em>not a promotion</em></h2>
+      </div>
+      <p class="rc-lead">The project brief proposes an early-participation discount of 20 %. This page explains how such a parameter could work, what it would be measured against, and why it would exist. It does not offer a discount, a price or any token. Token issuance remains inactive until formally launched.</p>
+    </div>
+    <div class="rc-claims" data-reveal>
+      <div><strong>Discount parameter d</strong>[rc_status s="proposed" label="Proposed · not approved"]<small>Set out in the brief as 20 %. Subject to legal review, the definitive documentation and a written approval reference before it can be published as a term.</small></div>
+      <div><strong>Valuation reference R</strong>[rc_status s="pending_verification"]<small>Requires an independent valuation of verified reserves. No such valuation exists yet.</small></div>
+      <div><strong>Program limits and window</strong>[rc_status s="proposed"]<small>Not set. Configuration fields default to unset.</small></div>
+      <div><strong>Token price, symbol and supply</strong>[rc_status s="not_applicable" label="Not determined"]<small>Not determined. No price is shown or implied anywhere on this website.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">1 · Valuation reference</p>
+      <h2>What a discount would be <em>measured against</em></h2>
+      <p class="rc-lead">A discount is meaningless without a defensible reference. The proposed reference is derived from independently valued, verified and custodied reserves, never from a target price, market sentiment or a promoter's estimate.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Symbol</th><th>Meaning</th><th>Proposed source</th><th>Current state</th></tr></thead>
+        <tbody>
+          <tr><td class="rc-mono">V</td><td>Independent valuation of the eligible reserve for one program</td><td>Qualified independent valuer, using a documented methodology, on verified lots only</td><td>[rc_status s="pending_verification" label="None yet"]</td></tr>
+          <tr><td class="rc-mono">E</td><td>Eligible reserve units accepted into the reserve</td><td>Verification report, custody records and reserve attestation</td><td>[rc_status s="pending_verification" label="None attested"]</td></tr>
+          <tr><td class="rc-mono">k</td><td>Approved asset-to-token ratio</td><td>Definitive documentation; configuration field with written approval reference</td><td>[rc_status s="proposed" label="Unset"]</td></tr>
+          <tr><td class="rc-mono">R</td><td>Reference value per token unit, R = V ÷ (E × k)</td><td>Derived; recalculated when V, E or k change</td><td>[rc_status s="not_applicable" label="Cannot be computed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Owner-supplied Certificates of Analysis (IGAS No. 0004512 for Cu; No. 0004368 for Ni) describe composition. They are not valuations and do not establish R.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">2 · Calculation formula</p>
+        <h2>Expressed symbolically, <em>by design</em></h2>
+        <p>The proposed early-participation acquisition reference <span class="rc-mono">A</span> is a fixed fraction of the reference value:</p>
+        <div class="rc-callout"><p class="rc-mono">A = R × (1 − d)</p></div>
+        <p>where <span class="rc-mono">d</span> is the early-participation discount parameter, expressed as a fraction between 0 and 1. The brief proposes <span class="rc-mono">d = 0.20</span>; that value is not approved. Consideration for an accepted request would be:</p>
+        <div class="rc-callout"><p class="rc-mono">C = q′ × A,  where  q′ = min(q, l, L − Q)</p></div>
+        <p class="rc-fine">q = units requested · l = per-participant limit · L = program cap for the early window · Q = units already accepted in that window.</p>
+      </div>
+      <div>
+        <p class="rc-kicker">Fixed rules of the formula</p>
+        <h2>Properties that <em>cannot be bent</em></h2>
+        <ul class="rc-checks">
+          <li>If <span class="rc-mono">R</span> cannot be computed, <span class="rc-mono">A</span> does not exist and no request can be accepted.</li>
+          <li><span class="rc-mono">d</span> applies only to <span class="rc-mono">R</span>; it is never stacked with other incentives.</li>
+          <li><span class="rc-mono">L</span> can never exceed the issuance capacity allowed by attested reserves, <span class="rc-mono">E × k</span>.</li>
+          <li><span class="rc-mono">d</span>, <span class="rc-mono">l</span> and <span class="rc-mono">L</span> are configuration values, unset by default, published only with a written approval reference.</li>
+          <li>Any change to <span class="rc-mono">d</span> is recorded in the tamper-evident audit trail.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">3 · Rationale</p>
+      <h2>Why a discount might exist: <em>risk compensation</em></h2>
+      <p class="rc-lead">Where an early-participation parameter is approved, its only justification would be that early participants bear risks that later participants may not. It is a recognition of those risks, not a promise of gain, appreciation or any future value.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Early-stage risk</h3><p>Participating before the program has an operating history, with structure, counterparties and processes still being proven.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Exit risk</h3><p>No market, transferability or redemption route may be available for an extended period, or at all.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Lock-up</h3><p>Early terms would likely carry a lock-up or transfer restriction whose length is not yet defined.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Execution risk</h3><p>Custody, reconciliation and redemption depend on arrangements that are not yet in place.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">4 · Eligibility, limits, conditions, exclusions</p>
+      <h2>Where the parameter <em>would and would not apply</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Element</th><th>Proposed rule</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Eligibility</td><td>Approved accounts only: jurisdiction eligible, KYC or KYB approved, AML and sanctions clear. Waitlist registration alone never qualifies.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Program window</td><td>A defined start and end, published in the definitive documents. No open-ended or rolling discount.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Program cap (L)</td><td>A fixed number of units per program, not exceeding attested capacity.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Per-participant limit (l)</td><td>Minimum and maximum per approved account, aggregated across related accounts.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Lock-up</td><td>Transfer restriction for a defined period, enforced on-chain.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Conditions</td><td>Acknowledgement of the exact document versions and risk disclosures, recorded with their fingerprints.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Exclusions</td><td>EU/EEA residents and persons located there; restricted jurisdictions; sanctioned persons; PEPs where enhanced due diligence is not satisfied; nominee or intermediary arrangements; team members and related parties unless separately approved.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Referral or bonus stacking</td><td>Not permitted.</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">5 · Worked example</p>
+      <h2>The formula, <em>symbols only</em></h2>
+      <p class="rc-lead"><span class="rc-demo-badge">Illustrative / demo data</span> This example uses abstract placeholders. It contains no token price, no currency and no symbol, and it does not describe any real or proposed transaction.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Step</th><th>Expression</th><th>Illustrative reading <span class="rc-demo-badge">Illustrative / demo data</span></th></tr></thead>
+        <tbody>
+          <tr><td>Reference value</td><td class="rc-mono">R = V ÷ (E × k)</td><td>R is expressed in an abstract reference unit "u". It cannot be computed today.</td></tr>
+          <tr><td>Apply parameter</td><td class="rc-mono">A = R × (1 − d)</td><td>With the brief's unapproved d = 0.20, A ÷ R = 0.80. The relationship is a ratio, not a price.</td></tr>
+          <tr><td>Apply limits</td><td class="rc-mono">q′ = min(q, l, L − Q)</td><td>If q exceeds l, only l units are considered. If the window has fewer than l units left, only L − Q are considered.</td></tr>
+          <tr><td>Consideration</td><td class="rc-mono">C = q′ × A</td><td>Expressed in u. Settlement currency and method are not determined.</td></tr>
+          <tr><td>Capacity check</td><td class="rc-mono">Q + q′ ≤ L ≤ E × k</td><td>If the check fails, the request is reduced or rejected. Issuance never exceeds attested capacity.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">6 · Governance and approval</p>
+        <h2>Four sign-offs <em>before publication</em></h2>
+        <ol class="rc-steps">
+          <li><div><h3>Legal review</h3><p>Counsel confirms whether, and in which jurisdictions, an early-participation parameter is permissible.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Valuation input</h3><p>An independent valuation establishes V for verified reserves.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Issuer approval</h3><p>Written approval of d, L, l and the window by the issuer's authorised governing body, once constituted, with a reference number.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Four-eyes publication</h3><p>Configuration change entered by one authorised person, approved by another, logged in the audit trail.</p></div>[rc_status s="in_development"]</li>
+        </ol>
+      </div>
+      <div>
+        <p class="rc-kicker">7 · Risk disclosure</p>
+        <h2>What the parameter <em>does not mean</em></h2>
+        <ul class="rc-list">
+          <li>A discount to R does not mean a token will ever be worth R, or any amount.</li>
+          <li>R depends on valuations that may change, be revised or prove wrong.</li>
+          <li>The underlying metal may not be realisable at its valuation, or at all.</li>
+          <li>Lock-ups and transfer restrictions may prevent exit when you need it.</li>
+          <li>The parameter may be changed, reduced to zero or withdrawn before launch.</li>
+          <li>Regulatory treatment may differ by jurisdiction and may change.</li>
+          <li>Total loss of the amount committed is possible.</li>
+        </ul>
+        <p class="rc-fine">Read the full <a href="/legal/risk-disclosure/">Risk Disclosure</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Review the program in context</h2><p>The parameter only makes sense alongside eligibility rules and verified asset evidence.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/overview/">View Program Overview</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn" href="/platform/verification/">View Verification Process</a>
+      </div>
+    </div>
+  </div>
+</section>

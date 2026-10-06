@@ -1,0 +1,191 @@
+<!--
+title: Technology
+excerpt: The technology behind real-world asset tokenization, described as it is built today. It comprises a governed CMS core, a cryptographically sealed registry, a single REST API for web and mobile, and six Ethereum smart contracts deployed to test networks only.
+kicker: Platform · Implementation · In development · Testnet only
+order: 3
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Stack</p>
+        <h2>Deliberately conventional, <em>verifiable by design</em></h2>
+      </div>
+      <p class="rc-lead">The stack uses established components so that the novel parts — evidence sealing, workflow binding and reserve-gated issuance — are small enough to inspect. This page describes the implementation that exists. It is in active development and has not yet had an external security review.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Layer</th><th>Implementation</th><th>Role</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Content and registry</td><td>WordPress CMS with the ReserveChain Core plugin; MySQL</td><td>Registry schema, passports, workflow, audit trail, compliance state</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Interface</td><td>REST API, namespace <span class="rc-mono">rc/v1</span></td><td>One contract shared by website, portal and mobile apps</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Mobile</td><td>iOS and Android applications on a shared codebase</td><td>Passports, documents, notifications; participant features locked</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Ledger</td><td>Solidity 0.8 on Ethereum, built on OpenZeppelin Contracts 5</td><td>ERC-20 issuance, compliance hook, reserve guard, redemption, treasury, anchoring</td><td>[rc_status s="in_development" label="Testnet only"]</td></tr>
+          <tr><td>Toolchain</td><td>Hardhat, TypeScript, unit tests, coverage reports, gas reports, static analysis</td><td>Repeatable builds and test evidence for every contract change</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Registry and passport records</p>
+      <h2>A declarative schema <em>and a sealed passport</em></h2>
+      <p class="rc-lead">Each registry record type, from program and lot to container, bobbin, certificate, custody receipt and reserve report, is declared once in a schema. That schema defines the fields, units, visibility and the evidence each field must link to. The editor, the API and the passport are all generated from it, so they cannot drift apart.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">A</span>
+        <h3>Record fingerprint</h3>
+        <p>For each passport, the platform computes a SHA-256 hash over the passport number, record type and every public field as key-value pairs. Changing any published value changes this fingerprint.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">B</span>
+        <h3>Document leaves</h3>
+        <p>Every linked document has a SHA-256 hash, computed from the stored file when it is uploaded. These hashes and the record fingerprint form the leaves of the passport's Merkle tree.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">C</span>
+        <h3>Merkle root</h3>
+        <p>The leaves are de-duplicated, sorted and hashed in pairs up to a single SHA-256 root. One 64-character value commits to the entire evidence set, and anyone holding the JSON export can recompute it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Smart contracts</p>
+      <h2>Six contracts. <em>Every economic value unset.</em></h2>
+      <p class="rc-lead">The contracts are a proposed ledger layer. Price, supply, the asset-to-token ratio, redemption thresholds and allocations are configuration inputs, and all of them default to unset, zero or disabled. With the shipped configuration, minting and redemption are both blocked. Deployment tooling refuses mainnet targets.</p>
+    </div>
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 300" role="img" aria-labelledby="rc-sc-title rc-sc-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-sc-title">Smart-contract interactions</title>
+        <desc id="rc-sc-desc">A multisig administrator governs all six contracts. ReserveToken asks ComplianceRegistry on every transfer and ReserveGuard on every mint. RedemptionManager escrows and burns tokens. Treasury holds tokens under limits. AuditAnchor stores CMS audit-chain heads.</desc>
+        <defs><marker id="rc-sc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D5B167"/></marker></defs>
+        <rect x="380" y="16" width="240" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2"/>
+        <text x="500" y="43" fill="#E7EBEE" font-size="13" text-anchor="middle" font-weight="600">Multisig administrator (two-step, delayed)</text>
+        <rect x="380" y="128" width="240" height="64" rx="8" fill="#0E1620" stroke="#C9773F" stroke-width="2.5"/>
+        <text x="500" y="156" fill="#E7EBEE" font-size="14" text-anchor="middle" font-weight="600">ReserveToken</text>
+        <text x="500" y="176" fill="#A9BBC8" font-size="11" text-anchor="middle">ERC-20 · permit · pause · fail-closed mint</text>
+        <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5">
+          <rect x="30" y="100" width="230" height="56" rx="8"/><rect x="30" y="180" width="230" height="56" rx="8"/>
+          <rect x="740" y="100" width="230" height="56" rx="8"/><rect x="740" y="180" width="230" height="56" rx="8"/>
+          <rect x="380" y="236" width="240" height="52" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">
+          <text x="145" y="124">ComplianceRegistry</text><text x="145" y="204">ReserveGuard</text>
+          <text x="855" y="124">RedemptionManager</text><text x="855" y="204">Treasury</text>
+          <text x="500" y="259">AuditAnchor</text>
+        </g>
+        <g fill="#A9BBC8" font-size="11" text-anchor="middle">
+          <text x="145" y="143">canTransfer on every transfer</text><text x="145" y="223">maxMintable on every mint</text>
+          <text x="855" y="143">escrow, then burn on approval</text><text x="855" y="223">daily limit · timelock queue</text>
+          <text x="500" y="277">CMS audit-chain heads, strictly increasing</text>
+        </g>
+        <g stroke="#D5B167" stroke-width="1.5" marker-end="url(#rc-sc-arr)">
+          <line x1="380" y1="150" x2="264" y2="130"/><line x1="380" y1="172" x2="264" y2="204"/>
+          <line x1="738" y1="130" x2="624" y2="150"/><line x1="738" y1="204" x2="624" y2="176"/>
+        </g>
+        <line x1="500" y1="60" x2="500" y2="126" stroke="#D5B167" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="512" y="98" fill="#A9BBC8" font-size="11">governs all six</text>
+      </svg>
+      <figcaption>Proposed on-chain layer, deployed to test networks only. There is no mainnet deployment and no contract address is published. The official address register will show "Not yet deployed" until approval is given.</figcaption>
+    </figure>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>ReserveToken</h3><p>An ERC-20 token with EIP-2612 permit and pause. Minting succeeds in only two configured modes: within the reserve guard's limit, or within an explicitly enabled static cap. In every other state it reverts. Burning is restricted to a dedicated role.</p></article>
+      <article class="rc-card" data-reveal><h3>ComplianceRegistry</h3><p>Holds one record per address: approval status, a two-letter jurisdiction code, an expiry and a frozen flag. Transfers need both parties to be eligible. Blocked jurisdictions are a configurable set, and the deployment configuration seeds it with EU/EEA codes.</p></article>
+      <article class="rc-card" data-reveal><h3>ReserveGuard</h3><p>Attestors post the program, the units held, a report hash, a URI and an as-of date. The mintable amount is units × ratio − supply, and it falls to zero if the ratio or staleness window is unset or the attestation is stale.</p></article>
+      <article class="rc-card" data-reveal><h3>RedemptionManager</h3><p>The holder requests redemption and tokens move into escrow. An operator either approves, which burns the tokens and records a fulfilment reference, or rejects, which releases them back. The holder can cancel while the request is pending. The module is disabled by default and its thresholds are unset.</p></article>
+      <article class="rc-card" data-reveal><h3>Treasury</h3><p>A role-controlled holder of program tokens. It enforces a daily withdrawal limit per token, and an optional timelock queue delays large withdrawals. The default limit is zero.</p></article>
+      <article class="rc-card" data-reveal><h3>AuditAnchor</h3><p>Records the CMS audit trail's chain head, sequence number and URI. Sequence numbers must strictly increase. Anyone can call <span class="rc-mono">verify(seq, head)</span> to confirm that a published head matches the on-chain anchor.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Audit logs</p>
+        <h2>An audit trail that <em>can be checked from outside</em></h2>
+        <p class="rc-lead">Audit logs are only useful if the operator cannot rewrite them. ReserveChain protects them with four independent layers.</p>
+        <p>The live status below is computed by walking the whole chain and recomputing every hash.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Application</h3><p>The log has no edit or delete path in the admin, the API or the CLI. Rows can only be appended.</p></div></li>
+        <li><div><h3>Database</h3><p>MySQL <span class="rc-mono">BEFORE UPDATE</span> and <span class="rc-mono">BEFORE DELETE</span> triggers reject any attempt to change a row, even with direct database access.</p></div></li>
+        <li><div><h3>Cryptographic</h3><p>Each row commits to the previous row's SHA-256 hash. Editing, inserting or removing any entry breaks every hash after it.</p></div></li>
+        <li><div><h3>External</h3><p>The chain head is periodically anchored in AuditAnchor on a public test network, so silently rewriting history would also require rewriting the chain.</p></div></li>
+      </ol>
+    </div>
+    [rc_audit_status]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">APIs and integration model</p>
+      <h2>One API, <em>every channel</em></h2>
+      <p class="rc-lead">The website, portal and the iOS and Android apps use the same versioned endpoints. Enterprise integrations would use them too. A figure on a passport page and the same figure in the app come from one query.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Public read</h3>
+        <ul class="rc-list">
+          <li><span class="rc-mono">GET /rc/v1/programs</span> — programs and their published fields</li>
+          <li><span class="rc-mono">GET /rc/v1/passports/{no}</span> — a full passport with Merkle root</li>
+          <li><span class="rc-mono">GET /rc/v1/verify?hash=</span> — match a fingerprint to a published document</li>
+          <li><span class="rc-mono">GET /rc/v1/documents</span> · <span class="rc-mono">/registry/stats</span> · <span class="rc-mono">/audit/head</span></li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Authenticated</h3>
+        <ul class="rc-list">
+          <li>Sign-in issues a short-lived JWT access token and a rotating refresh token</li>
+          <li>TOTP second factor with single-use recovery codes</li>
+          <li><span class="rc-mono">/me</span>, holdings, transactions and notifications for participants</li>
+          <li>Value-moving endpoints respond "module inactive" until authorized</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Scalability and roadmap</p>
+      <h2>What scales, <em>and what comes next</em></h2>
+      <p class="rc-lead">Scaling depends mainly on records and evidence, not on transactions. Token and redemption contracts are deployed per program, while compliance, reserve guard and anchoring are shared, so adding a program does not alter existing ones. Passports are computed from approved records and can be cached between publications. The audit chain grows linearly and is anchored in batches.</p>
+    </div>
+    <div class="rc-roadmap">
+      <div class="is-active"><span class="rc-phase">Now</span><h3>Core build</h3><ul><li>Registry schema and passports</li><li>Four-eyes workflow and audit trail</li><li>REST API, web and mobile clients</li><li>Contract suite on testnet</li></ul>[rc_status s="in_development"]</div>
+      <div><span class="rc-phase">Next</span><h3>Assurance</h3><ul><li>Independent smart-contract security review</li><li>Application penetration test</li><li>Multisig and hardware-wallet key ceremony</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">Then</span><h3>Integration</h3><ul><li>Laboratory and custodian data feeds</li><li>Reserve-attestation workflow</li><li>Enterprise tenant portal</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">Later</span><h3>Activation</h3><ul><li>Mainnet deployment, only after legal approval</li><li>Address publication on the official register</li></ul>[rc_status s="proposed"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Inspect the controls</h2>
+        <p>See how these components are protected, or check the <a href="/resources/contract-addresses/">official address register</a>, which currently lists no deployed contracts.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Learn About Tokenization</a>
+        <a class="rc-btn rc-btn--cream" href="/resources/documentation/">View Documents</a>
+        <a class="rc-btn" href="/enterprise/licensing-white-label/">Technology Licensing</a>
+      </div>
+    </div>
+  </div>
+</section>

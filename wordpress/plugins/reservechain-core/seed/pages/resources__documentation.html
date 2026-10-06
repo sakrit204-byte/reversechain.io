@@ -1,0 +1,159 @@
+<!--
+title: Documentation
+excerpt: The version-controlled document library for ReserveChain, organised in twelve categories. Every published file is fingerprinted with SHA-256, and any copy can be checked against the registry.
+kicker: Resources · Document library
+order: 1
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Library principles</p>
+        <h2>One source of truth <em>for every document</em></h2>
+      </div>
+      <p class="rc-lead">Documents are published only after four-eyes approval. One person prepares the record, and a second, different authorised person approves it. Each release gets a version, an issue date, a status and a SHA-256 fingerprint. Superseded versions stay registered, so an older copy can still be identified and dated.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">01</span>
+        <h3>Versioned</h3>
+        <p>Each release has a version identifier and an issue date. Any change, however small, produces a new version. A published file is never silently replaced.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">02</span>
+        <h3>Fingerprinted</h3>
+        <p>A SHA-256 fingerprint is computed from the exact bytes of the file. If a single byte changes, the fingerprint changes completely.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">03</span>
+        <h3>Status-labelled</h3>
+        <p>Each document shows whether it is a draft, a specimen, an owner-supplied copy or an approved release. The status describes the document, not the underlying arrangement.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">04</span>
+        <h3>Audit-logged</h3>
+        <p>Every upload, approval and supersession is written to a hash-chained, append-only audit trail. Any later alteration of that history can be detected.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Twelve categories</p>
+      <h2>What the library will hold, <em>and what it holds today</em></h2>
+      <p class="rc-lead">The categories below set out the full intended library. Many documents depend on arrangements that do not yet exist, such as custodians, attestors and offering documentation. Those categories stay empty until real documents are approved. We will not publish placeholders dressed up as evidence.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead>
+          <tr><th>Category</th><th>Intended contents</th><th>Current state</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Platform</strong></td><td>Platform overview, lifecycle description, module register, website-mode notices</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Technology</strong></td><td>Architecture notes, smart-contract specifications, API reference, test-network deployment records</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Asset Programs</strong></td><td>Program sheets for Ultra-High-Purity Copper Powder and High-Purity Nickel Wire 0.025 mm, specification summaries, packaging descriptions</td><td>[rc_status s="pending_verification"]</td></tr>
+          <tr><td><strong>Certificates</strong></td><td>Owner-supplied Certificates of Analysis: IGAS No. 0004512 (Cu) and No. 0004368 (Ni). Later, weight certificates and re-verification reports</td><td>[rc_status s="pending_verification" label="Owner-supplied"]</td></tr>
+          <tr><td><strong>Verification</strong></td><td>Sampling methodology, laboratory selection criteria, re-verification reports</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Custody</strong></td><td>Custody agreements summary, warehouse receipts, inventory statements, release records</td><td>[rc_status s="not_applicable" label="No custodian appointed"]</td></tr>
+          <tr><td><strong>Reserve Reports</strong></td><td>Periodic independent attestations, each fingerprinted and posted on-chain</td><td>[rc_status s="not_applicable" label="No attestor appointed"]</td></tr>
+          <tr><td><strong>Compliance</strong></td><td>Eligibility framework, KYC/KYB requirements, restricted-jurisdiction policy, sanctions-screening policy</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Enterprise</strong></td><td>Enterprise service descriptions, licensing and white-label module sheets, integration guides</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Participation</strong></td><td>Early Participation Program overview, discount-methodology paper (proposed, subject to approval), waitlist terms</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Policies</strong></td><td>Communication standards, conflicts of interest, information security, data protection, document-control policy</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Legal</strong></td><td>Website terms, privacy and cookie policies, risk disclosure. Any future definitive offering documentation</td><td>[rc_status s="in_development" label="Drafts — legal review"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Category states describe the library, not the underlying arrangements. "Not applicable" means the related arrangement does not exist yet, so no document can truthfully be published.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Live library</p>
+      <h2>Published documents <em>with fingerprints</em></h2>
+      <p class="rc-lead">This list comes directly from the registry. Each entry shows its type, version, issue date, status and SHA-256 fingerprint. Copy a fingerprint, or download the file and check it with the tool below.</p>
+    </div>
+    [rc_documents]
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Version control</p>
+      <h2>How a document <em>enters the library</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Draft and register</h3><p>An editor uploads the file. The system computes its SHA-256 fingerprint at upload, and records the document type, version, issue date, issuer and the registry units it relates to.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Independent approval</h3><p>A second authorised person, different from the editor, reviews the file against its source and approves or rejects it. Owner-supplied documents keep that label after approval.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Publish and log</h3><p>Publication writes an entry to the hash-chained audit trail. Each entry includes the hash of the one before it, so the history cannot be rewritten without detection.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Supersede, never overwrite</h3><p>A correction is published as a new version. The earlier version stays registered and marked as superseded, so anyone holding an older copy can identify it.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Anchor on-chain</h3><p>The audit-trail head is intended to be anchored periodically to a public test network through the AuditAnchor contract. This gives the history an external timestamp.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Verify any copy</p>
+        <h2>Received a ReserveChain document? <em>Check it here.</em></h2>
+        <p>Select the file. Your browser computes its SHA-256 fingerprint locally and compares it with the registry. The file never leaves your device. A match tells you the copy is identical to the one we published. It does not confirm that the arrangement the document describes is in place.</p>
+        <p>The same tool is available on the <a href="/platform/verification/">verification framework page</a>.</p>
+      </div>
+      <div>
+        [rc_verify]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Reading the documents</p>
+      <h2>Three limits to <em>keep in mind</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>A fingerprint proves integrity, not truth</h3>
+        <p>A fingerprint match shows a file has not changed since registration. It does not show that the statements in the file are accurate. That depends on the issuer and on independent verification.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Owner-supplied is not independently verified</h3>
+        <p>The two Certificates of Analysis were supplied by the asset owner. They have not yet been confirmed with the issuing laboratory or tested by an independent party appointed by ReserveChain.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>No document here is an offering document</h3>
+        <p>Nothing in this library is a prospectus or offering memorandum, and none of it is a solicitation. Any future definitive offering documentation would be separate. It would be shared only with eligible, approved persons.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Start with the whitepaper</h2>
+        <p>The discussion draft sets out the full proposed framework that these documents support.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/resources/whitepaper/">View Whitepaper</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/verification/">View Verification Process</a>
+      </div>
+    </div>
+  </div>
+</section>

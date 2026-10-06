@@ -19,6 +19,32 @@ defined( 'ABSPATH' ) || exit;
 
 final class Waitlist {
 
+	public const MATERIALS = array(
+		'cu'     => 'Copper Powder',
+		'ni'     => 'Nickel Wire',
+		'both'   => 'Both',
+		'future' => 'Future asset programs',
+	);
+
+	/** Indicative, non-binding. Never a commitment, reservation or allocation. */
+	public const RANGES = array(
+		'undisclosed' => 'Prefer not to say',
+		'lt10k'       => 'Under 10,000 (USD equivalent)',
+		'10k_50k'     => '10,000 – 50,000 (USD equivalent)',
+		'50k_250k'    => '50,000 – 250,000 (USD equivalent)',
+		'250k_1m'     => '250,000 – 1,000,000 (USD equivalent)',
+		'gt1m'        => 'Over 1,000,000 (USD equivalent)',
+	);
+
+	public const PARTICIPATION = array(
+		'updates'      => 'Project updates only',
+		'early'        => 'Future early participation (subject to eligibility and approval)',
+		'buyer'        => 'Industrial buyer / offtake',
+		'owner'        => 'Asset owner / originator',
+		'enterprise'   => 'Enterprise services / technology licensing',
+		'research'     => 'Media / research',
+	);
+
 	public static function table(): string {
 		global $wpdb;
 		return $wpdb->prefix . 'rc_waitlist';
@@ -47,7 +73,14 @@ final class Waitlist {
 			return new \WP_Error( 'rc_rate', __( 'Too many submissions from this network. Please try again later.', 'reservechain' ), array( 'status' => 429 ) );
 		}
 
-		$name    = sanitize_text_field( wp_unslash( $in['name'] ?? '' ) );
+		$first   = sanitize_text_field( wp_unslash( $in['first_name'] ?? '' ) );
+		$last    = sanitize_text_field( wp_unslash( $in['last_name'] ?? '' ) );
+		$name    = trim( $first . ' ' . $last ) ?: sanitize_text_field( wp_unslash( $in['name'] ?? '' ) );
+		$material = isset( self::MATERIALS[ $in['materials'] ?? '' ] ) ? $in['materials'] : '';
+		$range    = isset( self::RANGES[ $in['interest_range'] ?? '' ] ) ? $in['interest_range'] : 'undisclosed';
+		$ptype    = isset( self::PARTICIPATION[ $in['participation_type'] ?? '' ] ) ? $in['participation_type'] : 'updates';
+		$nat      = Settings::module_on( 'waitlist_nationality' ) ? strtoupper( sanitize_text_field( (string) ( $in['nationality'] ?? '' ) ) ) : '';
+		$loc      = Settings::module_on( 'waitlist_nationality' ) ? strtoupper( sanitize_text_field( (string) ( $in['current_location'] ?? '' ) ) ) : '';
 		$email   = sanitize_email( wp_unslash( $in['email'] ?? '' ) );
 		$country = strtoupper( sanitize_text_field( wp_unslash( $in['country'] ?? '' ) ) );
 		$entity  = in_array( $in['entity_type'] ?? '', array( 'individual', 'institution' ), true ) ? $in['entity_type'] : 'individual';
@@ -57,8 +90,18 @@ final class Waitlist {
 		$general = ! empty( $in['general_updates'] );
 
 		$errors = array();
-		if ( mb_strlen( $name ) < 2 ) {
+		if ( isset( $in['first_name'] ) || isset( $in['last_name'] ) ) {
+			if ( mb_strlen( $first ) < 1 ) {
+				$errors['first_name'] = __( 'Please enter your first name.', 'reservechain' );
+			}
+			if ( mb_strlen( $last ) < 1 ) {
+				$errors['last_name'] = __( 'Please enter your last name.', 'reservechain' );
+			}
+		} elseif ( mb_strlen( $name ) < 2 ) {
 			$errors['name'] = __( 'Please enter your name.', 'reservechain' );
+		}
+		if ( '' === $material && empty( $interest ) ) {
+			$errors['materials'] = __( 'Please select the material of interest.', 'reservechain' );
 		}
 		if ( ! is_email( $email ) ) {
 			$errors['email'] = __( 'Please enter a valid email address.', 'reservechain' );
@@ -94,7 +137,18 @@ final class Waitlist {
 			'country'              => $country,
 			'entity_type'          => $entity,
 			'organisation'         => $org,
-			'interest'             => implode( ',', $interest ),
+			'interest'             => implode( ',', $interest ?: ( 'both' === $material ? array( 'cu', 'ni' ) : ( in_array( $material, array( 'cu', 'ni' ), true ) ? array( $material ) : array() ) ) ),
+			'first_name'           => $first,
+			'last_name'            => $last,
+			'buyer_interest'       => ! empty( $in['buyer_interest'] ) ? 1 : 0,
+			'owner_interest'       => ! empty( $in['owner_interest'] ) ? 1 : 0,
+			'materials'            => $material,
+			'interest_range'       => $range,
+			'participation_type'   => $ptype,
+			'consent_updates'      => ! empty( $in['consent_updates'] ) ? 1 : 0,
+			'nationality'          => isset( Schema::countries()[ $nat ] ) ? $nat : '',
+			'current_location'     => isset( Schema::countries()[ $loc ] ) ? $loc : '',
+			'campaign_source'      => substr( sanitize_text_field( (string) ( $in['campaign_source'] ?? '' ) ), 0, 100 ),
 			'language'             => $lang,
 			'jurisdiction_status'  => $jurisdiction,
 			'general_updates_only' => 'restricted' === $jurisdiction ? 1 : 0,
@@ -156,7 +210,7 @@ final class Waitlist {
 	}
 
 	public static function confirm_url( string $token ): string {
-		return add_query_arg( array( 'rc_confirm' => $token ), home_url( '/waitlist/' ) );
+		return add_query_arg( array( 'rc_confirm' => $token ), home_url( '/participation/waitlist/' ) );
 	}
 
 	private static function send_confirmation( string $email, string $name, string $token, string $lang ): void {

@@ -217,6 +217,7 @@ final class Schema {
 				'fields'   => array(
 					$program_rel,
 					array( 'key' => 'batch', 'label' => 'Batch', 'type' => 'relation', 'target' => 'rc_batch', 'public' => true ),
+					array( 'key' => 'lot', 'label' => 'Parent lot (if no batch)', 'type' => 'relation', 'target' => 'rc_lot', 'public' => true ),
 					array( 'key' => 'container_id', 'label' => 'Container / drum ID', 'type' => 'text', 'public' => true, 'pending' => 'Not yet provided' ),
 					array( 'key' => 'seal_number', 'label' => 'Tamper seal number', 'type' => 'text', 'public' => true, 'pending' => 'Pending — sealed at custody intake' ),
 					array( 'key' => 'net_weight', 'label' => 'Net weight', 'type' => 'number', 'unit' => 'kg', 'public' => true, 'pending' => 'Pending — weight certificate required' ),

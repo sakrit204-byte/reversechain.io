@@ -1,0 +1,157 @@
+<!--
+title: Proposed Independent Verification Framework
+excerpt: Trust is built before an asset is tokenized. This page sets out how ReserveChain proposes to sample, test, validate and re-verify industrial-metal units. It also explains how owner-supplied evidence is kept separate from independently verified evidence.
+kicker: Platform · Proposed framework · Verification
+order: 5
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Scope of this page</p>
+        <h2>A proposed framework, <em>stated as such</em></h2>
+        <p class="rc-lead">This page describes a proposed verification framework, subject to final legal, contractual, technical and operational confirmation. No independent laboratory has been appointed by ReserveChain. No unit on this site has been independently verified under this framework.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Owner-supplied Certificates of Analysis on file</strong>[rc_status s="pending_verification"]<small>IGAS CoA 0004512 (Cu, 04.07.2022) and CoA 0004368 (Ni, 19.10.2021), supplied by the asset owner.</small></div>
+        <div><strong>Document fingerprints recorded and publicly checkable</strong>[rc_status s="in_development"]<small>Each stored file carries a SHA-256 fingerprint. Use the tool below to check one.</small></div>
+        <div><strong>Independent sampling and testing</strong>[rc_status s="proposed"]<small>Requires an accredited laboratory to be appointed under contract.</small></div>
+        <div><strong>Valuation review</strong>[rc_status s="proposed"]<small>Requires an independent valuer to be appointed under contract.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">The distinction that matters</p>
+      <h2>Owner-supplied <em>is not the same as verified</em></h2>
+      <p class="rc-lead">A certificate supplied by an asset owner may be accurate. It is still a claim made by an interested party about a sample they arranged. ReserveChain records the source of every certificate and shows it on every passport.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Owner-supplied evidence</h3>
+        <ul class="rc-list">
+          <li>Commissioned by the owner or a prior holder</li>
+          <li>The sample and its chain of custody were not witnessed by ReserveChain</li>
+          <li>Quantities are often "according to the customer", as on both IGAS certificates</li>
+          <li>Displayed as an exact transcription with the original scan</li>
+          <li>Status shown: <strong>Pending verification</strong></li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Independently verified evidence (proposed)</h3>
+        <ul class="rc-list">
+          <li>Commissioned under contract by the platform, not by the owner</li>
+          <li>Samples drawn by the laboratory or a witnessed inspector, then sealed</li>
+          <li>Tested by an accredited laboratory using a stated method and reference standard</li>
+          <li>The issuer confirms the certificate directly</li>
+          <li>The "verified" status may only be shown once an approved record exists</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Workflow</p>
+      <h2>Seven steps <em>from submission to status</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Document intake</h3><p>The owner submits existing certificates, specifications and packing lists. Each file is fingerprinted on upload and kept unchanged.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Document validation</h3><p>Certificate numbers, dates, lot references and signatures are checked with the issuing laboratory. Any mismatch is recorded as an exception and the certificate is not used.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Physical inspection</h3><p>An inspector confirms packaging, labels, seal numbers and unit counts against the registry, then weighs and photographs the units.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Sampling</h3><p>Samples are drawn under the sampling plan below. The sample containers are sealed, the seal numbers recorded, and the samples sent to the laboratory under a chain-of-custody form.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Testing</h3><p>The laboratory runs the agreed analysis, for example ICP-MS or ICP-OES for trace elements, plus physical tests appropriate to the material form, and issues a certificate.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Review and approval</h3><p>A reviewer compares the results with the declared specification. A second person approves the verification record, and the approval is bound to the record's fingerprint.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Status published</h3><p>The unit's passport shows the verification record, the certificate, its fingerprint and the date by which re-verification is due.</p></div>[rc_status s="in_development"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Sampling methodology and laboratories</p>
+      <h2>Plans fitted to <em>the material form</em></h2>
+      <p class="rc-lead">A powder sealed in glass ampoules and a 0.025 mm wire wound on bobbins need different sampling plans. The proposed plans below are subject to the appointed laboratory's own procedures and to final approval.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th></th><th>Copper powder (ampoules in boxes)</th><th>Nickel wire 0.025 mm (bobbins)</th></tr></thead>
+        <tbody>
+          <tr><td>Unit of control</td><td>Container (box), recorded per ampoule where practical</td><td>Bobbin (registry "coil")</td></tr>
+          <tr><td>Selection</td><td>Random selection of boxes across the lot. The number of boxes is set by the laboratory for the lot size.</td><td>Random selection of bobbins across the box. Every bobbin is weighed and checked visually.</td></tr>
+          <tr><td>Chemistry</td><td>Trace-element analysis against a named impurity basis</td><td>Trace-element analysis against a named impurity basis</td></tr>
+          <tr><td>Physical</td><td>Particle-size distribution, morphology, apparent and tap density, oxygen and moisture: all <strong>Pending</strong></td><td>Diameter and tolerance, tensile strength, elongation and surface finish: all <strong>Pending</strong></td></tr>
+          <tr><td>Owner-supplied reference</td><td>CoA 0004512: 10 g sample from Box no. 20, ICP/OES</td><td>CoA 0004368: 0.8 g sample from bobbins 8, 10, 19 and 27, ICP/MS + ICP/OES</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Accreditation required</h3><p>Any laboratory used for independent verification must hold accreditation to ISO/IEC 17025 for the methods it applies. This is a requirement on the laboratory, not a claim about ReserveChain.</p></article>
+      <article class="rc-card" data-reveal><h3>Independence required</h3><p>The laboratory must have no commercial relationship with the asset owner for the unit under test, and it is engaged and paid by the platform.</p></article>
+      <article class="rc-card" data-reveal><h3>None appointed</h3><p>No laboratory has been appointed. Partner names appear only after a contract is signed and the partner has authorized the use of its name.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Chain of evidence and re-verification</p>
+        <h2>Evidence that <em>stays attached to the unit</em></h2>
+        <p class="rc-lead">Each verification record links to the exact unit it covers, the certificate file, the sampling record and the person who approved it. Replacing a document creates a new version and a new fingerprint. The previous version stays in the history.</p>
+      </div>
+      <ul class="rc-checks">
+        <li><strong>Scheduled re-verification:</strong> a due date is set per program, and when it passes the passport shows the record as stale.</li>
+        <li><strong>Event-driven re-verification:</strong> required after a broken seal, a custody transfer, a weight discrepancy or a damaged package.</li>
+        <li><strong>Pre-redemption check:</strong> the specific container or bobbin is confirmed against its record before release.</li>
+        <li><strong>Valuation review:</strong> each valuation is tied to the verified specification. If the specification changes, the valuation is reviewed again.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream" id="verify">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Live tool</p>
+      <h2>Verify a <em>document fingerprint</em></h2>
+      <p class="rc-lead">Drop in any document you received that claims to come from ReserveChain. Your browser computes its SHA-256 fingerprint locally, and the file is never uploaded. The tool then checks the fingerprint against the published registry. A match shows the file is byte-for-byte identical to the published version. It does not, on its own, show that the content is true.</p>
+    </div>
+    [rc_verify]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Certificates on file</p>
+      <h2>Owner-supplied <em>Certificates of Analysis</em></h2>
+      <p class="rc-lead">Each certificate is published with its original scan, an exact transcription and its fingerprint. Publication is subject to approval and does not indicate independent verification.</p>
+    </div>
+    [rc_documents type="coa"]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>See verification status per unit</h2>
+        <p>Each passport shows its verification record, the certificate source and its fingerprint.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/passport/RC-NI-COL-000008/">View Digital Asset Passport</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/asset-registry/">View Asset Registry</a>
+        <a class="rc-btn" href="/enterprise/asset-owners/">Submit an Asset</a>
+      </div>
+    </div>
+  </div>
+</section>

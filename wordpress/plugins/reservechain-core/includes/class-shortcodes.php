@@ -257,8 +257,9 @@ final class Shortcodes {
 		<?php echo $banner; // phpcs:ignore ?>
 		<form class="rc-form rc-waitlist" novalidate data-rc-form="waitlist">
 			<div class="rc-form__grid">
-				<label class="rc-field"><span><?php esc_html_e( 'Full name', 'reservechain' ); ?> *</span><input name="name" autocomplete="name" required maxlength="191"></label>
-				<label class="rc-field"><span><?php esc_html_e( 'Email address', 'reservechain' ); ?> *</span><input type="email" name="email" autocomplete="email" required maxlength="191"></label>
+				<label class="rc-field"><span><?php esc_html_e( 'First name', 'reservechain' ); ?> *</span><input name="first_name" autocomplete="given-name" required maxlength="100"></label>
+				<label class="rc-field"><span><?php esc_html_e( 'Last name', 'reservechain' ); ?> *</span><input name="last_name" autocomplete="family-name" required maxlength="100"></label>
+				<label class="rc-field rc-field--wide"><span><?php esc_html_e( 'Email address', 'reservechain' ); ?> *</span><input type="email" name="email" autocomplete="email" required maxlength="191"></label>
 				<label class="rc-field"><span><?php esc_html_e( 'Country of residence', 'reservechain' ); ?> *</span>
 					<select name="country" required>
 						<option value=""><?php esc_html_e( 'Select…', 'reservechain' ); ?></option>
@@ -272,11 +273,26 @@ final class Shortcodes {
 					<label><input type="radio" name="entity_type" value="institution"> <?php esc_html_e( 'Institution / company', 'reservechain' ); ?></label>
 				</fieldset>
 				<label class="rc-field rc-field--org" hidden><span><?php esc_html_e( 'Organisation', 'reservechain' ); ?> *</span><input name="organisation" autocomplete="organization" maxlength="191"></label>
-				<fieldset class="rc-field rc-field--inline rc-field--wide"><legend><?php esc_html_e( 'Programs of interest', 'reservechain' ); ?></legend>
-					<label class="rc-chip"><input type="checkbox" name="interest[]" value="cu" checked> <b>Cu</b> <?php esc_html_e( 'Copper Powder', 'reservechain' ); ?></label>
-					<label class="rc-chip"><input type="checkbox" name="interest[]" value="ni" checked> <b>Ni</b> <?php esc_html_e( 'Nickel Wire', 'reservechain' ); ?></label>
-					<label class="rc-chip"><input type="checkbox" name="interest[]" value="enterprise"> <?php esc_html_e( 'Enterprise services', 'reservechain' ); ?></label>
+				<fieldset class="rc-field rc-field--inline rc-field--wide"><legend><?php esc_html_e( 'Material of interest', 'reservechain' ); ?> *</legend>
+					<label class="rc-chip"><input type="radio" name="materials" value="cu"> <b>Cu</b> <?php esc_html_e( 'Copper Powder', 'reservechain' ); ?></label>
+					<label class="rc-chip"><input type="radio" name="materials" value="ni"> <b>Ni</b> <?php esc_html_e( 'Nickel Wire', 'reservechain' ); ?></label>
+					<label class="rc-chip"><input type="radio" name="materials" value="both" checked> <?php esc_html_e( 'Both', 'reservechain' ); ?></label>
+					<label class="rc-chip"><input type="radio" name="materials" value="future"> <?php esc_html_e( 'Future asset programs', 'reservechain' ); ?></label>
 				</fieldset>
+				<fieldset class="rc-field rc-field--inline rc-field--wide"><legend><?php esc_html_e( 'I am also interested as', 'reservechain' ); ?></legend>
+					<label class="rc-chip"><input type="checkbox" name="buyer_interest" value="1"> <?php esc_html_e( 'Industrial buyer', 'reservechain' ); ?></label>
+					<label class="rc-chip"><input type="checkbox" name="owner_interest" value="1"> <?php esc_html_e( 'Asset owner / originator', 'reservechain' ); ?></label>
+				</fieldset>
+				<label class="rc-field"><span><?php esc_html_e( 'Approximate interest range (indicative, non-binding)', 'reservechain' ); ?></span>
+					<select name="interest_range"><?php foreach ( Waitlist::RANGES as $k => $l ) : ?><option value="<?php echo esc_attr( $k ); ?>"><?php echo esc_html( __( $l, 'reservechain' ) ); // phpcs:ignore ?></option><?php endforeach; ?></select>
+				</label>
+				<label class="rc-field"><span><?php esc_html_e( 'Intended participation type', 'reservechain' ); ?></span>
+					<select name="participation_type"><?php foreach ( Waitlist::PARTICIPATION as $k => $l ) : ?><option value="<?php echo esc_attr( $k ); ?>"><?php echo esc_html( __( $l, 'reservechain' ) ); // phpcs:ignore ?></option><?php endforeach; ?></select>
+				</label>
+				<?php if ( Settings::module_on( 'waitlist_nationality' ) ) : ?>
+					<label class="rc-field"><span><?php esc_html_e( 'Nationality', 'reservechain' ); ?></span><select name="nationality"><option value=""><?php esc_html_e( 'Select…', 'reservechain' ); ?></option><?php foreach ( Schema::countries() as $code => $cname ) : ?><option value="<?php echo esc_attr( $code ); ?>"><?php echo esc_html( $cname ); ?></option><?php endforeach; ?></select></label>
+					<label class="rc-field"><span><?php esc_html_e( 'Current location', 'reservechain' ); ?></span><select name="current_location"><option value=""><?php esc_html_e( 'Select…', 'reservechain' ); ?></option><?php foreach ( Schema::countries() as $code => $cname ) : ?><option value="<?php echo esc_attr( $code ); ?>"><?php echo esc_html( $cname ); ?></option><?php endforeach; ?></select></label>
+				<?php endif; ?>
 			</div>
 
 			<div class="rc-alert rc-alert--warn rc-restricted-note" hidden role="alert"></div>
@@ -286,11 +302,13 @@ final class Shortcodes {
 				<p><?php echo esc_html( I18n::t( Settings::get( 'disclosure' ) ) ); ?></p>
 				<p><?php echo esc_html( I18n::t( Settings::get( 'eu_notice' ) ) ); ?></p>
 			</div>
+			<label class="rc-check"><input type="checkbox" name="consent_updates" value="1"> <?php esc_html_e( 'I consent to receive project-development updates and future eligibility information by email. I can withdraw consent at any time.', 'reservechain' ); ?></label>
 			<label class="rc-check"><input type="checkbox" name="consent_disclosure" value="1" required> <?php esc_html_e( 'I have read and understood the notice above. I understand that registering interest is not an investment, purchase, reservation or allocation of any kind.', 'reservechain' ); ?> *</label>
 			<label class="rc-check"><input type="checkbox" name="consent_privacy" value="1" required> <?php printf( wp_kses( __( 'I agree to the processing of my data as described in the <a href="%s">Privacy Notice</a>.', 'reservechain' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( home_url( '/legal/privacy/' ) ) ); ?> *</label>
 
 			<div class="rc-hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
 			<input type="hidden" name="ts" value="<?php echo esc_attr( (string) time() ); ?>">
+			<input type="hidden" name="campaign_source" value="" data-rc-campaign>
 			<input type="hidden" name="language" value="<?php echo esc_attr( I18n::lang() ); ?>">
 			<button class="rc-btn rc-btn--primary" type="submit"><?php esc_html_e( 'Register interest', 'reservechain' ); ?></button>
 			<p class="rc-form__fine"><?php esc_html_e( 'We use double opt-in. Your consent record stores a fingerprint of the exact notice you acknowledged.', 'reservechain' ); ?></p>
@@ -310,12 +328,26 @@ final class Shortcodes {
 				<label class="rc-field"><span><?php esc_html_e( 'Email address', 'reservechain' ); ?> *</span><input type="email" name="email" autocomplete="email" required></label>
 				<label class="rc-field"><span><?php esc_html_e( 'Topic', 'reservechain' ); ?></span>
 					<select name="topic">
-						<option value="general"><?php esc_html_e( 'General enquiry', 'reservechain' ); ?></option>
-						<option value="enterprise"><?php esc_html_e( 'Enterprise services', 'reservechain' ); ?></option>
-						<option value="supply"><?php esc_html_e( 'Producers & supply partners', 'reservechain' ); ?></option>
-						<option value="custody"><?php esc_html_e( 'Custody, laboratory & insurance partners', 'reservechain' ); ?></option>
-						<option value="media"><?php esc_html_e( 'Media', 'reservechain' ); ?></option>
-						<option value="security"><?php esc_html_e( 'Security disclosure', 'reservechain' ); ?></option>
+						<?php
+						$topics = array(
+							'general'      => __( 'General enquiry', 'reservechain' ),
+							'supply'       => __( 'Asset owners & originators', 'reservechain' ),
+							'buyers'       => __( 'Industrial buyers', 'reservechain' ),
+							'institutions' => __( 'Institutions & strategic partners', 'reservechain' ),
+							'enterprise'   => __( 'Enterprise tokenization services', 'reservechain' ),
+							'licensing'    => __( 'Technology licensing & white-label', 'reservechain' ),
+							'participation' => __( 'Early Participation questions', 'reservechain' ),
+							'custody'      => __( 'Custody, laboratory & insurance partners', 'reservechain' ),
+							'compliance'   => __( 'Compliance', 'reservechain' ),
+							'media'        => __( 'Media', 'reservechain' ),
+							'support'      => __( 'Support', 'reservechain' ),
+							'security'     => __( 'Security / fraud report', 'reservechain' ),
+						);
+						$current = sanitize_key( $_GET['topic'] ?? 'general' ); // phpcs:ignore
+						foreach ( $topics as $k => $l ) {
+							printf( '<option value="%s"%s>%s</option>', esc_attr( $k ), selected( $current, $k, false ), esc_html( $l ) );
+						}
+						?>
 					</select>
 				</label>
 				<label class="rc-field"><span><?php esc_html_e( 'Subject', 'reservechain' ); ?></span><input name="subject" maxlength="150"></label>

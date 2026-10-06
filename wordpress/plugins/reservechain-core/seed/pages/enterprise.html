@@ -1,0 +1,119 @@
+<!--
+title: Enterprise Services
+excerpt: The ReserveChain infrastructure, offered module by module to organisations that need to identify, evidence, control and digitally represent physical assets. Services are in development and offered for discussion only.
+kicker: Enterprise · Infrastructure modules · In development
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">What enterprise means here</p>
+        <h2>The same infrastructure, <em>for your assets</em></h2>
+      </div>
+      <p class="rc-lead">ReserveChain is being built first for its own copper and nickel programs. The registry, passport, evidence, compliance and issuance-control layers are designed as separable modules, so that asset owners, processors and institutions could later use them for their own physical assets. No enterprise service is live; discussions are welcome.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 1000 300" role="img" aria-labelledby="ent-t ent-d" font-family="Inter Tight, sans-serif">
+        <title id="ent-t">Enterprise module stack</title>
+        <desc id="ent-d">Four layers. Access layer: portals and APIs. Control layer: compliance, tokenization controls, reserve engine. Evidence layer: registry, Digital Asset Passports, verification and custody integrations. Physical layer: client assets.</desc>
+        <g stroke-width="1.5" fill="#0B1621">
+          <rect x="10" y="10" width="980" height="60" rx="10" stroke="#D5B167"/>
+          <rect x="10" y="82" width="980" height="60" rx="10" stroke="#A9BBC8"/>
+          <rect x="10" y="154" width="980" height="60" rx="10" stroke="#A9BBC8"/>
+          <rect x="10" y="226" width="980" height="60" rx="10" stroke="#C9773F"/>
+        </g>
+        <g fill="#D5B167" font-size="11" font-family="IBM Plex Mono, monospace">
+          <text x="28" y="45">ACCESS</text><text x="28" y="117">CONTROL</text><text x="28" y="189">EVIDENCE</text><text x="28" y="261">PHYSICAL</text>
+        </g>
+        <g fill="#E7EBEE" font-size="14">
+          <text x="150" y="45">Enterprise portal · Asset-owner portal · Participant portal · REST APIs · Reporting</text>
+          <text x="150" y="117">Compliance registry · Issuance and transfer rules · Reserve engine · Reconciliation</text>
+          <text x="150" y="189">Asset registry · Digital Asset Passports · Verification integrations · Custody integrations</text>
+          <text x="150" y="261">Client lots, batches, containers and coils, with laboratory and ownership documents</text>
+        </g>
+      </svg>
+      <figcaption>Each layer can be engaged separately. Every record in the evidence layer carries a claim status and a document fingerprint.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Module catalogue</p>
+      <h2>Thirteen modules, <em>status shown honestly</em></h2>
+      <p class="rc-lead">"In development" means software exists and is being tested on ReserveChain's own programs. "Proposed" means a defined scope without delivered software.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Onboarding</h3><p>Structured intake of asset, ownership, location and documentation, with due-diligence checklists.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Registry</h3><p>Separate records for program, material, lot, container, coil, laboratory report, valuation and custody location.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Digital Asset Passports</h3><p>Per-unit passports with QR access, lifecycle timeline, evidence ledger and Merkle root.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Verification integrations</h3><p>Intake of laboratory and inspection results, with SHA-256 fingerprints and field-level claim status.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Custody integrations</h3><p>Custody location, chain-of-custody events and release controls linked to registry units.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Compliance</h3><p>Jurisdiction rules, KYC/KYB outcome storage and an on-chain eligibility mirror without personal data.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">07</span><h3>Tokenization controls</h3><p>Role-based issuance, pausing and burn, with transfer checks against the compliance registry. Testnet only.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">08</span><h3>Reserve engine</h3><p>Attestations of eligible units that cap issuance; with no approved ratio, issuance is disabled.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">09</span><h3>Reporting</h3><p>Declared-versus-verified reserve views and an exportable, hash-chained audit trail.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">10</span><h3>APIs</h3><p>Read-only public endpoints for programs, passports and document verification; authenticated account endpoints.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">11</span><h3>Portals</h3><p>Enterprise, asset-owner and participant portals, built and kept inactive until authorised.</p><div class="rc-card__foot">[rc_status s="in_development" label="Built · inactive"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">12</span><h3>Customisation</h3><p>Asset-class schemas, document types, workflow states and languages configured per client.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">13</span><h3>Managed services</h3><p>Operation of the registry and evidence workflow on a client's behalf, under agreed controls.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Who it is for</p>
+      <h2>Three enterprise routes</h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/enterprise/tokenization-services/" data-reveal><span class="rc-card__num">A</span><h3>Enterprise Tokenization Services</h3><p>For organisations that want a governed digital representation of physical inventory, built on ReserveChain's infrastructure.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/licensing-white-label/" data-reveal><span class="rc-card__num">B</span><h3>Technology Licensing &amp; White-Label</h3><p>For platforms and institutions that want to run the modules under their own brand and governance.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/asset-owners/" data-reveal><span class="rc-card__num">C</span><h3>Asset Owners &amp; Originators</h3><p>For producers and holders who want their material considered for a ReserveChain program.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/industrial-buyers/" data-reveal><span class="rc-card__num">D</span><h3>Industrial Buyers</h3><p>For manufacturers and processors interested in documented ultra-high-purity materials.</p></a>
+      <a class="rc-card rc-card--link" href="/platform/infrastructure/" data-reveal><span class="rc-card__num">E</span><h3>Platform Infrastructure</h3><p>The architecture behind every module.</p></a>
+      <a class="rc-card rc-card--link" href="/platform/security/" data-reveal><span class="rc-card__num">F</span><h3>Security</h3><p>Access control, MFA, audit and key-management design.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Engagement path</p>
+      <h2>How an enterprise discussion <em>would proceed</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Enquiry</h3><p>Describe your asset class, volumes in general terms and objectives through the contact form.</p></div>[rc_status s="in_development" label="Open"]</li>
+      <li><div><h3>Scoping</h3><p>Identify which modules apply, what evidence exists and which jurisdictions are involved.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Due diligence, both ways</h3><p>KYB on your organisation; your review of our controls and documentation.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Pilot on a defined scope</h3><p>A limited set of records, run on test infrastructure, with agreed acceptance criteria.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Contract and onboarding</h3><p>Only after the Swiss corporate structure and legal framework are in place.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Portals</p>
+      <h2>Built for enterprise users, <em>not yet switched on</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="enterprise_portal" title="Enterprise client portal"]</div>
+      <div data-reveal>[rc_module module="asset_owner_portal" title="Asset-owner portal"]</div>
+    </div>
+    <div class="rc-callout"><p>No enterprise client, partner, custodian or laboratory relationship is claimed on this website. Any confirmed relationship would be shown only after written authorisation.</p></div>
+    <div class="rc-cta">
+      <div><h2>Discuss an enterprise requirement</h2><p>Tell us what you hold, what you need to prove and to whom.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contact ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/enterprise/licensing-white-label/">Technology Licensing</a>
+        <a class="rc-btn" href="/platform/how-it-works/">How ReserveChain Works</a>
+      </div>
+    </div>
+  </div>
+</section>

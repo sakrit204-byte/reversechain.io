@@ -1,0 +1,133 @@
+<!--
+title: All Real-World Asset Programs
+excerpt: The master directory of ReserveChain asset programs. Each entry shows its record structure, its unit of control and a status badge for every claim. Active programs and future categories sit in separate lists.
+kicker: Program directory
+order: 1
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_provisional]
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Directory · current programs</p>
+        <h2>Two programs in development. <em>Zero issued.</em></h2>
+      </div>
+      <p class="rc-lead">An asset program groups one kind of physical material under one set of rules: how it is identified, verified, held, valued and, if approved, represented by a token series. Two programs exist today. Neither has an issued token or an approved availability.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Program ID</th><th>Program</th><th>Unit of control</th><th>Lots</th><th>Evidence on file</th><th>Program status</th><th>Token series</th></tr></thead>
+        <tbody>
+          <tr><td class="rc-mono"><a href="/assets/industrial-metals/copper-powder/">copper-powder</a></td><td><span class="rc-cu">Cu</span> Ultra-High-Purity Copper Powder – 99.9999 %*</td><td>Container (box)</td><td><a href="/passport/RC-CU-LOT-000001/">#03-K-07</a></td><td>IGAS CoA 0004512 (owner-supplied)</td><td>[rc_status s="in_development"]</td><td>[rc_status s="pending" label="Not issued"]</td></tr>
+          <tr><td class="rc-mono"><a href="/assets/industrial-metals/nickel-wire/">nickel-wire</a></td><td><span class="rc-ni">Ni</span> High-Purity Nickel Wire – 99.9807 %*</td><td>Coil (bobbin)</td><td><a href="/passport/RC-NI-LOT-000001/">120/NP1</a></td><td>IGAS CoA 0004368 (owner-supplied)</td><td>[rc_status s="in_development"]</td><td>[rc_status s="pending" label="Not issued"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">* Owner-supplied purity, subject to documentary verification. The live counts below come from the registry.</p>
+    [rc_registry_stats]
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Status vocabulary</p>
+      <h2>What each badge <em>means, and does not mean</em></h2>
+      <p class="rc-lead">Programs and passports use the same small set of statuses. Labels such as Verified, Certified, In Custody, Tokenized, Available or Redeemable appear only after the status has been authorised. None has been authorised.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Proposed</strong>[rc_status s="proposed"]<small>Designed and described. No implementation or approval yet.</small></div>
+      <div><strong>In development</strong>[rc_status s="in_development"]<small>Being built or assembled, for example registry records and passports.</small></div>
+      <div><strong>Pending verification</strong>[rc_status s="pending_verification"]<small>Evidence has been supplied, for example an owner-supplied certificate, but has not been independently confirmed.</small></div>
+      <div><strong>Pending</strong>[rc_status s="pending"]<small>No evidence supplied yet. The field stays empty rather than estimated.</small></div>
+      <div><strong>Not applicable</strong>[rc_status s="not_applicable"]<small>The field does not apply to this asset class or unit.</small></div>
+      <div><strong>Future category · pre-launch</strong>[rc_status s="proposed" label="Future category · pre-launch"]<small>A concept only. Excluded from every count, total and reserve figure.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Anatomy of a program record</p>
+        <h2>Separate records, <em>linked by identifiers</em></h2>
+      </div>
+      <p class="rc-lead">A program is not one database row. It is a tree of separate record types, each with its own evidence and its own status, so a claim about one box or one bobbin never depends on the whole lot.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <div class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Program</h3><p>Material category, rules, unit of control and a configurable token-series link.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Lot or batch</h3><p>Batch number, laboratory report, declared and tested quantities, and the purity basis.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Container or coil</h3><p>Unit identifier, seal number, net weight, location, and its own redemption status.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Evidence records</h3><p>Ownership, laboratory, custody, valuation and insurance records, each fingerprinted.</p></div>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Field group</th><th>Examples</th><th>Publication rule</th></tr></thead>
+        <tbody>
+          <tr><td>Identity and status</td><td>Program ID, lot/unit ID, and verification, custody, reserve, tokenization and redemption status</td><td>Public once the record is approved</td></tr>
+          <tr><td>Product and origin</td><td>Material form, producer, country of origin, production date</td><td>Shown as Pending until evidenced</td></tr>
+          <tr><td>Quantities and packaging</td><td>Gross and net weight, number of units, packaging, seal numbers</td><td>Declared and verified figures shown separately</td></tr>
+          <tr><td>Valuation</td><td>Price per kg, methodology, benchmark, valuer, currency</td><td>Unpublished until an independent valuation is approved</td></tr>
+          <tr><td>Commercial</td><td>Acquisition cost, introduction value, spread</td><td>Restricted. Never public.</td></tr>
+          <tr><td>Media and history</td><td>Gallery, usage rights, material events, version history</td><td>Every change recorded in the tamper-evident audit trail</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Template preview</p>
+      <h2>What a complete record <em>will look like</em></h2>
+      <p>The Illustrative Industrial Metal Asset Template shows the future format of a program record. It is used for demonstration only. Every field is Pending, tokenization reads "Not issued" and availability reads "Not offered for sale".</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--sm" href="/passport/RC-LOT-000001/">Open the template passport</a></div>
+    </div>
+    <div class="rc-card">
+      <span class="rc-demo-badge">Illustrative / demo data</span>
+      <h3>Illustrative Industrial Metal Asset Template</h3>
+      <p class="rc-fine">"This presentation demonstrates the future format of a ReserveChain industrial-metal asset page. No verified material, ownership document, laboratory report, valuation, custody arrangement, reserve claim or token is represented by this placeholder."</p>
+      <dl class="rc-kv">
+        <div><dt>Material · Purity · Lot</dt><dd>Pending</dd></div>
+        <div><dt>Ownership · Valuation · Custody</dt><dd>Pending</dd></div>
+        <div><dt>Tokenization status</dt><dd>Not issued</dd></div>
+        <div><dt>Availability</dt><dd>Not offered for sale</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Directory · future categories</p>
+      <h2>Listed apart, <em>never totalled</em></h2>
+      <p class="rc-lead">These categories have no program ID, no lot, no passport and no status beyond "pre-launch". They are excluded from every directory count above.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Category</th><th>Program ID</th><th>Records</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Precious Metals</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+          <tr><td>Gemstones</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+          <tr><td>Energy Assets</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+          <tr><td>Real Estate</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+          <tr><td>Art &amp; Collectibles</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+          <tr><td>Other Assets</td><td>None</td><td>None</td><td>[rc_status s="proposed" label="Future category · pre-launch"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div><h2>Go from directory <em>to evidence</em></h2><p>Each program page follows the same 22-block template, from specification to redemption.</p></div>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/initial-programs/">View Initial Programs</a><a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">How ReserveChain Works</a><a class="rc-btn" href="/enterprise/asset-owners/">Submit an Asset</a></div>
+    </div>
+  </div>
+</section>

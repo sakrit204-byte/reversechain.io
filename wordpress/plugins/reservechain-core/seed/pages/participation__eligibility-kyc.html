@@ -1,0 +1,155 @@
+<!--
+title: Eligibility & KYC
+excerpt: The proposed eligibility framework for any future participation: who may qualify, which identity, business, AML and sanctions checks apply, what documents are expected, and how each decision is recorded.
+kicker: Participation · Compliance · Proposed framework
+order: 4
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">How eligibility works</p>
+        <h2>Every check must pass, <em>every time</em></h2>
+      </div>
+      <p class="rc-lead">Eligibility is the product of several independent checks. A single failed or expired check blocks access. ReserveChain does not verify identities itself: outcomes will come from an external KYC/KYB and screening provider, which has not yet been selected. Token issuance remains inactive until formally launched, so no check below grants any right today.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">IND</span>
+        <h3>Individuals</h3>
+        <ul class="rc-checks">
+          <li>Adult with full legal capacity</li>
+          <li>Resident in, and located in, a permitted jurisdiction</li>
+          <li>KYC approved (identity, address, liveness)</li>
+          <li>AML, sanctions and PEP screening clear, or EDD satisfied</li>
+          <li>Source of funds explained; source of wealth where required</li>
+          <li>Professional or qualified-participant status where the final structure requires it</li>
+        </ul>
+        <div class="rc-card__foot">Required checks: KYC · AML · Sanctions/PEP · KYB not applicable</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">ORG</span>
+        <h3>Companies and institutions</h3>
+        <ul class="rc-checks">
+          <li>Duly incorporated and in good standing</li>
+          <li>Registered in, and operating from, a permitted jurisdiction</li>
+          <li>KYB approved, including ultimate beneficial owners</li>
+          <li>Directors, controllers and authorised signatories screened</li>
+          <li>Ownership structure transparent; no unexplained layering</li>
+          <li>Institutional or professional classification where required</li>
+        </ul>
+        <div class="rc-card__foot">Required checks: KYB · AML · Sanctions/PEP · KYC not applicable at entity level</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Check catalogue</p>
+      <h2>What each check is <em>designed to establish</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Check</th><th>Purpose</th><th>Typical evidence</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>KYC</td><td>Confirm a natural person's identity and residence</td><td>Government photo ID, liveness check, proof of address</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>KYB</td><td>Confirm an organisation exists and who controls it</td><td>Registry extract, constitutional documents, UBO declaration, director list, signatory authority</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>AML screening</td><td>Identify money-laundering and terrorist-financing risk indicators</td><td>Provider risk score, adverse-media results</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Sanctions and PEP</td><td>Detect designated persons and politically exposed persons, including relatives and close associates</td><td>Screening against applicable lists, with ongoing re-screening</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Source of funds (SoF)</td><td>Show where the money for a specific participation comes from</td><td>Bank statements, sale or salary documents, corporate accounts</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Source of wealth (SoW)</td><td>Explain how overall wealth was accumulated, where risk requires it</td><td>Narrative with supporting documents</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Enhanced due diligence (EDD)</td><td>Additional review for higher-risk profiles, PEPs or complex structures</td><td>Senior compliance sign-off, additional documents, interview where appropriate</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Final document lists, thresholds and risk-scoring rules will be set with the selected provider and legal counsel.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Approval states</p>
+      <h2>Five states, <em>shown identically everywhere</em></h2>
+      <p class="rc-lead">The same five states are used in the participant portal, the mobile app, the API and the compliance back office. Each check (KYC, KYB, AML, sanctions/PEP) carries its own state.</p>
+    </div>
+    <div class="rc-claims" data-reveal>
+      <div><strong>Not started</strong>[rc_status s="not_applicable" label="Not started"]<small>No submission has been made for this check.</small></div>
+      <div><strong>Pending</strong>[rc_status s="pending" label="Pending"]<small>Submitted and under review by the provider or the compliance team.</small></div>
+      <div><strong>Approved</strong>[rc_status s="eligible" label="Approved"]<small>The check has passed. Approval may carry an expiry and can be withdrawn after re-screening.</small></div>
+      <div><strong>Rejected</strong>[rc_status s="restricted" label="Rejected"]<small>The check has failed. The reason may not always be disclosed where law prohibits it.</small></div>
+      <div><strong>Not applicable</strong>[rc_status s="not_applicable"]<small>The check does not apply to this account type (for example, KYB for an individual).</small></div>
+    </div>
+    <div class="rc-callout"><p>Overall eligibility is shown as <strong>restricted</strong>, <strong>incomplete</strong> or <strong>eligible, subject to final approval</strong>. Even the last state does not confer any right to participate in any future offering.</p></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Access restrictions</p>
+        <h2>What eligibility <em>controls</em></h2>
+        <ul class="rc-list">
+          <li>Restricted accounts can view public information and receive general updates only.</li>
+          <li>Program documents and the token-acquisition module would be visible only to approved accounts.</li>
+          <li>Tokens, if ever issued, could only move to addresses approved in the on-chain ComplianceRegistry.</li>
+          <li>Approvals can expire; an expired approval blocks transfers until renewed.</li>
+          <li>An account can be frozen on new sanctions or AML information, on-chain and off-chain at once.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="rc-kicker">Anti-nominee controls</p>
+        <h2>No participation <em>on someone else's behalf</em></h2>
+        <ul class="rc-list">
+          <li>Declaration that the participant acts for their own account</li>
+          <li>Funds must come from an account in the participant's own name</li>
+          <li>Wallet ownership checks before an address is approved</li>
+          <li>Detection of shared devices, addresses and payment sources across accounts</li>
+          <li>Related-account limits aggregated for program caps</li>
+          <li>Rejection and possible reporting where bypass is suspected</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Record-keeping</p>
+      <h2>Decisions you can <em>trace and test</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Outcome, not identity, on-chain</h3><p>The ComplianceRegistry stores only status, jurisdiction code, expiry and a frozen flag per address. No name, document or personal data is written to a blockchain.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Tamper-evident audit trail</h3><p>Every status change records who made it, when, the previous and new value and its source. Rows are hash-chained and cannot be edited or deleted through the admin.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Retention and privacy</h3><p>Identity documents would be held by the provider and the issuer under retention periods set by applicable AML law, as described in the <a href="/legal/privacy/">Privacy Policy</a>.</p></article>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="kyc_kyb" title="KYC / KYB screening"]</div>
+      <div data-reveal>[rc_module module="eligibility" title="Jurisdictional eligibility decisions"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-faq">
+      <h3>Eligibility questions</h3>
+      <details><summary>Can I start KYC now?</summary><div><p>No. The KYC/KYB module is built but inactive, and no provider has been selected. ReserveChain will never ask for identity documents by email, chat or social media.</p></div></details>
+      <details><summary>Does passing KYC mean I can participate?</summary><div><p>No. KYC is one of several conditions. Participation also requires an eligible jurisdiction, cleared screening, approved documentation and an activated program.</p></div></details>
+      <details><summary>I live outside the EU/EEA but hold an EU passport. Am I eligible?</summary><div><p>Residence, current location and, where legally required, nationality may all be relevant. The final rules are subject to legal review and will be set out in the definitive documents.</p></div></details>
+    </div>
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Check the jurisdiction rules next</h2><p>Eligibility starts with where you live and where you are.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/restricted-jurisdictions/">Check Eligibility</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn" href="/legal/">View Documents</a>
+      </div>
+    </div>
+  </div>
+</section>

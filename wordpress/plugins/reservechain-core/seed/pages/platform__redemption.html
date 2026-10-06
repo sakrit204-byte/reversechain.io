@@ -1,0 +1,142 @@
+<!--
+title: Proposed Physical Redemption Framework
+excerpt: From digital position to physical asset delivery. This page sets out the proposed seven-stage process by which an eligible holder could exchange tokens for a specific container or bobbin. Tokens are escrowed and burned before any metal leaves custody. Physical redemption is not currently available.
+kicker: Platform · Proposed framework · Redemption
+order: 11
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Scope of this page</p>
+        <h2>Redemption is the test <em>of the whole chain</em></h2>
+        <p class="rc-lead">This page describes a proposed physical-redemption framework, subject to final legal, contractual, technical and operational confirmation. No tokens have been issued, so nothing can be redeemed. The redemption module and its contract are built but disabled.</p>
+        <p>Every earlier link exists so that this one can work. A redemption names a specific unit. That unit has a passport, the passport has evidence, and the custodian holds the unit under a receipt.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>RedemptionManager contract (escrow → burn)</strong>[rc_status s="in_development" label="Testnet, disabled"]<small>Thresholds unset. Requests cannot be opened.</small></div>
+        <div><strong>Redemption request records and portal flow</strong>[rc_status s="in_development"]<small>Built behind a locked module.</small></div>
+        <div><strong>Custodian release and logistics</strong>[rc_status s="proposed"]<small>No custodian or logistics provider has been appointed.</small></div>
+        <div><strong>Redemption terms, fees and thresholds</strong>[rc_status s="proposed" label="To be determined"]<small>These will be published only once approved.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">The process</p>
+      <h2>Seven stages, <em>one irreversible order</em></h2>
+      <p class="rc-lead">The sequence is fixed: escrow, then approval, then burn, then release. Metal never leaves custody against tokens that still exist, and tokens are never burned for a unit that has not been confirmed.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Redemption request</h3><p>The holder opens a request in the portal. They select the program and either name the specific container or bobbin or let the system allocate one, and they choose delivery or collection. Their tokens move into escrow in RedemptionManager.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Eligibility</h3><p>Compliance confirms that the holder's KYC/KYB is current, that the jurisdiction is permitted for physical delivery, that sanctions screening is clear, and that the request meets the program's thresholds once they are set.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verification</h3><p>The selected unit is confirmed against its passport: seal intact, weight within tolerance, unencumbered and not allocated to another request. A failed check reopens the selection.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Settlement and burn</h3><p>An operator approves the request. The escrowed tokens are burned on-chain and a fulfilment reference is recorded. Applicable fees are settled under the approved terms.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Custody release</h3><p>The custodian receives a dual-approved release order that cites the burn transaction, then releases the unit with its seal and documentation.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Logistics or collection</h3><p>The unit is packed to the material's handling requirements, with customs and transport documents where needed. It is delivered or collected against identity confirmation.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Completion</h3><p>Receipt is confirmed. The passport moves to "Released" with its full history, and reserve and supply figures update after reconciliation.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Exits from the process</p>
+      <h2>What happens <em>when a request stops</em></h2>
+      <p class="rc-lead">A redemption framework is judged by its failure paths as much as by its main path. Each one ends with the tokens or the unit in a known state.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Event</th><th>When</th><th>Tokens</th><th>Physical unit</th></tr></thead>
+        <tbody>
+          <tr><td>Holder cancels</td><td>Before approval</td><td>Released back from escrow to the holder</td><td>Stays in custody, unallocated</td></tr>
+          <tr><td>Eligibility refused</td><td>Stage 2</td><td>Released back from escrow; a reason hash is recorded on-chain</td><td>Stays in custody, unallocated</td></tr>
+          <tr><td>Unit fails verification</td><td>Stage 3</td><td>Remain in escrow while another unit is selected</td><td>Flagged; re-verification and an exception opened</td></tr>
+          <tr><td>Module paused</td><td>Any stage</td><td>New requests and approvals halt; rejections still release escrow</td><td>No release orders issued</td></tr>
+          <tr><td>Delivery incident</td><td>Stage 6</td><td>Already burned</td><td>Handled under the approved logistics and insurance terms</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Unit-level redemption</p>
+      <h2>A specific box. <em>A specific bobbin.</em></h2>
+      <p class="rc-lead">The redemption unit is set by the material's form, so that a holder receives a documented, sealed and traceable item rather than an anonymous quantity.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Cu 29</span>
+        <h3>Copper powder: container-level</h3>
+        <p>Powder sealed in glass ampoules and packed in cardboard boxes is redeemed by the container, which keeps the seal and the passport intact. Splitting ampoules out of a box is not proposed. The quantity per container is pending documentation.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-CU-CTN-000001/">Example: Box no. 20 passport →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Ni 28</span>
+        <h3>Nickel wire: bobbin-level</h3>
+        <p>Wire 0.025 mm in diameter cannot be cut and re-spooled without risk to its condition, so it is redeemed by the bobbin. Lot 120/NP1 comprises 30 bobbins, each with its own passport. Net weight per bobbin is pending.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-NI-COL-000008/">Example: Bobbin 8 passport →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Fees, thresholds and terms</p>
+        <h2>To be determined, <em>and published only when approved</em></h2>
+        <p class="rc-lead">We do not publish indicative fees, minimum quantities or delivery times. Any figure stated now would be invented. The items on the right are open and depend on custodian, logistics and legal arrangements.</p>
+      </div>
+      <dl class="rc-kv">
+        <div><dt>Minimum and maximum redemption</dt><dd>To be determined</dd></div>
+        <div><dt>Redemption fee</dt><dd>To be determined</dd></div>
+        <div><dt>Custody release and handling fee</dt><dd>To be determined</dd></div>
+        <div><dt>Delivery, insurance in transit, customs</dt><dd>To be determined</dd></div>
+        <div><dt>Collection location</dt><dd>To be confirmed</dd></div>
+        <div><dt>Eligible delivery jurisdictions</dt><dd>Subject to final legal review</dd></div>
+        <div><dt>Processing time</dt><dd>To be determined</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Redemption portal</p>
+        <h2>The request flow, <em>built and locked</em></h2>
+        <p class="rc-lead">The <a href="/portal/redemption/">Redemption Portal</a> shows the planned flow: eligible holdings, unit selection, compliance state, settlement status, custody release, delivery or collection, documents and history. Requests cannot be submitted until the module is activated by written authorization.</p>
+      </div>
+      <div>
+        [rc_module module="redemption" title="Physical-redemption requests"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>See the planned portal</h2>
+        <p>Review the redemption flow, or read how custody release is controlled.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/portal/redemption/">Access Portal</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/custody/">Explore Custody</a>
+        <a class="rc-btn" href="/enterprise/">Enterprise Services</a>
+      </div>
+    </div>
+  </div>
+</section>

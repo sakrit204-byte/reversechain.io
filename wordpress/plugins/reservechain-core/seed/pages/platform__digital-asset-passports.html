@@ -1,0 +1,145 @@
+<!--
+title: Digital Asset Passports
+excerpt: A persistent digital identity for every asset unit. Each passport is assembled from approved evidence records and sealed with a SHA-256 Merkle root. It can be opened by QR code or downloaded as machine-readable JSON, and anyone can check it independently.
+kicker: Platform · Digital identity · Live with owner-supplied data
+order: 8
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">What a passport is</p>
+        <h2>Not a page about an asset. <em>A record of one.</em></h2>
+      </div>
+      <p class="rc-lead">A Digital Asset Passport is generated, not written. Nobody edits a passport directly. It is assembled from the registry records for one specific lot, container or bobbin. A passport can therefore never state more than its evidence supports, and every statement in it can be traced to a document whose fingerprint you can check.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>One passport per controllable unit</h3><p>A passport exists for each lot, each container and each bobbin. The copper lot and its Box no. 20 each have their own passport. Each of the 30 nickel bobbins has one too.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Permanent identifier</h3><p>Identifiers follow the pattern <span class="rc-mono">RC-[metal]-[type]-[sequence]</span>, for example <span class="rc-mono">RC-NI-COL-000008</span>. An identifier is never reused, even after a unit is released or retired.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Parent and child links</h3><p>Lots link down to their containers or bobbins, and units link up to their lot and program. Evidence attached at lot level is visible from every child unit.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Contents</p>
+      <h2>Thirteen sections, <em>each backed by a record type</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Section</th><th>What it shows</th><th>Source record</th></tr></thead>
+        <tbody>
+          <tr><td>Identity</td><td>Passport number, unit type, program, parent lot, QR code</td><td>Lot / container / coil</td></tr>
+          <tr><td>Specifications</td><td>Material, form, purity and its basis, dimensions, packaging. Undocumented fields show "Pending".</td><td>Lot and program schema</td></tr>
+          <tr><td>Certificates</td><td>Certificate of Analysis, exact transcription, assay grid, original scan, fingerprint</td><td>Certificate of Analysis, laboratory</td></tr>
+          <tr><td>Provenance and source</td><td>Producer, origin, owner-supplied chain-of-title documents (restricted where required)</td><td>Custody / ownership</td></tr>
+          <tr><td>Verification</td><td>Source of the evidence (owner-supplied or independent), sampling, approval date</td><td>Certificate of Analysis, verification</td></tr>
+          <tr><td>Custody</td><td>Custody status, receipt, seal numbers, inspections</td><td>Custody</td></tr>
+          <tr><td>Valuation</td><td>Valuation status, date and methodology once approved for publication</td><td>Valuation</td></tr>
+          <tr><td>Reserve status</td><td>Declared, verified, eligible or allocated</td><td>Reserve report</td></tr>
+          <tr><td>Tokenization status</td><td>Linked token program, or "Not linked"</td><td>Token program</td></tr>
+          <tr><td>Blockchain references</td><td>Attestation and burn transaction references once they exist. None today.</td><td>Token program, redemption</td></tr>
+          <tr><td>History</td><td>Versioned lifecycle events and publication history</td><td>Workflow and audit trail</td></tr>
+          <tr><td>Documents</td><td>Every linked file, with its SHA-256 fingerprint and visibility</td><td>Document</td></tr>
+          <tr><td>Integrity</td><td>Merkle root and leaf count over the record and its documents</td><td>Computed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Merkle integrity</p>
+        <h2>One hash that <em>commits to everything</em></h2>
+        <p class="rc-lead">Each passport carries a SHA-256 Merkle root. Its leaves are a fingerprint of the passport's public fields plus the fingerprint of every linked document. Change a purity value, swap a certificate scan or remove a receipt, and the root changes.</p>
+        <p>The root is shown on the passport and included in the JSON export. Third parties can store it and compare it later. It is also a compact value suitable for anchoring on a public ledger.</p>
+      </div>
+      <figure class="rc-diagram">
+        <svg viewBox="0 0 520 300" role="img" aria-labelledby="rc-mk-title rc-mk-desc" font-family="Inter Tight, sans-serif">
+          <title id="rc-mk-title">Passport Merkle tree</title>
+          <desc id="rc-mk-desc">Four leaves (record fingerprint, Certificate of Analysis, scan, receipt) are hashed in pairs into two nodes, which are hashed into the Merkle root.</desc>
+          <rect x="170" y="16" width="180" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2.5"/>
+          <text x="260" y="43" fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">Merkle root</text>
+          <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5"><rect x="50" y="120" width="160" height="40" rx="8"/><rect x="310" y="120" width="160" height="40" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="12" text-anchor="middle"><text x="130" y="145">SHA-256(a ‖ b)</text><text x="390" y="145">SHA-256(c ‖ d)</text></g>
+          <g fill="#0E1620" stroke="#C9773F" stroke-width="1.5"><rect x="10" y="226" width="115" height="54" rx="8"/><rect x="135" y="226" width="115" height="54" rx="8"/><rect x="270" y="226" width="115" height="54" rx="8"/><rect x="395" y="226" width="115" height="54" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="11.5" text-anchor="middle"><text x="67" y="249">a · record</text><text x="67" y="266">fields</text><text x="192" y="249">b · CoA</text><text x="192" y="266">PDF</text><text x="327" y="249">c · original</text><text x="327" y="266">scan</text><text x="452" y="249">d · further</text><text x="452" y="266">documents</text></g>
+          <g stroke="#1C2A38" stroke-width="2" fill="none"><path d="M67 226 L130 160"/><path d="M192 226 L130 160"/><path d="M327 226 L390 160"/><path d="M452 226 L390 160"/><path d="M130 120 L260 60"/><path d="M390 120 L260 60"/></g>
+        </svg>
+        <figcaption>Leaves are de-duplicated and sorted before pairing, so the root does not depend on the order in which documents were attached. An odd leaf is paired with itself.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Access</p>
+      <h2>QR, web and <em>machine-readable JSON</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>QR access</h3><p>Each passport has a QR code that resolves to its permanent URL. In the proposed custody model, the code would be printed on the unit's label, so whoever handles a container can open its record.</p></article>
+      <article class="rc-card" data-reveal><h3>Downloadable evidence</h3><p>Add <span class="rc-mono">?format=json</span> to any passport URL to download the full passport: fields, lifecycle, document fingerprints and Merkle root. The same data is served at <span class="rc-mono">/rc/v1/passports/{no}</span>.</p></article>
+      <article class="rc-card" data-reveal><h3>Independent check</h3><p>Hash a document you hold with any SHA-256 tool, or use the <a href="/platform/verification/#verify">verification tool</a>, then compare the result with the fingerprint listed in the passport.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Live passports</p>
+        <h2>Open a <em>real record</em></h2>
+      </div>
+      <p class="rc-lead">These passports are live and hold owner-supplied evidence for the two initial programs. Their stages show "Pending" wherever independent evidence does not yet exist. That is accurate reporting, not missing work.</p>
+    </div>
+    [rc_passports limit="6"]
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/passport/RC-CU-LOT-000001/" data-reveal><span class="rc-card__num">Cu 29</span><h3>Copper Powder · Lot #03-K-07</h3><p>A lot-level passport with owner-supplied IGAS CoA 0004512, a 30-element assay grid and the 2000 kg declared net weight.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-NI-COL-000008/" data-reveal><span class="rc-card__num">Ni 28</span><h3>Nickel Wire · Bobbin 8</h3><p>One of the four bobbins sampled for owner-supplied IGAS CoA 0004368. It is a unit-level passport linked to Lot 120/NP1.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-LOT-000001/" data-reveal><span class="rc-card__num">Template</span><h3>Illustrative Industrial Metal Asset Template</h3><p>Shows the future format with every field Pending. It represents no material, document or token. <span class="rc-demo-badge">Illustrative / demo data</span></p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">History and versioning</p>
+        <h2>A passport <em>remembers</em></h2>
+        <p class="rc-lead">A passport's past states remain part of its record. Each publication is a version, each version passed four-eyes approval, and every transition is in the tamper-evident audit trail.</p>
+      </div>
+      <ul class="rc-checks">
+        <li>Replacing a document creates a new document version, and the passport root changes visibly.</li>
+        <li>Unpublished or archived passports are withdrawn, never hard-deleted.</li>
+        <li>Lifecycle stages record when evidence was added and who approved it.</li>
+        <li>Statuses such as "verified" or "in custody" appear only when a linked, approved record exists.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>See where passports come from</h2>
+        <p>Every passport is a view over the Industrial Metals Registry.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">View Asset Registry</a>
+        <a class="rc-btn rc-btn--cream" href="/assets/initial-programs/">View Initial Programs</a>
+        <a class="rc-btn" href="/platform/verification/">View Verification Process</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,145 @@
+<!--
+title: Proposed Tokenization Framework
+excerpt: Connecting verified physical assets to digital infrastructure. This page sets out how ERC-20 tokens could be issued, transferred, reconciled and retired against attested industrial-metal reserves. No token has been issued, and issuance remains inactive.
+kicker: Platform · Proposed framework · Tokenization · Testnet only
+order: 10
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Scope of this page</p>
+        <h2>The last link, <em>built to fail closed</em></h2>
+        <p class="rc-lead">This page describes a proposed tokenization framework, subject to final legal, contractual, technical and operational confirmation. ERC-20 tokens or asset-program token series may be issued under the final legal and corporate structure. That structure is in development, and token issuance is inactive.</p>
+        <p>No token exists. There is no token symbol, price, supply, ratio or contract address, and no secondary market is provided or implied. ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Smart-contract suite</strong>[rc_status s="in_development" label="Testnet only"]<small>Six contracts. Mainnet deployment is blocked by the tooling.</small></div>
+        <div><strong>Token parameters</strong>[rc_status s="proposed" label="Pending"]<small>Every economic parameter is unset by default.</small></div>
+        <div><strong>Token issuance</strong>[rc_status s="not_applicable" label="Inactive"]<small>Requires the final legal structure, offering documentation and written authorization.</small></div>
+        <div><strong>Legal linkage between token and metal</strong>[rc_status s="proposed"]<small>Subject to final legal review. No right to physical title is implied.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Preconditions</p>
+      <h2>Before a single unit <em>could be minted</em></h2>
+      <p class="rc-lead">Tokenization comes last because it depends on every link before it. The conditions below are cumulative, and each one is checked by a separate party or contract.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Asset onboarding</h3><p>The owner has passed KYB, the chain-of-title documents are approved and the unit has a registry identifier.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Asset eligibility</h3><p>The unit is independently verified, valued, held in custody under receipt, unencumbered and accepted into the program.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Asset identity</h3><p>An approved Digital Asset Passport with a current Merkle root exists for every unit to be allocated.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Legal and operational linkage</h3><p>Final offering documentation defines what a token represents, how it relates to the units in custody and under which law.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Reserve attestation</h3><p>An independent attestor's report hash and as-of date are posted to ReserveGuard, inside the staleness window.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Authorization</h3><p>The program's parameters are approved, and the issuance module is activated with a written authorization reference that is recorded in the audit trail.</p></div>[rc_status s="not_applicable" label="Inactive"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Issuance controls</p>
+      <h2>Minting is <em>blocked unless proven otherwise</em></h2>
+      <p class="rc-lead">ReserveToken refuses to mint unless one of two explicitly configured modes applies. If configuration is missing, nothing can be minted. A key holding the minter role can never mint an unlimited amount.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">A</span>
+        <h3>Reserve mode (intended)</h3>
+        <p>Every mint asks ReserveGuard for the maximum mintable amount: attested units × tokens-per-unit − current supply. The result is zero if the ratio is unset, the staleness window is unset or the latest attestation is out of date.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">B</span>
+        <h3>Static-cap mode (restricted)</h3>
+        <p>This mode applies only when the guard is disabled, a non-zero cap is set and minting has been explicitly enabled by the administrator. Supply can never exceed the cap. It is intended for testing, not for reserve-linked issuance.</p>
+      </article>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Control</th><th>Mechanism</th><th>Default</th></tr></thead>
+        <tbody>
+          <tr><td>Reserve ceiling</td><td>ReserveGuard <span class="rc-mono">maxMintable</span> checked on every mint</td><td>Zero (ratio unset)</td></tr>
+          <tr><td>Role separation</td><td>Separate minter, burner, pauser, attestor and administrator roles</td><td>Unassigned</td></tr>
+          <tr><td>Administrator change</td><td>Two steps with an enforced delay; multisig-compatible</td><td>Delay set at deployment</td></tr>
+          <tr><td>Emergency stop</td><td>Pause halts transfers, mints and burns</td><td>Available to the pauser role</td></tr>
+          <tr><td>Document binding</td><td>A token stores the program ID and a document URI plus hash</td><td>Unset</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Token lifecycle and transfer rules</p>
+      <h2>Every transfer <em>checked against eligibility</em></h2>
+      <p class="rc-lead">If tokens are ever issued, each transfer would be screened by the ComplianceRegistry. A transfer goes through only if both sender and recipient are eligible. A mint screens the recipient, and a burn screens the sender.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Approved</h3><p>The address holds an approved KYC/KYB decision, mirrored on-chain by a separately permissioned operator.</p></article>
+      <article class="rc-card" data-reveal><h3>Not frozen</h3><p>Compliance can freeze an individual address without pausing the whole program.</p></article>
+      <article class="rc-card" data-reveal><h3>Not expired</h3><p>Each approval carries an expiry, so screening that has lapsed stops transfers.</p></article>
+      <article class="rc-card" data-reveal><h3>Permitted jurisdiction</h3><p>Each address carries a jurisdiction code. Codes in the blocked set, which is seeded with EU/EEA codes, are refused.</p></article>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Issue</h3><p>Mint to an eligible recipient, within the reserve ceiling, after attestation.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Hold</h3><p>The token is held in an eligible wallet or in the role-controlled Treasury, which has daily limits and a timelock queue.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Transfer</h3><p>Transfers are permitted only between eligible addresses, and only when the final legal structure allows them.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Reconcile</h3><p>Supply is compared with eligible reserves and custodian statements on every change. An exception blocks further mints.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Retire or burn</h3><p>Tokens are burned on physical redemption, or retired if a unit leaves the program. The burned supply is published.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Token-program parameters</p>
+        <h2>Configurable, <em>never hard-coded</em></h2>
+      </div>
+      <p class="rc-lead">Supply, the token-to-kilogram ratio, the token-to-container or token-to-bobbin ratio, redemption thresholds and allocations are registry fields that move through Pending, Under Review, Approved and Published. Until approved, they show "Pending". The panel below reads the copper program's record live.</p>
+    </div>
+    [rc_token_params program="copper-powder"]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Participation</p>
+        <h2>Built, <em>and deliberately locked</em></h2>
+        <p class="rc-lead">The token-acquisition module exists so that its controls can be reviewed before anything is activated. It cannot accept funds, connect wallets or reserve tokens. Activation would require the final legal structure, definitive offering documentation, eligibility controls and written authorization.</p>
+        <p><a href="/participation/how-token-acquisition-will-work/">How token acquisition would work →</a></p>
+      </div>
+      <div>
+        [rc_module module="purchase" title="Token-acquisition module"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Register for development updates</h2>
+        <p>Joining the waitlist is not an investment, purchase, reservation or allocation. It only means you receive updates and future eligibility information.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn" href="/platform/redemption/">How Redemption Works</a>
+      </div>
+    </div>
+  </div>
+</section>

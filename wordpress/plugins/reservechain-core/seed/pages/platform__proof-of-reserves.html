@@ -1,0 +1,124 @@
+<!--
+title: Proposed Proof of Industrial Metal Reserves
+excerpt: Transparent, verifiable and reconciled. The reserve dashboard below is computed live from approved registry data. Owner-declared and independently verified quantities are kept apart, and the dashboard will not show a coverage ratio that the evidence cannot support.
+kicker: Platform · Proposed framework · Proof of Reserves
+order: 7
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Scope of this page</p>
+        <h2>A live dashboard <em>of a proposed framework</em></h2>
+        <p class="rc-lead">This page describes a proposed Proof-of-Reserves framework, subject to final legal, contractual, technical and operational confirmation. The dashboard is real software reading real registry records. Those records are currently owner-declared, and no independent reserve attestation has been issued.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Reserve computation from approved registry data</strong>[rc_status s="in_development"]<small>Live. Recomputed whenever a record is published.</small></div>
+        <div><strong>Independent reserve attestation</strong>[rc_status s="proposed" label="None issued"]<small>No attestor has been appointed and no attestation date exists.</small></div>
+        <div><strong>Token supply</strong>[rc_status s="not_applicable" label="Not issued"]<small>No tokens exist, so no coverage ratio can be computed.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Live reserve dashboard</p>
+      <h2>What the registry <em>holds right now</em></h2>
+      <p class="rc-lead">These figures are computed on request. They are never typed in. A figure that has not been independently verified is labelled "declared". When a value is missing, the dashboard says so and does not estimate it.</p>
+    </div>
+    [rc_por]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Methodology</p>
+      <h2>Five quantities, <em>never blended</em></h2>
+      <p class="rc-lead">Most reserve claims fail because different quantities are added together. The proposed methodology keeps five quantities separate. A unit moves from one to the next only when the evidence for that step is approved.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Quantity</th><th>Definition</th><th>Evidence required</th><th>Current state</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Declared</strong></td><td>Quantity stated by the owner or on an owner-supplied document</td><td>Owner documents, a registry record</td><td>[rc_status s="pending_verification" label="Owner-declared"]</td></tr>
+          <tr><td><strong>Verified</strong></td><td>Quantity and specification confirmed by independent inspection and testing</td><td>Approved verification record and certificate</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>In custody</strong></td><td>Verified units held by an appointed custodian under receipt</td><td>Warehouse receipt, custodian statement</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Eligible reserve</strong></td><td>In-custody units that are unencumbered, valued and accepted into a program</td><td>Valuation, encumbrance check, acceptance approval</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Allocated to tokens</strong></td><td>Eligible units linked to issued supply under the token program's ratio</td><td>Attestation posted to ReserveGuard; supply on-chain</td><td>[rc_status s="not_applicable" label="Not issued"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rc-callout">
+      <p><strong>Coverage</strong> is defined only as eligible reserve divided by the reserve required for the token supply, both measured in the program's unit. It is calculated only when both values exist and an attestation is current. In every other case the dashboard shows "Not applicable", never a percentage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Reconciliation</p>
+        <h2>Three ledgers <em>that must agree</em></h2>
+        <p class="rc-lead">Reconciliation compares the on-chain supply, the registry's unit records and the custodian's statement. Any difference blocks new minting until it is resolved.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Supply snapshot</h3><p>Issued, Treasury-held, escrowed, burned and redeemed supply is read from the contracts for each program.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Registry snapshot</h3><p>Units in custody, eligible and allocated are taken from approved records, down to container and bobbin.</p></div>[rc_status s="in_development"]</li>
+        <li><div><h3>Custodian statement</h3><p>The custodian's unit list and weights are matched to the registry unit by unit.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Attestation</h3><p>An independent attestor reviews the reconciliation. The report hash and an as-of date are posted to ReserveGuard, and the attestation goes stale after the configured window.</p></div>[rc_status s="proposed"]</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Exceptions and alerts</p>
+      <h2>Problems are <em>published, not smoothed over</em></h2>
+      <p class="rc-lead">The proposed framework treats an exception as reportable information. Open exceptions appear on the dashboard with the date opened and the units affected.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Count mismatch</h3><p>The custodian's units do not equal the registry's units in custody.</p></article>
+      <article class="rc-card" data-reveal><h3>Stale valuation</h3><p>A valuation has passed its review date, so the eligible reserve is reduced until it is renewed.</p></article>
+      <article class="rc-card" data-reveal><h3>Expiring document</h3><p>A receipt, insurance schedule or certificate is close to expiry or past it.</p></article>
+      <article class="rc-card" data-reveal><h3>Stale attestation</h3><p>The latest attestation is older than the staleness window, so ReserveGuard allows zero minting.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Reporting and history</p>
+      <h2>Reports you can <em>re-derive</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Public dashboard</h3><p>Totals by program and metal, with declared and verified quantities separated. It links to each unit's passport.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><h3>Reserve reports</h3><p>Versioned reserve-report records with a fingerprinted PDF, a reporting date and approval history. They are published through the same four-eyes workflow.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><h3>Institutional data room</h3><p>Unit-level reconciliation, custodian statements and attestation files for auditors and approved institutions.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+    <p class="rc-fine">Supporting documents and verification history are available on each unit's Digital Asset Passport. Uploaded information is never described as "independently verified" unless an actual attestation exists.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Trace a reserve figure to its evidence</h2>
+        <p>Each reserve figure leads back to a unit, a unit to its passport, and a passport to fingerprinted documents.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">View Asset Registry</a>
+        <a class="rc-btn rc-btn--cream" href="/passport/RC-CU-LOT-000001/">View Digital Asset Passport</a>
+        <a class="rc-btn" href="/platform/custody/">Explore Custody</a>
+      </div>
+    </div>
+  </div>
+</section>

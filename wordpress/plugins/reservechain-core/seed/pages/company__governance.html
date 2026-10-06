@@ -1,0 +1,240 @@
+<!--
+title: Governance
+excerpt: How decisions, content and records are controlled at ReserveChain during development: a four-eyes publication workflow bound to content fingerprints, evidence-gated asset records, separated roles, written authorization for sensitive modules, and a tamper-evident audit trail that the database itself refuses to alter.
+kicker: Company · Oversight and controls
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Governance framework</p>
+        <h2>Controls that run in software, <em>not only in policy</em></h2>
+      </div>
+      <p class="rc-lead">Formal corporate governance will follow the completion of the Swiss corporate and issuance structure. Until then, the controls that matter most for a pre-launch platform (who may publish what, on what evidence, and with what record) are already enforced by the platform itself.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <a class="rc-card rc-card--link" href="#corporate" data-reveal><span class="rc-card__num">01</span><h3>Corporate oversight</h3><p>Reserved decisions and written authorizations.</p></a>
+      <a class="rc-card rc-card--link" href="#platform" data-reveal><span class="rc-card__num">02</span><h3>Platform governance</h3><p>Four-eyes workflow and separated roles.</p></a>
+      <a class="rc-card rc-card--link" href="#assets" data-reveal><span class="rc-card__num">03</span><h3>Asset governance</h3><p>Evidence-gated records and exceptions.</p></a>
+      <a class="rc-card rc-card--link" href="#audit" data-reveal><span class="rc-card__num">04</span><h3>Audit trail</h3><p>Hash chain, triggers and on-chain anchoring.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint" id="corporate">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Corporate oversight</p>
+      <h2>No board is shown <em>until one exists</em></h2>
+      <p>Swiss corporate and issuance structure in development. Directors, officers and committee members will be disclosed only once appointed, verified and approved for publication. We do not display placeholder names, photographs or titles.</p>
+      [rc_module module="team_profiles" title="Confirmed team profiles"]
+    </div>
+    <div data-reveal>
+      <h3>Reserved matters (proposed)</h3>
+      <p class="rc-fine">Decisions that require explicit written authorization by the project owners and a separate deployment action. None can be triggered by a content edit or happen automatically.</p>
+      <div class="rc-claims">
+        <div><strong>Changing the website mode (e.g. Pre-Launch to Eligibility)</strong>[rc_status s="proposed" label="Written authorization"]</div>
+        <div><strong>Activating wallet, token-acquisition, holdings or redemption modules</strong>[rc_status s="proposed" label="Written authorization"]</div>
+        <div><strong>Approving token name, symbol, supply and parameters</strong>[rc_status s="proposed" label="Written authorization"]</div>
+        <div><strong>Publishing reserve figures or a Proof of Reserves attestation</strong>[rc_status s="proposed" label="Evidence + approval"]</div>
+        <div><strong>Any mainnet smart-contract deployment</strong>[rc_status s="proposed" label="Written authorization"]</div>
+        <div><strong>Naming a partner, custodian, laboratory or insurer</strong>[rc_status s="proposed" label="Executed agreement"]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark" id="platform">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Platform governance</p>
+      <h2>Four eyes on every record, <em>bound to its fingerprint</em></h2>
+      <p class="rc-lead">Pages, asset records, certificates, passports and documents follow one workflow. Drafts and items under review are never public, indexed or exposed through the API, and published records are unpublished or archived rather than deleted.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 960 250" role="img" aria-labelledby="wf-title wf-desc" font-family="Inter Tight, sans-serif">
+        <title id="wf-title">Publication workflow</title>
+        <desc id="wf-desc">Draft, Under Review, Approved, Published, Unpublished, Archived. Edits after approval return the item to review; changes requested return it to draft; unpublished items can be resubmitted; any item can be archived, never deleted.</desc>
+        <defs><marker id="wf-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D5B167"/></marker><marker id="wf-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C9773F"/></marker></defs>
+        <g fill="none" stroke-width="1.5">
+          <path d="M150 118 H173 M305 118 H328 M460 118 H483 M615 118 H638 M770 118 H793" stroke="#D5B167" marker-end="url(#wf-arr)"/>
+          <path d="M395 90 V58 H260 V88" stroke="#C9773F" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+          <path d="M220 146 V190 H85 V148" stroke="#C9773F" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+          <path d="M705 146 V215 H250 V148" stroke="#A9BBC8" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+        </g>
+        <g fill="#0A141F" stroke="#D5B167" stroke-width="1.2">
+          <rect x="20" y="90" width="130" height="56" rx="8"/>
+          <rect x="175" y="90" width="130" height="56" rx="8"/>
+          <rect x="330" y="90" width="130" height="56" rx="8"/>
+          <rect x="485" y="90" width="130" height="56" rx="8" stroke="#3FB37F"/>
+          <rect x="640" y="90" width="130" height="56" rx="8"/>
+          <rect x="795" y="90" width="130" height="56" rx="8" stroke="#A9BBC8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="14" font-weight="600" text-anchor="middle">
+          <text x="85" y="123">Draft</text>
+          <text x="240" y="123">Under Review</text>
+          <text x="395" y="123">Approved</text>
+          <text x="550" y="123">Published</text>
+          <text x="705" y="123">Unpublished</text>
+          <text x="860" y="123">Archived</text>
+        </g>
+        <g fill="#A9BBC8" font-size="11" text-anchor="middle">
+          <text x="328" y="50">edited after approval: fingerprint mismatch</text>
+          <text x="152" y="182">changes requested</text>
+          <text x="478" y="208">resubmitted for review</text>
+          <text x="395" y="166">approver ≠ submitter</text>
+          <text x="550" y="166">public, indexable</text>
+          <text x="860" y="80">from any state</text>
+          <text x="860" y="166">never deleted</text>
+        </g>
+      </svg>
+      <figcaption>Workflow as implemented in the CMS. The approver must differ from both the submitter and the last editor. Publishing re-checks that the content still matches the approved fingerprint.</figcaption>
+    </figure>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Approval bound to content</h3><p>Approval stores a SHA-256 fingerprint of the content and registry fields. Any later change, however small, invalidates approval and returns the item to review automatically.</p></article>
+      <article class="rc-card" data-reveal><h3>No back doors</h3><p>Direct publishing through the editor's publish button, the REST API or quick edit is intercepted and routed into review. Editors do not hold a publish capability.</p></article>
+      <article class="rc-card" data-reveal><h3>Every transition recorded</h3><p>Each step is appended to the item's history and to the tamper-evident audit trail, with user, time, action, previous and new state and the fingerprint.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Role separation</p>
+      <h2>Five roles, <em>no single point of approval</em></h2>
+    </div>
+    <div class="rc-table-wrap" data-reveal>
+      <table class="rc-table">
+        <thead><tr><th>Role</th><th>May</th><th>May not</th></tr></thead>
+        <tbody>
+          <tr><td>Content Editor</td><td>Draft pages and submit for review</td><td>Approve or publish anything</td></tr>
+          <tr><td>Registry Manager</td><td>Create and edit lots, containers, coils, certificates; submit</td><td>Approve its own submissions; publish</td></tr>
+          <tr><td>Reviewer</td><td>Approve or request changes; view the audit trail</td><td>Approve items it submitted or last edited</td></tr>
+          <tr><td>Compliance Officer</td><td>Approve, publish, unpublish, archive; manage compliance and waitlist</td><td>Bypass the fingerprint check or edit audit history</td></tr>
+          <tr><td>Auditor (read-only)</td><td>Read records and the audit trail</td><td>Change any record</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Staff accounts require multi-factor authentication. Role changes, logins, failed logins and setting changes are themselves written to the audit trail.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint" id="assets">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Asset governance</p>
+      <h2>A status is a claim. <em>Claims need evidence.</em></h2>
+      <p>Ownership, laboratory, custody, insurance and reserve claims remain unpublished until the supporting evidence has been supplied and approved. Every value in the registry carries a data-source reference; values without a source stay empty.</p>
+      <p><a href="/platform/asset-registry/">View Asset Registry →</a></p>
+    </div>
+    <ul class="rc-checks" data-reveal>
+      <li>Owner-supplied data is labelled as owner-supplied and subject to documentary verification.</li>
+      <li>Certificates are transcribed exactly and the original scan is fingerprinted and published alongside.</li>
+      <li>Status values come from restricted lists; confirmation states are intended to require attached evidence and a second approver.</li>
+      <li>Reconciliation is intended to detect and report inconsistencies, never to adjust them silently.</li>
+      <li>Future asset categories are never mixed into current program records or totals.</li>
+      <li>Illustrative content is always marked as illustrative or demo data.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <p class="rc-kicker">Conflicts management</p>
+        <h3>Disclose, separate, record</h3>
+        <ul class="rc-list">
+          <li>Relationships between ReserveChain and asset owners or originators are to be disclosed in program documentation.</li>
+          <li>Independent verification, valuation and custody are intended to be performed by parties unrelated to the asset owner.</li>
+          <li>Any commercial spread between acquisition cost, assessed value and introduction value is to be disclosed under approved methodology.</li>
+          <li>A conflicts register is proposed, maintained under the same audit trail.</li>
+        </ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <p class="rc-kicker">Security and compliance oversight</p>
+        <h3>Controls already in the build</h3>
+        <ul class="rc-list">
+          <li>Role-based access, MFA for staff, session expiry and login-attempt protection.</li>
+          <li>EU/EEA restriction logic and a KYC/KYB, AML and sanctions status model (provider pending).</li>
+          <li>Proposed issuer-controlled multisig for privileged smart-contract roles; no keys retained by developers.</li>
+          <li>Incident response and backup-restore runbooks, to be drilled before launch.</li>
+        </ul>
+        <div class="rc-card__foot">[rc_status s="in_development"] <a href="/platform/security/">Security →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Future committees (proposed)</p>
+      <h2>Oversight bodies <em>to be constituted</em></h2>
+      <p>Composition, mandates and reporting lines will be set within the final corporate structure. None of these bodies currently exists.</p>
+      <div class="rc-claims">
+        <div><strong>Asset Admission Committee</strong>[rc_status s="proposed"]<small>Approves new programs against admission gates.</small></div>
+        <div><strong>Reserve Oversight Committee</strong>[rc_status s="proposed"]<small>Reviews reconciliation results and exceptions.</small></div>
+        <div><strong>Risk and Audit Committee</strong>[rc_status s="proposed"]<small>Oversees audits, findings and remediation.</small></div>
+        <div><strong>Compliance Committee</strong>[rc_status s="proposed"]<small>Eligibility rules, jurisdiction lists and screening outcomes.</small></div>
+      </div>
+    </div>
+    <div data-reveal>
+      <h3>Policies</h3>
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead><tr><th>Policy</th><th>State</th></tr></thead>
+          <tbody>
+            <tr><td>Content, disclosure and publication policy</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td>Asset admission and evidence policy</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td>Conflicts of interest policy</td><td>[rc_status s="proposed"]</td></tr>
+            <tr><td>Information security and key management</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td><a href="/legal/privacy/">Privacy Policy</a></td><td>[rc_status s="in_development" label="Draft, pending counsel"]</td></tr>
+            <tr><td><a href="/legal/anti-fraud/">Anti-Fraud Notice</a></td><td>[rc_status s="in_development" label="Draft, pending counsel"]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark" id="audit">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Tamper-evident audit trail</p>
+      <h2>History that cannot be <em>quietly rewritten</em></h2>
+      <p class="rc-lead">Every workflow transition, document upload, registry change, login and setting change is appended to a single log. Four independent layers make any alteration detectable.</p>
+    </div>
+    <div class="rc-split">
+      <ol class="rc-steps">
+        <li><div><h3>Application</h3><p>No code path updates or deletes audit rows, and there is no admin screen to do so.</p></div>[rc_status s="provided" label="Active"]</li>
+        <li><div><h3>Database triggers</h3><p>BEFORE UPDATE and BEFORE DELETE triggers reject any change to the table, even from a direct database connection.</p></div>[rc_status s="provided" label="Active"]</li>
+        <li><div><h3>Hash chain</h3><p>Each row stores the SHA-256 hash of the previous row. Editing, inserting or removing any entry breaks every later hash, and the full-chain check reports it.</p></div>[rc_status s="provided" label="Active"]</li>
+        <li><div><h3>On-chain anchoring</h3><p>The chain head (sequence number and hash) can be written to a public blockchain through the AuditAnchor contract, so even a complete database rewrite would be detectable.</p></div>[rc_status s="in_development" label="Testnet"]</li>
+      </ol>
+      <div data-reveal>
+        <p class="rc-fine">Live status, read from the platform at page load:</p>
+        [rc_audit_status]
+        <p class="rc-fine">If triggers show as unavailable or the chain check fails, the result is shown here as it is. It is not hidden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Check a record yourself</h2>
+        <p>Hash any published document in your browser and compare it with the registry, or open a Digital Asset Passport to see its evidence ledger.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/verification/">View Verification Process</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/passport/RC-CU-LOT-000001/">View Digital Asset Passport</a>
+      </div>
+    </div>
+  </div>
+</section>

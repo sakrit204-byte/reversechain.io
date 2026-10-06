@@ -249,6 +249,7 @@ final class Passport {
 				'value'     => $empty ? null : $display,
 				'unit'      => $field['unit'] ?? null,
 				'type'      => $field['type'],
+				'scope'     => $field['scope'] ?? null,
 				'state'     => $empty ? 'pending' : 'provided',
 				'pending'   => $empty ? ( $field['pending'] ?? 'Not yet provided' ) : null,
 				'countable' => ! in_array( $field['type'], array( 'relation', 'relations' ), true ) && ! empty( $field['pending'] ),
@@ -376,7 +377,7 @@ final class Passport {
 
 	private static function children( int $post_id, $status ): array {
 		$out = array();
-		foreach ( array( 'batch' => array( 'rc_container' ), 'lot' => array( 'rc_batch', 'rc_coil' ) ) as $key => $types ) {
+		foreach ( array( 'batch' => array( 'rc_container' ), 'lot' => array( 'rc_batch', 'rc_coil', 'rc_container' ) ) as $key => $types ) {
 			$out = array_merge(
 				$out,
 				get_posts(
@@ -384,6 +385,8 @@ final class Passport {
 						'post_type'      => $types,
 						'post_status'    => $status,
 						'posts_per_page' => 100,
+						'orderby'        => 'title',
+						'order'          => 'ASC',
 						'meta_key'       => Schema::meta_key( $key ), // phpcs:ignore
 						'meta_value'     => $post_id, // phpcs:ignore
 					)

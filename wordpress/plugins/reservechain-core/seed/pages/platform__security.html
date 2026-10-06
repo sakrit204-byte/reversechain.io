@@ -1,0 +1,141 @@
+<!--
+title: Security
+excerpt: Security for real-world asset infrastructure, described as implemented and as planned. It covers role separation, multi-factor authentication, session discipline, a tamper-evident audit trail and multisig key management. We do not claim certifications.
+kicker: Platform · Security programme · In development
+order: 4
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Our position</p>
+        <h2>Controls you can inspect, <em>not badges you must trust</em></h2>
+        <p class="rc-lead">The platform is in development. Some of the controls below are implemented in code today. Others are designed and scheduled. Each is labelled accordingly.</p>
+      </div>
+      <div class="rc-callout">
+        <p><strong>No certification claims.</strong> ReserveChain does not hold, and does not claim, ISO 27001, SOC 2 or any other security certification or attestation. No external penetration test or smart-contract security review has been completed yet. Both are planned before any activation. If a third party presents a ReserveChain security certificate, it is not genuine. Report it through the <a href="/legal/anti-fraud/">Anti-Fraud Notice</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Identity and access management</p>
+      <h2>Six roles. <em>No one approves their own work.</em></h2>
+      <p class="rc-lead">Access is role-based and least-privilege. Editing, approval, publication, compliance and system administration are separate permissions held by separate people. Publishing anything public requires a second person: the approver must differ from both the submitter and the last editor.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Role</th><th>Can</th><th>Cannot</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Content editor</strong></td><td>Draft and edit website pages; upload media; submit for review</td><td>Edit registry records; approve; publish</td></tr>
+          <tr><td><strong>Registry manager</strong></td><td>Create and edit registry records and evidence; submit for review</td><td>Approve or publish their own records</td></tr>
+          <tr><td><strong>Reviewer</strong></td><td>Approve or request changes on submitted content; read the audit trail</td><td>Publish; manage compliance or settings</td></tr>
+          <tr><td><strong>Compliance officer</strong></td><td>Approve, publish, unpublish and archive; manage KYC/KYB, jurisdiction controls and the waitlist</td><td>Change platform settings or activate locked modules</td></tr>
+          <tr><td><strong>Auditor</strong></td><td>Read registry records, including restricted fields; verify the audit chain</td><td>Change anything</td></tr>
+          <tr><td><strong>Administrator</strong></td><td>Platform settings and modes; activate a locked module with a written authorization reference</td><td>Bypass four-eyes; edit or delete audit entries</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Application, sessions and portal</p>
+      <h2>Implemented <em>controls</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Multi-factor authentication</h3><p>Time-based one-time passwords (RFC 6238) with replay protection and single-use recovery codes, which are stored hashed. Shared secrets are encrypted at rest with AES-256-GCM.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Sessions</h3><p>Staff sessions expire after a working day. API access tokens last one hour. Refresh tokens are stored hashed and rotated on every use. If a refresh token is reused, every session for that account is revoked.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Login protection</h3><p>An account is locked after repeated failures, and failed sign-ins all show the same generic error. Author enumeration is blocked, and public forms and endpoints are rate-limited.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Transport and headers</h3><p>HTTPS with HSTS, a Content Security Policy, nosniff, frame restrictions and a strict referrer policy. Camera, microphone, geolocation, payment and USB permissions are disabled.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Input and uploads</h3><p>Uploads are limited to an allow-list of file types and a size ceiling, with a hook for malware scanning. Input is validated and output encoded. State-changing requests carry CSRF protection.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Portal and module gating</h3><p>Wallet, token-acquisition, holdings and redemption functions are built but locked at the server. Their endpoints report "inactive" whatever the client sends.</p><div class="rc-card__foot">[rc_status s="not_applicable" label="Locked"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Logging and monitoring</p>
+        <h2>A tamper-evident <em>record of every action</em></h2>
+        <p class="rc-lead">Sign-ins, failed sign-ins, role changes, workflow transitions, document uploads and replacements, module activations and recovery-code use are all written to an append-only, hash-chained audit trail. Database triggers block changes to it, and its head is anchored on-chain.</p>
+        <p>IP addresses are stored only as keyed hashes. This keeps the trail useful for investigation without turning it into a store of personal data.</p>
+      </div>
+      <div>
+        [rc_audit_status]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Key management</p>
+      <h2>No single key <em>can move value</em></h2>
+      <p class="rc-lead">The smart contracts are designed for multisig administration from the start. Key custody arrangements for any live deployment are planned and not yet in place.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>One administrator per contract, transferable only in two delayed steps</strong>[rc_status s="in_development"]<small>Changing the administrator needs a begin step and an accept step separated by an enforced delay. This leaves time to detect and cancel a hostile transfer.</small></div>
+      <div><strong>Narrow operational roles</strong>[rc_status s="in_development"]<small>Minting, burning, pausing, KYC updates, reserve attestation and audit anchoring are separate roles and can be held by separate keys.</small></div>
+      <div><strong>Multisig administrator</strong>[rc_status s="proposed"]<small>The contracts are compatible with a multisig administrator. The signer set and threshold are subject to governance approval.</small></div>
+      <div><strong>Hardware wallets for every signer</strong>[rc_status s="proposed"]<small>Planned for all administrative and operational signers, with a documented key ceremony.</small></div>
+      <div><strong>Application secrets</strong>[rc_status s="in_development"]<small>Held in environment configuration, never in the repository. No credentials are shared, and accounts can be deactivated immediately.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Infrastructure, data, vendors, response</p>
+      <h2>The rest of the <em>programme</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Infrastructure</h3>
+        <ul class="rc-list"><li>Separate development, staging and production environments</li><li>Staging is never indexed</li><li>Encrypted automated backups with periodic restore tests</li><li>Release approval and rollback procedures</li><li>All accounts owned by ReserveChain, none by individual developers</li></ul>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Data protection</h3>
+        <ul class="rc-list"><li>Field-level visibility: public, participant, auditor, restricted</li><li>Confidential documents are served only to authorized roles</li><li>No personal data in analytics or URLs</li><li>No non-essential tracking before consent</li><li>Retention, correction and deletion procedures</li></ul>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Incident response</h3>
+        <ul class="rc-list"><li>Alerts on failed logins, security events, backup failures and deployments</li><li>Contract pause and account freeze as containment</li><li>Audit-chain verification to establish the timeline</li><li>Notifications on the official channels only</li></ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Vendor controls and testing</h3>
+        <ul class="rc-list"><li>An inventory of third-party services and dependencies</li><li>Dependency vulnerability review on each release</li><li>Contract unit tests, coverage and static analysis on every change</li><li>Independent penetration test and contract security review before activation</li></ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Report a concern</h2>
+        <p>If you find a vulnerability or receive a suspicious message that claims to come from ReserveChain, contact us through the official channels listed on our site.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/">Contact ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/resources/documentation/">View Documents</a>
+        <a class="rc-btn" href="/platform/how-it-works/">How ReserveChain Works</a>
+      </div>
+    </div>
+  </div>
+</section>

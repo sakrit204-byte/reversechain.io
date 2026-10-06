@@ -1,0 +1,119 @@
+<!--
+title: Restricted Jurisdictions
+excerpt: How geographic restrictions are intended to apply to any future participation: the EU/EEA position, a configurable restricted list subject to counsel, layered location controls and on-chain transfer restrictions.
+kicker: Participation · Geographic restrictions · Subject to legal review
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Position statement</p>
+        <h2>The EU/EEA <em>position</em></h2>
+      </div>
+      <div>
+        <div class="rc-callout"><p><strong>ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.</strong></p></div>
+        <p class="rc-lead">This applies to all 27 EU member states and to Iceland, Liechtenstein and Norway. Persons in these countries may read this website and may opt in to general project updates, but they are not intended participants in any future offering. Token issuance remains inactive until formally launched.</p>
+      </div>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Group</th><th>Countries (ISO 3166-1)</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td>European Union (27)</td><td class="rc-mono">AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE</td><td>[rc_status s="restricted"] General updates only</td></tr>
+          <tr><td>EEA, non-EU (3)</td><td class="rc-mono">IS LI NO</td><td>[rc_status s="restricted"] General updates only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Restricted list</p>
+      <h2>A configurable list, <em>not a final one</em></h2>
+      <p class="rc-lead">Beyond the EU/EEA, restrictions are held as configuration so that counsel can change them without a code release. The current configuration is a placeholder. This page does not set out a final list, and the final list will be published only in the definitive legal documents.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Category</th><th>Basis</th><th>Current state</th></tr></thead>
+        <tbody>
+          <tr><td>EU/EEA</td><td>Project policy (above)</td><td>[rc_status s="restricted" label="Enforced in configuration"]</td></tr>
+          <tr><td>Jurisdictions subject to comprehensive sanctions programmes</td><td>Placeholder default in configuration, pending confirmation by counsel</td><td>[rc_status s="pending_verification" label="Placeholder · subject to counsel"]</td></tr>
+          <tr><td>Jurisdictions where an offering would require a licence or registration not held</td><td>To be determined by jurisdiction-by-jurisdiction legal analysis</td><td>[rc_status s="proposed" label="To be determined"]</td></tr>
+          <tr><td>Jurisdictions with high-risk AML designations</td><td>To be considered with the selected compliance provider; may lead to restriction or enhanced due diligence</td><td>[rc_status s="proposed" label="To be determined"]</td></tr>
+          <tr><td>Designated persons, wherever located</td><td>Sanctions screening applies to individuals and entities regardless of country</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Layered controls</p>
+      <h2>Four layers, <em>from website to contract</em></h2>
+      <p class="rc-lead">No single signal decides eligibility. Each layer can block access on its own.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Self-declaration</h3><p>Country of residence is required at waitlist registration and account creation. Nationality and current-location fields exist but are activated only where legally required.</p></div>[rc_status s="in_development" label="Active on waitlist"]</li>
+      <li><div><h3>Edge location signal</h3><p>The country reported by the content-delivery network is recorded alongside the declaration. A mismatch is flagged for review; it does not on its own approve anyone.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Verified residence</h3><p>KYC or KYB confirms residence or registered office with documents, overriding self-declaration.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>On-chain transfer restriction</h3><p>The ComplianceRegistry contract holds a blocked-jurisdiction set supplied by configuration. Transfers to or from an address recorded in a blocked jurisdiction, or not approved, would fail. Testnet only.</p></div>[rc_status s="in_development" label="Testnet"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Blocked access</p>
+        <h2>What a restricted visitor <em>experiences</em></h2>
+        <ul class="rc-list">
+          <li>The website remains readable for information purposes.</li>
+          <li>Waitlist registration is recorded as restricted and limited to general updates, only if the visitor opts in.</li>
+          <li>No program documents, eligibility flow or token-acquisition module would be shown.</li>
+          <li>Existing approvals are suspended if residence changes to a restricted jurisdiction.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="rc-kicker">Participant responsibility</p>
+        <h2>Your obligations, <em>stated plainly</em></h2>
+        <ul class="rc-list">
+          <li>Provide accurate residence, location and, where requested, nationality.</li>
+          <li>Do not use VPNs, proxies or other tools to disguise your location.</li>
+          <li>Do not act for, or transfer to, a restricted person.</li>
+          <li>Notify any change of residence promptly.</li>
+          <li>Check that participation is lawful where you are. This website is not legal advice.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Updates and final documents</p>
+      <h2>How this list <em>will change</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Counsel-led changes</h3><p>Changes to the restricted list follow legal advice and are entered through the four-eyes workflow, with every change logged in the audit trail.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Published with a date</h3><p>Material updates will be noted in <a href="/company/news/">News &amp; Announcements</a> and reflected in the jurisdiction-specific disclosures.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Final documents prevail</h3><p>If this page and the definitive legal documents differ, the definitive documents prevail. See <a href="/legal/">Legal &amp; Disclosures</a> and the <a href="/legal/terms/">Terms of Use</a>.</p></article>
+    </div>
+    [rc_module module="eligibility" title="Jurisdictional eligibility decisions"]
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Understand the full eligibility picture</h2><p>Jurisdiction is the first gate. Identity and screening follow.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn rc-btn--cream" href="/legal/">View Documents</a>
+        <a class="rc-btn" href="/company/contact/">Contact ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

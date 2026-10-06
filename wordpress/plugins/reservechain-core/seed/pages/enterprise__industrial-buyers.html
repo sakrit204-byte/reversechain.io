@@ -1,0 +1,112 @@
+<!--
+title: Industrial Buyers
+excerpt: For manufacturers, processors, research users and qualified counterparties who need documented ultra-high-purity materials. How ReserveChain's evidence model is intended to support procurement, and how physical delivery could work in future.
+kicker: Enterprise · Industrial users · Enquiries only
+order: 4
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">The procurement problem</p>
+        <h2>Purity claims are easy. <em>Proof travels badly.</em></h2>
+      </div>
+      <p class="rc-lead">Ultra-high-purity materials are specified to parts per million, yet the paperwork that proves a specification is often a scanned certificate detached from the unit it describes. ReserveChain links each lot, container and coil to its certificate, its fingerprint and its custody history. No material is currently offered for sale; this page is for enquiries.</p>
+    </div>
+    <div class="rc-elements">
+      <a class="rc-element" href="/assets/industrial-metals/copper-powder/"><span class="rc-element__n">29</span><span class="rc-element__s">Cu</span><span class="rc-element__l">Ultra-High-Purity Copper Powder <small>99.9999 %*</small></span></a>
+      <a class="rc-element rc-element--ni" href="/assets/industrial-metals/nickel-wire/"><span class="rc-element__n">28</span><span class="rc-element__s">Ni</span><span class="rc-element__l">High-Purity Nickel Wire 0.025 mm <small>99.9807 %*</small></span></a>
+    </div>
+    <p class="rc-fine">* Owner-supplied IGAS Certificates of Analysis (Cu: No. 0004512, Lot #03-K-07; Ni: No. 0004368, Lot 120/NP1). Subject to documentary verification.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Typical application areas</p>
+      <h2>Where materials like these <em>are generally used</em></h2>
+      <p class="rc-lead">General industry context only. It does not state that the program materials have been qualified for any specific application.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Copper powder</h3>
+        <ul class="rc-list"><li>Electronics and conductive materials</li><li>Additive manufacturing</li><li>Energy storage research</li><li>Research and development</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Fine nickel wire</h3>
+        <ul class="rc-list"><li>Precision electronics</li><li>Medical devices</li><li>Battery technology and filtration</li><li>Research and development</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Documentation you would receive</p>
+      <h2>Evidence attached <em>to the unit</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Evidence</th><th>Form</th><th>Status today</th></tr></thead>
+        <tbody>
+          <tr><td>Certificate of Analysis</td><td>Original scan, exact transcription and SHA-256 fingerprint on the Digital Asset Passport</td><td>[rc_status s="pending_verification" label="Owner-supplied"]</td></tr>
+          <tr><td>Independent verification report</td><td>Inspection and laboratory results from an independent party</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Unit identity</td><td>Passport number and QR code per lot, container or coil</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Chain of custody</td><td>Dated custody events from intake to release</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Document authenticity</td><td>In-browser fingerprint check against the registry, without uploading the file</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Check a document you already hold with the <a href="/platform/verification/">verification tool</a>, or browse an example passport: <a href="/passport/RC-CU-LOT-000001/">Cu Lot #03-K-07</a> · <a href="/passport/RC-NI-COL-000008/">Ni bobbin 8</a>.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Proposed procurement workflow</p>
+      <h2>Six steps, <em>none active yet</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Enquiry</h3><p>Material, specification, form, approximate quantity range, destination and timing.</p></div>[rc_status s="in_development" label="Open"]</li>
+      <li><div><h3>Counterparty checks</h3><p>KYB, sanctions and end-use screening appropriate to the material and destination.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Specification match</h3><p>Comparison of your requirement with passport evidence; samples or independent testing where agreed.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Commercial terms</h3><p>Agreed directly in a written contract. No price is quoted on this website.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Release from custody</h3><p>Custody release recorded against the unit's passport.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Delivery or collection</h3><p>Packaging, transport, export documentation and handover, with the passport following the unit.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Physical delivery and redemption</p>
+        <h2>Two routes <em>to the same metal</em></h2>
+        <p>An industrial user could obtain material through direct procurement, or, if a token program is ever launched, a holder could request physical redemption. Both routes would draw on the same registry units, so a unit released for one cannot be counted for the other.</p>
+        <p>Redemption is a proposed framework subject to final legal, contractual, technical and operational confirmation. Thresholds, fees and logistics are not defined.</p>
+      </div>
+      <div>
+        [rc_module module="logistics" title="Logistics, customs and delivery workflow"]
+        [rc_module module="redemption" title="Physical-redemption requests"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-callout"><p>No customer, testimonial or supply agreement is shown on this page because none is authorised for publication. Any future reference will appear only with written consent.</p></div>
+    <div class="rc-cta">
+      <div><h2>Make an industrial enquiry</h2><p>Describe the material, specification and destination you need.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contact ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/assets/initial-programs/">View Initial Programs</a>
+        <a class="rc-btn" href="/platform/redemption/">How Redemption Works</a>
+      </div>
+    </div>
+  </div>
+</section>

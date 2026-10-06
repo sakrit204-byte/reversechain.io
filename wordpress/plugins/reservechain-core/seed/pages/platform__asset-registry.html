@@ -1,0 +1,130 @@
+<!--
+title: Industrial Metals Registry
+excerpt: The single source of truth behind every passport, reserve figure and program page. Fourteen typed record types are held under four-eyes publication control, with full version history and unit-level status down to each container and bobbin.
+kicker: Platform · Registry · Live with owner-supplied data
+order: 9
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_provisional]
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Live counts</p>
+        <h2>What the registry <em>contains today</em></h2>
+      </div>
+      <p class="rc-lead">The counts below are read directly from published records. Draft and under-review records are excluded by design, so the registry never shows anything that has not been through approval.</p>
+    </div>
+    [rc_registry_stats]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Record types</p>
+      <h2>Fourteen record types, <em>each a separate fact</em></h2>
+      <p class="rc-lead">The registry keeps separate facts in separate records. A certificate is not a field on a lot. It is its own record, linked to the lot, with its own issuer, date, fingerprint and approval. One record can then be corrected, superseded or withdrawn without touching the others.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Asset programs</h3><p>Cu and Ni program definitions, status and program-level documents.</p></article>
+      <article class="rc-card" data-reveal><h3>Lots</h3><p>Production lots, such as Cu #03-K-07 and Ni 120/NP1, with declared quantity and specification.</p></article>
+      <article class="rc-card" data-reveal><h3>Batches</h3><p>Sub-lot production or structuring batches where a lot is split.</p></article>
+      <article class="rc-card" data-reveal><h3>Containers</h3><p>Boxes and packages. This is the redemption unit for copper powder.</p></article>
+      <article class="rc-card" data-reveal><h3>Coils</h3><p>Bobbins and coils. This is the redemption unit for nickel wire. There are 30 bobbins in Lot 120/NP1.</p></article>
+      <article class="rc-card" data-reveal><h3>Laboratories</h3><p>Issuer identity, location and accreditation evidence, where it has been provided.</p></article>
+      <article class="rc-card" data-reveal><h3>Certificates of Analysis</h3><p>Exact transcription, assay grid, method, standard, sample record, source and fingerprint.</p></article>
+      <article class="rc-card" data-reveal><h3>Custody and ownership</h3><p>Custody intake, receipts, seals, chain-of-title and ownership records.</p></article>
+      <article class="rc-card" data-reveal><h3>Valuations</h3><p>Methodology, benchmark, currency, date, valuer and review date.</p></article>
+      <article class="rc-card" data-reveal><h3>Insurance</h3><p>Policy schedules and coverage periods, where arranged. None are arranged today.</p></article>
+      <article class="rc-card" data-reveal><h3>Reserve reports</h3><p>Reconciliation snapshots, attestation files and as-of dates.</p></article>
+      <article class="rc-card" data-reveal><h3>Token programs</h3><p>Proposed parameters for each program. All of them are pending, and none is hard-coded.</p></article>
+      <article class="rc-card" data-reveal><h3>Redemptions</h3><p>Requests, eligibility decisions, burn references and release records.</p></article>
+      <article class="rc-card" data-reveal><h3>Documents</h3><p>Every file, with its SHA-256 fingerprint, version and visibility level.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Unit-level registry</p>
+      <h2>Every lot, container and bobbin, <em>each with its own status line</em></h2>
+      <p class="rc-lead">Each row is a unit with its own passport. Verification, custody, reserve, tokenization, redemption and availability statuses change only through the four-eyes workflow, when supporting evidence is approved.</p>
+    </div>
+    [rc_registry_table]
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Publication control</p>
+        <h2>Nothing is public <em>until a second person approves it</em></h2>
+        <p class="rc-lead">Ownership, laboratory, custody, insurance and reserve claims stay unpublished until evidence is supplied and approved. The workflow enforces this. It does not depend on editorial habit.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Draft</h3><p>Visible only to the editor and to roles with review rights. Never indexed and never returned by the API.</p></div></li>
+        <li><div><h3>Under Review</h3><p>Submitted with its evidence. The submitter cannot approve it.</p></div></li>
+        <li><div><h3>Approved</h3><p>A second person approves it, and the approval is bound to a SHA-256 fingerprint of the content and fields.</p></div></li>
+        <li><div><h3>Published</h3><p>The fingerprint is re-checked first. Any edit made after approval sends the record back to review.</p></div></li>
+        <li><div><h3>Unpublished or Archived</h3><p>Published records are withdrawn, never hard-deleted. Their history remains intact.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Versioning and field discipline</p>
+      <h2>How the registry <em>stays honest</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Declared vs tested</h3><p>Quantities and purities keep their source. The 2000 kg (Cu) and 5000 g (Ni) net weights are stored as declared by the customer, exactly as their certificates state.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Original strings preserved</h3><p>Certificate values are stored as printed, for example "99,9807 %" with a comma decimal, alongside normalised numbers. The evidence view never re-renders a value differently from its source.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Pending is a value</h3><p>Fields without evidence, such as particle size, tap density, tensile strength and temper, are stored and shown as "Pending". They are never left blank and never estimated.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Field-level visibility</h3><p>Each field is marked public, participant, auditor or restricted. Acquisition cost and commercial terms remain restricted.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Full change history</h3><p>Every transition records who made it, when, the previous and new state, and the reason. The record is held in the hash-chained audit trail.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Bulk operations, same controls</h3><p>Imports and exports pass through the same workflow. A bulk import produces drafts, not published records.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Who reads the registry</p>
+      <h2>One registry, <em>many views</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Consumer</th><th>Reads</th><th>Access</th></tr></thead>
+        <tbody>
+          <tr><td>Program pages and passports</td><td>Published records and public fields</td><td>Public</td></tr>
+          <tr><td>Proof-of-Reserves dashboard</td><td>Published quantities by status</td><td>Public</td></tr>
+          <tr><td>iOS and Android apps</td><td>The same records, through <span class="rc-mono">rc/v1</span></td><td>Public; participant once activated</td></tr>
+          <tr><td>Auditors</td><td>Restricted fields and the audit trail</td><td>Auditor role</td></tr>
+          <tr><td>Enterprise clients (planned)</td><td>Their own programs and units</td><td>Tenant-scoped</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>From a registry row to a passport</h2>
+        <p>Open any unit to see its complete evidence set and Merkle root.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/digital-asset-passports/">View Digital Asset Passport</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/proof-of-reserves/">View Reserve Report</a>
+        <a class="rc-btn" href="/enterprise/asset-owners/">Submit an Asset</a>
+      </div>
+    </div>
+  </div>
+</section>

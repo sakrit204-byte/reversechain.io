@@ -1,0 +1,154 @@
+<!--
+title: Roadmap
+excerpt: The proposed sequence from blueprint to physical redemption, organised as gated phases rather than calendar dates. Each phase opens only when the previous phase's exit criteria are met and, where required, written authorization has been given.
+kicker: Company · Phased plan, no calendar promises
+order: 6
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">How this roadmap works</p>
+      <h2>Gates, <em>not deadlines</em></h2>
+      <p class="rc-lead">We do not publish launch dates. Several phases depend on parties we do not control (counsel, laboratories, custodians, insurers, auditors, app-store review), and a date that cannot be kept is a claim that cannot be supported.</p>
+      <p>Each phase has explicit exit criteria. Phases that activate a sensitive capability (eligibility, token acquisition, issuance, redemption) additionally require written authorization from the project owners and a separate deployment action.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Current phase</dt><dd>Phase 2 · Pre-launch platform [rc_status s="in_development" label="Active"]</dd></div>
+      <div><dt>Running in parallel</dt><dd>Phase 3 · Corporate, legal and documentation [rc_status s="in_development"]</dd></div>
+      <div><dt>Token issuance</dt><dd>Phase 7, conditional [rc_status s="proposed" label="Not started"]</dd></div>
+      <div><dt>Calendar dates</dt><dd>Not published. Progress is reported on <a href="/company/development-status/">Development Status</a>.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Phases 1–4</p>
+      <h2>Build the record, <em>then prove the material</em></h2>
+    </div>
+    <div class="rc-roadmap">
+      <div>
+        <span class="rc-phase">Phase 1</span>
+        <h3>Requirements and blueprint</h3>
+        <ul><li>Scope, sitemap and data model</li><li>Prohibited-content and disclosure rules</li><li>Architecture and security baseline</li></ul>
+        [rc_status s="provided" label="Completed"]
+      </div>
+      <div class="is-active">
+        <span class="rc-phase">Phase 2 · Current</span>
+        <h3>Pre-launch platform</h3>
+        <ul><li>Website, CMS and four-eyes workflow</li><li>Industrial Metals Registry and Digital Asset Passports</li><li>Tamper-evident audit trail, waitlist</li><li>Testnet contracts and app source</li></ul>
+        [rc_status s="in_development" label="Active"]
+      </div>
+      <div>
+        <span class="rc-phase">Phase 3</span>
+        <h3>Corporate, legal and documentation</h3>
+        <ul><li>Swiss corporate and issuance structure</li><li>Counsel-approved legal texts</li><li>Whitepaper Stage 1, then Stage 2</li><li>Official channels confirmed</li></ul>
+        [rc_status s="in_development" label="In progress"]
+      </div>
+      <div>
+        <span class="rc-phase">Phase 4</span>
+        <h3>Verification and custody</h3>
+        <ul><li>Independent re-assay and inspection</li><li>Independent valuation</li><li>Custodian appointment and sealed intake</li><li>Insurance arrangements</li></ul>
+        [rc_status s="proposed" label="Planned"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Phases 5–8</p>
+      <h2>Harden, admit, issue, <em>redeem</em></h2>
+      <p class="rc-lead">Phases 6 to 8 activate capabilities that are already built but locked. Each requires written authorization; none can switch on automatically.</p>
+    </div>
+    <div class="rc-roadmap">
+      <div>
+        <span class="rc-phase">Phase 5</span>
+        <h3>Technology hardening</h3>
+        <ul><li>Independent smart-contract audit</li><li>Penetration test, mobile assessment</li><li>Production hosting, backup and DR drills</li><li>TestFlight and Google Play testing</li></ul>
+        [rc_status s="proposed" label="Planned"]
+      </div>
+      <div>
+        <span class="rc-phase">Phase 6</span>
+        <h3>Eligibility and Early Participation</h3>
+        <ul><li>KYC/KYB, AML and sanctions provider</li><li>Final jurisdiction lists</li><li>Participant Portal staged activation</li><li>Token-acquisition module, if authorized</li></ul>
+        [rc_status s="proposed" label="Conditional"]
+      </div>
+      <div>
+        <span class="rc-phase">Phase 7</span>
+        <h3>Issuance and reserves</h3>
+        <ul><li>Token terms and offering documents</li><li>Mainnet deployment, if authorized</li><li>Proof of Reserves attestation</li><li>Daily reconciliation</li></ul>
+        [rc_status s="proposed" label="Conditional"]
+      </div>
+      <div>
+        <span class="rc-phase">Phase 8</span>
+        <h3>Redemption and expansion</h3>
+        <ul><li>Unit-level physical redemption</li><li>Enterprise and licensing onboarding</li><li>Further programs via admission gates</li></ul>
+        [rc_status s="proposed" label="Conditional"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Exit criteria</p>
+      <h2>What closes <em>each phase</em></h2>
+    </div>
+    <div class="rc-table-wrap" data-reveal>
+      <table class="rc-table">
+        <thead><tr><th>Phase</th><th>Exit criteria</th><th>Who confirms</th></tr></thead>
+        <tbody>
+          <tr><td>2 · Pre-launch platform</td><td>All pages live on the official domain; tamper test shows trigger block; integrity verification passes; accessibility and performance checks pass</td><td>ReserveChain-nominated reviewer; owner acceptance</td></tr>
+          <tr><td>3 · Corporate and legal</td><td>Entity formed; issuer and asset-holding structure documented; legal texts approved by counsel</td><td>Counsel; project owners</td></tr>
+          <tr><td>4 · Verification and custody</td><td>Independent reports attached and approved per unit; custody records with seal numbers; insurance evidence where applicable</td><td>Appointed laboratory, valuer, custodian</td></tr>
+          <tr><td>5 · Hardening</td><td>No open critical or high findings; backup-restore and rollback drills passed; store test builds installable</td><td>Independent auditor; pen-test vendor</td></tr>
+          <tr><td>6 · Eligibility</td><td>Screening provider integrated; eligibility decisions recorded; written authorization for any module activation</td><td>Compliance; project owners</td></tr>
+          <tr><td>7 · Issuance</td><td>Definitive documentation; supply reconciles to verified eligible reserve; addresses published only on the official domain</td><td>Counsel; attestor; project owners</td></tr>
+          <tr><td>8 · Redemption</td><td>Redemption terms approved; end-to-end test including burn, release and registry update</td><td>Custodian; compliance; project owners</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Delivery work in the current phase</p>
+      <h2>Milestones that remain <em>inside Phase 2</em></h2>
+      <p>A milestone counts as complete only when it is implemented, deployed, demonstrated, tested, documented, independently checked and formally accepted.</p>
+    </div>
+    <div class="rc-claims" data-reveal>
+      <div><strong>Account ownership and environments</strong>[rc_status s="proposed" label="Planned"]<small>All accounts in ReserveChain's name; dev, staging and production separated.</small></div>
+      <div><strong>CMS, registry and workflow hardening</strong>[rc_status s="in_development" label="In progress"]<small>Migrations, admin UX, anchoring job.</small></div>
+      <div><strong>Public website (EN) and translations (ES / IT)</strong>[rc_status s="in_development" label="In progress"]<small>Legal translations marked pending counsel approval.</small></div>
+      <div><strong>Mobile apps, store test builds</strong>[rc_status s="in_development" label="In progress"]<small>Source in development; TestFlight and Google Play testing pending.</small></div>
+      <div><strong>Handover, training and owner acceptance</strong>[rc_status s="proposed" label="Planned"]<small>Developer access removed at handover.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-callout"><p>This roadmap is a proposed plan, subject to final approval. It is not a commitment to issue tokens, to list on any venue, or to deliver any capability by a particular time. ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.</p></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Receive development updates</h2>
+        <p>Waitlist members receive project-development updates and future eligibility information. Registration is not an investment, token purchase or reservation.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/project-overview/">View Program Overview</a>
+      </div>
+    </div>
+  </div>
+</section>

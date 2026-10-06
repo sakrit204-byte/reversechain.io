@@ -695,3 +695,13 @@ a.rc-element:hover { transform: translateY(-6px) rotateX(4deg); color: var(--ink
 .rc-card--alert .rc-kicker { color: var(--red); }
 .rc-diagram--chain svg { min-width: 900px; }
 .rc-section .rc-kv { margin-top: 20px; }
+
+/* passport unit status strip */
+.rc-unitstatus { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin: 32px 0 0; background: rgba(213, 177, 103, .18); border: 1px solid rgba(213, 177, 103, .18); border-radius: 14px; overflow: hidden; }
+.rc-unitstatus > div { background: rgba(10, 20, 31, .92); padding: 12px 16px; }
+.rc-unitstatus dt { font: 500 .66rem/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.rc-unitstatus dd { margin: 6px 0 0; font: 500 .95rem/1.25 var(--f-serif); color: #fff; }
+@media (max-width: 900px) { .rc-unitstatus { grid-template-columns: repeat(2, 1fr); } }
+.rc-dap__sub { margin: 32px 0 14px; font-size: 1.25rem; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.rc-dap__sub small { font: 500 .7rem/1 var(--f-mono); letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.rc-dap-hero .rc-provisional { margin-bottom: 24px; }

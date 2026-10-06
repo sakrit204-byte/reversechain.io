@@ -1,0 +1,119 @@
+<!--
+title: Enterprise Tokenization Services
+excerpt: A proposed B2B service for organisations that need a governed, evidence-linked digital representation of physical inventory, using ReserveChain's registry, compliance and reserve-gated issuance controls.
+kicker: Enterprise · Tokenization services · Proposed
+order: 1
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Service thesis</p>
+        <h2>Tokenization is the last step, <em>not the first</em></h2>
+      </div>
+      <p class="rc-lead">Most of the work in representing a physical asset digitally happens before any token exists: identifying the unit, proving what it is, proving where it is and who controls it, and deciding who may hold a representation of it. The proposed service is built around that sequence. It describes a proposed framework subject to final legal, contractual, technical and operational confirmation.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Stage</th><th>Client provides</th><th>ReserveChain infrastructure provides</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Onboarding</td><td>Asset description, ownership evidence, location, laboratory documents</td><td>Structured intake, document fingerprinting, due-diligence checklist</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Data model</td><td>Asset-class attributes and units of account</td><td>Configurable schema for program, lot, container, coil and custom unit types</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Evidence</td><td>Independent verification and valuation reports</td><td>Digital Asset Passports with evidence ledger and Merkle root</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Custody and reserve link</td><td>Custody arrangement and periodic inventory</td><td>Reserve attestations that cap issuance per program</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Issuance and transfer rules</td><td>Legal terms, eligible holder profile, restrictions</td><td>Role-controlled contracts with compliance checks on every transfer</td><td>[rc_status s="in_development" label="Testnet"]</td></tr>
+          <tr><td>Reporting</td><td>Approval of published fields</td><td>Declared-versus-verified views, audit trail, API access</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Smart-contract suite</p>
+        <h2>Six contracts, <em>one control model</em></h2>
+        <p>The contract suite is written against OpenZeppelin v5 and deployed to public testnets only. No mainnet deployment has been performed, and no contract address on this site is an official production address until it appears on <a href="/resources/contract-addresses/">Official Smart-Contract Addresses</a>.</p>
+        <p class="rc-fine">Token name, symbol, decimals, cap and ratio are constructor or configuration inputs. None is hard-coded.</p>
+      </div>
+      <div class="rc-chain" data-reveal>
+        <div class="rc-chain__row"><span>ReserveToken</span><code>ERC-20 with permit, pausing and role-based mint and burn; transfer hook calls the compliance registry</code></div>
+        <div class="rc-chain__row"><span>ComplianceRegistry</span><code>Per-address status, jurisdiction, expiry and frozen flag; blocked-jurisdiction set from configuration</code></div>
+        <div class="rc-chain__row"><span>ReserveGuard</span><code>Attestor posts (program, units, report hash, URI); maximum issuable amount derived from attested units</code></div>
+        <div class="rc-chain__row"><span>RedemptionManager</span><code>Escrow, compliance review, approve-and-burn or reject-and-return; disabled by default</code></div>
+        <div class="rc-chain__row"><span>Treasury</span><code>Role-controlled, with withdrawal limits and a timelock option</code></div>
+        <div class="rc-chain__row"><span>AuditAnchor</span><code>Anchors the head of the off-chain audit chain on-chain</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Rule engine and participant controls</p>
+      <h2>Rules enforced in code, <em>decided by people</em></h2>
+      <p class="rc-lead">Rules are configured by authorised roles and enforced automatically. Every change to a rule is logged.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Eligibility rules</h3><p>Only approved, unfrozen, unexpired addresses outside blocked jurisdictions can send or receive.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Issuance ceilings</h3><p>Total supply per program cannot exceed attested reserve units multiplied by the approved ratio.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Emergency controls</h3><p>Pausing and account freezing by separate roles, intended to be held by a multisignature wallet.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Role separation</h3><p>Admin, minter, burner, pauser, compliance and treasury roles are distinct; admin transfer is time-delayed.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Redemption rules</h3><p>Minimum and maximum thresholds and compliance review before any burn, configurable per program.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Activation gates</h3><p>Issuance, wallet and redemption functions require explicit authorisation and a separate deployment action.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Deployment and governance</p>
+      <h2>Options under consideration</h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Topic</th><th>Proposed approach</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Network</td><td>EVM-compatible public network, selected per program; testnet until authorised</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Key custody</td><td>Client-controlled multisignature for administrative roles; no keys or roles retained by developers</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Independent review</td><td>Third-party security review of contracts before any production deployment</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Change control</td><td>Four-eyes approval for published data and configuration; audit-chain head anchored on-chain</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Legal wrapper</td><td>Defined per client and jurisdiction by the client's counsel</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">APIs and reporting</p>
+      <h2>Evidence that systems <em>can read</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <ul class="rc-list">
+        <li>Program and passport endpoints returning field-level values with their claim status</li>
+        <li>Document-verification endpoint: submit a SHA-256 hash, receive a match or no match</li>
+        <li>Authenticated account endpoints with bearer tokens and TOTP multi-factor authentication</li>
+      </ul>
+      <ul class="rc-list">
+        <li>Reserve views computed from records, showing declared and verified quantities separately</li>
+        <li>Audit-trail export with integrity verification</li>
+        <li>Holdings and transaction endpoints return "not enabled" until authorised</li>
+      </ul>
+    </div>
+    <div class="rc-cta">
+      <div><h2>Scope a tokenization requirement</h2><p>Start with the evidence you hold. We will tell you what is missing.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contact ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/tokenization/">Learn About Tokenization</a>
+        <a class="rc-btn" href="/enterprise/">Enterprise Services</a>
+      </div>
+    </div>
+  </div>
+</section>

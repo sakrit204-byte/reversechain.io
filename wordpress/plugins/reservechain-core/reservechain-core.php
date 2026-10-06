@@ -14,7 +14,7 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'RC_VERSION', '0.9.0' );
-define( 'RC_DB_VERSION', '3' );
+define( 'RC_DB_VERSION', '4' );
 define( 'RC_FILE', __FILE__ );
 define( 'RC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'RC_URL', plugin_dir_url( __FILE__ ) );

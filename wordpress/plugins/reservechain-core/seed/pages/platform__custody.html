@@ -1,0 +1,145 @@
+<!--
+title: Proposed Custody & Vault Structure
+excerpt: Controlled and auditable. This is the proposed custody model for industrial metals. Each container and bobbin is segregated, sealed, counted and released only against a recorded, dual-controlled instruction. No custodian has yet been appointed.
+kicker: Platform · Proposed framework · Custody
+order: 6
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Scope of this page</p>
+        <h2>The custody model, <em>before the custodian</em></h2>
+        <p class="rc-lead">This page describes a proposed custody framework, subject to final legal, contractual, technical and operational confirmation. No custodian, warehouse, vault or insurer has been appointed. No unit described on this site is held in professional custody under this framework.</p>
+        <p>We publish the model before any appointment so that prospective custodians, asset owners and participants can judge the control standard ReserveChain intends to require.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Custody data model (receipts, seals, locations, inspections)</strong>[rc_status s="in_development"]<small>Implemented in the registry and ready to be populated.</small></div>
+        <div><strong>Professional custodian</strong>[rc_status s="proposed"]<small>Selection is subject to due diligence and a custody agreement.</small></div>
+        <div><strong>Storage location</strong>[rc_status s="proposed" label="To be confirmed"]<small>No vault or warehouse location is published.</small></div>
+        <div><strong>Insurance</strong>[rc_status s="proposed" label="To be confirmed"]<small>Subject to final insurance arrangements. No unit is currently covered.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Custody model</p>
+      <h2>Allocated, segregated, <em>unit-addressable</em></h2>
+      <p class="rc-lead">The proposed model is allocated custody. Each physical unit is held in its own identity and recorded at the smallest level that can be redeemed: the container for copper powder and the bobbin for nickel wire.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Segregation</h3><p>Program assets are held apart from the custodian's own stock and from other clients' stock. Each program is also segregated from the other. A unit is never pooled or swapped for a "similar" one.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Unit-level identity</h3><p>Each container and bobbin carries a label that matches its registry identifier and passport. Copper Box no. 20, for example, is recorded as <span class="rc-mono">RC-CU-CTN-000001</span>.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Material-appropriate storage</h3><p>The conditions are set for each material. Sealed ampoules are protected against breakage and oxidation exposure. Fine wire is protected against deformation, humidity and handling damage. Specific requirements are pending documentation.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Chain of custody</p>
+      <h2>Every movement <em>leaves a record</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Inbound</h3><p>The custodian receives the units against an expected-receipt record. Seals are checked against the inspection record, then the units are weighed and photographed.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Receipt</h3><p>The custodian issues a warehouse receipt for each unit. The receipt is uploaded, fingerprinted and linked to the passport.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Holding</h3><p>The unit is stored in its assigned location. Any movement within the facility is logged with the time, the person and the reason.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Inspection</h3><p>Scheduled counts and seal checks run on a sample of units, with a full count at least once a year. Ad hoc inspections can be called by the platform or an attestor.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Release</h3><p>Only against a release order that a second authorized person has approved and that refers to a completed burn on-chain.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Access controls and inventory records</p>
+      <h2>Two keys for every door, <em>one record for every unit</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Access controls</h3>
+        <ul class="rc-list">
+          <li>Dual control for physical access to program stock</li>
+          <li>No ReserveChain staff member can remove a unit alone</li>
+          <li>Visitor and access logs supplied to the platform</li>
+          <li>Custodian staff screened under the custody agreement</li>
+          <li>Release instructions only through the authenticated workflow, never by email or phone</li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Inventory records</h3>
+        <ul class="rc-list">
+          <li>Unit identifier, seal number, gross and net weight</li>
+          <li>Location reference, published at the level approved</li>
+          <li>Receipt number and date</li>
+          <li>Inspection history with outcomes</li>
+          <li>Encumbrance and restriction status</li>
+          <li>Release history, linked to redemption records</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Audit, reconciliation and insurance</p>
+      <h2>Independent of the custodian's <em>own word</em></h2>
+      <p class="rc-lead">A custodian's statement is evidence, but on its own it is not proof. The proposed framework compares three independent records and treats any difference as an exception.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Record</th><th>Source</th><th>Compared against</th><th>Frequency (proposed)</th></tr></thead>
+        <tbody>
+          <tr><td>Custodian inventory statement</td><td>Custodian (to be appointed)</td><td>Registry units in custody</td><td>Monthly, and before any mint</td></tr>
+          <tr><td>Registry custody records</td><td>ReserveChain registry</td><td>Token supply per program</td><td>On every supply change</td></tr>
+          <tr><td>Physical count</td><td>Independent inspector or attestor (to be appointed)</td><td>Custodian statement and registry</td><td>Sample quarterly; full count annually</td></tr>
+          <tr><td>Insurance schedule</td><td>Insurer or broker (to be appointed)</td><td>Units in custody and their approved valuation</td><td>On renewal and on material change</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Frequencies are proposals subject to final contractual terms. Insurance, where applicable, depends on final insurance arrangements, and no cover is currently in place.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Release and redemption controls</p>
+        <h2>Burn first. <em>Release second.</em></h2>
+        <p class="rc-lead">Physical release is the point where a digital record and a physical asset part ways. The order of operations is therefore fixed.</p>
+      </div>
+      <ul class="rc-checks">
+        <li>The holder's tokens are escrowed in the RedemptionManager contract.</li>
+        <li>Compliance approves the request and the specific container or bobbin to be released.</li>
+        <li>The tokens are burned on-chain, and the burn transaction is recorded against the request.</li>
+        <li>Only then does the custodian receive a dual-approved release order that cites the burn.</li>
+        <li>The passport moves to "Released", and the reserve figures update after reconciliation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Follow custody into the reserve report</h2>
+        <p>Custody records feed the Proof-of-Reserves dashboard. Until a custodian is appointed, the dashboard reports custody as pending.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/proof-of-reserves/">View Reserve Report</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/redemption/">How Redemption Works</a>
+        <a class="rc-btn" href="/company/contact/">Contact ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,196 @@
+<!--
+title: ReserveChain Whitepaper
+excerpt: The institutional discussion draft for the proposed industrial-metals reserve registry and tokenization framework. Draft v0.9 (2026) is in preparation, pending owner inputs and legal review.
+kicker: Resources · Draft v0.9 (2026)
+order: 2
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Document status</p>
+        <h2>A discussion draft, <em>not an offering document</em></h2>
+        <p>The whitepaper describes a proposed platform and proposed operating frameworks. It is written for institutional readers such as asset owners, industrial users, prospective service providers and advisers. Its aim is to let them assess the design before any arrangement is finalised.</p>
+        <p>It is not a prospectus or offering memorandum, and it is not a key information document. No supervisory authority has reviewed it. Where information has not yet been provided or verified, the draft shows an explicit placeholder rather than an estimate.</p>
+      </div>
+      <dl class="rc-kv">
+        <div><dt>Title</dt><dd>ReserveChain — Industrial-Metals Reserve Registry and Tokenization Framework</dd></div>
+        <div><dt>Version</dt><dd>Draft v0.9 (2026)</dd></div>
+        <div><dt>Status</dt><dd>[rc_status s="in_development" label="Draft in preparation — pending owner inputs"]</dd></div>
+        <div><dt>Approval</dt><dd>Pending — subject to legal review and final approval</dd></div>
+        <div><dt>Formats</dt><dd>PDF (read-only) and editable DOCX (for review)</dd></div>
+        <div><dt>Chapters</dt><dd>18</dd></div>
+        <div><dt>Distribution</dt><dd>Information only</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Purpose</p>
+      <h2>What the paper sets out <em>to answer</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q1</span>
+        <h3>Can a physical metal unit be represented faithfully?</h3>
+        <p>The paper sets out the evidence model. Each lot, container and coil gets its own Digital Asset Passport, field-level claim status, fingerprinted evidence and a Merkle commitment.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q2</span>
+        <h3>What stops a representation outrunning the reserve?</h3>
+        <p>It describes reserve-gated minting. The mint ceiling is zero unless an independent attestation is fresh and the configuration is complete. The design is fail-closed by default.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q3</span>
+        <h3>What is still missing?</h3>
+        <p>The paper states plainly what has not yet been decided. That includes the corporate structure, custodian, insurer, attestor, holder rights and every economic parameter.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Table of contents</p>
+      <h2>Eighteen chapters, <em>from problem to document control</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>#</th><th>Chapter</th><th>Scope</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Abstract</td><td>The project in one page</td></tr>
+          <tr><td>2</td><td>The Problem: Trust in Physical-Asset Representations</td><td>Why aggregate claims about physical backing are hard to check</td></tr>
+          <tr><td>3</td><td>Project Model</td><td>Overview, proposed participants and proposed lifecycle</td></tr>
+          <tr><td>4</td><td>The Metal Programs</td><td>Copper Powder (Cu 29), Nickel Wire (Ni 28), and why unit-level registration matters</td></tr>
+          <tr><td>5</td><td>Proposed Legal, Custody and Reserve Frameworks</td><td>Corporate structure, custody, insurance and reserve framework, all proposed</td></tr>
+          <tr><td>6</td><td>Digital Asset Passport and Evidence Model</td><td>Registry hierarchy, passports, fingerprinting, Merkle commitment, client-side verification, Claim Status System</td></tr>
+          <tr><td>7</td><td>Token Architecture</td><td>Contract suite, roles, compliance-gated transfers, reserve-gated minting, configuration rather than code</td></tr>
+          <tr><td>8</td><td>Tokenomics Framework</td><td>Parameters that must be decided. Every value is to be determined</td></tr>
+          <tr><td>9</td><td>Governance</td><td>Principles, editorial and registry workflow, platform roles, intended on-chain and corporate governance</td></tr>
+          <tr><td>10</td><td>Technology Platform</td><td>CMS, registry, API, verification tooling and mobile application source</td></tr>
+          <tr><td>11</td><td>Security</td><td>Application, key-management and operational security controls</td></tr>
+          <tr><td>12</td><td>Compliance</td><td>Eligibility controls, jurisdictions, registration of interest, data protection, communication standards</td></tr>
+          <tr><td>13</td><td>Redemption (Proposed Process)</td><td>Escrow, review, burn or release back to the holder, and physical release</td></tr>
+          <tr><td>14</td><td>Proof of Reserves (Proposed)</td><td>Registry, attestation, on-chain posting and public reconciliation</td></tr>
+          <tr><td>15</td><td>Roadmap</td><td>Phases 0–5, gated by dependencies rather than dates</td></tr>
+          <tr><td>16</td><td>Risk Factors</td><td>Project, legal, asset, custody, reserve, technology, market and operational risks</td></tr>
+          <tr><td>17</td><td>Glossary</td><td>Defined terms</td></tr>
+          <tr><td>18</td><td>Document Control</td><td>Version, owner, approval state and build provenance</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Chapter summaries</p>
+      <h2>The framework <em>in brief</em></h2>
+      <p class="rc-lead">Short summaries of the main chapters. Each describes a proposed framework, subject to final legal, contractual, technical and operational confirmation.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Architecture</h3>
+        <p>Four layers. A CMS-backed registry is the single source of truth. Public Digital Asset Passports and a REST API read from it. A tamper-evident audit trail records every material action. Test-network smart contracts mirror eligibility and reserve state without holding personal data.</p>
+        <div class="rc-card__foot"><a href="/platform/infrastructure/">Platform Infrastructure →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Asset framework</h3>
+        <p>Programs contain lots, lots contain containers or coils, and each unit has its own passport. The initial programs are Ultra-High-Purity Copper Powder, 99.9999 %, and High-Purity Nickel Wire 0.025 mm, 99.9807 %. Both rest on owner-supplied IGAS certificates.</p>
+        <div class="rc-card__foot"><a href="/assets/initial-programs/">View Initial Programs →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Verification</h3>
+        <p>Laboratory evidence, sampling records and certificate validation are fingerprinted and attached to the units they cover. Each factual field carries its own status, so a passport can be partly evidenced without overstating the whole.</p>
+        <div class="rc-card__foot"><a href="/platform/verification/">View Verification Process →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Custody</h3>
+        <p>The intended model is segregated storage of registered units with a professional custodian. Receipt, transfer and release would be evidenced by custody records on each passport. No custodian has been appointed.</p>
+        <div class="rc-card__foot"><a href="/platform/custody/">Explore Custody →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Reserves</h3>
+        <p>An attestor, not yet appointed, would report on registered units. Each report is fingerprinted, registered and posted to the ReserveGuard contract. The mint ceiling comes from the latest fresh attestation. The module is inactive.</p>
+        <div class="rc-card__foot"><a href="/platform/proof-of-reserves/">Proof of Reserves →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Tokenization</h3>
+        <p>An ERC-20 representation, if it is ever authorised. Every transfer passes an on-chain eligibility check, and minting is bounded by reserve attestations. Contracts exist as tested source code for test networks only. No tokenomics have been decided.</p>
+        <div class="rc-card__foot"><a href="/platform/tokenization/">Learn About Tokenization →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Compliance</h3>
+        <p>KYC for individuals and KYB for entities, together with AML risk assessment and sanctions and PEP screening. Jurisdictional eligibility is enforced on-chain through a registry that stores status flags, never documents. EU/EEA persons are not intended to be eligible.</p>
+        <div class="rc-card__foot"><a href="/participation/eligibility-kyc/">Check Eligibility →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Enterprise model</h3>
+        <p>The registry, passport engine, verification tooling and contract suite are designed as reusable modules. Third-party asset owners and platforms could license them, subject to approval.</p>
+        <div class="rc-card__foot"><a href="/enterprise/">Enterprise Services →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Roadmap, risk and governance</h3>
+        <p>The roadmap has six phases, from Foundation to Controlled Activation, and none is dated. The risk chapter covers seven risk families. Governance rests on four-eyes approval, separation of duties and multisig administration.</p>
+        <div class="rc-card__foot"><a href="/company/roadmap/">Roadmap →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Pending owner inputs</p>
+      <h2>What must be supplied <em>before approval</em></h2>
+      <p class="rc-lead">The draft is complete in structure. These inputs must come from ReserveChain or its future counterparties. They will not be estimated.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Operating entity and corporate structure</strong>[rc_status s="in_development" label="Swiss structure in development"]<small>No entity, register number or address is asserted.</small></div>
+      <div><strong>Custodian, insurer, attestor and laboratory appointments</strong>[rc_status s="proposed"]<small>None appointed. Named in the paper only once agreements exist.</small></div>
+      <div><strong>Multisig signers and threshold</strong>[rc_status s="proposed"]<small>To be provided by ReserveChain.</small></div>
+      <div><strong>Token and economic parameters</strong>[rc_status s="not_applicable" label="To be determined"]<small>Name, symbol, ratio, supply cap, pricing methodology and redemption terms are all subject to written approval.</small></div>
+      <div><strong>Independent confirmation of the two IGAS certificates</strong>[rc_status s="pending_verification"]<small>Currently owner-supplied copies.</small></div>
+      <div><strong>Date of this version</strong>[rc_status s="pending_verification"]<small>To be inserted on approval.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Download</p>
+      <h2>PDF and editable DOCX, <em>each with a fingerprint</em></h2>
+      <p class="rc-lead">The whitepaper will be published in two formats. The PDF is the reference copy. The DOCX is provided so reviewers can annotate and comment. Each release carries its own SHA-256 fingerprint. If the list below is empty, the current draft has not yet been approved for publication.</p>
+    </div>
+    [rc_documents type="whitepaper"]
+    <div class="rc-callout"><p>Treat any whitepaper obtained outside reservechain.io as unverified until its fingerprint matches an entry on this page or in the <a href="/resources/documentation/">Documentation Library</a>.</p></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Follow the draft to approval</h2>
+        <p>Waitlist registrants receive notice when an approved version is published. Registration creates no entitlement of any kind.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/resources/documentation/">View Documents</a>
+      </div>
+    </div>
+  </div>
+</section>

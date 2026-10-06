@@ -30,6 +30,7 @@ final class Seed {
 	}
 
 	public static function run( bool $pages_only = false ): void {
+		kses_remove_filters();
 		Workflow::bypass(
 			static function () use ( $pages_only ) {
 				self::pages();
@@ -319,7 +320,7 @@ final class Seed {
 			'cu-lot-03-k-07-box-20',
 			'Lot #03-K-07 — Box no. 20 (sampled box)',
 			'Box identified on the supplied certificate as the sampling source (10 g sample taken 01.07.2022). Box count and per-box net weight for the remainder of the lot have not yet been provided.',
-			array_merge( $common_status, array( 'program' => $p['cu'], 'container_id' => 'Box no. 20', 'verification_status' => 'pending_verification' ) )
+			array_merge( $common_status, array( 'program' => $p['cu'], 'lot' => $cu_lot, 'container_id' => 'Box no. 20', 'verification_status' => 'pending_verification' ) )
 		);
 
 		/* ---------------- Nickel: Lot 120/NP1, 30 bobbins ---------------- */

@@ -17,7 +17,11 @@ wp_enqueue_script( 'rc-public' );
 get_header();
 
 $sym      = $p['program']['symbol'] ?? 'RC';
-$specimen = 0 === stripos( $p['description'], 'SPECIMEN' ) || false !== stripos( $p['title'], 'specimen' );
+$specimen = 0 === stripos( $p['description'], 'SPECIMEN' ) || false !== stripos( $p['title'], 'specimen' ) || false !== stripos( $p['title'], 'Illustrative' );
+$status_keys = array( 'availability_status', 'custody_status', 'reserve_status', 'tokenization_status', 'redemption_status' );
+$f_status    = array_values( array_filter( $p['fields'], static fn( $f ) => in_array( $f['key'], $status_keys, true ) ) );
+$f_spec      = array_values( array_filter( $p['fields'], static fn( $f ) => ! empty( $f['scope'] ) ) );
+$f_ident     = array_values( array_filter( $p['fields'], static fn( $f ) => empty( $f['scope'] ) && ! in_array( $f['key'], $status_keys, true ) ) );
 $pct      = (int) $p['completeness']['percent'];
 $circ     = 2 * M_PI * 52;
 $stage_lb = array(
@@ -28,9 +32,10 @@ $stage_lb = array(
 ?>
 <section class="rc-dap-hero rc-dap-hero--<?php echo esc_attr( strtolower( $sym ) ); ?>">
 	<div class="rc-wrap">
-		<?php echo rct_breadcrumbs(); // phpcs:ignore ?>
+		<nav class="rc-crumbs" aria-label="<?php esc_attr_e( 'Breadcrumb', 'reservechain' ); ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'reservechain' ); ?></a><span aria-hidden="true">/</span><a href="<?php echo esc_url( home_url( '/platform/digital-asset-passports/' ) ); ?>"><?php esc_html_e( 'Digital Asset Passports', 'reservechain' ); ?></a><?php if ( ! empty( $p['program']['slug'] ) ) : ?><span aria-hidden="true">/</span><a href="<?php echo esc_url( home_url( '/assets/industrial-metals/' . $p['program']['slug'] . '/' ) ); ?>"><?php echo esc_html( rct__( $p['program']['name'] ) ); ?></a><?php endif; ?><span aria-hidden="true">/</span><span aria-current="page"><?php echo esc_html( $p['passport_no'] ); ?></span></nav>
+		<?php echo rct_provisional(); // phpcs:ignore ?>
 		<?php if ( $specimen ) : ?>
-			<div class="rc-specimen" role="note"><strong><?php esc_html_e( 'Specimen passport', 'reservechain' ); ?></strong> — <?php esc_html_e( 'illustrative template only. It does not represent physical material held by or for ReserveChain. Fields remain empty until verified documents are supplied.', 'reservechain' ); ?></div>
+			<div class="rc-specimen" role="note"><strong><?php esc_html_e( 'Illustrative / demo data', 'reservechain' ); ?></strong> — <?php esc_html_e( 'This presentation demonstrates the future format of a ReserveChain industrial-metal asset page. No verified material, ownership document, laboratory report, valuation, custody arrangement, reserve claim or token is represented by this placeholder.', 'reservechain' ); ?></div>
 		<?php endif; ?>
 		<div class="rc-dap-hero__grid">
 			<div class="rc-dap-hero__id">
@@ -62,6 +67,13 @@ $stage_lb = array(
 				</div>
 			</aside>
 		</div>
+		<?php if ( $f_status ) : ?>
+		<dl class="rc-unitstatus" aria-label="<?php esc_attr_e( 'Unit status', 'reservechain' ); ?>">
+			<?php foreach ( $f_status as $f ) : ?>
+				<div><dt><?php echo esc_html( rct__( $f['label'] ) ); ?></dt><dd><?php echo esc_html( rct__( (string) ( $f['value'] ?? $f['pending'] ) ) ); ?></dd></div>
+			<?php endforeach; ?>
+		</dl>
+		<?php endif; ?>
 	</div>
 </section>
 
@@ -79,7 +91,11 @@ $stage_lb = array(
 		<section id="identity" class="rc-dap__sec">
 			<h2><?php esc_html_e( 'Identity & specification', 'reservechain' ); ?></h2>
 			<?php if ( $p['description'] ) : ?><p class="rc-dap__desc"><?php echo esc_html( $p['description'] ); ?></p><?php endif; ?>
-			<?php echo RC\Shortcodes::field_table( $p['fields'] ); // phpcs:ignore ?>
+			<?php echo RC\Shortcodes::field_table( $f_ident ); // phpcs:ignore ?>
+			<?php if ( $f_spec ) : ?>
+				<h3 class="rc-dap__sub"><?php esc_html_e( 'Technical specification', 'reservechain' ); ?> <small><?php echo esc_html( sprintf( __( '%s program fields', 'reservechain' ), $sym ) ); ?></small></h3>
+				<?php echo RC\Shortcodes::field_table( $f_spec ); // phpcs:ignore ?>
+			<?php endif; ?>
 		</section>
 
 		<section id="lifecycle" class="rc-dap__sec">

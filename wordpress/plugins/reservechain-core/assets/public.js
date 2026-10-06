@@ -54,6 +54,10 @@
     return (C.restrictEu && C.eu.indexOf(code) !== -1) || C.restricted.indexOf(code) !== -1;
   }
 
+  /* ---------------- campaign source (utm) ---------------- */
+  var qs = new URLSearchParams(location.search);
+  $$('[data-rc-campaign]').forEach(function (el) { el.value = (qs.get('utm_source') || qs.get('ref') || document.referrer.split('/')[2] || '').slice(0, 100); });
+
   /* ---------------- waitlist + contact ---------------- */
   $$('form[data-rc-form]').forEach(function (form) {
     var kind = form.getAttribute('data-rc-form');

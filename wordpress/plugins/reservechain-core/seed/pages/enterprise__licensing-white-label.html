@@ -1,0 +1,111 @@
+<!--
+title: Technology Licensing & White-Label
+excerpt: A proposed licensing model for institutions and platforms that want to operate ReserveChain's registry, passport, compliance and reserve-control modules under their own brand, governance and legal structure.
+kicker: Enterprise · Licensing · Proposed model
+order: 2
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">The proposition</p>
+        <h2>Your brand and governance, <em>our evidence engine</em></h2>
+      </div>
+      <p class="rc-lead">Licensing is intended for organisations that will be the operator and accountable party for their own asset programs, and want proven building blocks rather than a new build. The licensing model is proposed and no licence has been granted to any party.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>White-label platform</h3><p>Public site components, registry pages and passports rendered under the licensee's domain, branding and languages.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Module licence</h3><p>Selected modules, such as the registry and passport engine, integrated into the licensee's existing systems through APIs.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Managed deployment</h3><p>ReserveChain operates the infrastructure for the licensee under agreed service levels and controls.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Licensable components</p>
+      <h2>What can be licensed, <em>and its maturity</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Component</th><th>What it does</th><th>Configurable</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Asset registry</td><td>Record types for programs, materials, lots, containers, coils, reports, valuations and custody locations</td><td>Asset-class schema, fields, public/private visibility</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Passport engine</td><td>Digital Asset Passports with QR, timeline, evidence ledger and Merkle root</td><td>Passport number format, sections, languages</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Claim-status system</td><td>Every factual field carries proposed, in development, pending verification, verified or not applicable</td><td>Labels and display rules</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Document verification</td><td>In-browser SHA-256 hashing matched against registry fingerprints; files are never uploaded</td><td>Document types</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Compliance integration</td><td>Jurisdiction lists, KYC/KYB outcome storage, on-chain eligibility mirror</td><td>Provider connector, restricted lists</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Tokenization infrastructure</td><td>Role-controlled token, redemption and treasury contracts</td><td>Name, symbol, cap, ratio, thresholds</td><td>[rc_status s="in_development" label="Testnet"]</td></tr>
+          <tr><td>Reserve engine</td><td>Attestation-capped issuance and reserve views</td><td>Units, attestors, ratio</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Portals</td><td>Participant, enterprise and asset-owner portals; mobile apps</td><td>Modules visible per site mode</td><td>[rc_status s="in_development" label="Built · inactive"]</td></tr>
+          <tr><td>Analytics and reporting</td><td>Operational dashboards and audit-trail exports</td><td>Report sets</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Branding and modes</p>
+        <h2>Ten site modes, <em>one switchboard</em></h2>
+        <p>The platform runs in defined modes: Development, Pre-Launch, Waitlist, Documentation Release, Asset Verification, Enterprise Onboarding, Eligibility, Early Participation, Live Offering and Redemption. A licensee would control which modules are visible in each mode.</p>
+        <p>Modes that expose eligibility, acquisition, wallet, payment or redemption functions are locked behind written authorisation and a separate deployment flag. They cannot be turned on from the content editor.</p>
+      </div>
+      <div>
+        <p class="rc-kicker">Licensee responsibilities</p>
+        <h2>What stays <em>with the licensee</em></h2>
+        <ul class="rc-list">
+          <li>Legal structure, licences and offering documentation in its jurisdictions</li>
+          <li>Selection and contracting of laboratories, custodians and insurers</li>
+          <li>KYC/KYB provider selection and compliance decisions</li>
+          <li>Accuracy of the evidence and data it publishes</li>
+          <li>Control of administrative keys and roles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Deployment and support</p>
+      <h2>How a licence <em>would be delivered</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Technical due diligence</h3><p>Architecture, security design and source review under NDA.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Configuration</h3><p>Asset-class schema, branding, languages, jurisdiction lists and roles.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Staging deployment</h3><p>Separate environment with testnet contracts and seeded test records.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Acceptance and handover</h3><p>Documentation, training and transfer of all keys and roles to the licensee.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Support</h3><p>Updates, security patches and incident support under an agreed service schedule.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Licensing model</p>
+      <h2>Commercial structure, <em>described qualitatively</em></h2>
+      <p class="rc-lead">Fees are not published and will be set per engagement. The intended components are:</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Set-up</h3><p>Configuration, integration and staging deployment.</p></article>
+      <article class="rc-card" data-reveal><h3>Platform licence</h3><p>Recurring right to use the licensed modules.</p></article>
+      <article class="rc-card" data-reveal><h3>Usage</h3><p>Linked to records, passports or programs managed.</p></article>
+      <article class="rc-card" data-reveal><h3>Support</h3><p>Service levels and managed operations where requested.</p></article>
+    </div>
+    <div class="rc-cta">
+      <div><h2>Explore a licence</h2><p>Share your asset class, jurisdictions and intended operating model.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contact ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">How ReserveChain Works</a>
+        <a class="rc-btn" href="/enterprise/">Enterprise Services</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,124 @@
+<!--
+title: Official Smart-Contract Addresses
+excerpt: The only official source for ReserveChain smart-contract addresses. No contract has been deployed to any mainnet, and mainnet deployment remains pending approval. A test-network deployment on Ethereum Sepolia is planned.
+kicker: Resources · Single source of truth
+order: 5
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Current status</p>
+      <h2>There is <em>no production contract address</em></h2>
+      <p class="rc-lead">ReserveChain has not deployed any smart contract to a production blockchain. No token exists that can be held, sent or received. Any address presented as a ReserveChain mainnet contract or token is not official.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Mainnet deployment</strong>[rc_status s="not_applicable" label="Not deployed"]<small>Pending approval. It would require final legal structure, an independent smart-contract audit, definitive documentation and written authorisation.</small></div>
+      <div><strong>Test-network deployment (Ethereum Sepolia)</strong>[rc_status s="proposed" label="Planned"]<small>For demonstration and testing only. Testnet tokens have no economic value. Polygon Amoy may be used as an optional second test network.</small></div>
+      <div><strong>Smart-contract source code and automated tests</strong>[rc_status s="in_development"]<small>Built on OpenZeppelin v5 libraries. Every economic parameter is unset by default.</small></div>
+      <div><strong>Independent smart-contract audit</strong>[rc_status s="proposed"]<small>Not yet performed. Auditor to be appointed.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Warning</p>
+        <h2>Never trust an address <em>from any other source</em></h2>
+        <p>Scammers impersonate new projects by publishing look-alike token contracts and "official" addresses. They do this on social media, in messaging groups, through paid search results, on token-listing sites and in direct messages. These addresses often look plausible and are sometimes promoted by accounts that copy ReserveChain's name and logo.</p>
+        <ul class="rc-list">
+          <li>An address is official only if it appears on this page on reservechain.io, reached by typing the domain yourself.</li>
+          <li>ReserveChain will never send you an address in a direct message, email attachment or chat group.</li>
+          <li>Do not approve token allowances, sign messages or send funds to any address claiming to be ReserveChain.</li>
+          <li>Block-explorer labels, token-listing pages and aggregator entries are not official sources.</li>
+        </ul>
+      </div>
+      <div class="rc-callout">
+        <p><strong>If you were given a ReserveChain address elsewhere</strong>, do not interact with it. Report it through the <a href="/legal/anti-fraud/">Anti-Fraud Notice</a>. Include the address, where you saw it and any screenshots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Publication protocol</p>
+      <h2>How addresses <em>will be published</em></h2>
+      <p class="rc-lead">When any deployment is authorised, testnet or otherwise, its addresses will be published through three channels that confirm one another. All three must agree.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>This page</h3><p>Addresses are entered in the CMS and approved under four-eyes review. They then appear in the panel below, with network, contract name, deployment transaction and block-explorer link.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Signed announcement</h3><p>A dated announcement in <a href="/company/news/">News &amp; Announcements</a> lists the same addresses. It will be signed by a key whose public identity is published in the <a href="/company/official-channels/">Official Channels Directory</a>.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Audit-trail anchoring</h3><p>The publication event is written to the hash-chained audit trail. The trail head is intended to be anchored on-chain through the AuditAnchor contract, which fixes when and what was published.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Changes only by new announcement</h3><p>Addresses are never silently edited. Any replacement, migration or pause is announced through the same three channels. The superseded address stays listed with its status.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Contract suite</p>
+      <h2>Contracts that <em>may be listed here</em></h2>
+      <p class="rc-lead">This is the planned suite, as described in the whitepaper. Listing it is not a statement that any contract has been deployed.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Contract</th><th>Role</th><th>Address</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ReserveToken</strong></td><td>ERC-20 representation, if it is ever authorised. Pausable, role-based, with compliance hook and reserve guard</td><td>Not deployed</td></tr>
+          <tr><td><strong>ComplianceRegistry</strong></td><td>Per-address eligibility status, jurisdiction code, frozen flag and expiry. No personal data</td><td>Not deployed</td></tr>
+          <tr><td><strong>ReserveGuard</strong></td><td>Mint ceiling derived from independent attestations. Zero unless fully configured</td><td>Not deployed</td></tr>
+          <tr><td><strong>RedemptionManager</strong></td><td>Proposed escrow-and-review redemption workflow. Disabled by default</td><td>Not deployed</td></tr>
+          <tr><td><strong>Treasury</strong></td><td>Role-controlled holdings with daily limits and an optional timelock</td><td>Not deployed</td></tr>
+          <tr><td><strong>AuditAnchor</strong></td><td>Anchors the head of the CMS audit trail with monotonic sequence numbers</td><td>Not deployed</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Administrative roles are intended to be held by a Safe multisig. Signers and threshold are to be provided by ReserveChain.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Live panel</p>
+      <h2>Addresses and <em>explorer links</em></h2>
+      <p class="rc-lead">This panel is the authoritative display. It stays locked until an authorised deployment has been approved for publication.</p>
+    </div>
+    [rc_module module="contract_info" title="Smart-contract addresses"]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Checking an address</p>
+      <h2>Four checks <em>before you rely on one</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Domain</h3><p>You reached this page by typing reservechain.io, not through a link someone sent you.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Character match</h3><p>Compare every character of the address, not only the first and last few. Look-alike addresses are designed to defeat quick checks.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Network</h3><p>Confirm the network. A testnet address is not a mainnet address, and testnet tokens have no value.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Announcement</h3><p>Confirm that the same address appears in the dated, signed announcement in News &amp; Announcements.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Understand the contracts before they exist</h2>
+        <p>The tokenization framework explains compliance-gated transfers and fail-closed, reserve-gated minting.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Learn About Tokenization</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/legal/anti-fraud/">Anti-Fraud Notice</a>
+      </div>
+    </div>
+  </div>
+</section>

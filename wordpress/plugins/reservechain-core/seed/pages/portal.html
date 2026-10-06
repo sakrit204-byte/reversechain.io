@@ -1,0 +1,145 @@
+<!--
+title: Participant Portal
+excerpt: The Participant Portal is the planned single place for an eligible participant's account, KYC/KYB status, programs, holdings, Digital Asset Passports, documents, transactions, notices, reserve information, redemption access, support and security settings. It is built in stages; sensitive modules remain inactive until written authorization.
+kicker: Portal · Staged access
+order: 30
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Portal concept</p>
+      <h2>One account view, <em>every status visible</em></h2>
+      <p class="rc-lead">The portal is designed so that a participant sees the same evidence the public registry shows, plus their own account, eligibility and documents, with each module clearly marked active or inactive.</p>
+      <p>The same functionality is being built into the ReserveChain iOS and Android apps, which share the portal's backend, authentication, permissions and compliance status. The apps are in development; TestFlight and Google Play testing are pending.</p>
+      <p>Nothing in the portal enables a purchase, a payment or a wallet connection during pre-launch. No tokens exist, so no holdings exist.</p>
+    </div>
+    <article class="rc-card" data-reveal>
+      <span class="rc-card__num">SIGN IN</span>
+      <h3>Participant sign-in</h3>
+      <p>Accounts are provided in staged access. There is no public self-service portal registration during pre-launch, and no demo credentials are published.</p>
+      <dl class="rc-kv">
+        <div><dt>Access stage</dt><dd>Staged, by invitation</dd></div>
+        <div><dt>Authentication</dt><dd>Password plus one-time code (MFA)</dd></div>
+        <div><dt>Wallet connection</dt><dd>Inactive</dd></div>
+      </dl>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary rc-btn--sm" href="/participation/waitlist/">Join Waitlist</a><a class="rc-btn rc-btn--sm" href="/support/">Access support</a></div>
+      <p class="rc-fine">Only sign in on <span class="rc-mono">reservechain.io</span>. We never ask for a private key or seed phrase.</p>
+    </article>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Module map</p>
+      <h2>Twelve modules, <em>three states</em></h2>
+      <p class="rc-lead">"Active" means publicly available today. "Built" means implemented and available only in staged access. "Inactive" means implemented but locked until written authorization and a deployment action.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Account and profile</h3><p>Individual or corporate profile, contact preferences, data-export and closure requests.</p><div class="rc-card__foot">[rc_status s="in_development" label="Built"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>KYC / KYB status</h3><p>Verification progress, requested documents, approval state and periodic review dates.</p><div class="rc-card__foot">[rc_status s="proposed" label="Provider pending"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Programs</h3><p>Copper powder and nickel wire program information, statuses and documents.</p><div class="rc-card__foot">[rc_status s="provided" label="Active"] <a href="/assets/initial-programs/">Open →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Holdings and positions</h3><p>Token balances per program, linked to reconciled reserve records.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inactive"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Digital Asset Passports</h3><p>Unit-level records with evidence ledger, fingerprints and QR access.</p><div class="rc-card__foot">[rc_status s="provided" label="Active"] <a href="/platform/digital-asset-passports/">Open →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Documents</h3><p>Public library today; a permissioned data room and signed-document archive later.</p><div class="rc-card__foot">[rc_status s="proposed" label="Client docs inactive"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">07</span><h3>Transactions</h3><p>Ledger of every balance change with reason, time and on-chain reference.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inactive"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">08</span><h3>Notices</h3><p>Material events, document releases and security alerts, also as app notifications.</p><div class="rc-card__foot">[rc_status s="in_development" label="Built"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">09</span><h3>Reserve information</h3><p>Declared versus independently verified quantities; no coverage figure until attested.</p><div class="rc-card__foot">[rc_status s="pending_verification" label="Pending attestation"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">10</span><h3>Redemption access</h3><p>Entry point to the Redemption Portal for eligible holdings.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inactive"] <a href="/portal/redemption/">Concept →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">11</span><h3>Support</h3><p>Help topics, support requests and fraud reporting.</p><div class="rc-card__foot">[rc_status s="provided" label="Active"] <a href="/support/">Open →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">12</span><h3>Security settings</h3><p>MFA enrolment, session control and security alerts.</p><div class="rc-card__foot">[rc_status s="in_development" label="Built"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Locked modules</p>
+      <h2>Built and <em>switched off</em></h2>
+      <p class="rc-lead">These panels are rendered live from the platform's module settings. If a module were ever activated, its panel would be replaced by the working module, after written authorization.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="holdings" title="Token holdings and transaction history"]</div>
+      <div data-reveal>[rc_module module="redemption" title="Redemption requests"]</div>
+      <div data-reveal>[rc_module module="wallet" title="Wallet connection"]</div>
+      <div data-reveal>[rc_module module="client_documents" title="Client documents and signed-document archive"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Dashboard layout</p>
+      <h2>What a participant <em>is intended to see</em></h2>
+      <p>The layout puts eligibility first, because no participant-specific function is reachable until eligibility is decided. Holdings and redemption appear only after the relevant modules are authorized.</p>
+    </div>
+    <div data-reveal>
+      <p><span class="rc-demo-badge">Illustrative / demo data</span></p>
+      <dl class="rc-kv">
+        <div><dt>Account</dt><dd>Corporate profile · staged access</dd></div>
+        <div><dt>KYC / KYB</dt><dd>[rc_status s="pending" label="Not started"]</dd></div>
+        <div><dt>Jurisdiction check</dt><dd>[rc_status s="pending" label="Not started"]</dd></div>
+        <div><dt>Programs followed</dt><dd>Copper Powder · Nickel Wire 0.025 mm</dd></div>
+        <div><dt>Holdings</dt><dd>— (module inactive)</dd></div>
+        <div><dt>Latest notice</dt><dd>Development update published</dd></div>
+        <div><dt>MFA</dt><dd>Enabled</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">iOS and Android</p>
+      <h2>The same portal, <em>in your pocket</em></h2>
+      <p>The ReserveChain apps are native builds, not a web wrapper. They use the same accounts, MFA, permissions, compliance status and module flags as the website, so a module that is inactive here is inactive in the apps.</p>
+      <ul class="rc-list">
+        <li>Programs, Digital Asset Passports, fingerprint verification, documents</li>
+        <li>Account, MFA set-up, notifications and support</li>
+        <li>Wallet, holdings and redemption screens present but inactive</li>
+        <li>Mandatory disclosure and EU/EEA notice acknowledged before first use</li>
+      </ul>
+    </div>
+    <div data-reveal>
+      <div class="rc-claims">
+        <div><strong>App source</strong>[rc_status s="in_development"]<small>Feature scope implemented in source; testing continues.</small></div>
+        <div><strong>TestFlight (iOS) testing</strong>[rc_status s="proposed" label="Pending"]<small>Requires ReserveChain-controlled Apple developer account.</small></div>
+        <div><strong>Google Play testing</strong>[rc_status s="proposed" label="Pending"]<small>Requires ReserveChain-controlled Google Play account.</small></div>
+      </div>
+      [rc_module module="mobile_app_links" title="Public mobile-app store links"]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Security settings</p>
+      <h2>Account protection <em>by design</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Multi-factor authentication</h3><p>Time-based one-time codes for every account; enforced for all staff roles. Codes cannot be reused within their window.</p></article>
+      <article class="rc-card" data-reveal><h3>Sessions and devices</h3><p>Session expiry and refresh tokens that rotate on every use; reuse of an old token revokes all sessions. App credentials are held in the device's protected storage.</p></article>
+      <article class="rc-card" data-reveal><h3>Wallet ownership proof (future)</h3><p>If wallet functions are ever authorized, a wallet would need signature-based ownership proof and risk screening before use.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Interested in future access?</h2>
+        <p>Join the waitlist for development updates and future eligibility information. Registration does not constitute an investment, token purchase or reservation.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/redemption/">How Redemption Works</a>
+      </div>
+    </div>
+  </div>
+</section>
