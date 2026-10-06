@@ -410,5 +410,20 @@ export function createMockApi({ tokenStore, delayMs = 250 }: MockOptions): Reser
       await tick();
       return { ok: true };
     },
+    async deleteAccount(input) {
+      await tick();
+      await requireSession();
+      if (!input.password || input.confirm !== 'DELETE') {
+        throw new ApiError('Password or confirmation is incorrect.', 422, 'rc_delete_confirm');
+      }
+      state.email = 'demo@example.com';
+      state.name = 'Demo user (mock)';
+      state.country = null;
+      state.entityType = 'individual';
+      state.language = null;
+      state.read.clear();
+      await tokenStore.clear();
+      return { ok: true, mode: 'deleted', message: 'Mock mode: no real account was deleted.' };
+    },
   };
 }

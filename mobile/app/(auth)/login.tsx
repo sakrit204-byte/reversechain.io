@@ -30,7 +30,9 @@ export default function Login() {
         ? t('common.loggedOutInactivity')
         : logoutReason === 'expired'
           ? t('common.sessionExpired')
-          : null;
+          : logoutReason === 'deleted'
+            ? t('deleteAccount.done')
+            : null;
 
   const submit = async () => {
     setError(null);

@@ -41,6 +41,7 @@ The `EXPO_PUBLIC_*` variables are inlined when the bundle is built. Set them in 
 | `EXPO_PUBLIC_API_URL` | `http://localhost:8080/wp-json/rc/v1` | Base URL of the WordPress plugin REST namespace `rc/v1` |
 | `EXPO_PUBLIC_API_MOCK` | `0` | `1` = built-in placeholder data, no network calls |
 | `EXPO_PUBLIC_INACTIVITY_MINUTES` | `5` | Auto sign-out after this much inactivity |
+| `EXPO_PUBLIC_HIDE_MOCK_BANNER` | `0` | Store-screenshot builds only: `1` hides the MOCK DATA banner in a mock build. Never set it in EAS profiles or `.env` |
 
 For an Android emulator, use `http://10.0.2.2:8080/...` to reach the host machine's Docker WordPress.
 
@@ -71,6 +72,7 @@ For an Android emulator, use `http://10.0.2.2:8080/...` to reach the host machin
 | Holdings, transactions, wallet, purchase, Proof of Reserves, redemption — **locked** | `app/(tabs)/assets.tsx`, Overview module grid | `GET /config` modules, `GET /me/holdings`, `GET /me/transactions` |
 | Notifications (+ mark read, push registration scaffold) | `app/notifications.tsx` | `GET /me/notifications`, `POST /me/notifications/{id}/read`, `POST /me/devices` |
 | Support form (ticket reference) | `app/support.tsx` | `POST /support` |
+| Account deletion (danger zone: erased vs kept, password + typed DELETE, final confirmation; then local sign-out and secure-storage wipe) | `app/delete-account.tsx`, Account tab | `POST /me/delete` |
 | Biometric unlock (optional) | `app/lock.tsx`, Account → Security | — |
 
 The client sends `client: "ios" | "android"` on login, MFA verify and refresh. Errors are parsed from the WordPress format `{code, message, data:{status, fields}}`. Field errors from registration are shown next to the matching inputs.
@@ -182,7 +184,7 @@ Contractors should be invited as team members with the least privilege they need
 
 ## 7. Store publication checklist
 
-- [ ] Final app icon, adaptive icon and splash in ReserveChain branding. The template placeholders are still in `assets/` and must be replaced.
+- [x] Final app icon, adaptive icon, monochrome, notification icon, splash and favicon in ReserveChain branding (`assets/images/`, sources in `assets/brand/`). Store copy, privacy answers and screenshots: `store/`.
 - [ ] App name and subtitle. Description in EN/ES/IT. The mandatory disclosure must be in the store description, with no "investment/returns/profit" wording.
 - [ ] Screenshots (6.9" and 6.5" iPhone, 13" iPad if `supportsTablet` stays on; Android phone and tablet)
 - [ ] Privacy policy URL and support URL (hosted on reservechain.io)
@@ -211,7 +213,7 @@ Contractors should be invited as team members with the least privilege they need
 
 - `npx tsc --noEmit`: clean
 - `npx eslint .`: clean
-- `npx jest`: 27 tests passing across 4 suites. They cover the API client, normalisation, i18n completeness, feature-flag gating, mock-data honesty, and an expo-router smoke test of onboarding → guest browsing → passport → locked modules.
+- `npx jest`: 36 tests passing across 6 suites. They cover the API client, normalisation, i18n completeness, feature-flag gating, mock-data honesty, the MOCK DATA banner flag, account deletion (client, mock and in-app flow), and an expo-router smoke test of onboarding → guest browsing → passport → locked modules.
 - `npx expo-doctor`: 21/21
 - `npx expo export --platform web`: succeeds
 

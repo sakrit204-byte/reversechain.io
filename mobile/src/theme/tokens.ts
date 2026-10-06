@@ -3,7 +3,7 @@
  * Shared with the web theme; do not introduce colours outside this palette.
  */
 export const colors = {
-  ink: '#0B0F14',
+  ink: '#050C14', // = splash / adaptive-icon background (assets/brand), so splash → app has no colour step
   graphite: '#141A22',
   panel: '#1B232D',
   line: '#2A3542',

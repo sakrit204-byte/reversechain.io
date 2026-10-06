@@ -23,7 +23,7 @@ void SplashScreen.preventAutoHideAsync().catch(() => undefined);
 configureNotificationHandler();
 
 /** Routes that require a signed-in session. */
-const PROTECTED = new Set(['notifications', 'support', 'mfa-setup']);
+const PROTECTED = new Set(['notifications', 'support', 'mfa-setup', 'delete-account']);
 /** Routes reachable while signed out, even without choosing guest browsing. */
 const ALWAYS_PUBLIC = new Set(['(auth)', 'onboarding', 'disclosure']);
 
@@ -91,6 +91,7 @@ function RootNavigator() {
         <Stack.Screen name="notifications" options={{ title: t('notifications.title') }} />
         <Stack.Screen name="support" options={{ title: t('support.title') }} />
         <Stack.Screen name="mfa-setup" options={{ title: t('mfa.setupTitle') }} />
+        <Stack.Screen name="delete-account" options={{ title: t('deleteAccount.title') }} />
         <Stack.Screen name="disclosure" options={{ title: t('disclosure.title'), presentation: 'modal' }} />
       </Stack>
     </View>

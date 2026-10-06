@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import { Platform, type ColorValue } from 'react-native';
 import { Tabs } from 'expo-router/js-tabs';
 import { useTranslation } from 'react-i18next';
 import { Icon, type IconName } from '@/components/Icon';
@@ -19,7 +19,12 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.copperLight,
         tabBarInactiveTintColor: colors.muted,
-        tabBarStyle: { backgroundColor: colors.graphite, borderTopColor: colors.line },
+        tabBarStyle: {
+          backgroundColor: colors.graphite,
+          borderTopColor: colors.line,
+          // Web preview has no safe-area inset, and the default 49px bar clips the labels there. Native is unchanged.
+          ...(Platform.OS === 'web' ? { height: 60 } : null),
+        },
         tabBarLabelStyle: { fontFamily: fonts.uiMedium, fontSize: 11 },
         sceneStyle: { backgroundColor: colors.ink },
       }}

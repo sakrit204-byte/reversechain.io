@@ -11,6 +11,8 @@ import type {
   AppConfig,
   AppNotification,
   ClientPlatform,
+  DeleteAccountInput,
+  DeleteAccountResult,
   GatedList,
   Holding,
   LanguageCode,
@@ -80,6 +82,11 @@ export interface ReserveChainApi {
   markNotificationRead(id: string | number): Promise<OkResult>;
   submitSupport(input: SupportInput): Promise<SupportResult>;
   registerDevice(pushToken: string): Promise<OkResult>;
+  /**
+   * Permanently deletes (or anonymises) the signed-in account. On success the local tokens are cleared.
+   * Errors: 422 `rc_delete_confirm` (wrong password / confirmation), 403 `rc_delete_staff` (staff accounts).
+   */
+  deleteAccount(input: DeleteAccountInput): Promise<DeleteAccountResult>;
 }
 
 export interface ClientOptions {
@@ -318,5 +325,19 @@ export function createHttpApi(opts: ClientOptions): ReserveChainApi {
     },
     registerDevice: (pushToken) =>
       authed<OkResult>('/me/devices', { method: 'POST', body: { push_token: pushToken, platform: opts.client } }),
+    deleteAccount: async (input) => {
+      const r = await authed<{ ok?: unknown; mode?: unknown; message?: unknown }>('/me/delete', {
+        method: 'POST',
+        body: { password: input.password, confirm: input.confirm },
+      });
+      if (r.ok !== true) throw new ApiError('Account deletion was not confirmed', 500, 'bad_delete');
+      // The server sessions no longer exist: drop local tokens without calling /auth/logout.
+      await opts.tokenStore.clear();
+      return {
+        ok: true,
+        mode: r.mode === 'deleted' || r.mode === 'anonymised' ? r.mode : null,
+        message: typeof r.message === 'string' ? r.message : null,
+      };
+    },
   };
 }

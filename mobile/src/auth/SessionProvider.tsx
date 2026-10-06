@@ -10,13 +10,13 @@ import {
 } from 'react';
 import { AppState, type AppStateStatus } from 'react-native';
 import { api, ApiError, onAuthFailure } from '@/api';
-import type { Me, RegisterInput } from '@/api/types';
+import type { DeleteAccountResult, Me, RegisterInput } from '@/api/types';
 import { env } from '@/config/env';
 import { usePreferences } from '@/config/PreferencesProvider';
-import { secureTokenStore } from '@/storage/secure';
+import { clearAccountData, secureTokenStore } from '@/storage/secure';
 
 export type SessionStatus = 'loading' | 'signedOut' | 'locked' | 'signedIn';
-export type LogoutReason = 'user' | 'inactivity' | 'expired' | null;
+export type LogoutReason = 'user' | 'inactivity' | 'expired' | 'deleted' | null;
 
 /** Re-lock (biometric) when the app returns from background after this long. */
 const RELOCK_AFTER_MS = 30_000;
@@ -33,6 +33,8 @@ interface SessionState {
   logout: (reason?: LogoutReason) => Promise<void>;
   unlock: () => Promise<void>;
   refreshMe: () => Promise<void>;
+  /** Deletes the account on the server, then signs out and wipes account data from this device. */
+  deleteAccount: (password: string) => Promise<DeleteAccountResult>;
   /** Call on any user interaction to reset the inactivity timer. */
   touch: () => void;
 }
@@ -40,7 +42,7 @@ interface SessionState {
 const Ctx = createContext<SessionState | null>(null);
 
 export function SessionProvider({ children }: { children: ReactNode }) {
-  const { loaded: prefsLoaded, biometricEnabled, language } = usePreferences();
+  const { loaded: prefsLoaded, biometricEnabled, setBiometricEnabled, language } = usePreferences();
   const [status, setStatus] = useState<SessionStatus>('loading');
   const [me, setMe] = useState<Me | null>(null);
   const [guest, setGuest] = useState(false);
@@ -174,6 +176,20 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     await api.register(input);
   }, []);
 
+  const deleteAccount = useCallback(
+    async (password: string) => {
+      const r = await api.deleteAccount({ password, confirm: 'DELETE' });
+      await clearAccountData();
+      await setBiometricEnabled(false);
+      setMe(null);
+      setGuest(false);
+      setLogoutReason('deleted');
+      setStatus('signedOut');
+      return r;
+    },
+    [setBiometricEnabled],
+  );
+
   const unlock = useCallback(async () => {
     try {
       await loadMe();
@@ -195,11 +211,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       logout,
       unlock,
       refreshMe: loadMe,
+      deleteAccount,
       touch: () => {
         lastActivity.current = Date.now();
       },
     }),
-    [status, me, guest, logoutReason, login, verifyMfa, register, logout, unlock, loadMe],
+    [status, me, guest, logoutReason, login, verifyMfa, register, logout, unlock, loadMe, deleteAccount],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

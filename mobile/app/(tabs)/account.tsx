@@ -159,7 +159,15 @@ export default function Account() {
       </Section>
 
       {signedIn ? (
-        <Button label={t('common.signOut')} variant="danger" onPress={() => void logout('user')} style={{ marginTop: space.xl }} />
+        <>
+          <Button label={t('common.signOut')} variant="danger" onPress={() => void logout('user')} style={{ marginTop: space.xl }} />
+          <Section title={t('deleteAccount.dangerZone')}>
+            <Card accent={colors.red} style={{ padding: 0 }}>
+              <ListRow icon="shield" label={t('deleteAccount.title')} onPress={() => router.push('/delete-account')} />
+              <Muted style={{ paddingHorizontal: space.lg, paddingBottom: space.md }}>{t('deleteAccount.entryHint')}</Muted>
+            </Card>
+          </Section>
+        </>
       ) : null}
 
       <View style={{ marginTop: space.xl, alignItems: 'center' }}>

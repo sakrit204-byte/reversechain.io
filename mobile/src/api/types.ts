@@ -254,6 +254,21 @@ export interface SupportInput {
   topic: string;
 }
 
+/** POST /me/delete — `confirm` must be the literal string "DELETE". */
+export interface DeleteAccountInput {
+  password: string;
+  confirm: 'DELETE';
+}
+
+/** `deleted` = account erased; `anonymised` = personal data removed, records kept where the law requires it. */
+export type DeleteAccountMode = 'deleted' | 'anonymised';
+
+export interface DeleteAccountResult {
+  ok: boolean;
+  mode: DeleteAccountMode | null;
+  message: string | null;
+}
+
 export interface SupportResult {
   ok: boolean;
   ticket: string | null;

@@ -94,3 +94,13 @@ export const PREF_KEYS = {
   language: 'language',
   biometric: 'biometric_enabled',
 } as const;
+
+/**
+ * Wipes everything on this device that belongs to the signed-in account (used after account deletion):
+ * session tokens and the biometric-unlock opt-in. Device-level preferences (language, disclosure
+ * acknowledgement) are not personal data and are kept.
+ */
+export async function clearAccountData(): Promise<void> {
+  await secureTokenStore.clear();
+  await prefs.set(PREF_KEYS.biometric, '0');
+}

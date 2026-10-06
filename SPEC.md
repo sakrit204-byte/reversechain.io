@@ -34,7 +34,7 @@ EN/ES/IT, institutional whitepaper. Entity is a *proposed Swiss* structure (brie
 
 ## Brand / design tokens (shared by web + app)
 - Concept: "assay-grade" — periodic-table element tiles as program identity: **Cu 29** (Copper Powder), **Ni 28** (Nickel Wire).
-- Colors: ink `#0B0F14`, graphite `#141A22`, panel `#1B232D`, line `#2A3542`, paper `#F5F2EC`, text-muted `#8A96A3`,
+- Colors: ink `#050C14`, graphite `#141A22`, panel `#1B232D`, line `#2A3542`, paper `#F5F2EC`, text-muted `#8A96A3`,
   copper `#C46A3A` (light `#E39A6B`), nickel `#9FB3C2` (light `#C9D6DF`), signal-green `#3FB37F`, amber `#E0A43A`, red `#D9574A`.
 - Status pill colors: proposed=nickel, in_development=amber, pending_verification=copper, verified=green, not_applicable=muted.
 - Type: "Inter Tight"/Inter for UI, "IBM Plex Mono" for hashes/IDs/data, "Fraunces" (serif) for display headings.

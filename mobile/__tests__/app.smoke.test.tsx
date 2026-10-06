@@ -32,6 +32,10 @@ jest.mock('@/storage/secure', () => {
       set: async (t: unknown) => void mem.set('tokens', JSON.stringify(t)),
       clear: async () => void mem.delete('tokens'),
     },
+    clearAccountData: async () => {
+      mem.delete('tokens');
+      mem.set('pref.biometric_enabled', '0');
+    },
     PREF_KEYS: { disclosureAck: 'disclosure_ack_version', language: 'language', biometric: 'biometric_enabled' },
   };
 });

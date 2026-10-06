@@ -8,7 +8,7 @@ import { Body } from './Typography';
 
 export function MockBanner() {
   const { t } = useTranslation();
-  if (!env.mock) return null;
+  if (!env.mock || env.hideMockBanner) return null;
   return (
     <View style={st.mock} accessibilityRole="alert" accessibilityLabel={t('common.mockBanner')}>
       <Body style={st.mockBadge}>{t('common.mockBadge')}</Body>

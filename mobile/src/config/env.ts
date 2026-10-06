@@ -15,4 +15,9 @@ export const env = {
   apiUrl: (process.env.EXPO_PUBLIC_API_URL || DEFAULT_API_URL).replace(/\/+$/, ''),
   mock: flag(process.env.EXPO_PUBLIC_API_MOCK),
   inactivityMinutes: intOr(process.env.EXPO_PUBLIC_INACTIVITY_MINUTES, 5),
+  /**
+   * Store-screenshot builds ONLY: hides the amber MOCK DATA banner. Default off, so every normal mock
+   * build still shows it. Has no effect unless `mock` is also on (never hides anything in a live build).
+   */
+  hideMockBanner: flag(process.env.EXPO_PUBLIC_HIDE_MOCK_BANNER),
 } as const;
