@@ -29,8 +29,12 @@ add_action(
 			array(
 				'primary'  => __( 'Primary navigation', 'reservechain' ),
 				'footer-1' => __( 'Footer — Platform', 'reservechain' ),
-				'footer-2' => __( 'Footer — Company', 'reservechain' ),
-				'footer-3' => __( 'Footer — Legal', 'reservechain' ),
+				'footer-2' => __( 'Footer — Assets', 'reservechain' ),
+				'footer-3' => __( 'Footer — Enterprise', 'reservechain' ),
+				'footer-4' => __( 'Footer — Participation', 'reservechain' ),
+				'footer-5' => __( 'Footer — Company', 'reservechain' ),
+				'footer-6' => __( 'Footer — Resources', 'reservechain' ),
+				'footer-7' => __( 'Footer — Legal', 'reservechain' ),
 			)
 		);
 	}
@@ -55,7 +59,9 @@ add_action(
 	static function () {
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>', esc_url( RCT_URI . '/assets/fonts/inter-tight-latin-wght-normal.woff2' ) );
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>', esc_url( RCT_URI . '/assets/fonts/fraunces-latin-wght-normal.woff2' ) );
-		echo '<meta name="theme-color" content="#0B0F14">';
+		echo '<meta name="theme-color" content="#050C14">';
+		printf( '<link rel="icon" href="%s" type="image/svg+xml">', esc_url( RCT_URI . '/assets/img/favicon.svg' ) );
+		printf( '<link rel="apple-touch-icon" href="%s">', esc_url( RCT_URI . '/assets/img/apple-touch-icon.png' ) );
 	},
 	1
 );
@@ -76,8 +82,8 @@ add_action(
 		if ( ! class_exists( 'RC\\Settings' ) || ! is_page() ) {
 			return;
 		}
-		$slug = get_post_field( 'post_name', get_queried_object_id() );
-		if ( isset( RC\Settings::SECTIONS[ $slug ] ) && ! RC\Settings::section_on( $slug ) && ! current_user_can( 'edit_pages' ) ) {
+		$path = get_page_uri( get_queried_object_id() );
+		if ( ! RC\Settings::section_on( $path ) && ! current_user_can( 'edit_pages' ) ) {
 			global $wp_query;
 			$wp_query->set_404();
 			status_header( 404 );
@@ -97,8 +103,7 @@ add_filter(
 				if ( 'page' !== $item->object ) {
 					return true;
 				}
-				$slug = get_post_field( 'post_name', (int) $item->object_id );
-				return ! isset( RC\Settings::SECTIONS[ $slug ] ) || RC\Settings::section_on( $slug );
+				return RC\Settings::section_on( get_page_uri( (int) $item->object_id ) );
 			}
 		);
 	}
@@ -125,4 +130,22 @@ add_filter(
 		return $content;
 	},
 	0
+);
+
+/** Mandated browser title for the homepage (MASTER p.3). */
+add_filter(
+	'pre_get_document_title',
+	static function ( $title ) {
+		return is_front_page() ? 'ReserveChain.io | Building the Infrastructure for Industrial-Metals Tokenization' : $title;
+	},
+	20
+);
+
+add_filter(
+	'document_title_parts',
+	static function ( $parts ) {
+		$parts['site'] = 'ReserveChain.io';
+		unset( $parts['tagline'] );
+		return $parts;
+	}
 );

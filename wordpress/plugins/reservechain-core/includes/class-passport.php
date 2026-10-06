@@ -230,9 +230,13 @@ final class Passport {
 	 * Public field list with explicit provided / pending state.
 	 */
 	public static function public_fields( int $post_id, bool $include_private = false ): array {
-		$def = Schema::entity( (string) get_post_type( $post_id ) );
-		$out = array();
+		$def    = Schema::entity( (string) get_post_type( $post_id ) );
+		$out    = array();
+		$symbol = Registry::program_symbol( $post_id );
 		foreach ( $def['fields'] ?? array() as $field ) {
+			if ( ! empty( $field['scope'] ) && strcasecmp( $field['scope'], $symbol ) !== 0 ) {
+				continue;
+			}
 			if ( ( isset( $field['public'] ) && ! $field['public'] && ! $include_private ) || in_array( $field['type'], array( 'status', 'file' ), true ) ) {
 				continue;
 			}
@@ -244,6 +248,7 @@ final class Passport {
 				'label'     => $field['label'],
 				'value'     => $empty ? null : $display,
 				'unit'      => $field['unit'] ?? null,
+				'type'      => $field['type'],
 				'state'     => $empty ? 'pending' : 'provided',
 				'pending'   => $empty ? ( $field['pending'] ?? 'Not yet provided' ) : null,
 				'countable' => ! in_array( $field['type'], array( 'relation', 'relations' ), true ) && ! empty( $field['pending'] ),

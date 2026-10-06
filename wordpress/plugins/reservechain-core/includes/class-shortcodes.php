@@ -30,6 +30,10 @@ final class Shortcodes {
 			'rc_status'         => 'status',
 			'rc_program_facts'  => 'program_facts',
 			'rc_module'         => 'module',
+			'rc_provisional'    => 'provisional',
+			'rc_registry_table' => 'registry_table',
+			'rc_coa'            => 'coa',
+			'rc_por'            => 'por',
 		);
 		foreach ( $map as $tag => $method ) {
 			add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -100,6 +104,136 @@ final class Shortcodes {
 	public static function module( $atts ): string {
 		$a = shortcode_atts( array( 'module' => '', 'title' => '' ), $atts );
 		return self::module_off( sanitize_key( $a['module'] ), $a['title'] ?: ( Settings::GATED_MODULES[ $a['module'] ] ?? $a['module'] ) ) ?? '';
+	}
+
+	/* ------------------------------------------------------------ live registry components */
+
+	public static function provisional(): string {
+		return '<div class="rc-provisional" role="note"><strong>' . esc_html__( 'Provisional Asset Notice', 'reservechain' ) . '</strong>' . esc_html( I18n::t( (string) Settings::get( 'provisional_notice' ) ) ) . '</div>';
+	}
+
+	private static function program_id( string $slug ): int {
+		$p = $slug ? get_page_by_path( sanitize_title( $slug ), OBJECT, 'rc_program' ) : null;
+		return $p && 'publish' === $p->post_status ? (int) $p->ID : 0;
+	}
+
+	private static function select_label( string $type, string $key, string $value ): string {
+		$f = Schema::field( $type, $key );
+		return $f && isset( $f['options'][ $value ] ) ? __( $f['options'][ $value ], 'reservechain' ) : ( $value ?: '—' ); // phpcs:ignore
+	}
+
+	/** Industrial Metals Registry table with unit-level statuses. [rc_registry_table program="" type="" limit=""] */
+	public static function registry_table( $atts ): string {
+		$a = shortcode_atts( array( 'program' => '', 'type' => '', 'limit' => 100 ), $atts );
+		if ( ! Settings::module_on( 'registry_public' ) ) {
+			return self::module_off( 'registry_public', __( 'Industrial Metals Registry', 'reservechain' ) ) ?? '';
+		}
+		$q = array( 'post_type' => $a['type'] && Schema::is_passport_type( $a['type'] ) ? $a['type'] : Schema::PASSPORT_TYPES, 'post_status' => 'publish', 'posts_per_page' => (int) $a['limit'], 'orderby' => array( 'type' => 'ASC', 'title' => 'ASC' ) );
+		if ( $a['program'] ) {
+			$pid = self::program_id( $a['program'] );
+			if ( ! $pid ) {
+				return '';
+			}
+			$q['meta_query'] = array( array( 'key' => '_rc_program', 'value' => $pid ) ); // phpcs:ignore
+		}
+		$rows = get_posts( $q );
+		if ( ! $rows ) {
+			return '<p class="rc-empty">' . esc_html__( 'No registry records have been published yet.', 'reservechain' ) . '</p>';
+		}
+		$out = '<div class="rc-table-wrap"><table class="rc-table rc-registry"><thead><tr><th>' . esc_html__( 'Record', 'reservechain' ) . '</th><th>' . esc_html__( 'Unit', 'reservechain' ) . '</th><th>' . esc_html__( 'Verification', 'reservechain' ) . '</th><th>' . esc_html__( 'Custody', 'reservechain' ) . '</th><th>' . esc_html__( 'Reserve', 'reservechain' ) . '</th><th>' . esc_html__( 'Tokenization', 'reservechain' ) . '</th><th>' . esc_html__( 'Redemption', 'reservechain' ) . '</th><th>' . esc_html__( 'Availability', 'reservechain' ) . '</th></tr></thead><tbody>';
+		foreach ( $rows as $r ) {
+			$m   = static fn( $k ) => (string) get_post_meta( $r->ID, '_rc_' . $k, true );
+			$no  = $m( 'record_no' );
+			$out .= sprintf(
+				'<tr><td><a class="rc-mono" href="%1$s">%2$s</a></td><td>%3$s<br><small>%4$s</small></td><td>%5$s</td><td>%6$s</td><td>%7$s</td><td>%8$s</td><td>%9$s</td><td>%10$s</td></tr>',
+				esc_url( home_url( '/passport/' . rawurlencode( $no ) . '/' ) ),
+				esc_html( $no ),
+				esc_html( $r->post_title ),
+				esc_html( __( Schema::entity( $r->post_type )['singular'], 'reservechain' ) ), // phpcs:ignore
+				self::pill( $m( 'verification_status' ) ?: 'in_development' ),
+				esc_html( self::select_label( $r->post_type, 'custody_status', $m( 'custody_status' ) ?: 'pending' ) ),
+				esc_html( self::select_label( $r->post_type, 'reserve_status', $m( 'reserve_status' ) ?: 'pending' ) ),
+				esc_html( self::select_label( $r->post_type, 'tokenization_status', $m( 'tokenization_status' ) ?: 'not_issued' ) ),
+				esc_html( self::select_label( $r->post_type, 'redemption_status', $m( 'redemption_status' ) ?: 'not_available' ) ),
+				esc_html( self::select_label( $r->post_type, 'availability_status', $m( 'availability_status' ) ?: 'not_offered' ) )
+			);
+		}
+		return $out . '</tbody></table></div><p class="rc-fine">' . esc_html( sprintf( _n( '%d record', '%d records', count( $rows ), 'reservechain' ), count( $rows ) ) ) . ' · ' . esc_html__( 'Statuses are set through the four-eyes workflow and change only when supporting evidence is approved.', 'reservechain' ) . '</p>';
+	}
+
+	/** Certificate of Analysis evidence panel for a program. [rc_coa program="copper-powder"] */
+	public static function coa( $atts ): string {
+		$a   = shortcode_atts( array( 'program' => '' ), $atts );
+		$pid = self::program_id( $a['program'] );
+		if ( ! $pid ) {
+			return '';
+		}
+		$lots = get_posts( array( 'post_type' => 'rc_lot', 'post_status' => 'publish', 'posts_per_page' => 20, 'meta_key' => '_rc_program', 'meta_value' => $pid, 'fields' => 'ids' ) ); // phpcs:ignore
+		$coas = array();
+		foreach ( $lots as $lot ) {
+			$coas = array_merge( $coas, Registry::referencing( $lot, array( 'rc_coa' ) ) );
+		}
+		if ( ! $coas ) {
+			return '<p class="rc-empty">' . esc_html__( 'No Certificate of Analysis has been published for this program yet.', 'reservechain' ) . '</p>';
+		}
+		$out = '';
+		foreach ( $coas as $coa ) {
+			$fields = Passport::public_fields( $coa->ID );
+			$doc    = Passport::document( (int) get_post_meta( $coa->ID, '_rc_document', true ) );
+			$assay  = array_values( array_filter( $fields, static fn( $f ) => 'assay_results' === $f['key'] ) );
+			$facts  = array_values( array_filter( $fields, static fn( $f ) => ! in_array( $f['key'], array( 'assay_results', 'subject', 'document', 'provenance' ), true ) && 'provided' === $f['state'] ) );
+			$prov   = (string) get_post_meta( $coa->ID, '_rc_provenance', true );
+			$out   .= '<div class="rc-coa">';
+			$out   .= '<div class="rc-coa__head"><div><p class="rc-kicker">' . esc_html__( 'Certificate of Analysis', 'reservechain' ) . '</p><h3>' . esc_html( $coa->post_title ) . '</h3><p class="rc-coa__badges">' . self::pill( (string) get_post_meta( $coa->ID, '_rc_verification_status', true ) ) . ( $prov ? ' <span class="rc-tag">' . esc_html( self::select_label( 'rc_coa', 'provenance', $prov ) ) . '</span>' : '' ) . '</p></div>';
+			if ( $doc && $doc['url'] ) {
+				$out .= '<a class="rc-coa__thumb" href="' . esc_url( $doc['url'] ) . '" target="_blank" rel="noopener">' . ( 0 === strpos( (string) $doc['mime'], 'image/' ) ? '<img src="' . esc_url( $doc['url'] ) . '" alt="' . esc_attr( $doc['title'] ) . '" loading="lazy" width="180" height="250">' : '<span>PDF</span>' ) . '<small>' . esc_html__( 'View original scan', 'reservechain' ) . '</small></a>';
+			}
+			$out .= '</div>' . self::field_table( $facts ) . ( $assay ? self::field_table( $assay ) : '' );
+			if ( $doc ) {
+				$out .= '<p class="rc-doc__hash"><span>SHA-256</span><code class="rc-mono" data-copy>' . esc_html( (string) $doc['sha256'] ) . '</code> <a class="rc-btn rc-btn--sm" href="' . esc_url( add_query_arg( 'hash', $doc['sha256'], home_url( '/platform/verification/' ) ) ) . '">' . esc_html__( 'Verify fingerprint', 'reservechain' ) . '</a></p>';
+			}
+			$out .= '<p class="rc-fine">' . esc_html__( 'Transcribed exactly as printed on the owner-supplied certificate (comma decimals). Owner-supplied evidence is not an independent verification by ReserveChain; publication and any "verified" status are subject to documentary verification and approval.', 'reservechain' ) . '</p></div>';
+		}
+		return $out;
+	}
+
+	/**
+	 * Proof-of-Reserves dashboard computed live from the registry. Declared (owner-supplied) and verified
+	 * quantities are never mixed; coverage is only computed from an attested reserve report. [rc_por program=""]
+	 */
+	public static function por( $atts ): string {
+		$a     = shortcode_atts( array( 'program' => '' ), $atts );
+		$progs = $a['program'] ? array_filter( array( self::program_id( $a['program'] ) ) ) : get_posts( array( 'post_type' => 'rc_program', 'post_status' => 'publish', 'fields' => 'ids', 'posts_per_page' => 20, 'orderby' => 'menu_order', 'order' => 'ASC' ) );
+		$out   = '<div class="rc-por">';
+		foreach ( $progs as $pid ) {
+			$units    = get_posts( array( 'post_type' => Schema::PASSPORT_TYPES, 'post_status' => 'publish', 'posts_per_page' => 500, 'meta_key' => '_rc_program', 'meta_value' => $pid ) ); // phpcs:ignore
+			$lots     = array_filter( $units, static fn( $u ) => 'rc_lot' === $u->post_type );
+			$declared = 0.0;
+			foreach ( $lots as $l ) {
+				$declared += (float) get_post_meta( $l->ID, '_rc_net_weight', true );
+			}
+			$verified = 0;
+			foreach ( $units as $u ) {
+				$verified += 'verified' === get_post_meta( $u->ID, '_rc_verification_status', true ) ? 1 : 0;
+			}
+			$reports  = get_posts( array( 'post_type' => 'rc_reserve_report', 'post_status' => 'publish', 'posts_per_page' => 1, 'meta_key' => '_rc_program', 'meta_value' => $pid ) ); // phpcs:ignore
+			$attested = $reports && 'verified' === get_post_meta( $reports[0]->ID, '_rc_verification_status', true );
+			$sym      = (string) get_post_meta( $pid, '_rc_symbol', true );
+			$cells    = array(
+				array( __( 'Registered physical units', 'reservechain' ), (string) count( $units ), __( 'lots, containers, coils', 'reservechain' ) ),
+				array( __( 'Declared net weight', 'reservechain' ), $declared ? rtrim( rtrim( number_format( $declared, 3, '.', ',' ), '0' ), '.' ) . ' kg' : '—', __( 'owner-declared, unverified', 'reservechain' ) ),
+				array( __( 'Independently verified units', 'reservechain' ), (string) $verified, __( 'requires verified evidence', 'reservechain' ) ),
+				array( __( 'Attested reserve', 'reservechain' ), $attested ? (string) get_post_meta( $reports[0]->ID, '_rc_reserve_units', true ) : __( 'None', 'reservechain' ), __( 'no attestation published', 'reservechain' ) ),
+				array( __( 'Tokens issued', 'reservechain' ), '0', __( 'no tokens exist', 'reservechain' ) ),
+				array( __( 'Reserve coverage', 'reservechain' ), __( 'Not computed', 'reservechain' ), __( 'computed only from an attested report', 'reservechain' ) ),
+			);
+			$out .= '<section class="rc-por__prog rc-por__prog--' . esc_attr( strtolower( $sym ) ) . '"><header><span class="rc-por__el">' . esc_html( $sym ) . '</span><h3>' . esc_html( get_the_title( $pid ) ) . '</h3>' . self::pill( 'in_development', __( 'Live from registry · no attestation', 'reservechain' ) ) . '</header><dl class="rc-por__grid">';
+			foreach ( $cells as $c ) {
+				$out .= '<div><dt>' . esc_html( $c[0] ) . '</dt><dd>' . esc_html( $c[1] ) . '</dd><small>' . esc_html( $c[2] ) . '</small></div>';
+			}
+			$out .= '</dl></section>';
+		}
+		return $out . '<p class="rc-fine">' . esc_html__( 'Figures are computed in real time from approved registry records. Declared quantities come from owner-supplied documents and are not verified reserves. Reserve coverage will only be calculated once an independent attestation is published.', 'reservechain' ) . '</p></div>';
 	}
 
 	/* ------------------------------------------------------------ waitlist */
@@ -335,9 +469,27 @@ final class Shortcodes {
 		return self::field_table( $fields, self::pill( get_post_meta( $prog->ID, '_rc_verification_status', true ) ?: 'in_development' ) );
 	}
 
+	/** "Element: value" lines → periodic-style result grid (values exactly as printed on the certificate). */
+	public static function assay_grid( string $raw ): string {
+		$out = '<div class="rc-assay">';
+		foreach ( preg_split( '/\r?\n/', trim( $raw ) ) as $line ) {
+			if ( ! preg_match( '/^\s*([A-Z][a-z]?)\s*[:=]\s*(.+?)\s*$/', $line, $m ) ) {
+				continue;
+			}
+			$matrix = 0 === strcasecmp( $m[2], 'matrix' );
+			$det    = ! $matrix && '<' !== substr( $m[2], 0, 1 );
+			$out   .= sprintf( '<span class="rc-assay__el%s"><b>%s</b><i>%s</i></span>', $matrix ? ' is-matrix' : ( $det ? ' is-detected' : '' ), esc_html( $m[1] ), esc_html( $m[2] ) );
+		}
+		return $out . '</div><p class="rc-assay__legend"><span class="is-detected"></span>' . esc_html__( 'detected', 'reservechain' ) . ' <span></span>' . esc_html__( 'below detection limit', 'reservechain' ) . ' <span class="is-matrix"></span>' . esc_html__( 'matrix (base metal)', 'reservechain' ) . '</p>';
+	}
+
 	public static function field_table( array $fields, string $status_html = '' ): string {
 		$out = '<div class="rc-ftable">' . ( $status_html ? '<div class="rc-ftable__status">' . $status_html . '</div>' : '' ) . '<dl>';
 		foreach ( $fields as $f ) {
+			if ( 'assay' === ( $f['type'] ?? '' ) && 'provided' === $f['state'] ) {
+				$out .= '<div class="rc-ftable__row rc-ftable__row--assay"><dt>' . esc_html( __( $f['label'], 'reservechain' ) ) . ' <small>[' . esc_html( (string) $f['unit'] ) . ']</small></dt><dd>' . self::assay_grid( (string) $f['value'] ) . '</dd></div>'; // phpcs:ignore
+				continue;
+			}
 			$out .= sprintf(
 				'<div class="rc-ftable__row rc-ftable__row--%1$s"><dt>%2$s</dt><dd>%3$s</dd></div>',
 				esc_attr( $f['state'] ),

@@ -126,7 +126,7 @@ final class Security {
 	}
 
 	public static function maintenance(): void {
-		if ( 'maintenance' !== Settings::get( 'site_mode' ) || current_user_can( 'edit_posts' ) || is_admin() ) {
+		if ( ! in_array( Settings::get( 'site_mode' ), array( 'maintenance', 'development' ), true ) || current_user_can( 'edit_posts' ) || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 			return;
 		}
 		status_header( 503 );

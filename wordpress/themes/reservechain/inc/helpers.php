@@ -30,10 +30,17 @@ function rct_pill( string $status, ?string $label = null ): string {
 	return rct_core() ? RC\Shortcodes::pill( $status, $label ) : '';
 }
 
-/** Brand mark: two element tiles (Cu · Ni) forming the RC monogram. */
+/** Brand lockup: hexagonal cube (gold top · copper · nickel faces) + ReserveChain.io wordmark. Source: assets/img/logo.svg. */
 function rct_logo( bool $wordmark = true ): string {
-	$svg = '<svg class="rc-logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="1" y="1" width="18" height="38" rx="3" fill="var(--copper)"/><rect x="21" y="1" width="18" height="38" rx="3" fill="var(--nickel)"/><text x="10" y="25" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#0B0F14">Cu</text><text x="30" y="25" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="#0B0F14">Ni</text></svg>';
-	return '<span class="rc-logo">' . $svg . ( $wordmark ? '<span class="rc-logo__word">Reserve<b>Chain</b></span>' : '' ) . '</span>';
+	static $n = 0;
+	$i   = ++$n;
+	$svg = '<svg class="rc-logo__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><linearGradient id="rcg' . $i . '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0D59A"/><stop offset=".5" stop-color="#D5B167"/><stop offset="1" stop-color="#9C6E22"/></linearGradient><linearGradient id="rcc' . $i . '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8A06A"/><stop offset="1" stop-color="#8E4A20"/></linearGradient><linearGradient id="rcn' . $i . '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E1E9EF"/><stop offset="1" stop-color="#7C8F9E"/></linearGradient></defs><polygon points="24,2.5 42.6,13.25 42.6,34.75 24,45.5 5.4,34.75 5.4,13.25" fill="#0A141F" stroke="url(#rcg' . $i . ')" stroke-width="2"/><polygon points="24,11 35.3,17.5 24,24 12.7,17.5" fill="url(#rcg' . $i . ')"/><polygon points="12.7,17.5 24,24 24,37 12.7,30.5" fill="url(#rcc' . $i . ')"/><polygon points="24,24 35.3,17.5 35.3,30.5 24,37" fill="url(#rcn' . $i . ')"/><g fill="#D5B167"><circle cx="24" cy="2.5" r="1.6"/><circle cx="42.6" cy="13.25" r="1.6"/><circle cx="42.6" cy="34.75" r="1.6"/><circle cx="24" cy="45.5" r="1.6"/><circle cx="5.4" cy="34.75" r="1.6"/><circle cx="5.4" cy="13.25" r="1.6"/></g></svg>';
+	return '<span class="rc-logo">' . $svg . ( $wordmark ? '<span class="rc-logo__text"><span class="rc-logo__word">Reserve<b>Chain.io</b></span><span class="rc-logo__tag">' . esc_html__( 'Infrastructure for real-world assets', 'reservechain' ) . '</span></span>' : '' ) . '</span>';
+}
+
+function rct_provisional(): string {
+	$t = rct_core() ? RC\I18n::t( (string) RC\Settings::get( 'provisional_notice' ) ) : '';
+	return $t ? '<div class="rc-provisional" role="note"><strong>' . esc_html__( 'Provisional Asset Notice', 'reservechain' ) . '</strong>' . esc_html( $t ) . '</div>' : '';
 }
 
 function rct_lang_switcher(): string {

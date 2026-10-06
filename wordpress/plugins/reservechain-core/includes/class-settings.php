@@ -20,46 +20,92 @@ final class Settings {
 
 	public const EU_NOTICE = 'ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.';
 
+	public const PROVISIONAL_NOTICE = 'Preliminary illustrative information only - subject to documentary verification, independent assessment and final approval. No asset or token is currently offered for sale through this website.';
+
+	/**
+	 * The ten website modes of the master instructions (+ maintenance). Modes flagged `locked` need BOTH an
+	 * admin action (written authorization reference) AND a deployment action (wp-config constant) — they can
+	 * never auto-activate.
+	 */
 	public const MODES = array(
-		'prelaunch'     => 'Prelaunch — full informational site, waitlist open, no offering',
-		'waitlist_only' => 'Waitlist only — homepage, disclosures and waitlist',
-		'maintenance'   => 'Maintenance — holding page for visitors, staff unaffected',
-		'live'          => 'Live — locked; requires RC_ALLOW_LIVE_MODE and written authorization',
+		'development'           => array( 'Development', 'Staff preview; public sees holding page', false ),
+		'prelaunch'             => array( 'Pre-Launch', 'Full informational site, waitlist open, no offering', false ),
+		'waitlist'              => array( 'Waitlist', 'Homepage, disclosures, waitlist and legal pages only', false ),
+		'documentation_release' => array( 'Documentation Release', 'Pre-Launch + whitepaper and document library emphasised', false ),
+		'asset_verification'    => array( 'Asset Verification', 'Pre-Launch + registry and passports emphasised as evidence arrives', false ),
+		'enterprise_onboarding' => array( 'Enterprise Onboarding', 'Pre-Launch + enterprise / asset-owner intake emphasised', false ),
+		'eligibility'           => array( 'Eligibility', 'Account eligibility checks (KYC/KYB) open — locked', true ),
+		'early_participation'   => array( 'Early Participation', 'Token-acquisition module visible — locked', true ),
+		'live_offering'         => array( 'Live Offering', 'Offering live under definitive documentation — locked', true ),
+		'redemption'            => array( 'Redemption', 'Physical redemption requests open — locked', true ),
+		'maintenance'           => array( 'Maintenance', 'Holding page (HTTP 503) for visitors; staff unaffected', false ),
 	);
 
+	/** Built but inactive, hidden and non-indexable until written authorization (MASTER §17). */
 	public const GATED_MODULES = array(
-		'wallet'            => 'Wallet connection',
-		'purchase'          => 'Purchase / subscription',
-		'proof_of_reserves' => 'Proof of Reserves (live data)',
-		'redemption'        => 'Redemption requests',
+		'wallet'               => 'Wallet connection',
+		'purchase'             => 'Token purchase / token-acquisition module',
+		'usdt_payments'        => 'USDT (ERC-20) payments',
+		'kyc_kyb'              => 'KYC / KYB, AML and sanctions screening',
+		'eligibility'          => 'Jurisdictional eligibility decisions',
+		'proof_of_reserves'    => 'Proof of Industrial Metal Reserves (live figures)',
+		'reserve_dashboard'    => 'Reserve reconciliation dashboard',
+		'holdings'             => 'Token holdings & transaction history',
+		'client_documents'     => 'Client documents',
+		'redemption'           => 'Physical-redemption requests',
+		'unit_selection'       => 'Container / coil selection for redemption',
+		'logistics'            => 'Logistics, customs & delivery workflow',
+		'investor_portal'      => 'Investor portal',
+		'enterprise_portal'    => 'Enterprise client portal',
+		'asset_owner_portal'   => 'Asset-owner / originator portal',
+		'tokenomics'           => 'Tokenomics publication',
+		'contract_info'        => 'Smart-contract addresses & explorer links',
+		'dex_info'             => 'DEX / exchange information',
+		'team_profiles'        => 'Confirmed team profiles',
+		'partners_directory'   => 'Confirmed partners, laboratories, custodians, insurers, advisers',
+		'mobile_app_links'     => 'Public mobile-app store links',
+		'waitlist_nationality' => 'Waitlist nationality & current-location fields (only when legally required)',
 	);
 
 	public const OPEN_MODULES = array(
 		'waitlist'          => 'Waitlist registration',
-		'registry_public'   => 'Public Asset Registry',
-		'passports_public'  => 'Public Digital Asset Passports',
-		'verify_tool'       => 'Document verification tool',
+		'registry_public'   => 'Public Industrial Metals Registry (approved records only)',
+		'passports_public'  => 'Public Digital Asset Passports (approved records only)',
+		'verify_tool'       => 'Document fingerprint verification tool',
 		'app_registration'  => 'Mobile app account registration',
+		'news'              => 'News & announcements',
 	);
 
+	/** Website sections (page paths) that can be hidden without deleting content. */
 	public const SECTIONS = array(
-		'overview'            => 'Project Overview',
-		'copper-powder'       => 'Copper Powder program',
-		'nickel-wire'         => 'Nickel Wire program',
-		'asset-registry'      => 'Asset Registry',
-		'digital-asset-passports' => 'Digital Asset Passports',
-		'verification'        => 'Verification',
-		'custody'             => 'Custody',
-		'proof-of-reserves'   => 'Proof of Reserves',
-		'tokenization'        => 'Tokenization',
-		'redemption'          => 'Redemption',
-		'enterprise-services' => 'Enterprise Services',
-		'documents'           => 'Documents & Whitepaper',
-		'roadmap'             => 'Roadmap',
-		'governance'          => 'Governance',
-		'faq'                 => 'FAQ',
-		'contact'             => 'Contact',
-		'waitlist'            => 'Waitlist',
+		'platform'                                 => 'Platform overview',
+		'platform/how-it-works'                    => 'How ReserveChain Works',
+		'platform/infrastructure'                  => 'Platform Infrastructure',
+		'platform/technology'                      => 'Technology',
+		'platform/security'                        => 'Security',
+		'platform/verification'                    => 'Independent Verification',
+		'platform/custody'                         => 'Custody & Vault Structure',
+		'platform/proof-of-reserves'               => 'Proof of Reserves',
+		'platform/digital-asset-passports'         => 'Digital Asset Passports',
+		'platform/asset-registry'                  => 'Industrial Metals Registry',
+		'platform/tokenization'                    => 'Tokenization',
+		'platform/redemption'                      => 'Physical Redemption',
+		'assets'                                   => 'Explore Real-World Assets',
+		'assets/industrial-metals/copper-powder'   => 'Copper Powder program',
+		'assets/industrial-metals/nickel-wire'     => 'Nickel Wire program',
+		'assets/future-categories'                 => 'Future Asset Categories',
+		'participation'                            => 'Early Participation Program',
+		'participation/discount-methodology'       => 'Discount Methodology',
+		'participation/waitlist'                   => 'Waitlist',
+		'enterprise'                               => 'Enterprise Services',
+		'investors'                                => 'Investors',
+		'resources'                                => 'Resources',
+		'resources/whitepaper'                     => 'Whitepaper',
+		'resources/investor-presentation'          => 'Investor Presentation',
+		'company/news'                             => 'News & Announcements',
+		'company/roadmap'                          => 'Roadmap',
+		'portal'                                   => 'Participant Portal',
+		'portal/redemption'                        => 'Redemption Portal',
 	);
 
 	/** Default comprehensive-sanctions screen. Must be confirmed by counsel before launch. */
@@ -79,6 +125,8 @@ final class Settings {
 			'authorizations'       => array(),
 			'disclosure'           => self::DISCLOSURE,
 			'eu_notice'            => self::EU_NOTICE,
+			'provisional_notice'   => self::PROVISIONAL_NOTICE,
+			'mode_authorizations'  => array(),
 			'restrict_eu_eea'      => true,
 			'restricted_countries' => self::DEFAULT_RESTRICTED,
 			'mfa_enforce_staff'    => true,
@@ -118,10 +166,20 @@ final class Settings {
 
 	public static function section_on( string $section ): bool {
 		$sections = self::get( 'sections', array() );
-		if ( 'waitlist_only' === self::get( 'site_mode' ) && ! in_array( $section, array( 'waitlist', 'contact' ), true ) ) {
+		if ( 'waitlist' === self::get( 'site_mode' ) && 0 !== strpos( $section, 'participation/waitlist' ) && 0 !== strpos( $section, 'legal' ) && 'company/contact' !== $section ) {
 			return false;
 		}
 		return ! isset( $sections[ $section ] ) || ! empty( $sections[ $section ] );
+	}
+
+	public static function mode_label( ?string $mode = null ): string {
+		$mode = $mode ?? (string) self::get( 'site_mode' );
+		return self::MODES[ $mode ][0] ?? $mode;
+	}
+
+	/** Public-facing modes behave as the informational pre-launch site. */
+	public static function is_public_info_mode(): bool {
+		return in_array( self::get( 'site_mode' ), array( 'prelaunch', 'documentation_release', 'asset_verification', 'enterprise_onboarding' ), true );
 	}
 
 	public static function disclosure_hash(): string {
@@ -149,9 +207,19 @@ final class Settings {
 			}
 		}
 
-		if ( 'live' === ( $new['site_mode'] ?? '' ) && ! ( defined( 'RC_ALLOW_LIVE_MODE' ) && RC_ALLOW_LIVE_MODE ) ) {
+		// Locked modes need an admin action (written authorization reference) AND a deployment action (constant).
+		$mode = (string) ( $new['site_mode'] ?? 'prelaunch' );
+		if ( ! isset( self::MODES[ $mode ] ) ) {
 			$new['site_mode'] = $old['site_mode'] ?? 'prelaunch';
-			add_settings_error( self::OPTION, 'rc_live', 'Live mode is locked. It requires RC_ALLOW_LIVE_MODE in wp-config.php following written authorization.' );
+		} elseif ( self::MODES[ $mode ][2] && ( $old['site_mode'] ?? '' ) !== $mode ) {
+			$const = 'RC_ALLOW_MODE_' . strtoupper( $mode );
+			$ref   = trim( (string) ( $new['mode_authorizations'][ $mode ]['ref'] ?? '' ) );
+			if ( ! ( defined( $const ) && constant( $const ) ) || '' === $ref || ! current_user_can( 'rc_authorize_modules' ) ) {
+				$new['site_mode'] = $old['site_mode'] ?? 'prelaunch';
+				add_settings_error( self::OPTION, 'rc_mode', sprintf( '“%s” mode is locked. It requires %s in wp-config.php (deployment action) AND a written authorization reference entered by an authorized administrator.', self::MODES[ $mode ][0], $const ) );
+			} else {
+				$new['mode_authorizations'][ $mode ] = array( 'ref' => $ref, 'by' => get_current_user_id(), 'at' => gmdate( 'c' ) );
+			}
 		}
 
 		// The mandatory disclosure can be extended but never emptied.
@@ -160,6 +228,9 @@ final class Settings {
 		}
 		if ( empty( trim( (string) ( $new['eu_notice'] ?? '' ) ) ) ) {
 			$new['eu_notice'] = self::EU_NOTICE;
+		}
+		if ( empty( trim( (string) ( $new['provisional_notice'] ?? '' ) ) ) ) {
+			$new['provisional_notice'] = self::PROVISIONAL_NOTICE;
 		}
 
 		self::$cache = null;

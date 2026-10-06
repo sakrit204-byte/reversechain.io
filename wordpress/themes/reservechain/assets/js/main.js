@@ -74,3 +74,22 @@
     }).catch(function () { ledger.classList.add('is-offline'); });
   }
 })();
+
+/* Mega menu: click/keyboard toggles (desktop hover handled in CSS; mobile uses accordions). */
+(function () {
+  var items = document.querySelectorAll('.rc-nav__list > li.menu-item-has-children');
+  items.forEach(function (li) {
+    var a = li.querySelector(':scope > a');
+    a.setAttribute('aria-haspopup', 'true'); a.setAttribute('aria-expanded', 'false');
+    a.addEventListener('click', function (e) {
+      if (window.matchMedia('(max-width: 1120px)').matches || !li.classList.contains('is-open')) {
+        e.preventDefault();
+        var open = !li.classList.contains('is-open');
+        items.forEach(function (o) { o.classList.remove('is-open'); o.querySelector(':scope > a').setAttribute('aria-expanded', 'false'); });
+        li.classList.toggle('is-open', open); a.setAttribute('aria-expanded', String(open));
+      }
+    });
+  });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.rc-nav__list')) items.forEach(function (o) { o.classList.remove('is-open'); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') items.forEach(function (o) { o.classList.remove('is-open'); }); });
+})();

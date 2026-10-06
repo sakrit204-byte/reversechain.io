@@ -66,7 +66,7 @@ final class Admin {
 		$head   = Audit_Log::head();
 		$review = count( get_posts( array( 'post_type' => Workflow::governed_types(), 'post_status' => array( 'rc_review', 'rc_approved' ), 'posts_per_page' => 200, 'fields' => 'ids' ) ) );
 		echo '<div class="rc-cards">';
-		printf( '<div class="rc-card"><span>Site mode</span><strong>%s</strong><a href="%s">Change</a></div>', esc_html( Settings::get( 'site_mode' ) ), esc_url( admin_url( 'admin.php?page=rc-settings' ) ) );
+		printf( '<div class="rc-card"><span>Website mode</span><strong>%s</strong><a href="%s">Change</a></div>', esc_html( Settings::mode_label() ), esc_url( admin_url( 'admin.php?page=rc-settings' ) ) );
 		printf( '<div class="rc-card"><span>Awaiting review / publication</span><strong>%d</strong><a href="%s">Open queue</a></div>', (int) $review, esc_url( admin_url( 'admin.php?page=rc-review' ) ) );
 		printf( '<div class="rc-card"><span>Waitlist (confirmed / total)</span><strong>%d / %d</strong><a href="%s">View</a></div>', (int) $wl['confirmed'], (int) $wl['total'], esc_url( admin_url( 'admin.php?page=rc-waitlist' ) ) );
 		printf( '<div class="rc-card"><span>Audit chain</span><strong>#%d</strong>%s</div>', (int) $head['seq'], $last ? self::pill( $last['ok'] ? 'verified' : 'restricted', $last['ok'] ? 'Intact (' . human_time_diff( (int) $last['at'] ) . ' ago)' : 'INTEGRITY FAILURE' ) : self::pill( 'pending_verification', 'Not yet verified' ) );
@@ -317,8 +317,19 @@ final class Admin {
 		wp_nonce_field( 'rc_save_settings' );
 
 		echo '<div class="rc-panel"><h2>Website mode</h2>';
-		foreach ( Settings::MODES as $k => $label ) {
-			printf( '<label class="rc-radio"><input type="radio" name="s[site_mode]" value="%s"%s%s> %s</label>', esc_attr( $k ), checked( $s['site_mode'], $k, false ), 'live' === $k && ! ( defined( 'RC_ALLOW_LIVE_MODE' ) && RC_ALLOW_LIVE_MODE ) ? ' disabled' : '', esc_html( $label ) );
+		echo '<p class="description">Locked modes need a deployment action (wp-config constant) <strong>and</strong> a written authorization reference. They never auto-activate.</p>';
+		foreach ( Settings::MODES as $k => $def ) {
+			$const  = 'RC_ALLOW_MODE_' . strtoupper( $k );
+			$armed  = ! $def[2] || ( defined( $const ) && constant( $const ) );
+			printf(
+				'<div class="rc-gated"><label class="rc-radio"><input type="radio" name="s[site_mode]" value="%1$s"%2$s%3$s> <strong>%4$s</strong> — %5$s</label>%6$s</div>',
+				esc_attr( $k ),
+				checked( $s['site_mode'], $k, false ),
+				$armed ? '' : ' disabled',
+				esc_html( $def[0] ),
+				esc_html( $def[1] ),
+				$def[2] ? sprintf( '<p><code>%s</code> %s <input type="text" name="s[mode_authorizations][%s][ref]" value="%s" placeholder="Written authorization reference" class="regular-text"></p>', esc_html( $const ), $armed ? self::pill( 'pending_verification', 'deployment flag set' ) : self::pill( 'restricted', 'not set — locked' ), esc_attr( $k ), esc_attr( $s['mode_authorizations'][ $k ]['ref'] ?? '' ) ) : ''
+			);
 		}
 		echo '</div>';
 
@@ -348,6 +359,7 @@ final class Admin {
 		echo '<div class="rc-panel"><h2>Mandatory disclosures</h2><p class="description">Shown site-wide, in the apps, in emails and stored (as a hash) with every consent. They can be extended but never removed.</p>';
 		printf( '<p><label>Prelaunch disclosure<br><textarea name="s[disclosure]" rows="5" class="large-text">%s</textarea></label></p>', esc_textarea( $s['disclosure'] ) );
 		printf( '<p><label>EU/EEA notice<br><textarea name="s[eu_notice]" rows="2" class="large-text">%s</textarea></label></p>', esc_textarea( $s['eu_notice'] ) );
+		printf( '<p><label>Provisional Asset Notice (asset pages, passports, illustrative data)<br><textarea name="s[provisional_notice]" rows="2" class="large-text">%s</textarea></label></p>', esc_textarea( $s['provisional_notice'] ) );
 		echo '<p>Current consent fingerprint: <code>' . esc_html( Settings::disclosure_hash() ) . '</code></p></div>';
 
 		echo '<div class="rc-grid2"><div class="rc-panel" id="jurisdictions"><h2>Jurisdictions</h2>';
@@ -377,6 +389,12 @@ final class Admin {
 		$new = $cur;
 
 		$new['site_mode'] = isset( Settings::MODES[ $in['site_mode'] ?? '' ] ) ? $in['site_mode'] : $cur['site_mode'];
+		foreach ( Settings::MODES as $k => $def ) {
+			if ( $def[2] ) {
+				$new['mode_authorizations'][ $k ] = array_merge( $cur['mode_authorizations'][ $k ] ?? array(), array( 'ref' => sanitize_text_field( $in['mode_authorizations'][ $k ]['ref'] ?? '' ) ) );
+			}
+		}
+		$new['provisional_notice'] = sanitize_textarea_field( $in['provisional_notice'] ?? '' );
 		foreach ( Settings::SECTIONS as $k => $l ) {
 			$new['sections'][ $k ] = ! empty( $in['sections'][ $k ] );
 		}

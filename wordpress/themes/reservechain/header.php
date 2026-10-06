@@ -41,14 +41,16 @@ defined( 'ABSPATH' ) || exit;
 					'theme_location' => 'primary',
 					'container'      => false,
 					'menu_class'     => 'rc-nav__list',
-					'depth'          => 1,
+					'depth'          => 2,
 					'fallback_cb'    => false,
 				)
 			);
 			?>
 			<div class="rc-nav__extra">
 				<?php echo rct_lang_switcher(); // phpcs:ignore ?>
-				<a class="rc-btn rc-btn--primary rc-btn--sm" href="<?php echo esc_url( home_url( '/waitlist/' ) ); ?>"><?php esc_html_e( 'Register interest', 'reservechain' ); ?></a>
+				<a class="rc-nav__portal" href="<?php echo esc_url( home_url( '/portal/' ) ); ?>"><?php esc_html_e( 'Portal', 'reservechain' ); ?></a>
+				<a class="rc-btn rc-btn--sm" href="<?php echo esc_url( home_url( '/participation/waitlist/' ) ); ?>"><?php esc_html_e( 'Join Waitlist', 'reservechain' ); ?></a>
+				<a class="rc-btn rc-btn--primary rc-btn--sm" href="<?php echo esc_url( home_url( '/assets/' ) ); ?>"><?php esc_html_e( 'Explore Assets', 'reservechain' ); ?></a>
 			</div>
 		</nav>
 		<button class="rc-burger" type="button" aria-controls="rc-nav" aria-expanded="false"><span class="screen-reader-text"><?php esc_html_e( 'Menu', 'reservechain' ); ?></span><i></i><i></i><i></i></button>

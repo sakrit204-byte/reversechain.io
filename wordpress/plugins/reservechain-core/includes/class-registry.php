@@ -95,12 +95,16 @@ final class Registry {
 		wp_nonce_field( 'rc_save_fields', 'rc_fields_nonce' );
 		echo '<p class="description">Leave a field empty when the information has not been provided. Empty fields are shown publicly as an explicit pending state — never estimate or invent values.</p>';
 		echo '<table class="form-table rc-fields" role="presentation"><tbody>';
+		$symbol = self::program_symbol( $post->ID );
 		foreach ( $def['fields'] as $field ) {
+			if ( ! empty( $field['scope'] ) && $symbol && strcasecmp( $field['scope'], $symbol ) !== 0 ) {
+				continue;
+			}
 			$key   = $field['key'];
 			$name  = 'rc_field[' . $key . ']';
 			$value = self::get( $post->ID, $key );
 			$req   = ! empty( $field['required'] ) ? ' <span class="rc-req" aria-label="required">*</span>' : '';
-			$vis   = isset( $field['public'] ) && ! $field['public'] ? ' <span class="rc-private">internal</span>' : '';
+			$vis   = ( isset( $field['public'] ) && ! $field['public'] ? ' <span class="rc-private">internal</span>' : '' ) . ( ! empty( $field['scope'] ) ? ' <span class="rc-private">' . esc_html( $field['scope'] ) . ' only</span>' : '' );
 			echo '<tr><th scope="row"><label for="rc_' . esc_attr( $key ) . '">' . esc_html( $field['label'] ) . $req . $vis . '</label></th><td>'; // phpcs:ignore
 			self::render_input( $field, $name, $value, $post );
 			if ( ! empty( $field['help'] ) ) {
@@ -117,6 +121,7 @@ final class Registry {
 	private static function render_input( array $field, string $name, $value, \WP_Post $post ): void {
 		$id = 'rc_' . $field['key'];
 		switch ( $field['type'] ) {
+			case 'assay':
 			case 'textarea':
 				printf( '<textarea id="%s" name="%s" rows="4" class="large-text">%s</textarea>', esc_attr( $id ), esc_attr( $name ), esc_textarea( (string) $value ) );
 				break;
@@ -197,6 +202,12 @@ final class Registry {
 		}
 	}
 
+	/** Element symbol of the record's metal program (Cu / Ni), used to scope program-specific fields. */
+	public static function program_symbol( int $post_id ): string {
+		$prog = 'rc_program' === get_post_type( $post_id ) ? $post_id : (int) get_post_meta( $post_id, '_rc_program', true );
+		return $prog ? (string) get_post_meta( $prog, '_rc_symbol', true ) : '';
+	}
+
 	public static function get( int $post_id, string $key ) {
 		$field = Schema::field( (string) get_post_type( $post_id ), $key );
 		if ( $field && 'relations' === $field['type'] ) {
@@ -207,6 +218,7 @@ final class Registry {
 
 	public static function sanitize( array $field, $raw ) {
 		switch ( $field['type'] ) {
+			case 'assay':
 			case 'textarea':
 				return sanitize_textarea_field( wp_unslash( (string) $raw ) );
 			case 'number':
@@ -332,8 +344,9 @@ final class Registry {
 			}
 			$scope = $symbol ? strtoupper( preg_replace( '/[^A-Za-z]/', '', $symbol ) ) : 'RC';
 		}
-		$seq = (int) get_option( 'rc_seq_' . $type, 0 ) + 1;
-		update_option( 'rc_seq_' . $type, $seq, false );
+		$seq_key = 'rc_seq_' . $type . '_' . strtolower( $scope );
+		$seq     = (int) get_option( $seq_key, 0 ) + 1;
+		update_option( $seq_key, $seq, false );
 		$no = 'RC' === $scope ? sprintf( 'RC-%s-%06d', $def['prefix'], $seq ) : sprintf( 'RC-%s-%s-%06d', $scope, $def['prefix'], $seq );
 		update_post_meta( $post_id, '_rc_record_no', $no );
 		Audit_Log::record( 'registry.created', $type, $post_id, sprintf( '%s %s created', $def['singular'], $no ), array( 'record_no' => $no ) );

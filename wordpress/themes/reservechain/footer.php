@@ -15,12 +15,18 @@ defined( 'ABSPATH' ) || exit;
 				<?php echo rct_logo(); // phpcs:ignore ?>
 				<p><?php esc_html_e( 'Proposed infrastructure for verifiable, industrial-metal real-world assets. Evidence first; tokens only if and when approved.', 'reservechain' ); ?></p>
 				<?php echo rct_audit_badge(); // phpcs:ignore ?>
+				<a class="rc-btn rc-btn--sm rc-footer__wl" href="<?php echo esc_url( home_url( '/participation/waitlist/' ) ); ?>"><?php esc_html_e( 'Receive project-development updates', 'reservechain' ); ?> →</a>
 			</div>
+			<div class="rc-footer__cols">
 			<?php
 			$cols = array(
 				'footer-1' => __( 'Platform', 'reservechain' ),
-				'footer-2' => __( 'Company', 'reservechain' ),
-				'footer-3' => __( 'Legal', 'reservechain' ),
+				'footer-2' => __( 'Assets', 'reservechain' ),
+				'footer-3' => __( 'Enterprise', 'reservechain' ),
+				'footer-4' => __( 'Participation', 'reservechain' ),
+				'footer-5' => __( 'Company', 'reservechain' ),
+				'footer-6' => __( 'Resources', 'reservechain' ),
+				'footer-7' => __( 'Legal', 'reservechain' ),
 			);
 			foreach ( $cols as $loc => $label ) :
 				if ( ! has_nav_menu( $loc ) ) {
@@ -32,6 +38,7 @@ defined( 'ABSPATH' ) || exit;
 					<?php wp_nav_menu( array( 'theme_location' => $loc, 'container' => false, 'depth' => 1 ) ); ?>
 				</nav>
 			<?php endforeach; ?>
+			</div>
 		</div>
 		<div class="rc-footer__legal">
 			<p><strong><?php esc_html_e( 'Important notice', 'reservechain' ); ?>.</strong> <?php echo esc_html( rct_disclosure() ); ?></p>
