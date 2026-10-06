@@ -1,0 +1,145 @@
+<!--
+title: Portale dei Partecipanti
+excerpt: Il Portale dei Partecipanti è lo spazio unico previsto per l'account del partecipante idoneo, lo stato KYC/KYB, i programmi, le posizioni detenute, i Passaporti dell'Asset Digitale, i documenti, le transazioni, gli avvisi, le informazioni sulle riserve, l'accesso al rimborso fisico, l'assistenza e le impostazioni di sicurezza. Viene realizzato per fasi; i moduli sensibili restano inattivi fino al rilascio di un'autorizzazione scritta.
+kicker: Portale · Accesso graduale
+order: 30
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Concetto del portale</p>
+      <h2>Un'unica vista dell'account, <em>ogni stato visibile</em></h2>
+      <p class="rc-lead">Il portale è progettato affinché il partecipante veda le stesse evidenze mostrate dal registro pubblico, oltre al proprio account, alla propria idoneità e ai propri documenti, con ciascun modulo chiaramente contrassegnato come attivo o inattivo.</p>
+      <p>La stessa funzionalità viene integrata nelle app ReserveChain per iOS e Android, che condividono con il portale backend, autenticazione, autorizzazioni e stato di compliance. Le app sono in sviluppo; i test su TestFlight e Google Play sono in sospeso.</p>
+      <p>Durante la fase pre-lancio nessuna funzione del portale consente un acquisto, un pagamento o la connessione di un wallet. Non esistono token e, di conseguenza, non esistono posizioni detenute.</p>
+    </div>
+    <article class="rc-card" data-reveal>
+      <span class="rc-card__num">ACCESSO</span>
+      <h3>Accesso dei partecipanti</h3>
+      <p>Gli account sono forniti tramite accesso graduale. Durante la fase pre-lancio non è prevista alcuna registrazione pubblica self-service al portale e non vengono pubblicate credenziali dimostrative.</p>
+      <dl class="rc-kv">
+        <div><dt>Fase di accesso</dt><dd>Graduale, su invito</dd></div>
+        <div><dt>Autenticazione</dt><dd>Password più codice monouso (MFA)</dd></div>
+        <div><dt>Connessione del wallet</dt><dd>Inattiva</dd></div>
+      </dl>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary rc-btn--sm" href="/participation/waitlist/">Iscriviti alla lista d'attesa</a><a class="rc-btn rc-btn--sm" href="/support/">Accedi all'assistenza</a></div>
+      <p class="rc-fine">Effettui l'accesso esclusivamente su <span class="rc-mono">reservechain.io</span>. Non Le chiederemo mai una chiave privata o una seed phrase.</p>
+    </article>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Mappa dei moduli</p>
+      <h2>Dodici moduli, <em>tre stati</em></h2>
+      <p class="rc-lead">«Attivo» significa disponibile al pubblico oggi. «Sviluppato» significa implementato e disponibile solo tramite accesso graduale. «Inattivo» significa implementato ma bloccato fino a un'autorizzazione scritta e a un'azione di deployment.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Account e profilo</h3><p>Profilo individuale o aziendale, preferenze di contatto, richieste di esportazione dei dati e di chiusura.</p><div class="rc-card__foot">[rc_status s="in_development" label="Sviluppato"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Stato KYC / KYB</h3><p>Avanzamento della verifica, documenti richiesti, stato di approvazione e date di revisione periodica.</p><div class="rc-card__foot">[rc_status s="proposed" label="Fornitore da definire"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Programmi</h3><p>Informazioni, stati e documenti dei programmi relativi alla polvere di rame e al filo di nichel.</p><div class="rc-card__foot">[rc_status s="provided" label="Attivo"] <a href="/assets/initial-programs/">Apri →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Posizioni detenute</h3><p>Saldi dei token per programma, collegati a registrazioni di riserva riconciliate.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inattivo"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Passaporti dell'Asset Digitale</h3><p>Registrazioni per singola unità con registro delle evidenze, impronte digitali e accesso tramite codice QR.</p><div class="rc-card__foot">[rc_status s="provided" label="Attivo"] <a href="/platform/digital-asset-passports/">Apri →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Documenti</h3><p>Biblioteca pubblica oggi; in seguito, una data room ad accesso autorizzato e un archivio dei documenti firmati.</p><div class="rc-card__foot">[rc_status s="proposed" label="Documenti dei clienti inattivi"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">07</span><h3>Transazioni</h3><p>Registro di ogni variazione di saldo con motivazione, orario e riferimento on-chain.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inattivo"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">08</span><h3>Avvisi</h3><p>Eventi rilevanti, pubblicazione di documenti e avvisi di sicurezza, anche come notifiche dell'app.</p><div class="rc-card__foot">[rc_status s="in_development" label="Sviluppato"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">09</span><h3>Informazioni sulle riserve</h3><p>Quantità dichiarate a confronto con quelle verificate in modo indipendente; nessun dato di copertura fino all'attestazione.</p><div class="rc-card__foot">[rc_status s="pending_verification" label="In attesa di attestazione"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">10</span><h3>Accesso al rimborso fisico</h3><p>Punto di accesso al Portale per il Rimborso Fisico per le posizioni idonee.</p><div class="rc-card__foot">[rc_status s="proposed" label="Inattivo"] <a href="/portal/redemption/">Concetto →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">11</span><h3>Assistenza</h3><p>Argomenti di aiuto, richieste di assistenza e segnalazione di frodi.</p><div class="rc-card__foot">[rc_status s="provided" label="Attivo"] <a href="/support/">Apri →</a></div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">12</span><h3>Impostazioni di sicurezza</h3><p>Attivazione della MFA, controllo delle sessioni e avvisi di sicurezza.</p><div class="rc-card__foot">[rc_status s="in_development" label="Sviluppato"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Moduli bloccati</p>
+      <h2>Sviluppati e <em>disattivati</em></h2>
+      <p class="rc-lead">Questi pannelli sono generati in tempo reale a partire dalle impostazioni dei moduli della piattaforma. Se un modulo venisse mai attivato, previa autorizzazione scritta, il relativo pannello sarebbe sostituito dal modulo operativo.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="holdings" title="Posizioni in token e cronologia delle transazioni"]</div>
+      <div data-reveal>[rc_module module="redemption" title="Richieste di rimborso fisico"]</div>
+      <div data-reveal>[rc_module module="wallet" title="Connessione del wallet"]</div>
+      <div data-reveal>[rc_module module="client_documents" title="Documenti dei clienti e archivio dei documenti firmati"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Layout della dashboard</p>
+      <h2>Ciò che un partecipante <em>dovrebbe vedere</em></h2>
+      <p>Il layout pone l'idoneità al primo posto, poiché nessuna funzione specifica per il partecipante è accessibile finché l'idoneità non è stata determinata. Le posizioni detenute e il rimborso fisico compaiono solo dopo l'autorizzazione dei moduli corrispondenti.</p>
+    </div>
+    <div data-reveal>
+      <p><span class="rc-demo-badge">Dati illustrativi / dimostrativi</span></p>
+      <dl class="rc-kv">
+        <div><dt>Account</dt><dd>Profilo aziendale · accesso graduale</dd></div>
+        <div><dt>KYC / KYB</dt><dd>[rc_status s="pending" label="Non avviato"]</dd></div>
+        <div><dt>Verifica giurisdizionale</dt><dd>[rc_status s="pending" label="Non avviata"]</dd></div>
+        <div><dt>Programmi seguiti</dt><dd>Polvere di rame · Filo di nichel 0.025 mm</dd></div>
+        <div><dt>Posizioni detenute</dt><dd>— (modulo inattivo)</dd></div>
+        <div><dt>Ultimo avviso</dt><dd>Pubblicato un aggiornamento sullo sviluppo</dd></div>
+        <div><dt>MFA</dt><dd>Attivata</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">iOS e Android</p>
+      <h2>Lo stesso portale, <em>sempre con Lei</em></h2>
+      <p>Le app ReserveChain sono build native, non un contenitore web. Utilizzano gli stessi account, la stessa MFA, le stesse autorizzazioni, lo stesso stato di compliance e gli stessi indicatori dei moduli del sito web; pertanto un modulo inattivo qui è inattivo anche nelle app.</p>
+      <ul class="rc-list">
+        <li>Programmi, Passaporti dell'Asset Digitale, verifica delle impronte digitali, documenti</li>
+        <li>Account, configurazione della MFA, notifiche e assistenza</li>
+        <li>Schermate di wallet, posizioni detenute e rimborso fisico presenti ma inattive</li>
+        <li>Presa visione dell'informativa obbligatoria e dell'avviso UE/SEE prima del primo utilizzo</li>
+      </ul>
+    </div>
+    <div data-reveal>
+      <div class="rc-claims">
+        <div><strong>Codice sorgente delle app</strong>[rc_status s="in_development"]<small>Ambito funzionale implementato nel codice sorgente; i test proseguono.</small></div>
+        <div><strong>Test su TestFlight (iOS)</strong>[rc_status s="proposed" label="In attesa"]<small>Richiede un account sviluppatore Apple controllato da ReserveChain.</small></div>
+        <div><strong>Test su Google Play</strong>[rc_status s="proposed" label="In attesa"]<small>Richiede un account Google Play controllato da ReserveChain.</small></div>
+      </div>
+      [rc_module module="mobile_app_links" title="Link pubblici alle app negli store"]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Impostazioni di sicurezza</p>
+      <h2>Protezione dell'account <em>fin dalla progettazione</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Autenticazione a più fattori</h3><p>Codici monouso basati sul tempo per ogni account; obbligatori per tutti i ruoli del personale. I codici non possono essere riutilizzati all'interno della loro finestra di validità.</p></article>
+      <article class="rc-card" data-reveal><h3>Sessioni e dispositivi</h3><p>Scadenza delle sessioni e token di aggiornamento che vengono rinnovati a ogni utilizzo; il riutilizzo di un token precedente revoca tutte le sessioni. Le credenziali dell'app sono conservate nell'archivio protetto del dispositivo.</p></article>
+      <article class="rc-card" data-reveal><h3>Prova di titolarità del wallet (futura)</h3><p>Se le funzioni di wallet venissero mai autorizzate, ciascun wallet richiederebbe una prova di titolarità basata su firma e un controllo dei rischi prima dell'utilizzo.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Interessato a un accesso futuro?</h2>
+        <p>Si iscriva alla lista d'attesa per ricevere aggiornamenti sullo sviluppo e informazioni sulla futura idoneità. La registrazione non costituisce un investimento, un acquisto di token né una prenotazione.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Iscriviti alla lista d'attesa</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/participation/eligibility-kyc/">Verifica l'idoneità</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/redemption/">Come funziona il rimborso fisico</a>
+      </div>
+    </div>
+  </div>
+</section>

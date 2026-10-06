@@ -1,0 +1,119 @@
+<!--
+title: Jurisdicciones restringidas
+excerpt: Cómo está previsto que se apliquen las restricciones geográficas a cualquier participación futura: la posición respecto de la UE/EEE, una lista configurable de jurisdicciones restringidas sujeta al criterio de los asesores jurídicos, controles de ubicación por capas y restricciones de transferencia en cadena.
+kicker: Participación · Restricciones geográficas · Sujeto a revisión jurídica
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Declaración de posición</p>
+        <h2>La posición respecto de <em>la UE/EEE</em></h2>
+      </div>
+      <div>
+        <div class="rc-callout"><p><strong>Actualmente, ReserveChain no tiene intención de ofrecer tokens a residentes en la UE/EEE ni a personas que se encuentren en ella.</strong></p></div>
+        <p class="rc-lead">Esto se aplica a los 27 Estados miembros de la UE y a Islandia, Liechtenstein y Noruega. Las personas que se encuentren en estos países pueden consultar este sitio web y optar por recibir novedades generales del proyecto, pero no se prevé que sean participantes en ninguna oferta futura. La emisión de tokens permanece inactiva hasta su lanzamiento formal.</p>
+      </div>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Grupo</th><th>Países (ISO 3166-1)</th><th>Tratamiento</th></tr></thead>
+        <tbody>
+          <tr><td>Unión Europea (27)</td><td class="rc-mono">AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE</td><td>[rc_status s="restricted"] Solo novedades generales</td></tr>
+          <tr><td>EEE, no pertenecientes a la UE (3)</td><td class="rc-mono">IS LI NO</td><td>[rc_status s="restricted"] Solo novedades generales</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Lista de jurisdicciones restringidas</p>
+      <h2>Una lista configurable, <em>no definitiva</em></h2>
+      <p class="rc-lead">Más allá de la UE/EEE, las restricciones se mantienen como configuración para que los asesores jurídicos puedan modificarlas sin necesidad de publicar una nueva versión del código. La configuración actual es provisional. Esta página no establece una lista definitiva, y la lista definitiva solo se publicará en los documentos jurídicos definitivos.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Categoría</th><th>Fundamento</th><th>Situación actual</th></tr></thead>
+        <tbody>
+          <tr><td>UE/EEE</td><td>Política del proyecto (véase más arriba)</td><td>[rc_status s="restricted" label="Aplicada en la configuración"]</td></tr>
+          <tr><td>Jurisdicciones sujetas a programas de sanciones integrales</td><td>Valor provisional por defecto en la configuración, pendiente de confirmación por los asesores jurídicos</td><td>[rc_status s="pending_verification" label="Provisional · sujeto al criterio de los asesores jurídicos"]</td></tr>
+          <tr><td>Jurisdicciones en las que una oferta requeriría una licencia o un registro de los que no se dispone</td><td>Se determinará mediante un análisis jurídico jurisdicción por jurisdicción</td><td>[rc_status s="proposed" label="Por determinar"]</td></tr>
+          <tr><td>Jurisdicciones con designaciones de alto riesgo en materia AML</td><td>Se examinará con el proveedor de cumplimiento seleccionado; puede dar lugar a una restricción o a una diligencia debida reforzada</td><td>[rc_status s="proposed" label="Por determinar"]</td></tr>
+          <tr><td>Personas designadas, dondequiera que se encuentren</td><td>El control de sanciones se aplica a personas físicas y entidades con independencia del país</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Controles por capas</p>
+      <h2>Cuatro capas, <em>del sitio web al contrato</em></h2>
+      <p class="rc-lead">Ninguna señal decide por sí sola la elegibilidad. Cada capa puede bloquear el acceso por sí misma.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Declaración propia</h3><p>El país de residencia es obligatorio al inscribirse en la lista de espera y al crear la cuenta. Existen campos de nacionalidad y ubicación actual, pero solo se activan cuando lo exige la ley.</p></div>[rc_status s="in_development" label="Activo en la lista de espera"]</li>
+      <li><div><h3>Señal de ubicación de la red perimetral</h3><p>El país indicado por la red de distribución de contenidos se registra junto con la declaración. Cualquier discrepancia se señala para su revisión; por sí sola, no aprueba a nadie.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Residencia verificada</h3><p>El KYC o KYB confirma la residencia o el domicilio social mediante documentos, y prevalece sobre la declaración propia.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Restricción de transferencias en cadena</h3><p>El contrato ComplianceRegistry contiene un conjunto de jurisdicciones bloqueadas suministrado por la configuración. Las transferencias hacia o desde una dirección registrada en una jurisdicción bloqueada, o no aprobada, fallarían. Solo en la red de pruebas.</p></div>[rc_status s="in_development" label="Red de pruebas"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Acceso bloqueado</p>
+        <h2>Qué <em>experimenta</em> un visitante restringido</h2>
+        <ul class="rc-list">
+          <li>El sitio web sigue siendo consultable con fines informativos.</li>
+          <li>La inscripción en la lista de espera se registra como restringida y se limita a novedades generales, solo si el visitante así lo elige.</li>
+          <li>No se mostrarían documentos del programa, flujo de elegibilidad ni módulo de adquisición de tokens.</li>
+          <li>Las aprobaciones existentes se suspenden si la residencia cambia a una jurisdicción restringida.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="rc-kicker">Responsabilidad del participante</p>
+        <h2>Sus obligaciones, <em>expuestas con claridad</em></h2>
+        <ul class="rc-list">
+          <li>Facilite datos exactos sobre su residencia, su ubicación y, cuando se le solicite, su nacionalidad.</li>
+          <li>No utilice VPN, proxies ni otras herramientas para ocultar su ubicación.</li>
+          <li>No actúe en nombre de una persona restringida ni realice transferencias a ella.</li>
+          <li>Notifique sin demora cualquier cambio de residencia.</li>
+          <li>Compruebe que la participación es lícita en el lugar en que se encuentra. Este sitio web no constituye asesoramiento jurídico.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Actualizaciones y documentos definitivos</p>
+      <h2>Cómo <em>cambiará</em> esta lista</h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Cambios dirigidos por los asesores jurídicos</h3><p>Los cambios en la lista de jurisdicciones restringidas siguen el asesoramiento jurídico y se introducen mediante el flujo de trabajo de doble control (principio de los cuatro ojos); cada cambio queda registrado en la pista de auditoría.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Publicados con fecha</h3><p>Las actualizaciones significativas se indicarán en <a href="/company/news/">Noticias y comunicados</a> y se reflejarán en la información específica de cada jurisdicción.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Prevalecen los documentos definitivos</h3><p>Si esta página y los documentos jurídicos definitivos difieren, prevalecerán los documentos definitivos. Consulte <a href="/legal/">Información legal y avisos</a> y las <a href="/legal/terms/">Condiciones de uso</a>.</p></article>
+    </div>
+    [rc_module module="eligibility" title="Decisiones de elegibilidad jurisdiccional"]
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Conozca el panorama completo de la elegibilidad</h2><p>La jurisdicción es el primer control. A continuación, la verificación de identidad y los controles.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Comprobar la elegibilidad</a>
+        <a class="rc-btn rc-btn--cream" href="/legal/">Ver documentos</a>
+        <a class="rc-btn" href="/company/contact/">Contactar con ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

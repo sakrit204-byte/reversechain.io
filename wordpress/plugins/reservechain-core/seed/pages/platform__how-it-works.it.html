@@ -1,0 +1,213 @@
+<!--
+title: Come funziona ReserveChain
+excerpt: Dall'asset fisico all'infrastruttura di titolarità digitale. Otto fasi soggette a controllo accompagnano un'unità di metallo industriale dall'origine al rimborso fisico. Ogni fase prevede un esecutore designato, l'evidenza che deve produrre, i controlli applicabili e ciò che i partecipanti possono visualizzare.
+kicker: Piattaforma · Ciclo operativo proposto
+order: 1
+-->
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Il ciclo di vita</p>
+      <h2>Otto fasi. <em>Ciascuna subordinata alle evidenze.</em></h2>
+      <p class="rc-lead">Un'unità passa alla fase successiva solo quando l'evidenza relativa alla fase corrente esiste ed è stata approvata. Le fasi da uno a cinque riguardano l'asset fisico e i relativi record. Le fasi da sei a otto riguardano il livello digitale e non possono mai precedere il record fisico.</p>
+    </div>
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 250" role="img" aria-labelledby="rc-lc-title rc-lc-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-lc-title">Ciclo di vita degli asset ReserveChain</title>
+        <desc id="rc-lc-desc">Otto nodi collegati: Identificazione e origine, Verifica, Valutazione, Custodia, Passaporto, Tokenizzazione, Riconciliazione, Rimborso. Una freccia di ritorno va da Riconciliazione a Custodia, e una freccia di burn va da Rimborso a Tokenizzazione.</desc>
+        <defs>
+          <marker id="rc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D5B167"/></marker>
+          <marker id="rc-arr-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C9773F"/></marker>
+        </defs>
+        <rect x="20" y="48" width="470" height="104" rx="14" fill="none" stroke="#1C2A38" stroke-dasharray="3 5"/>
+        <rect x="510" y="48" width="470" height="104" rx="14" fill="none" stroke="#1C2A38" stroke-dasharray="3 5"/>
+        <text x="30" y="40" fill="#A9BBC8" font-size="11" letter-spacing="1.2">LIVELLO FISICO E DELLE EVIDENZE</text>
+        <text x="520" y="40" fill="#A9BBC8" font-size="11" letter-spacing="1.2">LIVELLO DIGITALE E DEL REGISTRO</text>
+        <g stroke="#D5B167" stroke-width="2" marker-end="url(#rc-arr)">
+          <line x1="96" y1="100" x2="132" y2="100"/>
+          <line x1="216" y1="100" x2="252" y2="100"/>
+          <line x1="336" y1="100" x2="372" y2="100"/>
+          <line x1="456" y1="100" x2="544" y2="100"/>
+          <line x1="628" y1="100" x2="664" y2="100"/>
+          <line x1="748" y1="100" x2="784" y2="100"/>
+          <line x1="868" y1="100" x2="904" y2="100"/>
+        </g>
+        <g fill="#0E1620" stroke-width="2">
+          <circle cx="60" cy="100" r="34" stroke="#C9773F"/>
+          <circle cx="180" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="300" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="420" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="580" cy="100" r="34" stroke="#D5B167" stroke-width="3"/>
+          <circle cx="700" cy="100" r="34" stroke="#A9BBC8"/>
+          <circle cx="820" cy="100" r="34" stroke="#A9BBC8"/>
+          <circle cx="940" cy="100" r="34" stroke="#C9773F"/>
+        </g>
+        <g fill="#E7EBEE" font-size="12" font-weight="600" text-anchor="middle">
+          <text x="60" y="96">Identifica</text><text x="60" y="111">Origine</text>
+          <text x="180" y="104">Verifica</text>
+          <text x="300" y="104">Valuta</text>
+          <text x="420" y="104">Custodia</text>
+          <text x="580" y="104">Passaporto</text>
+          <text x="700" y="104">Tokenizza</text>
+          <text x="820" y="104">Riconcilia</text>
+          <text x="940" y="104">Rimborso</text>
+        </g>
+        <path d="M820 136 C 820 200, 420 200, 420 140" fill="none" stroke="#A9BBC8" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#rc-arr)"/>
+        <text x="620" y="196" fill="#A9BBC8" font-size="11" text-anchor="middle">conteggio del custode e record dei passaporti riconciliati con l'offerta</text>
+        <path d="M940 66 C 940 14, 700 14, 700 62" fill="none" stroke="#C9773F" stroke-width="1.5" marker-end="url(#rc-arr-c)"/>
+        <text x="820" y="22" fill="#C9773F" font-size="11" text-anchor="middle">burn al rimborso fisico</text>
+        <g fill="#A9BBC8" font-size="10.5" text-anchor="middle">
+          <text x="60" y="160">proprietario</text><text x="180" y="160">laboratorio</text><text x="300" y="160">perito</text><text x="420" y="160">custode</text>
+          <text x="580" y="160">registro</text><text x="700" y="160">contratti</text><text x="820" y="160">motore delle riserve</text><text x="940" y="160">partecipante</text>
+        </g>
+      </svg>
+      <figcaption>Ciclo di vita proposto. Ogni freccia è un punto di controllo che richiede un'evidenza approvata. I due cicli mostrano i controlli che mantengono coerenti il registro e l'inventario fisico: la riconciliazione e il burn eseguito prima del rilascio. Gli esecutori indicati sono ruoli; nessun soggetto terzo è stato nominato.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Fase per fase</p>
+        <h2>Che cosa accade <em>e che cosa dimostra</em></h2>
+      </div>
+      <p class="rc-lead">Qui si descrive un quadro operativo proposto, soggetto a conferma giuridica, contrattuale, tecnica e operativa definitiva. Lo stato indicato a destra di ogni fase mostra il livello di sviluppo attuale di tale fase.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Identificazione e origine</h3><p>Il proprietario dell'asset o l'originatore presenta l'unità: materiale, forma, riferimento del lotto o della partita, quantità dichiarata, imballaggio, origine e documenti in suo possesso. Il registro le assegna un identificativo permanente, ad esempio <span class="rc-mono">RC-CU-LOT-000001</span>, prima che venga pubblicata qualsiasi affermazione.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Verifica</h3><p>Il campionamento e le prove sono eseguiti da un laboratorio accreditato indipendente dal proprietario. Il certificato viene verificato presso l'emittente e l'impronta del documento viene registrata. Fino a quel momento, i certificati forniti dal proprietario sono indicati come forniti dal proprietario.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Valutazione</h3><p>Un perito valutatore qualificato applica una metodologia e un benchmark dichiarati alla specifica verificata. La valutazione registra data, valuta e fonte, e ogni valutazione ha una scadenza.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Custodia</h3><p>L'unità viene presa in custodia segregata, pesata, sigillata e registrata fino al livello di contenitore o bobina. Il custode emette una ricevuta collegata all'identificativo del registro.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Passaporto dell'Asset Digitale</h3><p>Il registro riunisce in un passaporto tutte le registrazioni di evidenza approvate relative all'unità. Il passaporto è sigillato con una radice di Merkle SHA-256 e pubblicato solo dopo l'approvazione a doppio controllo (principio dei quattro occhi).</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Tokenizzazione</h3><p>Se la struttura legale definitiva lo consentirà, unità ERC-20 potrebbero essere coniate esclusivamente a fronte di riserve attestate. Il conio è bloccato per impostazione predefinita e limitato dal controllo delle riserve.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Riconciliazione</h3><p>L'offerta di token, l'offerta bruciata, l'inventario del custode e i record dei passaporti vengono confrontati con cadenza fissa. Qualsiasi differenza apre un'eccezione e blocca ulteriori coni.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Rimborso fisico</h3><p>Un detentore idoneo richiede la consegna fisica. I token vengono depositati in escrow e poi bruciati, e solo successivamente l'unità specifica viene rilasciata dalla custodia.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Matrice delle responsabilità</p>
+      <h2>Chi la esegue, che cosa produce, <em>chi può vederla</em></h2>
+      <p class="rc-lead">La separazione delle funzioni è il controllo principale. Nessun singolo soggetto può identificare, verificare, detenere e rilasciare la stessa unità. I ruoli di terzi indicati di seguito sono funzioni da assegnare; nessun laboratorio, perito o custode è stato incaricato.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead>
+          <tr><th>Fase</th><th>Eseguita da</th><th>Evidenza generata</th><th>Controlli</th><th>Visibilità per i partecipanti</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Identificazione / Origine</strong></td><td>Proprietario dell'asset o originatore; gestore del registro</td><td>Record del registro, quantità dichiarata, documenti del proprietario, record della catena dei titoli</td><td>KYB sul proprietario; emissione di un ID univoco; i campi restano non pubblicati finché non sono supportati da evidenze</td><td>Identificativi del programma e del lotto; dati dichiarati contrassegnati come «dichiarati»</td></tr>
+          <tr><td><strong>Verifica</strong></td><td>Laboratorio indipendente accreditato (da nominare)</td><td>Verbale di campionamento, Certificato di Analisi, riferimento al metodo e alla norma, hash del documento</td><td>Campionamento presenziato e sigillato; conferma dell'emittente; impronta registrata</td><td>Certificato, griglia delle analisi e impronta; stato di verifica per unità</td></tr>
+          <tr><td><strong>Valutazione</strong></td><td>Perito valutatore indipendente qualificato (da nominare)</td><td>Rapporto di valutazione: metodologia, benchmark, valuta, data</td><td>Approvazione del revisore; avviso di valutazione scaduta alla scadenza</td><td>Data e stato della valutazione; importi solo dopo l'approvazione alla pubblicazione</td></tr>
+          <tr><td><strong>Custodia</strong></td><td>Custode professionale (da nominare)</td><td>Fede di deposito, numeri dei sigilli, pesi, rapporto di inventario, registro delle ispezioni</td><td>Segregazione; doppio controllo; conteggi periodici</td><td>Stato della custodia e date delle ispezioni; ubicazione mostrata al livello approvato</td></tr>
+          <tr><td><strong>Passaporto</strong></td><td>Registro ReserveChain; revisore; responsabile della conformità</td><td>Passaporto dell'Asset Digitale, radice di Merkle SHA-256, cronologia delle versioni</td><td>Approvazione a doppio controllo vincolata a un'impronta del contenuto; voce nell'audit trail</td><td>Passaporto pubblico completo, link QR ed evidenze JSON scaricabili</td></tr>
+          <tr><td><strong>Tokenizzazione</strong></td><td>Emittente nell'ambito della struttura legale definitiva; firmatari multisig</td><td>Transazione di conio, hash dell'attestazione delle riserve, record del programma di token</td><td>Limite del controllo delle riserve; hook di conformità; pausa; separazione dei ruoli</td><td>Dati sull'offerta e parametri del programma una volta approvati; attualmente «In attesa»</td></tr>
+          <tr><td><strong>Riconciliazione</strong></td><td>Motore delle riserve; responsabile della conformità; attestatore indipendente (da nominare)</td><td>Rapporto sulle riserve, registro di riconciliazione, registro delle eccezioni</td><td>Le eccezioni bloccano il conio; è richiesta un'attestazione prima che venga mostrato «verificato»</td><td>Dashboard della Prova delle Riserve: dati dichiarati e verificati mostrati separatamente</td></tr>
+          <tr><td><strong>Rimborso fisico</strong></td><td>Detentore idoneo; responsabile della conformità; custode; fornitore logistico</td><td>Richiesta, decisione sull'idoneità, transazione di burn, ordine di rilascio, registrazione della consegna</td><td>Escrow prima del burn; burn prima del rilascio; selezione a livello di unità</td><td>Stato della richiesta nel portale; cronologia del passaporto aggiornata al completamento</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Condizioni di passaggio</p>
+        <h2>Che cosa deve essere soddisfatto <em>prima che un'unità avanzi</em></h2>
+        <p class="rc-lead">Ogni punto di controllo è una condizione verificata dal software. Non è lasciata a una valutazione estemporanea. Se una condizione non è soddisfatta, l'unità resta nella fase corrente e il passaporto ne indica il motivo.</p>
+      </div>
+      <div>
+        <ul class="rc-checks">
+          <li><strong>Verso la Verifica:</strong> esiste un identificativo nel registro e sono agli atti il KYB del proprietario e i documenti sulla catena dei titoli.</li>
+          <li><strong>Verso la Valutazione:</strong> un record di verifica approvato è collegato a un certificato la cui impronta corrisponde al file archiviato.</li>
+          <li><strong>Verso la Custodia:</strong> il peso ricevuto dal custode e i numeri dei sigilli corrispondono al lotto verificato, entro la tolleranza.</li>
+          <li><strong>Verso il Passaporto:</strong> ogni record di fase è approvato da una persona diversa da quella che lo ha inserito.</li>
+          <li><strong>Verso la Tokenizzazione:</strong> esiste un'attestazione delle riserve in corso di validità, e il rapporto e la finestra di obsolescenza del controllo delle riserve sono configurati e approvati.</li>
+          <li><strong>Verso il Rimborso fisico:</strong> il detentore è idoneo, l'unità è libera da gravami e i token sono detenuti in escrow.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Applicazione ai programmi iniziali</p>
+      <h2>A che punto si trova <em>ciascun programma oggi</em></h2>
+      <p class="rc-lead">I due programmi iniziali hanno completato la fase uno e dispongono di evidenze fornite dal proprietario relative alla fase due. Tali evidenze devono ancora superare una verifica indipendente. Nulla oltre quel punto è stato avviato.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Cu 29</span>
+        <h3>Polvere di rame · Lotto #03-K-07</h3>
+        <p>Il Certificato di Analisi IGAS 0004512 (04.07.2022), fornito dal proprietario, registra un campione di 10 g prelevato dalla Scatola n. 20 e analizzato mediante ICP/OES. Indica una purezza del 99.9999 %. Il peso netto di 2000 kg è quello dichiarato dal cliente.</p>
+        <dl class="rc-kv">
+          <div><dt>Identificazione / Origine</dt><dd>[rc_status s="in_development" label="Registrato"]</dd></div>
+          <div><dt>Verifica</dt><dd>[rc_status s="pending_verification"]</dd></div>
+          <div><dt>Valutazione · Custodia · Tokenizzazione</dt><dd>[rc_status s="proposed"]</dd></div>
+        </dl>
+        <div class="rc-card__foot"><a href="/passport/RC-CU-LOT-000001/">Visualizza il Passaporto dell'Asset Digitale →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Ni 28</span>
+        <h3>Filo di nichel 0.025 mm · Lotto 120/NP1</h3>
+        <p>Il Certificato di Analisi IGAS 0004368 (19.10.2021), fornito dal proprietario, registra un campione di 0.8 g prelevato dalle bobine 8, 10, 19 e 27 e analizzato mediante ICP/MS e ICP/OES. Indica una purezza del 99.9807 %. Il peso netto di 5000 g, ripartito su 30 bobine, è quello dichiarato dal cliente.</p>
+        <dl class="rc-kv">
+          <div><dt>Identificazione / Origine</dt><dd>[rc_status s="in_development" label="Registrato"]</dd></div>
+          <div><dt>Verifica</dt><dd>[rc_status s="pending_verification"]</dd></div>
+          <div><dt>Valutazione · Custodia · Tokenizzazione</dt><dd>[rc_status s="proposed"]</dd></div>
+        </dl>
+        <div class="rc-card__foot"><a href="/passport/RC-NI-LOT-000001/">Visualizza il Passaporto dell'Asset Digitale →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Visibilità per i partecipanti</p>
+      <h2>Pubblico, partecipanti <em>e riservato</em></h2>
+      <p class="rc-lead">Trasparenza non significa pubblicare tutto. I campi dei record hanno una propria visibilità, così i dati commercialmente sensibili o personali restano riservati, mentre l'evidenza a supporto di un'affermazione resta aperta all'esame.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Pubblico</h3>
+        <ul class="rc-list"><li>Identificativi e specifiche dei passaporti</li><li>Certificati e relative impronte SHA-256</li><li>Stato di verifica, custodia e riserva</li><li>Sintesi della Prova delle Riserve</li><li>Testa della catena dell'audit trail</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Partecipanti idonei (previsto)</h3>
+        <ul class="rc-list"><li>Token detenuti e cronologia delle transazioni</li><li>Richieste di rimborso fisico e relativo stato</li><li>Documentazione del programma all'interno del portale</li><li>Comunicazioni relative ai propri token detenuti</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Riservato</h3>
+        <ul class="rc-list"><li>Fascicoli KYC/KYB ed esiti delle verifiche</li><li>Costo di acquisizione e condizioni commerciali</li><li>Riferimenti esatti del caveau, ove non divulgati</li><li>Note interne dei revisori</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Esamini le evidenze alla base di ogni fase</h2>
+        <p>Ogni fase dispone di una pagina dedicata con i controlli dettagliati. Il quadro di verifica è il punto di partenza.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/verification/">Visualizza il processo di verifica</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/custody/">Esplora la custodia</a>
+        <a class="rc-btn" href="/platform/redemption/">Come funziona il rimborso fisico</a>
+      </div>
+    </div>
+  </div>
+</section>

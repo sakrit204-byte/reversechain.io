@@ -1,0 +1,159 @@
+<!--
+title: Documentación
+excerpt: La biblioteca de documentos de ReserveChain sujeta a control de versiones, organizada en doce categorías. Cada archivo publicado lleva una huella SHA-256 y cualquier copia puede cotejarse con el registro.
+kicker: Recursos · Biblioteca de documentos
+order: 1
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Principios de la biblioteca</p>
+        <h2>Una única fuente de referencia <em>para cada documento</em></h2>
+      </div>
+      <p class="rc-lead">Los documentos se publican únicamente tras una aprobación por el principio de los cuatro ojos. Una persona prepara el registro y una segunda persona autorizada, distinta de la primera, lo aprueba. Cada publicación recibe una versión, una fecha de emisión, un estado y una huella SHA-256. Las versiones sustituidas permanecen registradas, de modo que una copia anterior pueda seguir identificándose y fechándose.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">01</span>
+        <h3>Con control de versiones</h3>
+        <p>Cada publicación tiene un identificador de versión y una fecha de emisión. Cualquier cambio, por pequeño que sea, genera una nueva versión. Un archivo publicado nunca se sustituye de forma silenciosa.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">02</span>
+        <h3>Con huella digital</h3>
+        <p>La huella SHA-256 se calcula a partir de los bytes exactos del archivo. Si cambia un solo byte, la huella cambia por completo.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">03</span>
+        <h3>Con etiqueta de estado</h3>
+        <p>Cada documento indica si es un borrador, un modelo, una copia aportada por el propietario o una versión aprobada. El estado describe el documento, no el acuerdo subyacente.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">04</span>
+        <h3>Registrado en auditoría</h3>
+        <p>Cada carga, aprobación y sustitución se escribe en un registro de auditoría encadenado mediante hashes y de solo anexión. Cualquier alteración posterior de ese historial puede detectarse.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Doce categorías</p>
+      <h2>Lo que contendrá la biblioteca <em>y lo que contiene hoy</em></h2>
+      <p class="rc-lead">Las categorías que figuran a continuación describen la biblioteca completa prevista. Muchos documentos dependen de acuerdos que todavía no existen, como custodios, atestadores y documentación de oferta. Esas categorías permanecen vacías hasta que se aprueben documentos reales. No publicaremos marcadores de posición presentados como evidencias.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead>
+          <tr><th>Categoría</th><th>Contenido previsto</th><th>Estado actual</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Plataforma</strong></td><td>Visión general de la plataforma, descripción del ciclo de vida, registro de módulos, avisos sobre el modo del sitio web</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Tecnología</strong></td><td>Notas de arquitectura, especificaciones de los contratos inteligentes, referencia de la API, registros de despliegue en red de pruebas</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Programas de activos</strong></td><td>Fichas de programa para polvo de cobre de ultra alta pureza y alambre de níquel de alta pureza 0.025 mm, resúmenes de especificaciones, descripciones del embalaje</td><td>[rc_status s="pending_verification"]</td></tr>
+          <tr><td><strong>Certificados</strong></td><td>Certificados de Análisis aportados por el propietario: IGAS No. 0004512 (Cu) y No. 0004368 (Ni). Posteriormente, certificados de peso e informes de nueva verificación</td><td>[rc_status s="pending_verification" label="Aportado por el propietario"]</td></tr>
+          <tr><td><strong>Verificación</strong></td><td>Metodología de muestreo, criterios de selección de laboratorios, informes de nueva verificación</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Custodia</strong></td><td>Resumen de los contratos de custodia, certificados de depósito, estados de inventario, registros de liberación</td><td>[rc_status s="not_applicable" label="Ningún custodio designado"]</td></tr>
+          <tr><td><strong>Informes de reservas</strong></td><td>Atestaciones independientes periódicas, cada una con su huella y publicada en cadena</td><td>[rc_status s="not_applicable" label="Ningún atestador designado"]</td></tr>
+          <tr><td><strong>Cumplimiento normativo</strong></td><td>Marco de elegibilidad, requisitos KYC/KYB, política sobre jurisdicciones restringidas, política de control de sanciones</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Empresas</strong></td><td>Descripciones de los servicios para empresas, fichas de los módulos de licencia y marca blanca, guías de integración</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Participación</strong></td><td>Visión general del Programa de Participación Temprana, documento sobre la metodología de descuentos (propuesto, sujeto a aprobación), condiciones de la lista de espera</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Políticas</strong></td><td>Normas de comunicación, conflictos de intereses, seguridad de la información, protección de datos, política de control documental</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Información legal</strong></td><td>Condiciones del sitio web, políticas de privacidad y de cookies, divulgación de riesgos. Cualquier documentación de oferta definitiva futura</td><td>[rc_status s="in_development" label="Borradores — revisión jurídica"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Los estados de las categorías describen la biblioteca, no los acuerdos subyacentes. «No aplicable» significa que el acuerdo correspondiente aún no existe, por lo que no puede publicarse verazmente ningún documento.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Biblioteca en directo</p>
+      <h2>Documentos publicados <em>con sus huellas</em></h2>
+      <p class="rc-lead">Esta lista procede directamente del registro. Cada entrada muestra su tipo, versión, fecha de emisión, estado y huella SHA-256. Copie una huella, o descargue el archivo y compruébelo con la herramienta que figura a continuación.</p>
+    </div>
+    [rc_documents]
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Control de versiones</p>
+      <h2>Cómo entra un documento <em>en la biblioteca</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Redacción y registro</h3><p>Un editor carga el archivo. El sistema calcula su huella SHA-256 en el momento de la carga y registra el tipo de documento, la versión, la fecha de emisión, el emisor y las unidades del registro con las que está relacionado.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Aprobación independiente</h3><p>Una segunda persona autorizada, distinta del editor, revisa el archivo frente a su fuente y lo aprueba o lo rechaza. Los documentos aportados por el propietario conservan esa etiqueta tras la aprobación.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Publicación y registro</h3><p>La publicación escribe una entrada en el registro de auditoría encadenado mediante hashes. Cada entrada incluye el hash de la anterior, de modo que el historial no puede reescribirse sin que se detecte.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Sustituir, nunca sobrescribir</h3><p>Una corrección se publica como nueva versión. La versión anterior permanece registrada y marcada como sustituida, de modo que cualquier persona que posea una copia anterior pueda identificarla.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Anclaje en cadena</h3><p>Está previsto que la cabeza del registro de auditoría se ancle periódicamente en una red de pruebas pública a través del contrato AuditAnchor. Ello proporciona al historial una marca de tiempo externa.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Verifique cualquier copia</p>
+        <h2>¿Ha recibido un documento de ReserveChain? <em>Compruébelo aquí.</em></h2>
+        <p>Seleccione el archivo. Su navegador calcula localmente su huella SHA-256 y la coteja con el registro. El archivo nunca sale de su dispositivo. Una coincidencia le indica que la copia es idéntica a la que publicamos. No confirma que el acuerdo descrito en el documento esté vigente.</p>
+        <p>La misma herramienta está disponible en la <a href="/platform/verification/">página del marco de verificación</a>.</p>
+      </div>
+      <div>
+        [rc_verify]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Lectura de los documentos</p>
+      <h2>Tres límites que <em>conviene tener presentes</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Una huella demuestra la integridad, no la veracidad</h3>
+        <p>La coincidencia de una huella demuestra que un archivo no ha cambiado desde su registro. No demuestra que las afirmaciones contenidas en el archivo sean exactas. Eso depende del emisor y de la verificación independiente.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Aportado por el propietario no significa verificado de forma independiente</h3>
+        <p>Los dos Certificados de Análisis fueron aportados por el propietario del activo. Todavía no se han confirmado con el laboratorio emisor ni han sido analizados por una parte independiente designada por ReserveChain.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Ningún documento de esta biblioteca es un documento de oferta</h3>
+        <p>Nada en esta biblioteca es un folleto ni un memorando de oferta, y nada de ello constituye una solicitud. Cualquier documentación de oferta definitiva futura sería independiente. Solo se facilitaría a personas elegibles y aprobadas.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Comience por el libro blanco</h2>
+        <p>El borrador para debate expone el marco propuesto completo en el que se apoyan estos documentos.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/resources/whitepaper/">Ver el libro blanco</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/verification/">Ver el proceso de verificación</a>
+      </div>
+    </div>
+  </div>
+</section>

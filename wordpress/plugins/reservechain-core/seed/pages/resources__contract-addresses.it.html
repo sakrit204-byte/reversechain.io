@@ -1,0 +1,124 @@
+<!--
+title: Indirizzi ufficiali degli smart contract
+excerpt: L'unica fonte ufficiale degli indirizzi degli smart contract di ReserveChain. Nessun contratto è stato distribuito su alcuna mainnet e la distribuzione sulla mainnet resta in attesa di approvazione. È prevista una distribuzione sulla rete di test Ethereum Sepolia.
+kicker: Risorse · Unica fonte di riferimento
+order: 5
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Stato attuale</p>
+      <h2>Non esiste <em>alcun indirizzo di contratto in produzione</em></h2>
+      <p class="rc-lead">ReserveChain non ha distribuito alcuno smart contract su una blockchain di produzione. Non esiste alcun token che possa essere detenuto, inviato o ricevuto. Qualsiasi indirizzo presentato come contratto o token ReserveChain sulla mainnet non è ufficiale.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Distribuzione sulla mainnet</strong>[rc_status s="not_applicable" label="Non distribuito"]<small>In attesa di approvazione. Richiederebbe la struttura legale definitiva, un audit indipendente degli smart contract, documentazione definitiva e un'autorizzazione scritta.</small></div>
+      <div><strong>Distribuzione sulla rete di test (Ethereum Sepolia)</strong>[rc_status s="proposed" label="Prevista"]<small>Esclusivamente a fini dimostrativi e di test. I token di testnet non hanno valore economico. Polygon Amoy potrà essere utilizzata come seconda rete di test facoltativa.</small></div>
+      <div><strong>Codice sorgente degli smart contract e test automatizzati</strong>[rc_status s="in_development"]<small>Basati sulle librerie OpenZeppelin v5. Tutti i parametri economici sono non impostati per impostazione predefinita.</small></div>
+      <div><strong>Audit indipendente degli smart contract</strong>[rc_status s="proposed"]<small>Non ancora eseguito. Revisore da nominare.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Avvertenza</p>
+        <h2>Non si fidi mai di un indirizzo <em>proveniente da altre fonti</em></h2>
+        <p>I truffatori si spacciano per progetti nuovi pubblicando contratti di token simili e indirizzi «ufficiali». Lo fanno sui social media, nei gruppi di messaggistica, tramite risultati di ricerca a pagamento, sui siti di listing di token e nei messaggi diretti. Questi indirizzi appaiono spesso plausibili e sono talvolta promossi da account che copiano il nome e il logo di ReserveChain.</p>
+        <ul class="rc-list">
+          <li>Un indirizzo è ufficiale solo se compare in questa pagina su reservechain.io, raggiunta digitando Lei stesso il dominio.</li>
+          <li>ReserveChain non Le invierà mai un indirizzo tramite messaggio diretto, allegato e-mail o gruppo di chat.</li>
+          <li>Non approvi autorizzazioni di spesa sui token (allowance), non firmi messaggi e non invii fondi ad alcun indirizzo che dichiari di appartenere a ReserveChain.</li>
+          <li>Le etichette dei block explorer, le pagine di listing dei token e le voci degli aggregatori non sono fonti ufficiali.</li>
+        </ul>
+      </div>
+      <div class="rc-callout">
+        <p><strong>Se Le è stato fornito altrove un indirizzo ReserveChain</strong>, non interagisca con esso. Lo segnali tramite l'<a href="/legal/anti-fraud/">Avviso antifrode</a>. Indichi l'indirizzo, dove lo ha visto ed eventuali screenshot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Protocollo di pubblicazione</p>
+      <h2>Come <em>saranno pubblicati</em> gli indirizzi</h2>
+      <p class="rc-lead">Quando sarà autorizzata una qualsiasi distribuzione, su testnet o di altro tipo, i relativi indirizzi saranno pubblicati attraverso tre canali che si confermano a vicenda. Tutti e tre devono coincidere.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Questa pagina</h3><p>Gli indirizzi vengono inseriti nel CMS e approvati secondo il principio dei quattro occhi. Compaiono quindi nel pannello sottostante, con rete, nome del contratto, transazione di distribuzione e link al block explorer.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Comunicazione firmata</h3><p>Una comunicazione datata in <a href="/company/news/">Notizie e comunicazioni</a> riporta gli stessi indirizzi. Sarà firmata con una chiave la cui identità pubblica è pubblicata nell'<a href="/company/official-channels/">Elenco dei canali ufficiali</a>.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Ancoraggio all'audit trail</h3><p>L'evento di pubblicazione viene scritto nell'audit trail concatenato tramite hash. È previsto che la testa dell'audit trail sia ancorata on-chain tramite il contratto AuditAnchor, che fissa quando e che cosa è stato pubblicato.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Modifiche solo tramite nuova comunicazione</h3><p>Gli indirizzi non vengono mai modificati in modo silente. Qualsiasi sostituzione, migrazione o sospensione è annunciata attraverso gli stessi tre canali. L'indirizzo sostituito resta in elenco con il relativo stato.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Suite di contratti</p>
+      <h2>Contratti che <em>potranno essere elencati qui</em></h2>
+      <p class="rc-lead">Questa è la suite prevista, come descritta nel whitepaper. Il fatto che sia elencata non costituisce una dichiarazione che un qualsiasi contratto sia stato distribuito.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Contratto</th><th>Ruolo</th><th>Indirizzo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ReserveToken</strong></td><td>Rappresentazione ERC-20, qualora venga mai autorizzata. Sospendibile, basata sui ruoli, con hook di conformità e salvaguardia delle riserve</td><td>Non distribuito</td></tr>
+          <tr><td><strong>ComplianceRegistry</strong></td><td>Stato di idoneità per indirizzo, codice di giurisdizione, indicatore di congelamento e scadenza. Nessun dato personale</td><td>Non distribuito</td></tr>
+          <tr><td><strong>ReserveGuard</strong></td><td>Tetto di emissione derivato da attestazioni indipendenti. Pari a zero se non completamente configurato</td><td>Non distribuito</td></tr>
+          <tr><td><strong>RedemptionManager</strong></td><td>Flusso di rimborso fisico proposto con deposito a garanzia (escrow) e verifica. Disattivato per impostazione predefinita</td><td>Non distribuito</td></tr>
+          <tr><td><strong>Treasury</strong></td><td>Disponibilità controllate tramite ruoli, con limiti giornalieri e un timelock facoltativo</td><td>Non distribuito</td></tr>
+          <tr><td><strong>AuditAnchor</strong></td><td>Ancora la testa dell'audit trail del CMS con numeri di sequenza monotoni</td><td>Non distribuito</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">È previsto che i ruoli amministrativi siano detenuti da un multisig Safe. Firmatari e soglia saranno comunicati da ReserveChain.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Pannello in tempo reale</p>
+      <h2>Indirizzi e <em>link all'explorer</em></h2>
+      <p class="rc-lead">Questo pannello costituisce la visualizzazione di riferimento. Resta bloccato finché la pubblicazione di una distribuzione autorizzata non sia stata approvata.</p>
+    </div>
+    [rc_module module="contract_info" title="Indirizzi degli smart contract"]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Verificare un indirizzo</p>
+      <h2>Quattro controlli <em>prima di farvi affidamento</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Dominio</h3><p>Ha raggiunto questa pagina digitando reservechain.io, non tramite un link inviatoLe da qualcuno.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Corrispondenza dei caratteri</h3><p>Confronti ogni carattere dell'indirizzo, non solo i primi e gli ultimi. Gli indirizzi simili sono concepiti per eludere i controlli rapidi.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Rete</h3><p>Verifichi la rete. Un indirizzo di testnet non è un indirizzo di mainnet e i token di testnet non hanno valore.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Comunicazione</h3><p>Verifichi che lo stesso indirizzo compaia nella comunicazione datata e firmata in Notizie e comunicazioni.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Comprenda i contratti prima che esistano</h2>
+        <p>Il framework di tokenizzazione illustra i trasferimenti subordinati alla conformità e l'emissione subordinata alle riserve, con blocco in caso di errore.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Scopra la tokenizzazione</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/legal/anti-fraud/">Avviso antifrode</a>
+      </div>
+    </div>
+  </div>
+</section>

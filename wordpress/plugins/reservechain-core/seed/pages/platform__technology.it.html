@@ -1,0 +1,191 @@
+<!--
+title: Tecnologia
+excerpt: La tecnologia alla base della tokenizzazione di asset del mondo reale, descritta così come è realizzata oggi. Comprende un nucleo CMS governato, un registro sigillato crittograficamente, un'unica API REST per web e mobile e sei smart contract Ethereum distribuiti esclusivamente su reti di test.
+kicker: Piattaforma · Implementazione · In sviluppo · Solo testnet
+order: 3
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Stack</p>
+        <h2>Volutamente convenzionale, <em>verificabile per progettazione</em></h2>
+      </div>
+      <p class="rc-lead">Lo stack utilizza componenti consolidati affinché le parti innovative — la sigillatura delle evidenze, il vincolo al flusso di lavoro e l'emissione subordinata alle riserve — siano abbastanza contenute da poter essere ispezionate. Questa pagina descrive l'implementazione esistente. È in fase di sviluppo attivo e non è ancora stata sottoposta a una revisione di sicurezza esterna.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Livello</th><th>Implementazione</th><th>Ruolo</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Contenuti e registro</td><td>CMS WordPress con il plugin ReserveChain Core; MySQL</td><td>Schema del registro, passaporti, flusso di lavoro, traccia di audit, stato di conformità</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Interfaccia</td><td>API REST, namespace <span class="rc-mono">rc/v1</span></td><td>Un unico contratto condiviso da sito web, portale e app mobili</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Mobile</td><td>Applicazioni iOS e Android su una base di codice condivisa</td><td>Passaporti, documenti, notifiche; funzioni per i partecipanti bloccate</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Ledger</td><td>Solidity 0.8 su Ethereum, basato su OpenZeppelin Contracts 5</td><td>Emissione ERC-20, hook di conformità, guardia delle riserve, rimborso fisico, tesoreria, ancoraggio</td><td>[rc_status s="in_development" label="Solo testnet"]</td></tr>
+          <tr><td>Toolchain</td><td>Hardhat, TypeScript, test unitari, report di copertura, report sul gas, analisi statica</td><td>Build ripetibili ed evidenze di test per ogni modifica ai contratti</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Record del registro e passaporti</p>
+      <h2>Uno schema dichiarativo <em>e un passaporto sigillato</em></h2>
+      <p class="rc-lead">Ogni tipo di record del registro, dal programma e dal lotto fino al contenitore, alla bobina, al certificato, alla ricevuta di custodia e al rapporto sulle riserve, è dichiarato una sola volta in uno schema. Tale schema definisce i campi, le unità, la visibilità e l'evidenza a cui ciascun campo deve essere collegato. L'editor, l'API e il passaporto sono tutti generati a partire da esso, pertanto non possono divergere.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">A</span>
+        <h3>Impronta del record</h3>
+        <p>Per ogni passaporto, la piattaforma calcola un hash SHA-256 sul numero del passaporto, sul tipo di record e su ogni campo pubblico sotto forma di coppie chiave-valore. La modifica di qualsiasi valore pubblicato modifica questa impronta.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">B</span>
+        <h3>Foglie dei documenti</h3>
+        <p>Ogni documento collegato ha un hash SHA-256, calcolato sul file archiviato al momento del caricamento. Questi hash e l'impronta del record costituiscono le foglie dell'albero di Merkle del passaporto.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">C</span>
+        <h3>Radice di Merkle</h3>
+        <p>Le foglie vengono deduplicate, ordinate e sottoposte a hash a coppie fino a ottenere un'unica radice SHA-256. Un solo valore di 64 caratteri vincola l'intero insieme di evidenze e chiunque disponga dell'esportazione JSON può ricalcolarlo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Smart contract</p>
+      <h2>Sei contratti. <em>Nessun valore economico impostato.</em></h2>
+      <p class="rc-lead">I contratti costituiscono un livello di ledger proposto. Prezzo, offerta, rapporto asset/token, soglie di rimborso fisico e allocazioni sono parametri di configurazione e tutti sono, per impostazione predefinita, non impostati, pari a zero o disattivati. Con la configurazione fornita, sia il conio sia il rimborso fisico sono bloccati. Gli strumenti di distribuzione rifiutano le destinazioni mainnet.</p>
+    </div>
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 300" role="img" aria-labelledby="rc-sc-title rc-sc-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-sc-title">Interazioni tra gli smart contract</title>
+        <desc id="rc-sc-desc">Un amministratore multisig governa tutti e sei i contratti. ReserveToken interroga ComplianceRegistry a ogni trasferimento e ReserveGuard a ogni conio. RedemptionManager trattiene in deposito e brucia i token. Treasury detiene token entro determinati limiti. AuditAnchor memorizza le teste della catena di audit del CMS.</desc>
+        <defs><marker id="rc-sc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D5B167"/></marker></defs>
+        <rect x="380" y="16" width="240" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2"/>
+        <text x="500" y="43" fill="#E7EBEE" font-size="13" text-anchor="middle" font-weight="600">Amministratore multisig (in due fasi, differito)</text>
+        <rect x="380" y="128" width="240" height="64" rx="8" fill="#0E1620" stroke="#C9773F" stroke-width="2.5"/>
+        <text x="500" y="156" fill="#E7EBEE" font-size="14" text-anchor="middle" font-weight="600">ReserveToken</text>
+        <text x="500" y="176" fill="#A9BBC8" font-size="11" text-anchor="middle">ERC-20 · permit · pausa · conio fail-closed</text>
+        <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5">
+          <rect x="30" y="100" width="230" height="56" rx="8"/><rect x="30" y="180" width="230" height="56" rx="8"/>
+          <rect x="740" y="100" width="230" height="56" rx="8"/><rect x="740" y="180" width="230" height="56" rx="8"/>
+          <rect x="380" y="236" width="240" height="52" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">
+          <text x="145" y="124">ComplianceRegistry</text><text x="145" y="204">ReserveGuard</text>
+          <text x="855" y="124">RedemptionManager</text><text x="855" y="204">Treasury</text>
+          <text x="500" y="259">AuditAnchor</text>
+        </g>
+        <g fill="#A9BBC8" font-size="11" text-anchor="middle">
+          <text x="145" y="143">canTransfer a ogni trasferimento</text><text x="145" y="223">maxMintable a ogni conio</text>
+          <text x="855" y="143">deposito, poi burn se approvato</text><text x="855" y="223">limite giornaliero · coda con timelock</text>
+          <text x="500" y="277">teste della catena di audit del CMS, strettamente crescenti</text>
+        </g>
+        <g stroke="#D5B167" stroke-width="1.5" marker-end="url(#rc-sc-arr)">
+          <line x1="380" y1="150" x2="264" y2="130"/><line x1="380" y1="172" x2="264" y2="204"/>
+          <line x1="738" y1="130" x2="624" y2="150"/><line x1="738" y1="204" x2="624" y2="176"/>
+        </g>
+        <line x1="500" y1="60" x2="500" y2="126" stroke="#D5B167" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="512" y="98" fill="#A9BBC8" font-size="11">governa tutti e sei</text>
+      </svg>
+      <figcaption>Livello on-chain proposto, distribuito esclusivamente su reti di test. Non esiste alcuna distribuzione sulla mainnet e non è pubblicato alcun indirizzo di contratto. Il registro ufficiale degli indirizzi mostrerà «Non ancora distribuito» fino al rilascio dell'approvazione.</figcaption>
+    </figure>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>ReserveToken</h3><p>Un token ERC-20 con permit EIP-2612 e funzione di pausa. Il conio riesce solo in due modalità configurate: entro il limite della guardia delle riserve oppure entro un tetto statico abilitato esplicitamente. In qualsiasi altro stato viene annullato (revert). Il burn è riservato a un ruolo dedicato.</p></article>
+      <article class="rc-card" data-reveal><h3>ComplianceRegistry</h3><p>Conserva un record per indirizzo: stato di approvazione, un codice di giurisdizione di due lettere, una scadenza e un indicatore di congelamento. I trasferimenti richiedono che entrambe le parti siano idonee. Le giurisdizioni bloccate costituiscono un insieme configurabile, che la configurazione di distribuzione inizializza con i codici UE/SEE.</p></article>
+      <article class="rc-card" data-reveal><h3>ReserveGuard</h3><p>Gli attestatori pubblicano il programma, le unità detenute, un hash del rapporto, un URI e una data di riferimento. L'importo coniabile è pari a unità × rapporto − offerta e si azzera se il rapporto o la finestra di validità non sono impostati oppure se l'attestazione è scaduta.</p></article>
+      <article class="rc-card" data-reveal><h3>RedemptionManager</h3><p>Il detentore richiede il rimborso fisico e i token vengono trasferiti in deposito. Un operatore approva la richiesta, il che comporta il burn dei token e la registrazione di un riferimento di evasione, oppure la respinge, il che comporta la restituzione dei token. Il detentore può annullare la richiesta finché è in attesa. Il modulo è disattivato per impostazione predefinita e le sue soglie non sono impostate.</p></article>
+      <article class="rc-card" data-reveal><h3>Treasury</h3><p>Un detentore di token di programma controllato tramite ruoli. Applica un limite giornaliero di prelievo per token e una coda opzionale con timelock ritarda i prelievi di importo elevato. Il limite predefinito è zero.</p></article>
+      <article class="rc-card" data-reveal><h3>AuditAnchor</h3><p>Registra la testa della catena della traccia di audit del CMS, il numero di sequenza e l'URI. I numeri di sequenza devono essere strettamente crescenti. Chiunque può richiamare <span class="rc-mono">verify(seq, head)</span> per confermare che una testa pubblicata corrisponda all'ancoraggio on-chain.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Log di audit</p>
+        <h2>Una traccia di audit <em>verificabile dall'esterno</em></h2>
+        <p class="rc-lead">I log di audit sono utili solo se l'operatore non può riscriverli. ReserveChain li protegge con quattro livelli indipendenti.</p>
+        <p>Lo stato in tempo reale riportato di seguito è calcolato percorrendo l'intera catena e ricalcolando ogni hash.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Applicazione</h3><p>Il log non prevede alcuna modalità di modifica o cancellazione nell'area di amministrazione, nell'API o nella CLI. È possibile soltanto aggiungere righe.</p></div></li>
+        <li><div><h3>Database</h3><p>I trigger MySQL <span class="rc-mono">BEFORE UPDATE</span> e <span class="rc-mono">BEFORE DELETE</span> respingono qualsiasi tentativo di modificare una riga, anche con accesso diretto al database.</p></div></li>
+        <li><div><h3>Crittografico</h3><p>Ogni riga vincola l'hash SHA-256 della riga precedente. La modifica, l'inserimento o la rimozione di qualsiasi voce invalida tutti gli hash successivi.</p></div></li>
+        <li><div><h3>Esterno</h3><p>La testa della catena viene periodicamente ancorata in AuditAnchor su una rete di test pubblica, pertanto riscrivere la cronologia senza lasciare traccia richiederebbe anche di riscrivere la catena.</p></div></li>
+      </ol>
+    </div>
+    [rc_audit_status]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">API e modello di integrazione</p>
+      <h2>Un'unica API, <em>tutti i canali</em></h2>
+      <p class="rc-lead">Il sito web, il portale e le app iOS e Android utilizzano gli stessi endpoint con versionamento. Anche le integrazioni aziendali li utilizzerebbero. Un dato nella pagina di un passaporto e lo stesso dato nell'app provengono da un'unica query.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Lettura pubblica</h3>
+        <ul class="rc-list">
+          <li><span class="rc-mono">GET /rc/v1/programs</span> — programmi e relativi campi pubblicati</li>
+          <li><span class="rc-mono">GET /rc/v1/passports/{no}</span> — un passaporto completo con radice di Merkle</li>
+          <li><span class="rc-mono">GET /rc/v1/verify?hash=</span> — confronto di un'impronta con un documento pubblicato</li>
+          <li><span class="rc-mono">GET /rc/v1/documents</span> · <span class="rc-mono">/registry/stats</span> · <span class="rc-mono">/audit/head</span></li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Autenticato</h3>
+        <ul class="rc-list">
+          <li>L'accesso genera un token di accesso JWT di breve durata e un refresh token a rotazione</li>
+          <li>Secondo fattore TOTP con codici di recupero monouso</li>
+          <li><span class="rc-mono">/me</span>, token detenuti, transazioni e notifiche per i partecipanti</li>
+          <li>Gli endpoint che movimentano valore rispondono «modulo inattivo» fino all'autorizzazione</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Scalabilità e roadmap</p>
+      <h2>Che cosa scala <em>e che cosa verrà dopo</em></h2>
+      <p class="rc-lead">La scalabilità dipende principalmente dai record e dalle evidenze, non dalle transazioni. I contratti dei token e del rimborso fisico sono distribuiti per programma, mentre conformità, guardia delle riserve e ancoraggio sono condivisi, pertanto l'aggiunta di un programma non modifica quelli esistenti. I passaporti sono calcolati a partire da record approvati e possono essere memorizzati nella cache tra una pubblicazione e l'altra. La catena di audit cresce in modo lineare ed è ancorata a blocchi.</p>
+    </div>
+    <div class="rc-roadmap">
+      <div class="is-active"><span class="rc-phase">Ora</span><h3>Sviluppo del nucleo</h3><ul><li>Schema del registro e passaporti</li><li>Flusso di lavoro a doppio controllo e traccia di audit</li><li>API REST, client web e mobile</li><li>Suite di contratti su testnet</li></ul>[rc_status s="in_development"]</div>
+      <div><span class="rc-phase">Prossimo passo</span><h3>Assurance</h3><ul><li>Revisione di sicurezza indipendente degli smart contract</li><li>Penetration test dell'applicazione</li><li>Cerimonia delle chiavi multisig e con hardware wallet</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">Successivamente</span><h3>Integrazione</h3><ul><li>Flussi di dati da laboratori e custodi</li><li>Flusso di lavoro di attestazione delle riserve</li><li>Portale clienti aziendali</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">In seguito</span><h3>Attivazione</h3><ul><li>Distribuzione sulla mainnet, solo dopo l'approvazione legale</li><li>Pubblicazione degli indirizzi nel registro ufficiale</li></ul>[rc_status s="proposed"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Esamini i controlli</h2>
+        <p>Scopra come sono protetti questi componenti oppure consulti il <a href="/resources/contract-addresses/">registro ufficiale degli indirizzi</a>, che attualmente non riporta alcun contratto distribuito.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Scopra la tokenizzazione</a>
+        <a class="rc-btn rc-btn--cream" href="/resources/documentation/">Consulti i documenti</a>
+        <a class="rc-btn" href="/enterprise/licensing-white-label/">Licenze tecnologiche</a>
+      </div>
+    </div>
+  </div>
+</section>

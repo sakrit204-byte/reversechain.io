@@ -1,0 +1,119 @@
+<!--
+title: Servizi di tokenizzazione per le imprese
+excerpt: Un servizio B2B proposto per organizzazioni che necessitano di una rappresentazione digitale governata e collegata alle evidenze del proprio inventario fisico, avvalendosi dei controlli di registro, conformità ed emissione vincolata alle riserve di ReserveChain.
+kicker: Imprese · Servizi di tokenizzazione · Proposto
+order: 1
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Impostazione del servizio</p>
+        <h2>La tokenizzazione è l'ultimo passo, <em>non il primo</em></h2>
+      </div>
+      <p class="rc-lead">La maggior parte del lavoro necessario per rappresentare digitalmente un asset fisico avviene prima che esista qualsiasi token: identificare l'unità, dimostrare che cosa sia, dimostrare dove si trovi e chi la controlli, e stabilire chi possa detenerne una rappresentazione. Il servizio proposto è costruito attorno a questa sequenza. Descrive un quadro proposto, soggetto a conferma finale sotto il profilo legale, contrattuale, tecnico e operativo.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Fase</th><th>Fornito dal cliente</th><th>Fornito dall'infrastruttura ReserveChain</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Onboarding</td><td>Descrizione dell'asset, evidenze di proprietà, ubicazione, documenti di laboratorio</td><td>Acquisizione strutturata, calcolo delle impronte dei documenti, checklist di due diligence</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Modello dei dati</td><td>Attributi della classe di asset e unità di conto</td><td>Schema configurabile per programmi, lotti, contenitori, bobine e tipi di unità personalizzati</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Evidenze</td><td>Rapporti di verifica e di valutazione indipendenti</td><td>Passaporti dell'Asset Digitale con registro delle evidenze e radice di Merkle</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Collegamento tra custodia e riserva</td><td>Accordo di custodia e inventario periodico</td><td>Attestazioni delle riserve che limitano l'emissione per programma</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Regole di emissione e trasferimento</td><td>Condizioni legali, profilo del detentore idoneo, restrizioni</td><td>Contratti con controllo basato sui ruoli e verifiche di conformità a ogni trasferimento</td><td>[rc_status s="in_development" label="Testnet"]</td></tr>
+          <tr><td>Reportistica</td><td>Approvazione dei campi pubblicati</td><td>Viste dichiarato/verificato, traccia di audit, accesso tramite API</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Suite di smart contract</p>
+        <h2>Sei contratti, <em>un unico modello di controllo</em></h2>
+        <p>La suite di contratti è sviluppata su OpenZeppelin v5 e implementata esclusivamente su testnet pubbliche. Non è stata effettuata alcuna implementazione su mainnet e nessun indirizzo di contratto presente su questo sito costituisce un indirizzo ufficiale di produzione finché non compare negli <a href="/resources/contract-addresses/">Indirizzi ufficiali degli smart contract</a>.</p>
+        <p class="rc-fine">Nome, simbolo, decimali, limite massimo e rapporto del token sono parametri del costruttore o di configurazione. Nessuno di essi è codificato in modo fisso.</p>
+      </div>
+      <div class="rc-chain" data-reveal>
+        <div class="rc-chain__row"><span>ReserveToken</span><code>ERC-20 con permit, messa in pausa e conio e bruciatura basati sui ruoli; l'hook di trasferimento interroga il registro di conformità</code></div>
+        <div class="rc-chain__row"><span>ComplianceRegistry</span><code>Stato, giurisdizione, scadenza e flag di congelamento per indirizzo; insieme delle giurisdizioni bloccate definito in configurazione</code></div>
+        <div class="rc-chain__row"><span>ReserveGuard</span><code>L'attestatore pubblica (programma, unità, hash del rapporto, URI); importo massimo emettibile derivato dalle unità attestate</code></div>
+        <div class="rc-chain__row"><span>RedemptionManager</span><code>Deposito in garanzia, revisione di conformità, approvazione e bruciatura oppure rifiuto e restituzione; disattivato per impostazione predefinita</code></div>
+        <div class="rc-chain__row"><span>Treasury</span><code>Con controllo basato sui ruoli, limiti di prelievo e opzione di blocco temporale (timelock)</code></div>
+        <div class="rc-chain__row"><span>AuditAnchor</span><code>Ancora on-chain la testa della catena di audit off-chain</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Motore delle regole e controlli sui partecipanti</p>
+      <h2>Regole applicate nel codice, <em>decise da persone</em></h2>
+      <p class="rc-lead">Le regole sono configurate da ruoli autorizzati e applicate automaticamente. Ogni modifica a una regola viene registrata.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Regole di idoneità</h3><p>Solo gli indirizzi approvati, non congelati, non scaduti e al di fuori delle giurisdizioni bloccate possono inviare o ricevere.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Limiti di emissione</h3><p>L'offerta totale per programma non può superare le unità di riserva attestate moltiplicate per il rapporto approvato.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Controlli di emergenza</h3><p>Messa in pausa e congelamento dei conti affidati a ruoli separati, destinati a essere detenuti da un wallet multifirma.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Separazione dei ruoli</h3><p>I ruoli di amministrazione, conio, bruciatura, pausa, conformità e tesoreria sono distinti; il trasferimento del ruolo di amministrazione è soggetto a un ritardo temporale.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Regole di rimborso fisico</h3><p>Soglie minime e massime e revisione di conformità prima di qualsiasi bruciatura, configurabili per programma.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Condizioni di attivazione</h3><p>Le funzioni di emissione, wallet e rimborso fisico richiedono un'autorizzazione esplicita e un'azione di implementazione separata.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Implementazione e governance</p>
+      <h2>Opzioni in esame</h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Ambito</th><th>Approccio proposto</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Rete</td><td>Rete pubblica compatibile con EVM, selezionata per programma; testnet fino ad autorizzazione</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Custodia delle chiavi</td><td>Multifirma controllata dal cliente per i ruoli amministrativi; nessuna chiave né ruolo trattenuti dagli sviluppatori</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Revisione indipendente</td><td>Revisione di sicurezza dei contratti da parte di terzi prima di qualsiasi implementazione in produzione</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Controllo delle modifiche</td><td>Approvazione secondo il principio dei quattro occhi per i dati pubblicati e la configurazione; testa della catena di audit ancorata on-chain</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Struttura giuridica</td><td>Definita per cliente e giurisdizione dai consulenti legali del cliente</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">API e reportistica</p>
+      <h2>Evidenze che i sistemi <em>possono leggere</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <ul class="rc-list">
+        <li>Endpoint di programmi e passaporti che restituiscono i valori a livello di campo con il relativo stato della dichiarazione</li>
+        <li>Endpoint di verifica dei documenti: si invia un hash SHA-256 e si riceve una corrispondenza o una mancata corrispondenza</li>
+        <li>Endpoint di account autenticati con bearer token e autenticazione a più fattori TOTP</li>
+      </ul>
+      <ul class="rc-list">
+        <li>Viste delle riserve calcolate dai record, che mostrano separatamente le quantità dichiarate e quelle verificate</li>
+        <li>Esportazione della traccia di audit con verifica dell'integrità</li>
+        <li>Gli endpoint relativi a detenzioni e transazioni restituiscono «non abilitato» fino ad autorizzazione</li>
+      </ul>
+    </div>
+    <div class="rc-cta">
+      <div><h2>Definisca l'ambito di un'esigenza di tokenizzazione</h2><p>Parta dalle evidenze in Suo possesso. Le indicheremo che cosa manca.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contatti ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/tokenization/">Scopra la tokenizzazione</a>
+        <a class="rc-btn" href="/enterprise/">Servizi per le imprese</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+# Production / staging stack: WordPress + MySQL 8 + Caddy (automatic HTTPS via Let's Encrypt).
+# Secrets live in deploy/.env (never committed). Usage on the server:
+#   docker compose -f docker-compose.prod.yml --env-file .env up -d
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: reservechain
+      MYSQL_USER: rc_app
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    command: ["--log-bin-trust-function-creators=1", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--innodb-buffer-pool-size=192M", "--performance-schema=OFF"]
+    volumes: [db_data:/var/lib/mysql]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      retries: 30
+
+  wordpress:
+    image: wordpress:6-php8.2-apache
+    restart: always
+    depends_on: { db: { condition: service_healthy } }
+    environment: &wpenv
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: reservechain
+      WORDPRESS_DB_USER: rc_app
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('RC_ENV', '${RC_ENV}');
+        define('RC_TOKEN_SECRET', '${RC_TOKEN_SECRET}');
+        define('RC_DEMO_PASSWORD', '${RC_DEMO_PASSWORD}');
+        define('DISALLOW_FILE_EDIT', true);
+        define('FORCE_SSL_ADMIN', true);
+        define('WP_DEBUG', false);
+        if (isset($$_SERVER['HTTP_X_FORWARDED_PROTO']) && $$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') { $$_SERVER['HTTPS'] = 'on'; }
+    volumes:
+      - wp_data:/var/www/html
+      - ./app/wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain:ro
+      - ./app/wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core:ro
+      - ./php-uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    profiles: ["tools"]
+    user: "33:33"
+    depends_on: [wordpress]
+    environment: *wpenv
+    volumes:
+      - wp_data:/var/www/html
+      - ./app/wordpress/themes/reservechain:/var/www/html/wp-content/themes/reservechain:ro
+      - ./app/wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core:ro
+
+  caddy:
+    image: caddy:2
+    restart: always
+    ports: ["80:80", "443:443"]
+    environment:
+      SITE_HOST: ${SITE_HOST}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [wordpress]
+
+volumes:
+  db_data:
+  wp_data:
+  caddy_data:
+  caddy_config:

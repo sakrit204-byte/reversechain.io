@@ -1,0 +1,141 @@
+<!--
+title: Seguridad
+excerpt: Seguridad para una infraestructura de activos del mundo real, descrita tal como está implementada y tal como está prevista. Abarca la separación de funciones, la autenticación multifactor, la disciplina de sesiones, un registro de auditoría a prueba de manipulaciones y la gestión de claves multifirma. No declaramos certificaciones.
+kicker: Plataforma · Programa de seguridad · En desarrollo
+order: 4
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Nuestra posición</p>
+        <h2>Controles que usted puede inspeccionar, <em>no distintivos en los que deba confiar</em></h2>
+        <p class="rc-lead">La plataforma está en desarrollo. Algunos de los controles que figuran a continuación ya están implementados en el código. Otros están diseñados y planificados. Cada uno está identificado en consecuencia.</p>
+      </div>
+      <div class="rc-callout">
+        <p><strong>Sin declaraciones de certificación.</strong> ReserveChain no posee ni declara poseer la certificación ISO 27001, SOC 2 ni ninguna otra certificación o atestación de seguridad. Aún no se ha completado ninguna prueba de penetración externa ni ninguna revisión de seguridad de los contratos inteligentes. Ambas están previstas antes de cualquier activación. Si un tercero presenta un certificado de seguridad de ReserveChain, no es auténtico. Denúncielo a través del <a href="/legal/anti-fraud/">Aviso antifraude</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Gestión de identidades y accesos</p>
+      <h2>Seis funciones. <em>Nadie aprueba su propio trabajo.</em></h2>
+      <p class="rc-lead">El acceso se basa en funciones y en el principio de mínimo privilegio. La edición, la aprobación, la publicación, el cumplimiento y la administración del sistema son permisos distintos asignados a personas distintas. Publicar cualquier contenido público requiere una segunda persona: el aprobador debe ser distinto tanto de quien envía el contenido como de su último editor.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Función</th><th>Puede</th><th>No puede</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Editor de contenidos</strong></td><td>Redactar y editar páginas del sitio web; cargar archivos multimedia; enviar para revisión</td><td>Editar registros; aprobar; publicar</td></tr>
+          <tr><td><strong>Gestor del registro</strong></td><td>Crear y editar registros y evidencias; enviar para revisión</td><td>Aprobar o publicar sus propios registros</td></tr>
+          <tr><td><strong>Revisor</strong></td><td>Aprobar contenido enviado o solicitar cambios; consultar el registro de auditoría</td><td>Publicar; gestionar el cumplimiento o la configuración</td></tr>
+          <tr><td><strong>Responsable de cumplimiento</strong></td><td>Aprobar, publicar, despublicar y archivar; gestionar KYC/KYB, los controles jurisdiccionales y la lista de espera</td><td>Modificar la configuración de la plataforma o activar módulos bloqueados</td></tr>
+          <tr><td><strong>Auditor</strong></td><td>Consultar registros, incluidos los campos restringidos; verificar la cadena de auditoría</td><td>Modificar nada</td></tr>
+          <tr><td><strong>Administrador</strong></td><td>Configuración y modos de la plataforma; activar un módulo bloqueado con una referencia de autorización por escrito</td><td>Eludir el doble control; editar o eliminar entradas de auditoría</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Aplicación, sesiones y portal</p>
+      <h2>Controles <em>implementados</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Autenticación multifactor</h3><p>Contraseñas de un solo uso basadas en el tiempo (RFC 6238) con protección frente a reutilización y códigos de recuperación de un solo uso, que se almacenan cifrados mediante hash. Los secretos compartidos se cifran en reposo con AES-256-GCM.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Sesiones</h3><p>Las sesiones del personal caducan al cabo de una jornada laboral. Los tokens de acceso a la API duran una hora. Los tokens de actualización se almacenan como hash y se rotan en cada uso. Si se reutiliza un token de actualización, se revocan todas las sesiones de esa cuenta.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Protección del inicio de sesión</h3><p>Una cuenta se bloquea tras fallos reiterados, y todos los inicios de sesión fallidos muestran el mismo error genérico. Se bloquea la enumeración de autores, y los formularios y endpoints públicos tienen límite de frecuencia.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Transporte y cabeceras</h3><p>HTTPS con HSTS, una Content Security Policy, nosniff, restricciones de marcos y una política de referente estricta. Los permisos de cámara, micrófono, geolocalización, pago y USB están desactivados.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Entradas y cargas</h3><p>Las cargas se limitan a una lista de tipos de archivo permitidos y a un tamaño máximo, con un punto de integración para el análisis de malware. Las entradas se validan y las salidas se codifican. Las solicitudes que modifican el estado incorporan protección CSRF.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Control de acceso al portal y a los módulos</h3><p>Las funciones de monedero, adquisición de tokens, tenencias y reembolso físico están desarrolladas, pero bloqueadas en el servidor. Sus endpoints indican «inactivo» con independencia de lo que envíe el cliente.</p><div class="rc-card__foot">[rc_status s="not_applicable" label="Bloqueado"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Registro y supervisión</p>
+        <h2>Un registro a prueba de manipulaciones <em>de cada acción</em></h2>
+        <p class="rc-lead">Los inicios de sesión, los inicios de sesión fallidos, los cambios de función, las transiciones del flujo de trabajo, las cargas y sustituciones de documentos, las activaciones de módulos y el uso de códigos de recuperación se escriben en un registro de auditoría de solo adición y encadenado mediante hash. Los disparadores de la base de datos impiden su modificación, y su cabeza se ancla en cadena.</p>
+        <p>Las direcciones IP solo se almacenan como hashes con clave. Así, el registro sigue siendo útil para las investigaciones sin convertirse en un almacén de datos personales.</p>
+      </div>
+      <div>
+        [rc_audit_status]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Gestión de claves</p>
+      <h2>Ninguna clave por sí sola <em>puede mover valor</em></h2>
+      <p class="rc-lead">Los contratos inteligentes están diseñados desde el principio para una administración multifirma. Los acuerdos de custodia de claves para cualquier despliegue en producción están previstos y aún no se han implantado.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Un administrador por contrato, transferible solo en dos pasos diferidos</strong>[rc_status s="in_development"]<small>El cambio de administrador requiere un paso de inicio y un paso de aceptación separados por una demora obligatoria. Esto deja tiempo para detectar y cancelar una transferencia hostil.</small></div>
+      <div><strong>Funciones operativas acotadas</strong>[rc_status s="in_development"]<small>La acuñación, la quema, la pausa, las actualizaciones de KYC, la atestación de reservas y el anclaje de la auditoría son funciones distintas y pueden asignarse a claves distintas.</small></div>
+      <div><strong>Administrador multifirma</strong>[rc_status s="proposed"]<small>Los contratos son compatibles con un administrador multifirma. El conjunto de firmantes y el umbral están sujetos a la aprobación de la gobernanza.</small></div>
+      <div><strong>Monederos físicos para cada firmante</strong>[rc_status s="proposed"]<small>Previstos para todos los firmantes administrativos y operativos, con una ceremonia de claves documentada.</small></div>
+      <div><strong>Secretos de la aplicación</strong>[rc_status s="in_development"]<small>Se guardan en la configuración del entorno, nunca en el repositorio. No se comparten credenciales y las cuentas pueden desactivarse de inmediato.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Infraestructura, datos, proveedores, respuesta</p>
+      <h2>El resto del <em>programa</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Infraestructura</h3>
+        <ul class="rc-list"><li>Entornos separados de desarrollo, preproducción y producción</li><li>El entorno de preproducción nunca se indexa</li><li>Copias de seguridad automáticas cifradas con pruebas periódicas de restauración</li><li>Procedimientos de aprobación de versiones y de reversión</li><li>Todas las cuentas son titularidad de ReserveChain, ninguna de desarrolladores individuales</li></ul>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Protección de datos</h3>
+        <ul class="rc-list"><li>Visibilidad por campo: público, participante, auditor, restringido</li><li>Los documentos confidenciales solo se facilitan a funciones autorizadas</li><li>Ningún dato personal en la analítica ni en las URL</li><li>Ningún seguimiento no esencial antes del consentimiento</li><li>Procedimientos de conservación, rectificación y supresión</li></ul>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Respuesta a incidentes</h3>
+        <ul class="rc-list"><li>Alertas sobre inicios de sesión fallidos, eventos de seguridad, fallos de copias de seguridad y despliegues</li><li>Pausa de contratos y congelación de cuentas como medidas de contención</li><li>Verificación de la cadena de auditoría para establecer la cronología</li><li>Notificaciones únicamente a través de los canales oficiales</li></ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Controles de proveedores y pruebas</h3>
+        <ul class="rc-list"><li>Un inventario de servicios y dependencias de terceros</li><li>Revisión de vulnerabilidades de las dependencias en cada versión</li><li>Pruebas unitarias de los contratos, cobertura y análisis estático en cada cambio</li><li>Prueba de penetración independiente y revisión de seguridad de los contratos antes de la activación</li></ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Comunique una incidencia</h2>
+        <p>Si detecta una vulnerabilidad o recibe un mensaje sospechoso que afirme proceder de ReserveChain, póngase en contacto con nosotros a través de los canales oficiales indicados en nuestro sitio web.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/">Contactar con ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/resources/documentation/">Ver documentos</a>
+        <a class="rc-btn" href="/platform/how-it-works/">Cómo funciona ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

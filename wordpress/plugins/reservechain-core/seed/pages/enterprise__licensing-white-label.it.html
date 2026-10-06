@@ -1,0 +1,111 @@
+<!--
+title: Licenze tecnologiche e white label
+excerpt: Un modello di licenza proposto per istituzioni e piattaforme che intendono gestire i moduli di registro, passaporto, conformità e controllo delle riserve di ReserveChain con il proprio marchio, la propria governance e la propria struttura legale.
+kicker: Imprese · Licenze · Modello proposto
+order: 2
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">La proposta</p>
+        <h2>Il Suo marchio e la Sua governance, <em>il nostro motore di evidenze</em></h2>
+      </div>
+      <p class="rc-lead">Le licenze sono destinate a organizzazioni che saranno l'operatore e la parte responsabile dei propri programmi di asset e che desiderano componenti già collaudati anziché un nuovo sviluppo. Il modello di licenza è proposto e non è stata concessa alcuna licenza ad alcuna parte.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Piattaforma white label</h3><p>Componenti del sito pubblico, pagine del registro e passaporti presentati con il dominio, il marchio e le lingue del licenziatario.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Licenza di moduli</h3><p>Moduli selezionati, come il registro e il motore dei passaporti, integrati nei sistemi esistenti del licenziatario tramite API.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Implementazione gestita</h3><p>ReserveChain gestisce l'infrastruttura per conto del licenziatario secondo livelli di servizio e controlli concordati.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Componenti concedibili in licenza</p>
+      <h2>Che cosa può essere concesso in licenza <em>e il relativo grado di maturità</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Componente</th><th>Funzione</th><th>Configurabile</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Registro degli asset</td><td>Tipi di record per programmi, materiali, lotti, contenitori, bobine, rapporti, valutazioni e luoghi di custodia</td><td>Schema per classe di asset, campi, visibilità pubblica/privata</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Motore dei passaporti</td><td>Passaporti dell'Asset Digitale con codice QR, cronologia, registro delle evidenze e radice di Merkle</td><td>Formato del numero di passaporto, sezioni, lingue</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Sistema di stato delle dichiarazioni</td><td>Ogni campo fattuale riporta lo stato proposto, in sviluppo, in attesa di verifica, verificato o non applicabile</td><td>Etichette e regole di visualizzazione</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Verifica dei documenti</td><td>Calcolo dell'hash SHA-256 nel browser e confronto con le impronte del registro; i file non vengono mai caricati</td><td>Tipi di documento</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Integrazione della conformità</td><td>Elenchi delle giurisdizioni, archiviazione degli esiti KYC/KYB, replica on-chain dell'idoneità</td><td>Connettore del fornitore, elenchi soggetti a restrizioni</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Infrastruttura di tokenizzazione</td><td>Contratti di token, rimborso fisico e tesoreria con controllo basato sui ruoli</td><td>Nome, simbolo, limite massimo, rapporto, soglie</td><td>[rc_status s="in_development" label="Testnet"]</td></tr>
+          <tr><td>Motore delle riserve</td><td>Emissione limitata dall'attestazione e viste delle riserve</td><td>Unità, attestatori, rapporto</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Portali</td><td>Portali per partecipanti, imprese e proprietari di asset; app mobili</td><td>Moduli visibili in base alla modalità del sito</td><td>[rc_status s="in_development" label="Sviluppato · non attivo"]</td></tr>
+          <tr><td>Analisi e reportistica</td><td>Dashboard operative ed esportazioni della traccia di audit</td><td>Set di report</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Marchio e modalità</p>
+        <h2>Dieci modalità del sito, <em>un unico quadro di comando</em></h2>
+        <p>La piattaforma opera secondo modalità definite: Sviluppo, Pre-lancio, Lista d'attesa, Pubblicazione della documentazione, Verifica degli asset, Onboarding delle imprese, Idoneità, Partecipazione Anticipata, Offerta attiva e Rimborso fisico. Un licenziatario controllerebbe quali moduli sono visibili in ciascuna modalità.</p>
+        <p>Le modalità che espongono funzioni di idoneità, acquisizione, wallet, pagamento o rimborso fisico sono bloccate e subordinate a un'autorizzazione scritta e a un flag di implementazione separato. Non possono essere attivate dall'editor dei contenuti.</p>
+      </div>
+      <div>
+        <p class="rc-kicker">Responsabilità del licenziatario</p>
+        <h2>Ciò che resta <em>in capo al licenziatario</em></h2>
+        <ul class="rc-list">
+          <li>Struttura legale, licenze e documentazione di offerta nelle proprie giurisdizioni</li>
+          <li>Selezione e contrattualizzazione di laboratori, custodi e assicuratori</li>
+          <li>Selezione del fornitore KYC/KYB e decisioni in materia di conformità</li>
+          <li>Accuratezza delle evidenze e dei dati che pubblica</li>
+          <li>Controllo delle chiavi e dei ruoli amministrativi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Implementazione e assistenza</p>
+      <h2>Come <em>verrebbe fornita</em> una licenza</h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Due diligence tecnica</h3><p>Revisione dell'architettura, della progettazione della sicurezza e del codice sorgente in regime di NDA.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Configurazione</h3><p>Schema per classe di asset, marchio, lingue, elenchi delle giurisdizioni e ruoli.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Implementazione in staging</h3><p>Ambiente separato con contratti su testnet e record di prova precaricati.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Collaudo e passaggio di consegne</h3><p>Documentazione, formazione e trasferimento di tutte le chiavi e di tutti i ruoli al licenziatario.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Assistenza</h3><p>Aggiornamenti, patch di sicurezza e supporto in caso di incidenti secondo un piano di servizio concordato.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Modello di licenza</p>
+      <h2>Struttura commerciale, <em>descritta in termini qualitativi</em></h2>
+      <p class="rc-lead">I corrispettivi non sono pubblicati e saranno definiti per ciascun incarico. Le componenti previste sono:</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Avviamento</h3><p>Configurazione, integrazione e implementazione in staging.</p></article>
+      <article class="rc-card" data-reveal><h3>Licenza della piattaforma</h3><p>Diritto ricorrente di utilizzo dei moduli concessi in licenza.</p></article>
+      <article class="rc-card" data-reveal><h3>Utilizzo</h3><p>Commisurato ai record, ai passaporti o ai programmi gestiti.</p></article>
+      <article class="rc-card" data-reveal><h3>Assistenza</h3><p>Livelli di servizio e operazioni gestite, ove richiesti.</p></article>
+    </div>
+    <div class="rc-cta">
+      <div><h2>Valuti una licenza</h2><p>Ci indichi la Sua classe di asset, le Sue giurisdizioni e il modello operativo previsto.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contatti ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">Come funziona ReserveChain</a>
+        <a class="rc-btn" href="/enterprise/">Servizi per le imprese</a>
+      </div>
+    </div>
+  </div>
+</section>

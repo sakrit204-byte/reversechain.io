@@ -1,0 +1,145 @@
+<!--
+title: Passaporti dell'Asset Digitale
+excerpt: Un'identità digitale persistente per ogni unità di asset. Ogni passaporto è composto a partire da registrazioni di evidenza approvate ed è sigillato con una radice di Merkle SHA-256. Può essere aperto tramite codice QR o scaricato come JSON leggibile da macchina, e chiunque può verificarlo in modo indipendente.
+kicker: Piattaforma · Identità digitale · Operativo con dati forniti dal proprietario
+order: 8
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Che cos'è un passaporto</p>
+        <h2>Non una pagina su un asset. <em>La registrazione di un asset.</em></h2>
+      </div>
+      <p class="rc-lead">Un Passaporto dell'Asset Digitale viene generato, non redatto. Nessuno modifica direttamente un passaporto. Esso è composto a partire dai record del registro relativi a uno specifico lotto, contenitore o bobina. Un passaporto non può quindi mai affermare più di quanto sia supportato dalle sue evidenze, e ogni affermazione in esso contenuta è riconducibile a un documento di cui Lei può verificare l'impronta.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Un passaporto per ogni unità controllabile</h3><p>Esiste un passaporto per ogni lotto, ogni contenitore e ogni bobina. Il lotto di rame e la relativa Scatola n. 20 hanno ciascuno il proprio passaporto. Anche ciascuna delle 30 bobine di nichel ne ha uno.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Identificativo permanente</h3><p>Gli identificativi seguono lo schema <span class="rc-mono">RC-[metal]-[type]-[sequence]</span>, ad esempio <span class="rc-mono">RC-NI-COL-000008</span>. Un identificativo non viene mai riutilizzato, nemmeno dopo che un'unità è stata rilasciata o ritirata.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Collegamenti padre-figlio</h3><p>I lotti sono collegati verso il basso ai propri contenitori o bobine, e le unità sono collegate verso l'alto al proprio lotto e programma. Le evidenze allegate a livello di lotto sono visibili da ogni unità figlia.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Contenuti</p>
+      <h2>Tredici sezioni, <em>ciascuna supportata da un tipo di record</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Sezione</th><th>Che cosa mostra</th><th>Record di origine</th></tr></thead>
+        <tbody>
+          <tr><td>Identità</td><td>Numero del passaporto, tipo di unità, programma, lotto di origine, codice QR</td><td>Lotto / contenitore / bobina</td></tr>
+          <tr><td>Specifiche</td><td>Materiale, forma, purezza e relativa base, dimensioni, imballaggio. I campi non documentati mostrano «In attesa».</td><td>Schema del lotto e del programma</td></tr>
+          <tr><td>Certificati</td><td>Certificato di Analisi, trascrizione esatta, griglia delle analisi, scansione originale, impronta</td><td>Certificato di Analisi, laboratorio</td></tr>
+          <tr><td>Provenienza e origine</td><td>Produttore, origine, documenti sulla catena dei titoli forniti dal proprietario (soggetti a restrizioni ove richiesto)</td><td>Custodia / proprietà</td></tr>
+          <tr><td>Verifica</td><td>Fonte dell'evidenza (fornita dal proprietario o indipendente), campionamento, data di approvazione</td><td>Certificato di Analisi, verifica</td></tr>
+          <tr><td>Custodia</td><td>Stato della custodia, ricevuta, numeri dei sigilli, ispezioni</td><td>Custodia</td></tr>
+          <tr><td>Valutazione</td><td>Stato, data e metodologia della valutazione, una volta approvata per la pubblicazione</td><td>Valutazione</td></tr>
+          <tr><td>Stato della riserva</td><td>Dichiarato, verificato, idoneo o allocato</td><td>Rapporto sulle riserve</td></tr>
+          <tr><td>Stato della tokenizzazione</td><td>Programma di token collegato, oppure «Non collegato»</td><td>Programma di token</td></tr>
+          <tr><td>Riferimenti blockchain</td><td>Riferimenti alle transazioni di attestazione e di burn, quando esisteranno. Attualmente nessuno.</td><td>Programma di token, rimborso fisico</td></tr>
+          <tr><td>Cronologia</td><td>Eventi del ciclo di vita con controllo delle versioni e cronologia delle pubblicazioni</td><td>Flusso di lavoro e audit trail</td></tr>
+          <tr><td>Documenti</td><td>Ogni file collegato, con la relativa impronta SHA-256 e visibilità</td><td>Documento</td></tr>
+          <tr><td>Integrità</td><td>Radice di Merkle e numero di foglie calcolati sul record e sui suoi documenti</td><td>Calcolato</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Integrità di Merkle</p>
+        <h2>Un unico hash che <em>vincola tutto</em></h2>
+        <p class="rc-lead">Ogni passaporto riporta una radice di Merkle SHA-256. Le sue foglie sono un'impronta dei campi pubblici del passaporto più l'impronta di ogni documento collegato. Se si modifica un valore di purezza, si sostituisce la scansione di un certificato o si rimuove una ricevuta, la radice cambia.</p>
+        <p>La radice è mostrata sul passaporto e inclusa nell'esportazione JSON. I terzi possono conservarla e confrontarla in seguito. È inoltre un valore compatto, adatto all'ancoraggio su un registro pubblico.</p>
+      </div>
+      <figure class="rc-diagram">
+        <svg viewBox="0 0 520 300" role="img" aria-labelledby="rc-mk-title rc-mk-desc" font-family="Inter Tight, sans-serif">
+          <title id="rc-mk-title">Albero di Merkle del passaporto</title>
+          <desc id="rc-mk-desc">Quattro foglie (impronta del record, Certificato di Analisi, scansione, ricevuta) vengono sottoposte a hash a coppie in due nodi, che a loro volta vengono sottoposti a hash nella radice di Merkle.</desc>
+          <rect x="170" y="16" width="180" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2.5"/>
+          <text x="260" y="43" fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">Radice di Merkle</text>
+          <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5"><rect x="50" y="120" width="160" height="40" rx="8"/><rect x="310" y="120" width="160" height="40" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="12" text-anchor="middle"><text x="130" y="145">SHA-256(a ‖ b)</text><text x="390" y="145">SHA-256(c ‖ d)</text></g>
+          <g fill="#0E1620" stroke="#C9773F" stroke-width="1.5"><rect x="10" y="226" width="115" height="54" rx="8"/><rect x="135" y="226" width="115" height="54" rx="8"/><rect x="270" y="226" width="115" height="54" rx="8"/><rect x="395" y="226" width="115" height="54" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="11.5" text-anchor="middle"><text x="67" y="249">a · campi</text><text x="67" y="266">del record</text><text x="192" y="249">b · CoA</text><text x="192" y="266">PDF</text><text x="327" y="249">c · scansione</text><text x="327" y="266">originale</text><text x="452" y="249">d · altri</text><text x="452" y="266">documenti</text></g>
+          <g stroke="#1C2A38" stroke-width="2" fill="none"><path d="M67 226 L130 160"/><path d="M192 226 L130 160"/><path d="M327 226 L390 160"/><path d="M452 226 L390 160"/><path d="M130 120 L260 60"/><path d="M390 120 L260 60"/></g>
+        </svg>
+        <figcaption>Le foglie vengono deduplicate e ordinate prima dell'accoppiamento, in modo che la radice non dipenda dall'ordine in cui i documenti sono stati allegati. Una foglia dispari viene accoppiata con sé stessa.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Accesso</p>
+      <h2>QR, web e <em>JSON leggibile da macchina</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Accesso tramite QR</h3><p>Ogni passaporto dispone di un codice QR che rimanda al suo URL permanente. Nel modello di custodia proposto, il codice verrebbe stampato sull'etichetta dell'unità, in modo che chiunque maneggi un contenitore possa aprirne il record.</p></article>
+      <article class="rc-card" data-reveal><h3>Evidenze scaricabili</h3><p>Aggiunga <span class="rc-mono">?format=json</span> all'URL di qualsiasi passaporto per scaricare il passaporto completo: campi, ciclo di vita, impronte dei documenti e radice di Merkle. Gli stessi dati sono disponibili all'indirizzo <span class="rc-mono">/rc/v1/passports/{no}</span>.</p></article>
+      <article class="rc-card" data-reveal><h3>Verifica indipendente</h3><p>Calcoli l'hash di un documento in Suo possesso con qualsiasi strumento SHA-256, oppure utilizzi lo <a href="/platform/verification/#verify">strumento di verifica</a>, quindi confronti il risultato con l'impronta indicata nel passaporto.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Passaporti operativi</p>
+        <h2>Apra un <em>record reale</em></h2>
+      </div>
+      <p class="rc-lead">Questi passaporti sono operativi e contengono evidenze fornite dal proprietario per i due programmi iniziali. Le loro fasi mostrano «In attesa» laddove non esistono ancora evidenze indipendenti. Si tratta di un'informazione accurata, non di lavoro mancante.</p>
+    </div>
+    [rc_passports limit="6"]
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/passport/RC-CU-LOT-000001/" data-reveal><span class="rc-card__num">Cu 29</span><h3>Polvere di rame · Lotto #03-K-07</h3><p>Un passaporto a livello di lotto con il CoA IGAS 0004512 fornito dal proprietario, una griglia di analisi di 30 elementi e il peso netto dichiarato di 2000 kg.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-NI-COL-000008/" data-reveal><span class="rc-card__num">Ni 28</span><h3>Filo di nichel · Bobina 8</h3><p>Una delle quattro bobine campionate per il CoA IGAS 0004368 fornito dal proprietario. È un passaporto a livello di unità collegato al Lotto 120/NP1.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-LOT-000001/" data-reveal><span class="rc-card__num">Modello</span><h3>Modello illustrativo di asset di metallo industriale</h3><p>Mostra il formato futuro con tutti i campi In attesa. Non rappresenta alcun materiale, documento o token. <span class="rc-demo-badge">Dati illustrativi / dimostrativi</span></p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Cronologia e controllo delle versioni</p>
+        <h2>Un passaporto <em>ricorda</em></h2>
+        <p class="rc-lead">Gli stati precedenti di un passaporto restano parte del suo record. Ogni pubblicazione è una versione, ogni versione ha superato l'approvazione a doppio controllo (principio dei quattro occhi) e ogni transizione è riportata nell'audit trail a prova di manomissione.</p>
+      </div>
+      <ul class="rc-checks">
+        <li>La sostituzione di un documento crea una nuova versione del documento e la radice del passaporto cambia in modo visibile.</li>
+        <li>I passaporti non più pubblicati o archiviati vengono ritirati, mai eliminati definitivamente.</li>
+        <li>Le fasi del ciclo di vita registrano quando è stata aggiunta un'evidenza e chi l'ha approvata.</li>
+        <li>Stati come «verificato» o «in custodia» compaiono solo quando esiste un record collegato e approvato.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Scopra da dove provengono i passaporti</h2>
+        <p>Ogni passaporto è una vista sul Registro dei Metalli Industriali.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">Visualizza il Registro degli Asset</a>
+        <a class="rc-btn rc-btn--cream" href="/assets/initial-programs/">Visualizza i programmi iniziali</a>
+        <a class="rc-btn" href="/platform/verification/">Visualizza il processo di verifica</a>
+      </div>
+    </div>
+  </div>
+</section>

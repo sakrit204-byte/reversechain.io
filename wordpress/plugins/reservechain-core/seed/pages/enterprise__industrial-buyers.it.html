@@ -1,0 +1,112 @@
+<!--
+title: Acquirenti industriali
+excerpt: Per produttori, trasformatori, utenti nel campo della ricerca e controparti qualificate che necessitano di materiali ad altissima purezza documentati. In che modo il modello di evidenze di ReserveChain è destinato a supportare gli acquisti e come potrebbe funzionare in futuro la consegna fisica.
+kicker: Imprese · Utenti industriali · Solo richieste di informazioni
+order: 4
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Il problema degli acquisti</p>
+        <h2>Dichiarare la purezza è facile. <em>La prova viaggia male.</em></h2>
+      </div>
+      <p class="rc-lead">I materiali ad altissima purezza sono specificati in parti per milione, eppure la documentazione che attesta una specifica è spesso un certificato scansionato e scollegato dall'unità che descrive. ReserveChain collega ciascun lotto, contenitore e bobina al relativo certificato, alla sua impronta e alla sua cronologia di custodia. Attualmente nessun materiale è offerto in vendita; questa pagina è destinata esclusivamente alle richieste di informazioni.</p>
+    </div>
+    <div class="rc-elements">
+      <a class="rc-element" href="/assets/industrial-metals/copper-powder/"><span class="rc-element__n">29</span><span class="rc-element__s">Cu</span><span class="rc-element__l">Polvere di rame ad altissima purezza <small>99.9999 %*</small></span></a>
+      <a class="rc-element rc-element--ni" href="/assets/industrial-metals/nickel-wire/"><span class="rc-element__n">28</span><span class="rc-element__s">Ni</span><span class="rc-element__l">Filo di nichel ad alta purezza 0.025 mm <small>99.9807 %*</small></span></a>
+    </div>
+    <p class="rc-fine">* Certificati di Analisi IGAS forniti dal proprietario (Cu: n. 0004512, Lot #03-K-07; Ni: n. 0004368, Lot 120/NP1). Soggetti a verifica documentale.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Ambiti di applicazione tipici</p>
+      <h2>Dove materiali come questi <em>vengono generalmente utilizzati</em></h2>
+      <p class="rc-lead">Solo contesto industriale generale. Non afferma che i materiali del programma siano stati qualificati per alcuna applicazione specifica.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Polvere di rame</h3>
+        <ul class="rc-list"><li>Elettronica e materiali conduttivi</li><li>Produzione additiva</li><li>Ricerca sull'accumulo di energia</li><li>Ricerca e sviluppo</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Filo sottile di nichel</h3>
+        <ul class="rc-list"><li>Elettronica di precisione</li><li>Dispositivi medici</li><li>Tecnologia delle batterie e filtrazione</li><li>Ricerca e sviluppo</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Documentazione che riceverebbe</p>
+      <h2>Evidenze collegate <em>all'unità</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Evidenza</th><th>Forma</th><th>Stato attuale</th></tr></thead>
+        <tbody>
+          <tr><td>Certificato di Analisi</td><td>Scansione originale, trascrizione esatta e impronta SHA-256 sul Passaporto dell'Asset Digitale</td><td>[rc_status s="pending_verification" label="Fornito dal proprietario"]</td></tr>
+          <tr><td>Rapporto di verifica indipendente</td><td>Risultati di ispezione e di laboratorio di una parte indipendente</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Identità dell'unità</td><td>Numero di passaporto e codice QR per lotto, contenitore o bobina</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Catena di custodia</td><td>Eventi di custodia datati dalla presa in carico al rilascio</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Autenticità dei documenti</td><td>Verifica dell'impronta nel browser rispetto al registro, senza caricare il file</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Verifichi un documento già in Suo possesso con lo <a href="/platform/verification/">strumento di verifica</a>, oppure consulti un passaporto di esempio: <a href="/passport/RC-CU-LOT-000001/">Cu Lot #03-K-07</a> · <a href="/passport/RC-NI-COL-000008/">Ni bobina 8</a>.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Flusso di acquisto proposto</p>
+      <h2>Sei fasi, <em>nessuna ancora attiva</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Richiesta di informazioni</h3><p>Materiale, specifica, forma, intervallo approssimativo di quantità, destinazione e tempistiche.</p></div>[rc_status s="in_development" label="Aperta"]</li>
+      <li><div><h3>Verifiche sulla controparte</h3><p>Verifiche KYB, sulle sanzioni e sull'uso finale adeguate al materiale e alla destinazione.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Corrispondenza con la specifica</h3><p>Confronto tra il Suo requisito e le evidenze del passaporto; campioni o prove indipendenti ove concordato.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Condizioni commerciali</h3><p>Concordate direttamente in un contratto scritto. Su questo sito web non viene quotato alcun prezzo.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Rilascio dalla custodia</h3><p>Rilascio dalla custodia registrato sul passaporto dell'unità.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Consegna o ritiro</h3><p>Imballaggio, trasporto, documentazione di esportazione e consegna, con il passaporto che accompagna l'unità.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Consegna fisica e rimborso fisico</p>
+        <h2>Due percorsi <em>verso lo stesso metallo</em></h2>
+        <p>Un utente industriale potrebbe ottenere il materiale tramite acquisto diretto oppure, qualora venisse mai lanciato un programma di token, un detentore potrebbe richiedere il rimborso fisico. Entrambi i percorsi attingerebbero alle stesse unità del registro, cosicché un'unità rilasciata per l'uno non potrebbe essere conteggiata per l'altro.</p>
+        <p>Il rimborso fisico è un quadro proposto, soggetto a conferma finale sotto il profilo legale, contrattuale, tecnico e operativo. Soglie, commissioni e logistica non sono definite.</p>
+      </div>
+      <div>
+        [rc_module module="logistics" title="Flusso di logistica, dogana e consegna"]
+        [rc_module module="redemption" title="Richieste di rimborso fisico"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-callout"><p>In questa pagina non sono riportati clienti, testimonianze o accordi di fornitura, poiché nessuno di essi è stato autorizzato per la pubblicazione. Eventuali riferimenti futuri compariranno solo previo consenso scritto.</p></div>
+    <div class="rc-cta">
+      <div><h2>Invii una richiesta industriale</h2><p>Descriva il materiale, la specifica e la destinazione di cui ha bisogno.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contatti ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/assets/initial-programs/">Visualizza i programmi iniziali</a>
+        <a class="rc-btn" href="/platform/redemption/">Come funziona il rimborso fisico</a>
+      </div>
+    </div>
+  </div>
+</section>

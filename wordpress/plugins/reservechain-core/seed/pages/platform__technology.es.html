@@ -1,0 +1,191 @@
+<!--
+title: Tecnología
+excerpt: La tecnología que sustenta la tokenización de activos del mundo real, descrita tal como está construida hoy. Comprende un núcleo CMS gobernado, un registro sellado criptográficamente, una única API REST para web y móvil, y seis contratos inteligentes de Ethereum desplegados únicamente en redes de prueba.
+kicker: Plataforma · Implementación · En desarrollo · Solo red de pruebas
+order: 3
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Pila tecnológica</p>
+        <h2>Deliberadamente convencional, <em>verificable por diseño</em></h2>
+      </div>
+      <p class="rc-lead">La pila tecnológica utiliza componentes consolidados para que las partes novedosas —el sellado de evidencias, la vinculación al flujo de trabajo y la emisión condicionada a las reservas— sean lo bastante pequeñas como para poder inspeccionarlas. Esta página describe la implementación que existe. Se encuentra en desarrollo activo y aún no ha sido objeto de una revisión de seguridad externa.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Capa</th><th>Implementación</th><th>Función</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>Contenido y registro</td><td>CMS WordPress con el plugin ReserveChain Core; MySQL</td><td>Esquema del registro, pasaportes, flujo de trabajo, registro de auditoría, estado de cumplimiento</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Interfaz</td><td>API REST, espacio de nombres <span class="rc-mono">rc/v1</span></td><td>Un único contrato compartido por el sitio web, el portal y las aplicaciones móviles</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Móvil</td><td>Aplicaciones para iOS y Android sobre una base de código compartida</td><td>Pasaportes, documentos, notificaciones; funciones para participantes bloqueadas</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Libro mayor</td><td>Solidity 0.8 en Ethereum, construido sobre OpenZeppelin Contracts 5</td><td>Emisión ERC-20, gancho de cumplimiento, guarda de reservas, reembolso físico, tesorería, anclaje</td><td>[rc_status s="in_development" label="Solo red de pruebas"]</td></tr>
+          <tr><td>Herramientas</td><td>Hardhat, TypeScript, pruebas unitarias, informes de cobertura, informes de gas, análisis estático</td><td>Compilaciones reproducibles y evidencias de pruebas para cada cambio en los contratos</td><td>[rc_status s="in_development"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Registros y pasaportes</p>
+      <h2>Un esquema declarativo <em>y un pasaporte sellado</em></h2>
+      <p class="rc-lead">Cada tipo de registro, desde el programa y el lote hasta el contenedor, la bobina, el certificado, el recibo de custodia y el informe de reservas, se declara una sola vez en un esquema. Ese esquema define los campos, las unidades, la visibilidad y la evidencia a la que debe vincularse cada campo. El editor, la API y el pasaporte se generan a partir de él, de modo que no pueden divergir.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">A</span>
+        <h3>Huella del registro</h3>
+        <p>Para cada pasaporte, la plataforma calcula un hash SHA-256 sobre el número de pasaporte, el tipo de registro y cada campo público en forma de pares clave-valor. Cualquier cambio en un valor publicado modifica esta huella.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">B</span>
+        <h3>Hojas de documentos</h3>
+        <p>Cada documento vinculado tiene un hash SHA-256, calculado a partir del archivo almacenado en el momento de su carga. Estos hashes y la huella del registro forman las hojas del árbol de Merkle del pasaporte.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">C</span>
+        <h3>Raíz de Merkle</h3>
+        <p>Las hojas se deduplican, se ordenan y se combinan por pares mediante hash hasta obtener una única raíz SHA-256. Un solo valor de 64 caracteres se compromete con todo el conjunto de evidencias, y cualquier persona que disponga de la exportación JSON puede recalcularlo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Contratos inteligentes</p>
+      <h2>Seis contratos. <em>Ningún valor económico definido.</em></h2>
+      <p class="rc-lead">Los contratos constituyen una capa de libro mayor propuesta. El precio, el suministro, la relación activo-token, los umbrales de reembolso físico y las asignaciones son parámetros de configuración, y todos ellos están por defecto sin definir, a cero o desactivados. Con la configuración entregada, tanto la acuñación como el reembolso físico están bloqueados. Las herramientas de despliegue rechazan los destinos de red principal.</p>
+    </div>
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 300" role="img" aria-labelledby="rc-sc-title rc-sc-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-sc-title">Interacciones entre contratos inteligentes</title>
+        <desc id="rc-sc-desc">Un administrador multifirma gobierna los seis contratos. ReserveToken consulta a ComplianceRegistry en cada transferencia y a ReserveGuard en cada acuñación. RedemptionManager mantiene los tokens en depósito y los quema. Treasury mantiene tokens sujetos a límites. AuditAnchor almacena las cabezas de la cadena de auditoría del CMS.</desc>
+        <defs><marker id="rc-sc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D5B167"/></marker></defs>
+        <rect x="380" y="16" width="240" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2"/>
+        <text x="500" y="43" fill="#E7EBEE" font-size="13" text-anchor="middle" font-weight="600">Administrador multifirma (dos pasos, diferido)</text>
+        <rect x="380" y="128" width="240" height="64" rx="8" fill="#0E1620" stroke="#C9773F" stroke-width="2.5"/>
+        <text x="500" y="156" fill="#E7EBEE" font-size="14" text-anchor="middle" font-weight="600">ReserveToken</text>
+        <text x="500" y="176" fill="#A9BBC8" font-size="11" text-anchor="middle">ERC-20 · permit · pausa · acuñación a prueba de fallos</text>
+        <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5">
+          <rect x="30" y="100" width="230" height="56" rx="8"/><rect x="30" y="180" width="230" height="56" rx="8"/>
+          <rect x="740" y="100" width="230" height="56" rx="8"/><rect x="740" y="180" width="230" height="56" rx="8"/>
+          <rect x="380" y="236" width="240" height="52" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">
+          <text x="145" y="124">ComplianceRegistry</text><text x="145" y="204">ReserveGuard</text>
+          <text x="855" y="124">RedemptionManager</text><text x="855" y="204">Treasury</text>
+          <text x="500" y="259">AuditAnchor</text>
+        </g>
+        <g fill="#A9BBC8" font-size="11" text-anchor="middle">
+          <text x="145" y="143">canTransfer en cada transferencia</text><text x="145" y="223">maxMintable en cada acuñación</text>
+          <text x="855" y="143">depósito y quema si se aprueba</text><text x="855" y="223">límite diario · cola con timelock</text>
+          <text x="500" y="277">cabezas de auditoría del CMS, estrictamente crecientes</text>
+        </g>
+        <g stroke="#D5B167" stroke-width="1.5" marker-end="url(#rc-sc-arr)">
+          <line x1="380" y1="150" x2="264" y2="130"/><line x1="380" y1="172" x2="264" y2="204"/>
+          <line x1="738" y1="130" x2="624" y2="150"/><line x1="738" y1="204" x2="624" y2="176"/>
+        </g>
+        <line x1="500" y1="60" x2="500" y2="126" stroke="#D5B167" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="512" y="98" fill="#A9BBC8" font-size="11">gobierna los seis</text>
+      </svg>
+      <figcaption>Capa en cadena propuesta, desplegada únicamente en redes de prueba. No existe ningún despliegue en la red principal ni se ha publicado ninguna dirección de contrato. El registro oficial de direcciones mostrará «Aún no desplegado» hasta que se otorgue la aprobación.</figcaption>
+    </figure>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>ReserveToken</h3><p>Un token ERC-20 con permit EIP-2612 y pausa. La acuñación solo prospera en dos modos configurados: dentro del límite de la guarda de reservas o dentro de un tope estático habilitado expresamente. En cualquier otro estado se revierte. La quema está restringida a un rol específico.</p></article>
+      <article class="rc-card" data-reveal><h3>ComplianceRegistry</h3><p>Mantiene un registro por dirección: estado de aprobación, un código de jurisdicción de dos letras, una fecha de vencimiento y un indicador de congelación. Las transferencias requieren que ambas partes sean elegibles. Las jurisdicciones bloqueadas forman un conjunto configurable, y la configuración de despliegue lo inicializa con los códigos de la UE/EEE.</p></article>
+      <article class="rc-card" data-reveal><h3>ReserveGuard</h3><p>Los atestadores publican el programa, las unidades mantenidas, un hash del informe, un URI y una fecha de referencia. La cantidad acuñable es unidades × relación − suministro, y se reduce a cero si la relación o la ventana de antigüedad no están definidas o si la atestación está desactualizada.</p></article>
+      <article class="rc-card" data-reveal><h3>RedemptionManager</h3><p>El titular solicita el reembolso físico y los tokens pasan a depósito. Un operador aprueba la solicitud, lo que quema los tokens y registra una referencia de ejecución, o la rechaza, lo que los libera de vuelta. El titular puede cancelar mientras la solicitud esté pendiente. El módulo está desactivado por defecto y sus umbrales no están definidos.</p></article>
+      <article class="rc-card" data-reveal><h3>Treasury</h3><p>Un tenedor de tokens de programa controlado por roles. Aplica un límite diario de retirada por token, y una cola opcional con timelock retrasa las retiradas de gran importe. El límite por defecto es cero.</p></article>
+      <article class="rc-card" data-reveal><h3>AuditAnchor</h3><p>Registra la cabeza de la cadena del registro de auditoría del CMS, el número de secuencia y el URI. Los números de secuencia deben ser estrictamente crecientes. Cualquier persona puede invocar <span class="rc-mono">verify(seq, head)</span> para confirmar que una cabeza publicada coincide con el anclaje en cadena.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Registros de auditoría</p>
+        <h2>Un registro de auditoría que <em>puede comprobarse desde fuera</em></h2>
+        <p class="rc-lead">Los registros de auditoría solo son útiles si el operador no puede reescribirlos. ReserveChain los protege con cuatro capas independientes.</p>
+        <p>El estado en directo que figura a continuación se calcula recorriendo toda la cadena y recalculando cada hash.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Aplicación</h3><p>El registro no dispone de ninguna vía de edición o eliminación en la administración, la API ni la CLI. Solo pueden añadirse filas.</p></div></li>
+        <li><div><h3>Base de datos</h3><p>Los disparadores <span class="rc-mono">BEFORE UPDATE</span> y <span class="rc-mono">BEFORE DELETE</span> de MySQL rechazan cualquier intento de modificar una fila, incluso con acceso directo a la base de datos.</p></div></li>
+        <li><div><h3>Criptográfica</h3><p>Cada fila se compromete con el hash SHA-256 de la fila anterior. Editar, insertar o eliminar cualquier entrada invalida todos los hashes posteriores.</p></div></li>
+        <li><div><h3>Externa</h3><p>La cabeza de la cadena se ancla periódicamente en AuditAnchor en una red de pruebas pública, de modo que reescribir el historial sin dejar rastro exigiría también reescribir la cadena.</p></div></li>
+      </ol>
+    </div>
+    [rc_audit_status]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">API y modelo de integración</p>
+      <h2>Una sola API, <em>todos los canales</em></h2>
+      <p class="rc-lead">El sitio web, el portal y las aplicaciones para iOS y Android utilizan los mismos endpoints versionados. Las integraciones empresariales también los utilizarían. Una cifra en la página de un pasaporte y esa misma cifra en la aplicación proceden de una única consulta.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Lectura pública</h3>
+        <ul class="rc-list">
+          <li><span class="rc-mono">GET /rc/v1/programs</span> — programas y sus campos publicados</li>
+          <li><span class="rc-mono">GET /rc/v1/passports/{no}</span> — un pasaporte completo con raíz de Merkle</li>
+          <li><span class="rc-mono">GET /rc/v1/verify?hash=</span> — cotejar una huella con un documento publicado</li>
+          <li><span class="rc-mono">GET /rc/v1/documents</span> · <span class="rc-mono">/registry/stats</span> · <span class="rc-mono">/audit/head</span></li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Autenticado</h3>
+        <ul class="rc-list">
+          <li>El inicio de sesión emite un token de acceso JWT de corta duración y un token de actualización rotatorio</li>
+          <li>Segundo factor TOTP con códigos de recuperación de un solo uso</li>
+          <li><span class="rc-mono">/me</span>, tenencias, transacciones y notificaciones para participantes</li>
+          <li>Los endpoints que mueven valor responden «módulo inactivo» hasta que se autoricen</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Escalabilidad y hoja de ruta</p>
+      <h2>Qué escala <em>y qué viene después</em></h2>
+      <p class="rc-lead">La escalabilidad depende principalmente de los registros y las evidencias, no de las transacciones. Los contratos de token y de reembolso físico se despliegan por programa, mientras que el cumplimiento, la guarda de reservas y el anclaje son compartidos, de modo que añadir un programa no altera los existentes. Los pasaportes se calculan a partir de registros aprobados y pueden almacenarse en caché entre publicaciones. La cadena de auditoría crece de forma lineal y se ancla por lotes.</p>
+    </div>
+    <div class="rc-roadmap">
+      <div class="is-active"><span class="rc-phase">Ahora</span><h3>Desarrollo del núcleo</h3><ul><li>Esquema del registro y pasaportes</li><li>Flujo de trabajo de doble control y registro de auditoría</li><li>API REST, clientes web y móviles</li><li>Conjunto de contratos en red de pruebas</li></ul>[rc_status s="in_development"]</div>
+      <div><span class="rc-phase">Siguiente</span><h3>Aseguramiento</h3><ul><li>Revisión de seguridad independiente de los contratos inteligentes</li><li>Prueba de penetración de la aplicación</li><li>Ceremonia de claves multifirma y con monedero de hardware</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">Después</span><h3>Integración</h3><ul><li>Flujos de datos de laboratorios y custodios</li><li>Flujo de trabajo de atestación de reservas</li><li>Portal para clientes corporativos</li></ul>[rc_status s="proposed"]</div>
+      <div><span class="rc-phase">Más adelante</span><h3>Activación</h3><ul><li>Despliegue en la red principal, solo tras la aprobación legal</li><li>Publicación de direcciones en el registro oficial</li></ul>[rc_status s="proposed"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Inspeccione los controles</h2>
+        <p>Vea cómo se protegen estos componentes o consulte el <a href="/resources/contract-addresses/">registro oficial de direcciones</a>, que actualmente no incluye ningún contrato desplegado.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Más información sobre la tokenización</a>
+        <a class="rc-btn rc-btn--cream" href="/resources/documentation/">Ver documentos</a>
+        <a class="rc-btn" href="/enterprise/licensing-white-label/">Licencias de tecnología</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -248,6 +248,8 @@ final class Shortcodes {
 		$banner    = '';
 		if ( true === $confirmed ) {
 			$banner = '<div class="rc-alert rc-alert--ok" role="status">' . esc_html__( 'Your email address is confirmed. Thank you for registering your interest.', 'reservechain' ) . '</div>';
+		} elseif ( isset( $GLOBALS['rc_waitlist_unsubscribed'] ) ) {
+			$banner = '<div class="rc-alert ' . ( $GLOBALS['rc_waitlist_unsubscribed'] ? 'rc-alert--ok' : 'rc-alert--warn' ) . '" role="status">' . esc_html( $GLOBALS['rc_waitlist_unsubscribed'] ? __( 'You have been unsubscribed. You will not receive further updates.', 'reservechain' ) : __( 'This unsubscribe link is invalid.', 'reservechain' ) ) . '</div>';
 		} elseif ( false === $confirmed ) {
 			$banner = '<div class="rc-alert rc-alert--warn" role="status">' . esc_html__( 'This confirmation link is invalid or has already been used.', 'reservechain' ) . '</div>';
 		}

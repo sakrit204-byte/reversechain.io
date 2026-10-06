@@ -1,0 +1,119 @@
+<!--
+title: Servicios para empresas
+excerpt: La infraestructura de ReserveChain, ofrecida módulo a módulo a organizaciones que necesitan identificar, documentar con evidencias, controlar y representar digitalmente activos físicos. Los servicios están en desarrollo y se ofrecen únicamente a efectos de discusión.
+kicker: Empresas · Módulos de infraestructura · En desarrollo
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Qué significa «empresas» aquí</p>
+        <h2>La misma infraestructura, <em>para sus activos</em></h2>
+      </div>
+      <p class="rc-lead">ReserveChain se está desarrollando en primer lugar para sus propios programas de cobre y níquel. Las capas de registro, pasaporte, evidencias, cumplimiento y control de la emisión están diseñadas como módulos separables, de modo que propietarios de activos, transformadores e instituciones puedan utilizarlas más adelante para sus propios activos físicos. Ningún servicio para empresas está operativo; se aceptan propuestas de conversación.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 1000 300" role="img" aria-labelledby="ent-t ent-d" font-family="Inter Tight, sans-serif">
+        <title id="ent-t">Pila de módulos para empresas</title>
+        <desc id="ent-d">Cuatro capas. Capa de acceso: portales y API. Capa de control: cumplimiento, controles de tokenización, motor de reservas. Capa de evidencias: registro, Pasaportes de Activo Digital, integraciones de verificación y de custodia. Capa física: activos de los clientes.</desc>
+        <g stroke-width="1.5" fill="#0B1621">
+          <rect x="10" y="10" width="980" height="60" rx="10" stroke="#D5B167"/>
+          <rect x="10" y="82" width="980" height="60" rx="10" stroke="#A9BBC8"/>
+          <rect x="10" y="154" width="980" height="60" rx="10" stroke="#A9BBC8"/>
+          <rect x="10" y="226" width="980" height="60" rx="10" stroke="#C9773F"/>
+        </g>
+        <g fill="#D5B167" font-size="11" font-family="IBM Plex Mono, monospace">
+          <text x="28" y="45">ACCESO</text><text x="28" y="117">CONTROL</text><text x="28" y="189">EVIDENCIAS</text><text x="28" y="261">FÍSICA</text>
+        </g>
+        <g fill="#E7EBEE" font-size="14">
+          <text x="150" y="45">Enterprise portal · Asset-owner portal · Participant portal · REST APIs · Reporting</text>
+          <text x="150" y="117">Compliance registry · Issuance and transfer rules · Reserve engine · Reconciliation</text>
+          <text x="150" y="189">Asset registry · Digital Asset Passports · Verification integrations · Custody integrations</text>
+          <text x="150" y="261">Client lots, batches, containers and coils, with laboratory and ownership documents</text>
+        </g>
+      </svg>
+      <figcaption>Cada capa puede contratarse por separado. Cada registro de la capa de evidencias incluye un estado de la afirmación y una huella del documento.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Catálogo de módulos</p>
+      <h2>Trece módulos, <em>con su estado indicado con transparencia</em></h2>
+      <p class="rc-lead">«En desarrollo» significa que el software existe y se está probando en los propios programas de ReserveChain. «Propuesto» significa un alcance definido sin software entregado.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Incorporación</h3><p>Recepción estructurada de la información sobre el activo, la propiedad, la ubicación y la documentación, con listas de comprobación de diligencia debida.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Registro</h3><p>Registros separados para programa, material, lote, contenedor, bobina, informe de laboratorio, valoración y ubicación de custodia.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Pasaportes de Activo Digital</h3><p>Pasaportes por unidad con acceso mediante código QR, cronología del ciclo de vida, registro de evidencias y raíz de Merkle.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Integraciones de verificación</h3><p>Recepción de resultados de laboratorio y de inspección, con huellas SHA-256 y estado de la afirmación a nivel de campo.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Integraciones de custodia</h3><p>Ubicación de custodia, eventos de la cadena de custodia y controles de liberación vinculados a las unidades del registro.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Cumplimiento</h3><p>Normas jurisdiccionales, almacenamiento de los resultados KYC/KYB y un reflejo en cadena de la elegibilidad sin datos personales.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">07</span><h3>Controles de tokenización</h3><p>Emisión, pausa y quema basadas en roles, con comprobaciones de las transferencias frente al registro de cumplimiento. Solo red de pruebas.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">08</span><h3>Motor de reservas</h3><p>Atestaciones de unidades elegibles que limitan la emisión; sin una relación aprobada, la emisión está deshabilitada.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">09</span><h3>Informes</h3><p>Vistas de reservas declaradas frente a verificadas y una pista de auditoría exportable encadenada mediante hashes.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">10</span><h3>API</h3><p>Endpoints públicos de solo lectura para programas, pasaportes y verificación de documentos; endpoints de cuenta autenticados.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">11</span><h3>Portales</h3><p>Portales para empresas, propietarios de activos y participantes, desarrollados y mantenidos inactivos hasta que se autoricen.</p><div class="rc-card__foot">[rc_status s="in_development" label="Desarrollado · inactivo"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">12</span><h3>Personalización</h3><p>Esquemas por clase de activo, tipos de documentos, estados del flujo de trabajo e idiomas configurados para cada cliente.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">13</span><h3>Servicios gestionados</h3><p>Operación del registro y del flujo de trabajo de evidencias por cuenta de un cliente, con arreglo a controles acordados.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">A quién se dirige</p>
+      <h2>Tres vías para empresas</h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/enterprise/tokenization-services/" data-reveal><span class="rc-card__num">A</span><h3>Servicios de tokenización para empresas</h3><p>Para organizaciones que desean una representación digital gobernada de su inventario físico, basada en la infraestructura de ReserveChain.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/licensing-white-label/" data-reveal><span class="rc-card__num">B</span><h3>Licencia de tecnología y marca blanca</h3><p>Para plataformas e instituciones que desean operar los módulos bajo su propia marca y gobernanza.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/asset-owners/" data-reveal><span class="rc-card__num">C</span><h3>Propietarios de activos y originadores</h3><p>Para productores y tenedores que desean que su material se considere para un programa de ReserveChain.</p></a>
+      <a class="rc-card rc-card--link" href="/enterprise/industrial-buyers/" data-reveal><span class="rc-card__num">D</span><h3>Compradores industriales</h3><p>Para fabricantes y transformadores interesados en materiales de pureza ultraalta documentados.</p></a>
+      <a class="rc-card rc-card--link" href="/platform/infrastructure/" data-reveal><span class="rc-card__num">E</span><h3>Infraestructura de la plataforma</h3><p>La arquitectura en que se basa cada módulo.</p></a>
+      <a class="rc-card rc-card--link" href="/platform/security/" data-reveal><span class="rc-card__num">F</span><h3>Seguridad</h3><p>Diseño del control de acceso, la autenticación multifactor (MFA), la auditoría y la gestión de claves.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Proceso de colaboración</p>
+      <h2>Cómo <em>se desarrollaría</em> una conversación con una empresa</h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Consulta</h3><p>Describa su clase de activo, los volúmenes en términos generales y sus objetivos a través del formulario de contacto.</p></div>[rc_status s="in_development" label="Abierto"]</li>
+      <li><div><h3>Definición del alcance</h3><p>Identificar qué módulos son aplicables, qué evidencias existen y qué jurisdicciones están implicadas.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Diligencia debida recíproca</h3><p>KYB sobre su organización; su revisión de nuestros controles y nuestra documentación.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Proyecto piloto con un alcance definido</h3><p>Un conjunto limitado de registros, ejecutado en una infraestructura de pruebas, con criterios de aceptación acordados.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Contrato e incorporación</h3><p>Solo una vez que la estructura societaria suiza y el marco legal estén establecidos.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Portales</p>
+      <h2>Desarrollados para usuarios empresariales, <em>aún no activados</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="enterprise_portal" title="Portal de clientes corporativos"]</div>
+      <div data-reveal>[rc_module module="asset_owner_portal" title="Portal de propietarios de activos"]</div>
+    </div>
+    <div class="rc-callout"><p>En este sitio web no se afirma la existencia de ninguna relación con clientes corporativos, socios, custodios ni laboratorios. Cualquier relación confirmada solo se mostraría tras una autorización por escrito.</p></div>
+    <div class="rc-cta">
+      <div><h2>Plantee una necesidad empresarial</h2><p>Indíquenos qué activos posee, qué necesita acreditar y ante quién.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/company/contact/?topic=enterprise">Contactar con ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/enterprise/licensing-white-label/">Licencia de tecnología</a>
+        <a class="rc-btn" href="/platform/how-it-works/">Cómo funciona ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

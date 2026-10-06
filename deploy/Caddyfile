@@ -1,0 +1,12 @@
+{$SITE_HOST} {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+	@blocked path /xmlrpc.php /wp-config.php /readme.html /license.txt
+	respond @blocked 404
+	reverse_proxy wordpress:80 {
+		header_up X-Forwarded-Proto https
+	}
+}

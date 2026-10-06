@@ -1,0 +1,229 @@
+<!--
+title: Visión general de la plataforma
+excerpt: ReserveChain está desarrollando una única cadena de confianza conectada para metales industriales. Cada unidad física se identifica, se respalda con evidencias, se valora, se mantiene en custodia, recibe un Pasaporte de Activo Digital y se concilia antes de que se considere cualquier token. Cada paso está condicionado por las evidencias que lo respaldan.
+kicker: Plataforma · Arquitectura propuesta en desarrollo
+order: 2
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">El principio de diseño</p>
+        <h2>Una única y coherente <em>cadena de confianza</em></h2>
+      </div>
+      <p class="rc-lead">La mayoría de los proyectos de tokenización comienzan por el token. ReserveChain comienza por la unidad física y trata el token como el último eslabón de una cadena. Cada eslabón debe sostenerse antes de que se permita el siguiente. Si un eslabón no puede respaldarse con evidencias, la cadena se detiene ahí y la plataforma informa de la carencia.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 200" role="img" aria-labelledby="rc-chain-title rc-chain-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-chain-title">Cadena de confianza de ReserveChain</title>
+        <desc id="rc-chain-desc">Nueve etapas enlazadas: activo físico, verificar, valorar, custodia, Pasaporte de Activo Digital, tokenizar, conciliar, participar, reembolso físico.</desc>
+        <line x1="56" y1="80" x2="944" y2="80" stroke="#1C2A38" stroke-width="2"/>
+        <line x1="56" y1="80" x2="500" y2="80" stroke="#D5B167" stroke-width="2" stroke-dasharray="4 6"/>
+        <g fill="#0E1620" stroke-width="2">
+          <circle cx="56" cy="80" r="26" stroke="#C9773F"/>
+          <circle cx="167" cy="80" r="26" stroke="#D5B167"/>
+          <circle cx="278" cy="80" r="26" stroke="#D5B167"/>
+          <circle cx="389" cy="80" r="26" stroke="#D5B167"/>
+          <circle cx="500" cy="80" r="30" stroke="#D5B167" stroke-width="3"/>
+          <circle cx="611" cy="80" r="26" stroke="#A9BBC8"/>
+          <circle cx="722" cy="80" r="26" stroke="#A9BBC8"/>
+          <circle cx="833" cy="80" r="26" stroke="#A9BBC8"/>
+          <circle cx="944" cy="80" r="26" stroke="#C9773F"/>
+        </g>
+        <g fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">
+          <text x="56" y="85">01</text><text x="167" y="85">02</text><text x="278" y="85">03</text><text x="389" y="85">04</text><text x="500" y="85">05</text><text x="611" y="85">06</text><text x="722" y="85">07</text><text x="833" y="85">08</text><text x="944" y="85">09</text>
+        </g>
+        <g fill="#E7EBEE" font-size="12.5" text-anchor="middle">
+          <text x="56" y="134">Activo</text><text x="56" y="150">físico</text>
+          <text x="167" y="134">Verificar</text>
+          <text x="278" y="134">Valorar</text>
+          <text x="389" y="134">Custodia</text>
+          <text x="500" y="138">Pasaporte de</text><text x="500" y="154">Activo Digital</text>
+          <text x="611" y="134">Tokenizar</text>
+          <text x="722" y="134">Conciliar</text>
+          <text x="833" y="134">Participar</text>
+          <text x="944" y="134">Reembolso</text>
+        </g>
+        <g fill="#A9BBC8" font-size="10.5" text-anchor="middle" letter-spacing="1">
+          <text x="222" y="30">CAPA DE EVIDENCIAS</text>
+          <text x="500" y="30">IDENTIDAD</text>
+          <text x="778" y="30">CAPA DE REGISTRO Y PARTICIPANTES</text>
+        </g>
+      </svg>
+      <figcaption>El Pasaporte de Activo Digital ocupa el centro. Todo lo que está a su izquierda produce evidencias sobre una unidad física. Todo lo que está a su derecha solo puede utilizar esas evidencias. No puede existir un token para una unidad sin pasaporte, y un pasaporte no puede afirmar más de lo que respaldan sus evidencias.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Explore la plataforma</p>
+      <h2>Cada eslabón, <em>documentado en su propia página</em></h2>
+      <p class="rc-lead">Cada página indica qué hace el eslabón, quién lo llevaría a cabo, qué evidencias produce y cuál es su estado de desarrollo actual. Las etiquetas de estado proceden de la configuración de la plataforma, no de textos de marketing.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/platform/how-it-works/" data-reveal>
+        <span class="rc-card__num">01</span>
+        <h3>Cómo funciona ReserveChain</h3>
+        <p>El ciclo de vida de ocho etapas, desde el origen hasta el reembolso físico. Para cada etapa muestra quién la lleva a cabo, las evidencias producidas, los controles aplicados y lo que pueden ver los participantes.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/verification/" data-reveal>
+        <span class="rc-card__num">02</span>
+        <h3>Verificación independiente</h3>
+        <p>Muestreo, ensayos acreditados, validación de certificados y reverificación. También distingue las evidencias aportadas por el propietario de las evidencias verificadas de forma independiente. Incluye un comprobador de huellas de documentos en tiempo real.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/custody/" data-reveal>
+        <span class="rc-card__num">03</span>
+        <h3>Custodia y estructura de cámara acorazada</h3>
+        <p>Segregación por lote, contenedor y carrete, disciplina de precintos, registros de inventario, inspecciones y liberación bajo doble control. Custodio pendiente de designación.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/digital-asset-passports/" data-reveal>
+        <span class="rc-card__num">04</span>
+        <h3>Pasaportes de Activo Digital</h3>
+        <p>Una identidad persistente para cada unidad. Se compone a partir de registros de evidencia, se sella con una raíz de Merkle SHA-256 y puede descargarse en formato JSON.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/asset-registry/" data-reveal>
+        <span class="rc-card__num">05</span>
+        <h3>Registro de Metales Industriales</h3>
+        <p>La única fuente de verdad. Contiene catorce tipos de registro sujetos a un control de publicación de doble verificación (principio de los cuatro ojos) y conserva el historial completo de versiones.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/proof-of-reserves/" data-reveal>
+        <span class="rc-card__num">06</span>
+        <h3>Prueba de Reservas</h3>
+        <p>Un panel en tiempo real que calcula las reservas a partir de datos aprobados del registro. Muestra por separado las cantidades declaradas y las verificadas, y nunca presenta un ratio de cobertura que no pueda respaldar.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/tokenization/" data-reveal>
+        <span class="rc-card__num">07</span>
+        <h3>Tokenización</h3>
+        <p>Controles de emisión ERC-20. La acuñación queda bloqueada por defecto salvo que las reservas atestadas la permitan, y las transferencias se someten a control de elegibilidad. Solo red de pruebas.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/redemption/" data-reveal>
+        <span class="rc-card__num">08</span>
+        <h3>Reembolso físico</h3>
+        <p>Siete etapas controladas desde la solicitud hasta la finalización. Los tokens se depositan en garantía (escrow) y después se queman, y solo entonces se libera la unidad física.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/infrastructure/" data-reveal>
+        <span class="rc-card__num">09</span>
+        <h3>Infraestructura de la plataforma</h3>
+        <p>La arquitectura funcional: registro, pasaportes, flujo de trabajo, cumplimiento, motor de reservas, capa de tokens, API y portales, y cómo se conectan entre sí.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/technology/" data-reveal>
+        <span class="rc-card__num">10</span>
+        <h3>Tecnología</h3>
+        <p>La implementación: el núcleo CMS, la API REST compartida por la web y las aplicaciones móviles, seis contratos inteligentes y el anclaje en cadena de la pista de auditoría.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/platform/security/" data-reveal>
+        <span class="rc-card__num">11</span>
+        <h3>Seguridad</h3>
+        <p>Separación de funciones, MFA, controles de sesión, una pista de auditoría a prueba de manipulaciones, diseño de la gestión de claves y respuesta a incidentes. No afirmamos poseer ninguna certificación.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </a>
+      <a class="rc-card rc-card--link" href="/assets/initial-programs/" data-reveal>
+        <span class="rc-card__num">12</span>
+        <h3>Programas de activos iniciales</h3>
+        <p>Los dos programas en torno a los cuales se está construyendo la cadena: polvo de cobre de ultra alta pureza y alambre de níquel de alta pureza de 0,025 mm.</p>
+        <div class="rc-card__foot">[rc_status s="pending_verification"]</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Situación actual de la plataforma</p>
+        <h2>Desarrollado, propuesto y <em>aún no iniciado</em></h2>
+        <p class="rc-lead">Una afirmación sobre infraestructura solo es creíble si indica qué partes existen. El cuadro de la derecha distingue el software implementado y verificable de los acuerdos operativos que dependen de terceros, contratos y aprobación legal.</p>
+        <p>Que un software esté «en desarrollo» no significa que se ofrezca el servicio correspondiente. No se ha emitido ningún token, no se ha designado ningún custodio ni laboratorio para la plataforma y no existe ninguna atestación de reservas.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Registro de Metales Industriales y motor de pasaportes</strong>[rc_status s="in_development"]<small>Implementado. Contiene registros aportados por el propietario para ambos programas iniciales.</small></div>
+        <div><strong>Flujo de publicación con doble control y pista de auditoría encadenada mediante hashes</strong>[rc_status s="in_development"]<small>Implementado. Cada transición queda registrada y puede comprobarse desde el exterior.</small></div>
+        <div><strong>Conjunto de contratos ERC-20</strong>[rc_status s="in_development" label="Solo red de pruebas"]<small>Sin despliegue en la red principal. No se publica ninguna dirección de contrato.</small></div>
+        <div><strong>Certificados de Análisis aportados por el propietario</strong>[rc_status s="pending_verification"]<small>IGAS CoA 0004512 (Cu) y 0004368 (Ni), aportados por el propietario del activo.</small></div>
+        <div><strong>Verificación independiente, custodia, seguro</strong>[rc_status s="proposed"]<small>No se ha designado ningún laboratorio, custodio ni aseguradora.</small></div>
+        <div><strong>Emisión de tokens, participación, reembolso físico</strong>[rc_status s="not_applicable" label="Inactivo"]<small>Los módulos están desarrollados, pero bloqueados. Su activación requiere autorización por escrito.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--center">
+      <p class="rc-kicker">Principios operativos</p>
+      <h2>Cuatro reglas que el software <em>aplica, no solo enuncia</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">I</span>
+        <h3>Evidencias antes que afirmaciones</h3>
+        <p>Las etapas del ciclo de vida del pasaporte se derivan de los registros de evidencia vinculados, y los estados solo cambian mediante aprobación. Sin un registro aprobado, la etapa permanece como «Pendiente».</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">II</span>
+        <h3>Bloqueo por defecto</h3>
+        <p>Las funciones de acuñación, reembolso físico, monedero y compra están desactivadas por defecto. Una configuración ausente bloquea la acción; nunca la permite.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">III</span>
+        <h3>Doble control sobre todo lo público</h3>
+        <p>La persona que edita un registro no puede aprobarlo. Cada aprobación queda vinculada a una huella del contenido exacto aprobado, de modo que cualquier edición posterior devuelve el registro a revisión.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">IV</span>
+        <h3>Una única fuente de verdad</h3>
+        <p>El sitio web, los pasaportes, el panel de Prueba de Reservas y las aplicaciones móviles leen todos los mismos datos aprobados del registro a través de una única API.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Los dos primeros eslabones en la práctica</p>
+      <h2>Programas iniciales, <em>evidencias aportadas por el propietario</em></h2>
+      <p class="rc-lead">La cadena se está construyendo y probando con dos programas de metales industriales. El propietario del activo ha aportado cifras de pureza, números de certificado y cantidades declaradas. Estos datos se muestran como aportados por el propietario y siguen sujetos a verificación documental e independiente.</p>
+    </div>
+    <div class="rc-elements">
+      <a class="rc-element" href="/assets/industrial-metals/copper-powder/"><span class="rc-element__n">29</span><span class="rc-element__s">Cu</span><span class="rc-element__l">Polvo de cobre de ultra alta pureza <small>99.9999 %* · CoA 0004512 · Lot #03-K-07</small></span></a>
+      <a class="rc-element rc-element--ni" href="/assets/industrial-metals/nickel-wire/"><span class="rc-element__n">28</span><span class="rc-element__s">Ni</span><span class="rc-element__l">Alambre de níquel de alta pureza de 0,025 mm <small>99.9807 %* · CoA 0004368 · Lot 120/NP1</small></span></a>
+    </div>
+    <p class="rc-fine">* Pureza según lo indicado en los Certificados de Análisis de IGAS aportados por el propietario. No verificada de forma independiente por ReserveChain. Las cantidades declaradas (2000 kg de Cu, 5000 g de Ni) son las indicadas por el cliente en los certificados.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Siga una unidad a lo largo de la cadena</h2>
+        <p>Comience por el ciclo de vida o abra un Pasaporte de Activo Digital en tiempo real para ver las evidencias que respaldan un lote real.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/how-it-works/">Cómo funciona ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/passport/RC-CU-LOT-000001/">Ver Pasaporte de Activo Digital</a>
+        <a class="rc-btn" href="/platform/asset-registry/">Ver Registro de Activos</a>
+      </div>
+    </div>
+  </div>
+</section>

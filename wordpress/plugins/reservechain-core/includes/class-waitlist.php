@@ -52,6 +52,11 @@ final class Waitlist {
 
 	public static function init(): void {
 		add_action( 'init', array( __CLASS__, 'confirm_route' ) );
+		add_action( 'init', array( __CLASS__, 'unsubscribe_route' ) );
+		add_action( 'rc_waitlist_purge', array( __CLASS__, 'purge_unconfirmed' ) );
+		if ( ! wp_next_scheduled( 'rc_waitlist_purge' ) ) {
+			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', 'rc_waitlist_purge' );
+		}
 	}
 
 	/**
@@ -209,6 +214,37 @@ final class Waitlist {
 		return $out;
 	}
 
+	public static function unsubscribe_url( string $email_hash ): string {
+		$sig = substr( hash_hmac( 'sha256', $email_hash, wp_salt( 'nonce' ) ), 0, 32 );
+		return add_query_arg( array( 'rc_unsub' => $email_hash . '.' . $sig ), home_url( '/participation/waitlist/' ) );
+	}
+
+	public static function unsubscribe_route(): void {
+		if ( empty( $_GET['rc_unsub'] ) ) { // phpcs:ignore
+			return;
+		}
+		global $wpdb;
+		$parts = explode( '.', sanitize_text_field( wp_unslash( $_GET['rc_unsub'] ) ) ); // phpcs:ignore
+		$ok    = 2 === count( $parts ) && hash_equals( substr( hash_hmac( 'sha256', $parts[0], wp_salt( 'nonce' ) ), 0, 32 ), $parts[1] );
+		if ( $ok ) {
+			$id = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM ' . self::table() . ' WHERE email_hash = %s', $parts[0] ) ); // phpcs:ignore
+			if ( $id ) {
+				$wpdb->update( self::table(), array( 'status' => 'unsubscribed', 'consent_updates' => 0, 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $id ) );
+				Audit_Log::record( 'waitlist.unsubscribed', 'waitlist', $id, 'Waitlist unsubscribe via email link', array(), 0 );
+			}
+		}
+		$GLOBALS['rc_waitlist_unsubscribed'] = $ok;
+	}
+
+	/** Retention: unconfirmed registrations are deleted after 30 days (privacy notice). */
+	public static function purge_unconfirmed(): void {
+		global $wpdb;
+		$n = (int) $wpdb->query( $wpdb->prepare( 'DELETE FROM ' . self::table() . " WHERE status = 'pending_confirmation' AND created_at < %s", gmdate( 'Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS ) ) ); // phpcs:ignore
+		if ( $n ) {
+			Audit_Log::record( 'waitlist.purged', 'waitlist', 0, sprintf( 'Retention purge: %d unconfirmed registration(s) older than 30 days deleted', $n ), array(), 0 );
+		}
+	}
+
 	public static function confirm_url( string $token ): string {
 		return add_query_arg( array( 'rc_confirm' => $token ), home_url( '/participation/waitlist/' ) );
 	}
@@ -220,7 +256,7 @@ final class Waitlist {
 			'it' => 'Conferma la tua registrazione di interesse a ReserveChain',
 		);
 		$body  = sprintf( "Hello %s,\n\nPlease confirm your registration of interest:\n%s\n\n", $name, self::confirm_url( $token ) );
-		$body .= Settings::get( 'disclosure' ) . "\n\n" . Settings::get( 'eu_notice' ) . "\n\nIf you did not request this, ignore this email.\n";
+		$body .= Settings::get( 'disclosure' ) . "\n\n" . Settings::get( 'eu_notice' ) . "\n\nIf you did not request this, ignore this email. Unconfirmed registrations are deleted after 30 days.\nUnsubscribe at any time: " . self::unsubscribe_url( hash( 'sha256', strtolower( $email ) ) ) . "\n";
 		wp_mail( $email, $subjects[ $lang ] ?? $subjects['en'], $body );
 	}
 

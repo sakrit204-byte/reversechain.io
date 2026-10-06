@@ -1,0 +1,124 @@
+<!--
+title: Prueba de Reservas de Metales Industriales propuesta
+excerpt: Transparente, verificable y conciliada. El panel de reservas que figura a continuación se calcula en tiempo real a partir de datos aprobados del registro. Las cantidades declaradas por el propietario y las verificadas de forma independiente se mantienen separadas, y el panel no mostrará ningún ratio de cobertura que la evidencia no pueda respaldar.
+kicker: Plataforma · Marco propuesto · Prueba de Reservas
+order: 7
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Alcance de esta página</p>
+        <h2>Un panel en tiempo real <em>de un marco propuesto</em></h2>
+        <p class="rc-lead">Esta página describe un marco de Prueba de Reservas propuesto, sujeto a confirmación final en los planos legal, contractual, técnico y operativo. El panel es software real que lee registros reales. Dichos registros son actualmente declarados por el propietario, y no se ha emitido ninguna atestación independiente de reservas.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Cálculo de reservas a partir de datos aprobados del registro</strong>[rc_status s="in_development"]<small>En funcionamiento. Se recalcula cada vez que se publica un registro.</small></div>
+        <div><strong>Atestación independiente de reservas</strong>[rc_status s="proposed" label="Ninguna emitida"]<small>No se ha designado ningún atestador y no existe fecha de atestación.</small></div>
+        <div><strong>Suministro de tokens</strong>[rc_status s="not_applicable" label="No emitido"]<small>No existen tokens, por lo que no puede calcularse ningún ratio de cobertura.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Panel de reservas en tiempo real</p>
+      <h2>Lo que el registro <em>contiene en este momento</em></h2>
+      <p class="rc-lead">Estas cifras se calculan en el momento de la consulta. Nunca se introducen manualmente. Toda cifra que no haya sido verificada de forma independiente se identifica como «declarada». Cuando falta un valor, el panel lo indica y no lo estima.</p>
+    </div>
+    [rc_por]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Metodología</p>
+      <h2>Cinco cantidades, <em>nunca combinadas</em></h2>
+      <p class="rc-lead">La mayoría de las declaraciones de reservas fallan porque se suman cantidades de distinta naturaleza. La metodología propuesta mantiene separadas cinco cantidades. Una unidad pasa de una a la siguiente solo cuando se aprueba la evidencia correspondiente a esa etapa.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Cantidad</th><th>Definición</th><th>Evidencia requerida</th><th>Estado actual</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Declarada</strong></td><td>Cantidad indicada por el propietario o en un documento aportado por el propietario</td><td>Documentos del propietario, un registro</td><td>[rc_status s="pending_verification" label="Declarada por el propietario"]</td></tr>
+          <tr><td><strong>Verificada</strong></td><td>Cantidad y especificación confirmadas mediante inspección y ensayos independientes</td><td>Registro de verificación aprobado y certificado</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>En custodia</strong></td><td>Unidades verificadas en poder de un custodio designado, con recibo</td><td>Certificado de depósito, extracto del custodio</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Reserva elegible</strong></td><td>Unidades en custodia libres de cargas, valoradas y aceptadas en un programa</td><td>Valoración, comprobación de cargas, aprobación de aceptación</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Asignada a tokens</strong></td><td>Unidades elegibles vinculadas al suministro emitido conforme a la relación del programa de tokens</td><td>Atestación registrada en ReserveGuard; suministro en cadena</td><td>[rc_status s="not_applicable" label="No emitido"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rc-callout">
+      <p><strong>La cobertura</strong> se define únicamente como la reserva elegible dividida entre la reserva requerida para el suministro de tokens, ambas medidas en la unidad del programa. Solo se calcula cuando existen ambos valores y hay una atestación vigente. En cualquier otro caso, el panel muestra «No aplicable», nunca un porcentaje.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Conciliación</p>
+        <h2>Tres registros contables <em>que deben coincidir</em></h2>
+        <p class="rc-lead">La conciliación compara el suministro en cadena, los registros de unidades del registro y el extracto del custodio. Cualquier diferencia bloquea nuevas acuñaciones hasta que se resuelva.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Instantánea del suministro</h3><p>El suministro emitido, en poder de la tesorería, en depósito de garantía (escrow), quemado y reembolsado se lee de los contratos de cada programa.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Instantánea del registro</h3><p>Las unidades en custodia, elegibles y asignadas se toman de registros aprobados, hasta el nivel de contenedor y carrete.</p></div>[rc_status s="in_development"]</li>
+        <li><div><h3>Extracto del custodio</h3><p>La lista de unidades y los pesos del custodio se cotejan con el registro, unidad por unidad.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Atestación</h3><p>Un atestador independiente revisa la conciliación. El hash del informe y una fecha de referencia se registran en ReserveGuard, y la atestación pierde vigencia una vez transcurrido el plazo configurado.</p></div>[rc_status s="proposed"]</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Excepciones y alertas</p>
+      <h2>Los problemas <em>se publican, no se maquillan</em></h2>
+      <p class="rc-lead">El marco propuesto trata cada excepción como información que debe comunicarse. Las excepciones abiertas aparecen en el panel con la fecha de apertura y las unidades afectadas.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Discrepancia en el recuento</h3><p>Las unidades del custodio no coinciden con las unidades en custodia que constan en el registro.</p></article>
+      <article class="rc-card" data-reveal><h3>Valoración desactualizada</h3><p>Una valoración ha superado su fecha de revisión, por lo que la reserva elegible se reduce hasta que se renueve.</p></article>
+      <article class="rc-card" data-reveal><h3>Documento próximo a vencer</h3><p>Un recibo, un cuadro de coberturas del seguro o un certificado está próximo a su vencimiento o ya ha vencido.</p></article>
+      <article class="rc-card" data-reveal><h3>Atestación desactualizada</h3><p>La última atestación es anterior al plazo de vigencia, por lo que ReserveGuard no permite ninguna acuñación.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Informes e historial</p>
+      <h2>Informes que usted puede <em>volver a derivar</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Panel público</h3><p>Totales por programa y metal, con las cantidades declaradas y verificadas por separado. Enlaza con el pasaporte de cada unidad.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><h3>Informes de reservas</h3><p>Registros versionados de informes de reservas con un PDF con huella, una fecha de referencia e historial de aprobaciones. Se publican mediante el mismo flujo de trabajo de doble control (principio de los cuatro ojos).</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><h3>Sala de datos institucional</h3><p>Conciliación a nivel de unidad, extractos del custodio y archivos de atestación para auditores e instituciones aprobadas.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+    <p class="rc-fine">Los documentos justificativos y el historial de verificación están disponibles en el Pasaporte de Activo Digital de cada unidad. La información cargada nunca se describe como «verificada de forma independiente» a menos que exista una atestación efectiva.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Rastree una cifra de reservas hasta su evidencia</h2>
+        <p>Cada cifra de reservas remite a una unidad, cada unidad a su pasaporte y cada pasaporte a documentos con huella.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">Ver el Registro de Activos</a>
+        <a class="rc-btn rc-btn--cream" href="/passport/RC-CU-LOT-000001/">Ver el Pasaporte de Activo Digital</a>
+        <a class="rc-btn" href="/platform/custody/">Explorar la custodia</a>
+      </div>
+    </div>
+  </div>
+</section>

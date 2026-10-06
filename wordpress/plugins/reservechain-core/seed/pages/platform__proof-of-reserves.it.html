@@ -1,0 +1,124 @@
+<!--
+title: Prova delle Riserve di Metalli Industriali proposta
+excerpt: Trasparente, verificabile e riconciliata. La dashboard delle riserve riportata di seguito è calcolata in tempo reale a partire da dati approvati del registro. Le quantità dichiarate dal proprietario e quelle verificate in modo indipendente sono tenute separate, e la dashboard non mostrerà alcun rapporto di copertura che le evidenze non possano supportare.
+kicker: Piattaforma · Quadro proposto · Prova delle Riserve
+order: 7
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Ambito di questa pagina</p>
+        <h2>Una dashboard in tempo reale <em>di un quadro proposto</em></h2>
+        <p class="rc-lead">Questa pagina descrive un quadro proposto di Prova delle Riserve, soggetto a conferma finale sotto il profilo legale, contrattuale, tecnico e operativo. La dashboard è un software reale che legge record reali del registro. Tali record sono attualmente dichiarati dal proprietario e non è stata emessa alcuna attestazione indipendente delle riserve.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Calcolo delle riserve a partire da dati approvati del registro</strong>[rc_status s="in_development"]<small>Operativo. Ricalcolato ogni volta che viene pubblicato un record.</small></div>
+        <div><strong>Attestazione indipendente delle riserve</strong>[rc_status s="proposed" label="Nessuna emessa"]<small>Non è stato nominato alcun attestatore e non esiste alcuna data di attestazione.</small></div>
+        <div><strong>Offerta di token</strong>[rc_status s="not_applicable" label="Non emesso"]<small>Non esistono token, pertanto non è possibile calcolare alcun rapporto di copertura.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Dashboard delle riserve in tempo reale</p>
+      <h2>Ciò che il registro <em>contiene in questo momento</em></h2>
+      <p class="rc-lead">Questi dati sono calcolati su richiesta. Non vengono mai inseriti manualmente. Un dato che non sia stato verificato in modo indipendente è contrassegnato come «dichiarato». Quando un valore manca, la dashboard lo segnala e non lo stima.</p>
+    </div>
+    [rc_por]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Metodologia</p>
+      <h2>Cinque quantità, <em>mai sommate tra loro</em></h2>
+      <p class="rc-lead">La maggior parte delle dichiarazioni sulle riserve fallisce perché si sommano quantità di natura diversa. La metodologia proposta mantiene separate cinque quantità. Un'unità passa da una all'altra solo quando l'evidenza relativa a quella fase viene approvata.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Quantità</th><th>Definizione</th><th>Evidenza richiesta</th><th>Stato attuale</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dichiarata</strong></td><td>Quantità indicata dal proprietario o in un documento fornito dal proprietario</td><td>Documenti del proprietario, un record del registro</td><td>[rc_status s="pending_verification" label="Dichiarata dal proprietario"]</td></tr>
+          <tr><td><strong>Verificata</strong></td><td>Quantità e specifiche confermate da ispezioni e prove indipendenti</td><td>Record di verifica approvato e certificato</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>In custodia</strong></td><td>Unità verificate detenute da un custode nominato, dietro ricevuta</td><td>Fede di deposito, estratto del custode</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Riserva idonea</strong></td><td>Unità in custodia libere da gravami, valutate e accettate in un programma</td><td>Valutazione, verifica dei gravami, approvazione dell'accettazione</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Allocata ai token</strong></td><td>Unità idonee collegate all'offerta emessa secondo il rapporto del programma di token</td><td>Attestazione registrata su ReserveGuard; offerta on-chain</td><td>[rc_status s="not_applicable" label="Non emesso"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rc-callout">
+      <p><strong>La copertura</strong> è definita esclusivamente come la riserva idonea divisa per la riserva richiesta per l'offerta di token, entrambe misurate nell'unità del programma. Viene calcolata solo quando entrambi i valori esistono e un'attestazione è in corso di validità. In ogni altro caso la dashboard mostra «Non applicabile», mai una percentuale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Riconciliazione</p>
+        <h2>Tre registri contabili <em>che devono concordare</em></h2>
+        <p class="rc-lead">La riconciliazione confronta l'offerta on-chain, i record delle unità nel registro e l'estratto del custode. Qualsiasi differenza blocca nuovi conii finché non viene risolta.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Istantanea dell'offerta</h3><p>L'offerta emessa, detenuta dalla tesoreria, in deposito vincolato (escrow), bruciata e rimborsata viene letta dai contratti di ciascun programma.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Istantanea del registro</h3><p>Le unità in custodia, idonee e allocate sono ricavate da record approvati, fino al livello di contenitore e rocchetto.</p></div>[rc_status s="in_development"]</li>
+        <li><div><h3>Estratto del custode</h3><p>L'elenco delle unità e i pesi del custode vengono confrontati con il registro, unità per unità.</p></div>[rc_status s="proposed"]</li>
+        <li><div><h3>Attestazione</h3><p>Un attestatore indipendente esamina la riconciliazione. L'hash del rapporto e una data di riferimento vengono registrati su ReserveGuard, e l'attestazione perde validità allo scadere della finestra configurata.</p></div>[rc_status s="proposed"]</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Eccezioni e avvisi</p>
+      <h2>I problemi <em>vengono pubblicati, non minimizzati</em></h2>
+      <p class="rc-lead">Il quadro proposto tratta ogni eccezione come un'informazione da comunicare. Le eccezioni aperte compaiono nella dashboard con la data di apertura e le unità interessate.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Discrepanza nel conteggio</h3><p>Le unità del custode non corrispondono alle unità in custodia risultanti dal registro.</p></article>
+      <article class="rc-card" data-reveal><h3>Valutazione non aggiornata</h3><p>Una valutazione ha superato la data di revisione, pertanto la riserva idonea viene ridotta finché non viene rinnovata.</p></article>
+      <article class="rc-card" data-reveal><h3>Documento in scadenza</h3><p>Una ricevuta, una scheda di copertura assicurativa o un certificato è prossimo alla scadenza o è già scaduto.</p></article>
+      <article class="rc-card" data-reveal><h3>Attestazione non aggiornata</h3><p>L'ultima attestazione è più vecchia della finestra di validità, pertanto ReserveGuard non consente alcun conio.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Rendicontazione e cronologia</p>
+      <h2>Rapporti che può <em>ricalcolare autonomamente</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Dashboard pubblica</h3><p>Totali per programma e metallo, con le quantità dichiarate e verificate separate. Rimanda al passaporto di ciascuna unità.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><h3>Rapporti sulle riserve</h3><p>Record versionati dei rapporti sulle riserve con un PDF dotato di impronta, una data di riferimento e la cronologia delle approvazioni. Sono pubblicati tramite lo stesso flusso di lavoro a doppio controllo (principio dei quattro occhi).</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><h3>Data room istituzionale</h3><p>Riconciliazione a livello di unità, estratti del custode e file di attestazione per revisori e istituzioni approvate.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+    <p class="rc-fine">I documenti giustificativi e la cronologia delle verifiche sono disponibili nel Passaporto dell'Asset Digitale di ciascuna unità. Le informazioni caricate non vengono mai descritte come «verificate in modo indipendente» se non esiste un'attestazione effettiva.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Risalga da un dato di riserva alla relativa evidenza</h2>
+        <p>Ogni dato di riserva rimanda a un'unità, ogni unità al proprio passaporto e ogni passaporto a documenti dotati di impronta.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">Visualizza il Registro degli Asset</a>
+        <a class="rc-btn rc-btn--cream" href="/passport/RC-CU-LOT-000001/">Visualizza il Passaporto dell'Asset Digitale</a>
+        <a class="rc-btn" href="/platform/custody/">Esplora la custodia</a>
+      </div>
+    </div>
+  </div>
+</section>

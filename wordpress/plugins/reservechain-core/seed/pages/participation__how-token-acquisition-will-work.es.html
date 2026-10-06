@@ -1,0 +1,150 @@
+<!--
+title: Cómo funcionará la adquisición de tokens
+excerpt: El recorrido previsto del participante en nueve pasos, desde la creación de la cuenta hasta el reembolso físico. Todos los pasos posteriores a la creación de la cuenta están previstos, inactivos y sujetos a la aprobación final legal, técnica y operativa.
+kicker: Participación · Recorrido previsto · No activo
+order: 2
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Lea esto primero</p>
+        <h2>Un proceso descrito, <em>no un proceso abierto</em></h2>
+      </div>
+      <p class="rc-lead">Esta página explica cómo está diseñado para funcionar el módulo de adquisición de tokens si, y solo si, se autoriza. La emisión de tokens permanece inactiva hasta su lanzamiento formal. Ninguno de los pasos siguientes puede completarse hoy, salvo registrar el interés y crear una cuenta básica, y ninguno de ellos confiere derecho alguno.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 1000 210" role="img" aria-labelledby="ta-t ta-d" font-family="Inter Tight, sans-serif">
+        <title id="ta-t">Recorrido previsto de adquisición de tokens</title>
+        <desc id="ta-d">Nueve etapas en secuencia: crear cuenta, elegibilidad, KYC o KYB, revisar el programa, revisar los documentos, adquisición y liquidación, cuenta y monedero, cartera, reembolso físico. Las etapas dos a nueve están sujetas a controles previos e inactivas.</desc>
+        <g fill="none" stroke="#1C2A38" stroke-width="2">
+          <path d="M100 80 H112 M210 80 H222 M320 80 H332 M430 80 H442 M540 80 H552 M650 80 H662 M760 80 H772 M870 80 H882"/>
+        </g>
+        <g stroke-width="1.5">
+          <rect x="4" y="40" width="96" height="80" rx="10" fill="#0B1621" stroke="#D5B167"/>
+          <rect x="112" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="222" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="332" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="442" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="552" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+          <rect x="662" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+          <rect x="772" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="882" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+        </g>
+        <g fill="#D5B167" font-size="11" font-family="IBM Plex Mono, monospace" text-anchor="middle">
+          <text x="52" y="60">01</text><text x="161" y="60">02</text><text x="271" y="60">03</text><text x="381" y="60">04</text><text x="491" y="60">05</text><text x="601" y="60">06</text><text x="711" y="60">07</text><text x="821" y="60">08</text><text x="931" y="60">09</text>
+        </g>
+        <g fill="#E7EBEE" font-size="12.5" text-anchor="middle">
+          <text x="52" y="84">Crear</text><text x="52" y="100">cuenta</text>
+          <text x="161" y="92">Elegibilidad</text>
+          <text x="271" y="92">KYC / KYB</text>
+          <text x="381" y="84">Revisar</text><text x="381" y="100">programa</text>
+          <text x="491" y="84">Revisar</text><text x="491" y="100">documentos</text>
+          <text x="601" y="84">Adquisición /</text><text x="601" y="100">liquidación</text>
+          <text x="711" y="84">Cuenta /</text><text x="711" y="100">monedero</text>
+          <text x="821" y="92">Cartera</text>
+          <text x="931" y="84">Reembolso</text><text x="931" y="100">físico</text>
+        </g>
+        <g font-size="11" fill="#8E99A5">
+          <text x="4" y="150">Borde dorado: desarrollado, solo funcionalidad básica</text>
+          <text x="4" y="168">Borde discontinuo color níquel: previsto, sujeto a controles de cumplimiento</text>
+          <text x="4" y="186">Borde discontinuo color cobre: previsto, módulo bloqueado que requiere autorización por escrito y una acción de despliegue</text>
+        </g>
+      </svg>
+      <figcaption>Secuencia prevista. Ninguna etapa se activa automáticamente; cada etapa sujeta a controles depende de la anterior.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Paso a paso</p>
+      <h2>Nueve pasos, <em>cada uno con su estado</em></h2>
+      <p class="rc-lead">El estado indicado a la derecha de cada paso refleja lo que existe hoy. Un paso marcado como propuesto es un diseño, no un servicio.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Crear cuenta</h3><p>Una cuenta de participante con verificación del correo electrónico y autenticación multifactor TOTP opcional. La cuenta en sí solo da acceso a avisos e información de estado, y no confiere ningún derecho a participar.</p></div>[rc_status s="in_development" label="Desarrollado · limitado"]</li>
+      <li><div><h3>Elegibilidad</h3><p>El país de residencia se contrasta con la restricción de la UE/EEE y con la lista configurable de jurisdicciones restringidas. Se registra una señal de ubicación de la red perimetral para detectar discrepancias. Las cuentas restringidas no pasan de este punto.</p></div>[rc_status s="proposed" label="Previsto"]</li>
+      <li><div><h3>KYC / KYB</h3><p>Verificación de identidad para personas físicas, o verificación de empresas con comprobación de la titularidad real para organizaciones, además de controles AML, de sanciones y PEP realizados por un proveedor externo (aún no seleccionado).</p></div>[rc_status s="proposed" label="Previsto"]</li>
+      <li><div><h3>Revisar el programa disponible</h3><p>Las cuentas aprobadas solo verían los programas que hayan superado la verificación, la custodia y la atestación de reservas, junto con sus Pasaportes de Activo Digital y su estado de reserva.</p></div>[rc_status s="proposed" label="Previsto"]</li>
+      <li><div><h3>Revisar los documentos</h3><p>Documentación definitiva de la oferta, condiciones, advertencias sobre riesgos y avisos específicos de cada jurisdicción, cada uno con una huella SHA-256. La confirmación de lectura se registraría con referencia a la versión exacta del documento.</p></div>[rc_status s="proposed" label="Previsto"]</li>
+      <li><div><h3>Adquisición / liquidación</h3><p>Una solicitud a través del módulo de adquisición de tokens dentro de los límites publicados. El método de liquidación, los plazos y cualquier parámetro de participación temprana no están aprobados. No puede realizarse ningún pago a través de este sitio web.</p></div>[rc_status s="proposed" label="Previsto · bloqueado"]</li>
+      <li><div><h3>Cuenta / monedero</h3><p>Los tokens, en caso de emitirse, solo se entregarían a una dirección registrada como aprobada en el contrato ComplianceRegistry. La conexión de monedero no está disponible en la fase de prelanzamiento.</p></div>[rc_status s="proposed" label="Previsto · bloqueado"]</li>
+      <li><div><h3>Cartera</h3><p>Tenencias, historial de transacciones, pasaportes vinculados, información sobre reservas y avisos en el portal del participante.</p></div>[rc_status s="proposed" label="Previsto"]</li>
+      <li><div><h3>Reembolso físico</h3><p>Una vía propuesta para solicitar la entrega física o la recogida del metal subyacente, sujeta a umbrales, comisiones, revisión de cumplimiento y logística que aún no están definidos.</p></div>[rc_status s="proposed" label="Previsto · bloqueado"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Módulos bloqueados</p>
+      <h2>Desarrollados, probados, <em>desactivados</em></h2>
+      <p class="rc-lead">El software de estos pasos existe para que pueda revisarse y probarse en la red de pruebas. Está oculto para los participantes y no puede activarse mediante una modificación de contenido.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="purchase" title="Módulo de adquisición de tokens"]</div>
+      <div data-reveal>[rc_module module="wallet" title="Conexión de monedero"]</div>
+      <div data-reveal>[rc_module module="holdings" title="Cartera: tenencias e historial de transacciones"]</div>
+      <div data-reveal>[rc_module module="redemption" title="Solicitudes de reembolso físico"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Condiciones de activación</p>
+      <h2>Qué debe cumplirse <em>antes de que se abra el paso 6</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Condición</th><th>Evidencia requerida</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>Estructura societaria y de emisión</td><td>Emisor constituido y estructura legal aprobada</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Documentación definitiva</td><td>Documentos de oferta, condiciones y advertencias sobre riesgos aprobados</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Verificación de activos</td><td>Verificación independiente de los lotes, la propiedad y las especificaciones</td><td>[rc_status s="pending_verification"]</td></tr>
+          <tr><td>Custodia</td><td>Acuerdo de custodia formalizado y registros de la cadena de custodia</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Atestación de reservas</td><td>Unidades elegibles atestadas registradas en el contrato de salvaguarda de reservas (reserve-guard)</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Proveedor de cumplimiento</td><td>Proveedor de KYC/KYB, AML y control de sanciones seleccionado e integrado</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Revisión de los contratos inteligentes</td><td>Revisión de seguridad independiente del conjunto de contratos y despliegue aprobado en la red principal</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Autorización por escrito</td><td>Activación por parte del administrador más un indicador de despliegue independiente, ambos registrados en la pista de auditoría</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Preguntas</p>
+      <h2>Preguntas frecuentes <em>sobre el recorrido</em></h2>
+    </div>
+    <div class="rc-faq">
+      <h3>Hoy</h3>
+      <details><summary>¿Puedo adquirir tokens ahora?</summary><div><p>No. No se ofrecen ni se venden tokens a través de este sitio web, y el módulo de adquisición de tokens está inactivo. Cualquier mensaje que afirme lo contrario debe tratarse como un fraude. Consulte el <a href="/legal/anti-fraud/">Aviso contra el fraude</a>.</p></div></details>
+      <details><summary>¿Crear una cuenta o unirse a la lista de espera supone reservar algo?</summary><div><p>No. Ninguna de las dos acciones crea una reserva, asignación, reserva de precio ni prioridad de ningún tipo.</p></div></details>
+      <h3>Más adelante</h3>
+      <details><summary>¿Podré utilizar cualquier monedero?</summary><div><p>El diseño solo permite la entrega a direcciones aprobadas en el ComplianceRegistry. Aún no se ha decidido qué tipos de monedero serán compatibles.</p></div></details>
+      <details><summary>¿Los tokens serán libremente transferibles?</summary><div><p>Las transferencias están diseñadas para efectuarse únicamente entre direcciones aprobadas y no congeladas, situadas fuera de las jurisdicciones bloqueadas. Se desconoce si existirá algún mercado, y no se promete ninguno.</p></div></details>
+      <details><summary>¿Será siempre posible el reembolso físico?</summary><div><p>El reembolso físico es un marco propuesto. Los umbrales, las comisiones, la logística y la elegibilidad no están definidos, y es posible que el reembolso físico no sea posible en todas las jurisdicciones. Consulte <a href="/platform/redemption/">Cómo funciona el reembolso físico</a>.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Empiece por los controles que puede revisar hoy</h2><p>Conozca los requisitos de elegibilidad y regístrese para recibir novedades. Nada más está abierto.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Comprobar la elegibilidad</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Unirse a la lista de espera</a>
+        <a class="rc-btn" href="/platform/redemption/">Cómo funciona el reembolso físico</a>
+      </div>
+    </div>
+  </div>
+</section>

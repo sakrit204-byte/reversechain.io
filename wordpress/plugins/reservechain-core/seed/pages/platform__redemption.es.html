@@ -1,0 +1,142 @@
+<!--
+title: Marco propuesto de reembolso físico
+excerpt: De la posición digital a la entrega física del activo. Esta página expone el proceso propuesto en siete etapas mediante el cual un titular elegible podría canjear tokens por un contenedor o un carrete concretos. Los tokens se depositan en garantía (escrow) y se queman antes de que cualquier metal salga de custodia. El reembolso físico no está disponible actualmente.
+kicker: Plataforma · Marco propuesto · Reembolso físico
+order: 11
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Alcance de esta página</p>
+        <h2>El reembolso físico es la prueba <em>de toda la cadena</em></h2>
+        <p class="rc-lead">Esta página describe un marco de reembolso físico propuesto, sujeto a confirmación final en los planos legal, contractual, técnico y operativo. No se ha emitido ningún token, por lo que no puede reembolsarse nada. El módulo de reembolso físico y su contrato están desarrollados, pero desactivados.</p>
+        <p>Todos los eslabones anteriores existen para que este pueda funcionar. Un reembolso físico designa una unidad concreta. Esa unidad tiene un pasaporte, el pasaporte contiene evidencias y el custodio conserva la unidad con un recibo.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Contrato RedemptionManager (escrow → quema)</strong>[rc_status s="in_development" label="Red de pruebas, desactivado"]<small>Umbrales sin definir. No pueden abrirse solicitudes.</small></div>
+        <div><strong>Registros de solicitudes de reembolso físico y flujo del portal</strong>[rc_status s="in_development"]<small>Desarrollados tras un módulo bloqueado.</small></div>
+        <div><strong>Liberación por el custodio y logística</strong>[rc_status s="proposed"]<small>No se ha designado ningún custodio ni proveedor logístico.</small></div>
+        <div><strong>Condiciones, comisiones y umbrales del reembolso físico</strong>[rc_status s="proposed" label="Por determinar"]<small>Solo se publicarán una vez aprobados.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">El proceso</p>
+      <h2>Siete etapas, <em>un orden irreversible</em></h2>
+      <p class="rc-lead">La secuencia es fija: depósito en garantía, después aprobación, después quema y, por último, liberación. El metal nunca sale de custodia a cambio de tokens que sigan existiendo, y nunca se queman tokens por una unidad que no haya sido confirmada.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Solicitud de reembolso físico</h3><p>El titular abre una solicitud en el portal. Selecciona el programa y designa el contenedor o carrete concreto o deja que el sistema asigne uno, y elige entre entrega o recogida. Sus tokens pasan a depósito en garantía (escrow) en RedemptionManager.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Elegibilidad</h3><p>El área de cumplimiento confirma que el KYC/KYB del titular está vigente, que la jurisdicción está permitida para la entrega física, que el control de sanciones no arroja resultados y que la solicitud cumple los umbrales del programa una vez definidos.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verificación</h3><p>La unidad seleccionada se coteja con su pasaporte: precinto intacto, peso dentro de la tolerancia, libre de cargas y no asignada a otra solicitud. Si la comprobación falla, se reabre la selección.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Liquidación y quema</h3><p>Un operador aprueba la solicitud. Los tokens en depósito de garantía se queman en cadena y se registra una referencia de ejecución. Las comisiones aplicables se liquidan conforme a las condiciones aprobadas.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Liberación de la custodia</h3><p>El custodio recibe una orden de liberación con doble aprobación que cita la transacción de quema y, a continuación, libera la unidad con su precinto y su documentación.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Logística o recogida</h3><p>La unidad se embala conforme a los requisitos de manipulación del material, con los documentos aduaneros y de transporte que sean necesarios. Se entrega o se recoge previa confirmación de identidad.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Finalización</h3><p>Se confirma la recepción. El pasaporte pasa a «Liberado» con su historial completo, y las cifras de reservas y de suministro se actualizan tras la conciliación.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Salidas del proceso</p>
+      <h2>Qué ocurre <em>cuando una solicitud se detiene</em></h2>
+      <p class="rc-lead">Un marco de reembolso físico se juzga tanto por sus vías de fallo como por su vía principal. Cada una de ellas termina con los tokens o la unidad en un estado conocido.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Evento</th><th>Cuándo</th><th>Tokens</th><th>Unidad física</th></tr></thead>
+        <tbody>
+          <tr><td>El titular cancela</td><td>Antes de la aprobación</td><td>Se liberan del depósito en garantía y se devuelven al titular</td><td>Permanece en custodia, sin asignar</td></tr>
+          <tr><td>Elegibilidad denegada</td><td>Etapa 2</td><td>Se liberan del depósito en garantía; se registra en cadena un hash del motivo</td><td>Permanece en custodia, sin asignar</td></tr>
+          <tr><td>La unidad no supera la verificación</td><td>Etapa 3</td><td>Permanecen en depósito en garantía mientras se selecciona otra unidad</td><td>Marcada; se abre una nueva verificación y una excepción</td></tr>
+          <tr><td>Módulo en pausa</td><td>Cualquier etapa</td><td>Se detienen las nuevas solicitudes y aprobaciones; los rechazos siguen liberando el depósito en garantía</td><td>No se emiten órdenes de liberación</td></tr>
+          <tr><td>Incidente en la entrega</td><td>Etapa 6</td><td>Ya quemados</td><td>Se gestiona conforme a las condiciones aprobadas de logística y seguro</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Reembolso físico por unidad</p>
+      <h2>Una caja concreta. <em>Un carrete concreto.</em></h2>
+      <p class="rc-lead">La unidad de reembolso físico viene determinada por la forma del material, de modo que el titular recibe un artículo documentado, precintado y trazable, y no una cantidad anónima.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Cu 29</span>
+        <h3>Polvo de cobre: por contenedor</h3>
+        <p>El polvo sellado en ampollas de vidrio y embalado en cajas de cartón se reembolsa por contenedor, lo que mantiene intactos el precinto y el pasaporte. No se propone separar ampollas de una caja. La cantidad por contenedor está pendiente de documentación.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-CU-CTN-000001/">Ejemplo: pasaporte de la caja n.º 20 →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Ni 28</span>
+        <h3>Alambre de níquel: por carrete</h3>
+        <p>Un alambre de 0,025 mm de diámetro no puede cortarse y rebobinarse sin riesgo para su estado, por lo que se reembolsa por carrete. El lote 120/NP1 comprende 30 carretes, cada uno con su propio pasaporte. El peso neto por carrete está pendiente.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-NI-COL-000008/">Ejemplo: pasaporte del carrete 8 →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Comisiones, umbrales y condiciones</p>
+        <h2>Por determinar, <em>y solo se publicarán una vez aprobados</em></h2>
+        <p class="rc-lead">No publicamos comisiones orientativas, cantidades mínimas ni plazos de entrega. Cualquier cifra indicada ahora sería inventada. Los elementos de la derecha están abiertos y dependen de los acuerdos con el custodio, de logística y legales.</p>
+      </div>
+      <dl class="rc-kv">
+        <div><dt>Reembolso físico mínimo y máximo</dt><dd>Por determinar</dd></div>
+        <div><dt>Comisión de reembolso físico</dt><dd>Por determinar</dd></div>
+        <div><dt>Comisión de liberación de custodia y manipulación</dt><dd>Por determinar</dd></div>
+        <div><dt>Entrega, seguro en tránsito, aduanas</dt><dd>Por determinar</dd></div>
+        <div><dt>Lugar de recogida</dt><dd>Por confirmar</dd></div>
+        <div><dt>Jurisdicciones de entrega elegibles</dt><dd>Sujeto a revisión legal final</dd></div>
+        <div><dt>Plazo de tramitación</dt><dd>Por determinar</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Portal de reembolso físico</p>
+        <h2>El flujo de solicitud, <em>desarrollado y bloqueado</em></h2>
+        <p class="rc-lead">El <a href="/portal/redemption/">Portal de reembolso físico</a> muestra el flujo previsto: tenencias elegibles, selección de la unidad, estado de cumplimiento, estado de la liquidación, liberación de la custodia, entrega o recogida, documentos e historial. No pueden enviarse solicitudes hasta que el módulo se active mediante autorización por escrito.</p>
+      </div>
+      <div>
+        [rc_module module="redemption" title="Solicitudes de reembolso físico"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Vea el portal previsto</h2>
+        <p>Revise el flujo de reembolso físico o consulte cómo se controla la liberación de la custodia.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/portal/redemption/">Acceder al portal</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/custody/">Explorar la custodia</a>
+        <a class="rc-btn" href="/enterprise/">Servicios para empresas</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,148 @@
+<!--
+title: Descripción general del Programa de Participación Temprana
+excerpt: La estructura propuesta del Programa de Participación Temprana: a qué activos haría referencia, cómo se controlaría el acceso, qué parámetros siguen sin definir y qué debe aprobarse antes de que se active cualquier elemento.
+kicker: Participación · Estructura del programa · Propuesto
+order: 1
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">El programa de un vistazo</p>
+        <h2>Primero la estructura, <em>después los parámetros</em></h2>
+      </div>
+      <p class="rc-lead">Esta descripción general expone la arquitectura del programa propuesto. Todos los parámetros comerciales se dejan deliberadamente sin definir hasta que se apruebe la documentación definitiva. La emisión de tokens permanece inactiva hasta su lanzamiento formal.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Nombre del programa</dt><dd>Programa de Participación Temprana (título provisional)</dd></div>
+      <div><dt>Fase del programa</dt><dd>Diseño del marco · prelanzamiento · [rc_status s="in_development"]</dd></div>
+      <div><dt>Emisor propuesto</dt><dd>Estructura societaria y de emisión suiza en desarrollo. Sujeta a revisión jurídica final.</dd></div>
+      <div><dt>Activos de referencia</dt><dd>Polvo de cobre de ultra alta pureza (Cu) y alambre de níquel de alta pureza de 0,025 mm (Ni), ambos pendientes de verificación</dd></div>
+      <div><dt>Vía de acceso</dt><dd>Módulo de adquisición de tokens, desarrollado pero inactivo, sujeto a la elegibilidad y a una autorización por escrito</dd></div>
+      <div><dt>Nombre, símbolo, suministro y relación del token</dt><dd><span class="rc-pending">Aún no determinados. Sujetos a aprobación por escrito.</span></dd></div>
+      <div><dt>Parámetro de descuento por participación temprana</dt><dd><span class="rc-pending">Propuesto en el documento de concepción del proyecto; no aprobado.</span> Consulte la <a href="/participation/discount-methodology/">metodología</a>.</dd></div>
+      <div><dt>Participantes excluidos</dt><dd>Residentes en la UE/EEE y personas que se encuentren en ella; jurisdicciones restringidas; personas sancionadas</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Capas estructurales</p>
+      <h2>Cuatro capas que <em>deben estar alineadas</em></h2>
+      <p class="rc-lead">El programa solo funciona si las capas física, jurídica, de cumplimiento y digital describen lo mismo al mismo tiempo. Cada capa tiene su propio responsable y sus propias evidencias.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">L1</span><h3>Activo físico</h3><p>Lotes, contenedores y bobinas identificados, con Certificados de Análisis, registros de custodia y verificación independiente.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L2</span><h3>Vínculo jurídico</h3><p>Los documentos definitivos que establecen qué representa un token, si es que representa algo, y conforme a qué ley.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L3</span><h3>Control de cumplimiento</h3><p>Resultados de jurisdicción, KYC/KYB, AML, sanciones y PEP reflejados en cadena sin datos personales.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L4</span><h3>Registro digital</h3><p>Pasaportes de Activo Digital, entradas del registro y controles de emisión supeditados a las reservas en la red de pruebas.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Parámetros del programa de tokens</p>
+      <h2>En directo desde el registro, <em>todos pendientes</em></h2>
+      <p class="rc-lead">Estos paneles se leen directamente de la configuración del programa. Nada de lo que aparece aquí se introduce manualmente en la página. Cuando un parámetro no tiene una referencia de aprobación por escrito, se muestra como pendiente.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>
+        <h3>Programa de polvo de cobre</h3>
+        [rc_token_params program="copper-powder"]
+      </div>
+      <div data-reveal>
+        <h3>Programa de alambre de níquel</h3>
+        [rc_token_params program="nickel-wire"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Lógica de asignación y adquisición</p>
+      <h2>Cómo se ordenaría el acceso, <em>en caso de aprobarse</em></h2>
+      <p class="rc-lead">Las reglas de asignación no están aprobadas. La tabla recoge las cuestiones de diseño que la documentación definitiva debe resolver, de modo que ninguna regla se improvise en el lanzamiento.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Cuestión de diseño</th><th>Enfoque propuesto</th><th>Estado de la decisión</th></tr></thead>
+        <tbody>
+          <tr><td>Capacidad del programa</td><td>Limitada por las unidades de reserva elegibles atestadas y por una relación activo-token aprobada. No existe capacidad alguna antes de la atestación.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Límites por participante</td><td>Participación mínima y máxima por cuenta aprobada, establecidas en la configuración.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Orden de las solicitudes</td><td>Solo las cuentas aprobadas pueden presentar solicitudes; el método de ordenación (p. ej., por sello de tiempo o a prorrata) se fijará en los documentos.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Posición en la lista de espera</td><td>La inscripción en la lista de espera no confiere ninguna prioridad, asignación ni derecho.</td><td>[rc_status s="not_applicable" label="Sin prioridad"]</td></tr>
+          <tr><td>Condiciones de participación temprana</td><td>Cualquier parámetro de descuento se aplica únicamente dentro de un período y un límite publicados, conforme a la <a href="/participation/discount-methodology/">metodología propuesta</a>.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Método de liquidación</td><td>Se definirá en la documentación definitiva. No se acepta ningún pago a través de este sitio web.</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Recorrido del participante</p>
+      <h2>Cinco controles <em>en resumen</em></h2>
+      <p class="rc-lead">El recorrido completo de nueve pasos se describe en <a href="/participation/how-token-acquisition-will-work/">Cómo funcionará la adquisición de tokens</a>.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Registrar el interés</h3><p>Únase a la lista de espera para recibir novedades. Doble confirmación. Sin fondos ni datos de monedero.</p></div>[rc_status s="in_development" label="Abierto · solo novedades"]</li>
+      <li><div><h3>Acreditar la elegibilidad</h3><p>Comprobación de la jurisdicción y, a continuación, KYC para personas físicas o KYB para organizaciones, con controles AML, de sanciones y PEP.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Revisar las evidencias y los documentos</h3><p>Pasaportes de Activo Digital, Certificados de Análisis, informes de reservas y los documentos definitivos de la oferta.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Solicitar la participación</h3><p>A través del módulo de adquisición de tokens, únicamente una vez que esté autorizado y activado.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Mantener, supervisar, reembolsar</h3><p>Vista de la cartera, información sobre las reservas y una vía propuesta de reembolso físico.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Conjunto documental</p>
+        <h2>Qué debe existir <em>antes del lanzamiento</em></h2>
+        <ul class="rc-list">
+          <li>Documentación definitiva de la oferta o del programa</li>
+          <li>Condiciones que describan lo que un token representa y lo que no representa</li>
+          <li>Informes de verificación y valoración independientes para cada lote de referencia</li>
+          <li>Acuerdo de custodia y registros de la cadena de custodia</li>
+          <li>Metodología de Prueba de Reservas y primera conciliación</li>
+          <li>Condiciones, umbrales y comisiones del reembolso físico (cuando se aprueben)</li>
+          <li>Información específica para cada jurisdicción y la lista definitiva de jurisdicciones restringidas</li>
+        </ul>
+        <p><a class="rc-btn rc-btn--sm" href="/resources/documentation/">Ver documentos</a></p>
+      </div>
+      <div>
+        <p class="rc-kicker">Principales factores de riesgo</p>
+        <h2>Incertidumbres significativas <em>a día de hoy</em></h2>
+        <div class="rc-claims">
+          <div><strong>Riesgo de lanzamiento</strong>[rc_status s="proposed"]<small>Es posible que el programa no se lance o que cambie de forma significativa.</small></div>
+          <div><strong>Riesgo del activo y de valoración</strong>[rc_status s="pending_verification"]<small>Las especificaciones y cantidades han sido aportadas por el propietario y aún no se han confirmado de forma independiente.</small></div>
+          <div><strong>Riesgo regulatorio</strong>[rc_status s="in_development"]<small>La clasificación y las jurisdicciones permitidas siguen sujetas a asesoramiento jurídico.</small></div>
+          <div><strong>Riesgo de salida</strong>[rc_status s="proposed"]<small>No se garantiza ningún mercado, transferibilidad ni vía de salida.</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Continúe con el recorrido del participante</h2><p>Revise los requisitos de elegibilidad, siga los <a href="/participation/how-token-acquisition-will-work/">pasos de adquisición previstos</a> o regístrese para recibir novedades.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Comprobar la elegibilidad</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Unirse a la lista de espera</a>
+        <a class="rc-btn" href="/assets/initial-programs/">Ver los programas iniciales</a>
+      </div>
+    </div>
+  </div>
+</section>

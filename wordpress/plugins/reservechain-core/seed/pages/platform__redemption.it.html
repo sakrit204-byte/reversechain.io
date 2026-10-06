@@ -1,0 +1,142 @@
+<!--
+title: Quadro proposto di rimborso fisico
+excerpt: Dalla posizione digitale alla consegna fisica dell'asset. Questa pagina illustra il processo proposto in sette fasi mediante il quale un detentore idoneo potrebbe scambiare token con un contenitore o un rocchetto specifico. I token vengono posti in deposito vincolato (escrow) e bruciati prima che qualsiasi metallo esca dalla custodia. Il rimborso fisico non è attualmente disponibile.
+kicker: Piattaforma · Quadro proposto · Rimborso fisico
+order: 11
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Ambito di questa pagina</p>
+        <h2>Il rimborso fisico è la prova <em>dell'intera catena</em></h2>
+        <p class="rc-lead">Questa pagina descrive un quadro proposto di rimborso fisico, soggetto a conferma finale sotto il profilo legale, contrattuale, tecnico e operativo. Non è stato emesso alcun token, pertanto nulla può essere rimborsato. Il modulo di rimborso fisico e il relativo contratto sono stati realizzati ma sono disattivati.</p>
+        <p>Ogni anello precedente esiste affinché questo possa funzionare. Un rimborso fisico indica un'unità specifica. Tale unità ha un passaporto, il passaporto contiene evidenze e il custode detiene l'unità dietro ricevuta.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Contratto RedemptionManager (escrow → burn)</strong>[rc_status s="in_development" label="Testnet, disattivato"]<small>Soglie non impostate. Non è possibile aprire richieste.</small></div>
+        <div><strong>Record delle richieste di rimborso fisico e flusso del portale</strong>[rc_status s="in_development"]<small>Realizzati dietro un modulo bloccato.</small></div>
+        <div><strong>Rilascio da parte del custode e logistica</strong>[rc_status s="proposed"]<small>Non è stato nominato alcun custode né alcun fornitore logistico.</small></div>
+        <div><strong>Condizioni, commissioni e soglie del rimborso fisico</strong>[rc_status s="proposed" label="Da determinare"]<small>Saranno pubblicate solo dopo l'approvazione.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Il processo</p>
+      <h2>Sette fasi, <em>un ordine irreversibile</em></h2>
+      <p class="rc-lead">La sequenza è fissa: deposito vincolato, quindi approvazione, quindi burn, infine rilascio. Il metallo non esce mai dalla custodia a fronte di token ancora esistenti, e i token non vengono mai bruciati per un'unità che non sia stata confermata.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Richiesta di rimborso fisico</h3><p>Il detentore apre una richiesta nel portale. Seleziona il programma e indica il contenitore o rocchetto specifico oppure lascia che il sistema ne assegni uno, e sceglie tra consegna e ritiro. I suoi token passano in deposito vincolato (escrow) in RedemptionManager.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Idoneità</h3><p>La funzione di conformità conferma che il KYC/KYB del detentore è aggiornato, che la giurisdizione è ammessa per la consegna fisica, che la verifica sulle sanzioni ha dato esito negativo e che la richiesta rispetta le soglie del programma, una volta stabilite.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verifica</h3><p>L'unità selezionata viene confrontata con il proprio passaporto: sigillo intatto, peso entro la tolleranza, libera da gravami e non assegnata a un'altra richiesta. Se il controllo non ha esito positivo, la selezione viene riaperta.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Regolamento e burn</h3><p>Un operatore approva la richiesta. I token in deposito vincolato vengono bruciati on-chain e viene registrato un riferimento di evasione. Le commissioni applicabili sono regolate secondo le condizioni approvate.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Rilascio dalla custodia</h3><p>Il custode riceve un ordine di rilascio con doppia approvazione che cita la transazione di burn, quindi rilascia l'unità con il relativo sigillo e la documentazione.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Logistica o ritiro</h3><p>L'unità viene imballata secondo i requisiti di movimentazione del materiale, con i documenti doganali e di trasporto ove necessari. Viene consegnata o ritirata previa conferma dell'identità.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Completamento</h3><p>La ricezione viene confermata. Il passaporto passa allo stato «Rilasciato» con la cronologia completa, e i dati sulle riserve e sull'offerta vengono aggiornati dopo la riconciliazione.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Uscite dal processo</p>
+      <h2>Che cosa accade <em>quando una richiesta si interrompe</em></h2>
+      <p class="rc-lead">Un quadro di rimborso fisico si giudica tanto dai percorsi di errore quanto dal percorso principale. Ciascuno di essi si conclude con i token o l'unità in uno stato noto.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Evento</th><th>Quando</th><th>Token</th><th>Unità fisica</th></tr></thead>
+        <tbody>
+          <tr><td>Il detentore annulla</td><td>Prima dell'approvazione</td><td>Svincolati dal deposito e restituiti al detentore</td><td>Resta in custodia, non assegnata</td></tr>
+          <tr><td>Idoneità negata</td><td>Fase 2</td><td>Svincolati dal deposito; un hash della motivazione viene registrato on-chain</td><td>Resta in custodia, non assegnata</td></tr>
+          <tr><td>L'unità non supera la verifica</td><td>Fase 3</td><td>Restano in deposito vincolato mentre viene selezionata un'altra unità</td><td>Segnalata; nuova verifica e apertura di un'eccezione</td></tr>
+          <tr><td>Modulo sospeso</td><td>Qualsiasi fase</td><td>Nuove richieste e approvazioni si interrompono; i rifiuti continuano a svincolare il deposito</td><td>Nessun ordine di rilascio emesso</td></tr>
+          <tr><td>Incidente durante la consegna</td><td>Fase 6</td><td>Già bruciati</td><td>Gestito secondo le condizioni approvate di logistica e assicurazione</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Rimborso fisico per unità</p>
+      <h2>Una scatola specifica. <em>Un rocchetto specifico.</em></h2>
+      <p class="rc-lead">L'unità di rimborso fisico è determinata dalla forma del materiale, in modo che il detentore riceva un articolo documentato, sigillato e tracciabile anziché una quantità anonima.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Cu 29</span>
+        <h3>Polvere di rame: per contenitore</h3>
+        <p>La polvere sigillata in fiale di vetro e imballata in scatole di cartone viene rimborsata per contenitore, il che preserva l'integrità del sigillo e del passaporto. Non è proposto il prelievo di singole fiale da una scatola. La quantità per contenitore è in attesa di documentazione.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-CU-CTN-000001/">Esempio: passaporto della scatola n. 20 →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Ni 28</span>
+        <h3>Filo di nichel: per rocchetto</h3>
+        <p>Un filo di 0,025 mm di diametro non può essere tagliato e riavvolto senza rischi per le sue condizioni, pertanto viene rimborsato per rocchetto. Il lotto 120/NP1 comprende 30 rocchetti, ciascuno con il proprio passaporto. Il peso netto per rocchetto è in attesa.</p>
+        <div class="rc-card__foot"><a href="/passport/RC-NI-COL-000008/">Esempio: passaporto del rocchetto 8 →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Commissioni, soglie e condizioni</p>
+        <h2>Da determinare, <em>e pubblicate solo dopo l'approvazione</em></h2>
+        <p class="rc-lead">Non pubblichiamo commissioni indicative, quantità minime né tempi di consegna. Qualsiasi dato indicato ora sarebbe inventato. Le voci a destra sono aperte e dipendono dagli accordi con il custode, logistici e legali.</p>
+      </div>
+      <dl class="rc-kv">
+        <div><dt>Rimborso fisico minimo e massimo</dt><dd>Da determinare</dd></div>
+        <div><dt>Commissione di rimborso fisico</dt><dd>Da determinare</dd></div>
+        <div><dt>Commissione di rilascio dalla custodia e di movimentazione</dt><dd>Da determinare</dd></div>
+        <div><dt>Consegna, assicurazione durante il trasporto, dogana</dt><dd>Da determinare</dd></div>
+        <div><dt>Luogo di ritiro</dt><dd>Da confermare</dd></div>
+        <div><dt>Giurisdizioni ammesse per la consegna</dt><dd>Soggette a revisione legale finale</dd></div>
+        <div><dt>Tempi di elaborazione</dt><dd>Da determinare</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Portale di rimborso fisico</p>
+        <h2>Il flusso delle richieste, <em>realizzato e bloccato</em></h2>
+        <p class="rc-lead">Il <a href="/portal/redemption/">Portale di rimborso fisico</a> mostra il flusso previsto: posizioni idonee, selezione dell'unità, stato di conformità, stato del regolamento, rilascio dalla custodia, consegna o ritiro, documenti e cronologia. Non è possibile inviare richieste finché il modulo non viene attivato mediante autorizzazione scritta.</p>
+      </div>
+      <div>
+        [rc_module module="redemption" title="Richieste di rimborso fisico"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Veda il portale previsto</h2>
+        <p>Esamini il flusso di rimborso fisico oppure legga come viene controllato il rilascio dalla custodia.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/portal/redemption/">Accedi al portale</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/custody/">Esplora la custodia</a>
+        <a class="rc-btn" href="/enterprise/">Servizi per le imprese</a>
+      </div>
+    </div>
+  </div>
+</section>

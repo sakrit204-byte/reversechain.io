@@ -1,0 +1,145 @@
+<!--
+title: Marco de tokenización propuesto
+excerpt: Conectar activos físicos verificados con una infraestructura digital. Esta página expone cómo podrían emitirse, transferirse, conciliarse y retirarse tokens ERC-20 frente a reservas atestadas de metales industriales. No se ha emitido ningún token y la emisión permanece inactiva.
+kicker: Plataforma · Marco propuesto · Tokenización · Solo red de pruebas
+order: 10
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Alcance de esta página</p>
+        <h2>El último eslabón, <em>diseñado para bloquearse ante cualquier fallo</em></h2>
+        <p class="rc-lead">Esta página describe un marco de tokenización propuesto, sujeto a confirmación jurídica, contractual, técnica y operativa definitiva. Podrán emitirse tokens ERC-20 o series de tokens de programas de activos conforme a la estructura legal y societaria definitiva. Dicha estructura está en desarrollo y la emisión de tokens está inactiva.</p>
+        <p>No existe ningún token. No hay símbolo de token, precio, suministro, relación ni dirección de contrato, y no se proporciona ni se da a entender ningún mercado secundario. Actualmente, ReserveChain no tiene intención de ofrecer tokens a residentes en la UE/EEE ni a personas que se encuentren en ella.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Conjunto de contratos inteligentes</strong>[rc_status s="in_development" label="Solo red de pruebas"]<small>Seis contratos. Las herramientas bloquean el despliegue en la red principal.</small></div>
+        <div><strong>Parámetros del token</strong>[rc_status s="proposed" label="Pendiente"]<small>Todos los parámetros económicos están sin definir por defecto.</small></div>
+        <div><strong>Emisión de tokens</strong>[rc_status s="not_applicable" label="Inactiva"]<small>Requiere la estructura legal definitiva, la documentación de la oferta y una autorización por escrito.</small></div>
+        <div><strong>Vinculación jurídica entre token y metal</strong>[rc_status s="proposed"]<small>Sujeta a revisión jurídica definitiva. No se da a entender ningún derecho de propiedad sobre el metal físico.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Condiciones previas</p>
+      <h2>Antes de que pudiera <em>acuñarse una sola unidad</em></h2>
+      <p class="rc-lead">La tokenización viene en último lugar porque depende de todos los eslabones anteriores. Las condiciones siguientes son acumulativas, y cada una de ellas es comprobada por una parte o un contrato distinto.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Incorporación del activo</h3><p>El propietario ha superado el proceso KYB, los documentos de la cadena de titularidad están aprobados y la unidad dispone de un identificador en el registro.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Elegibilidad del activo</h3><p>La unidad ha sido verificada de forma independiente, valorada, puesta en custodia con recibo, está libre de cargas y ha sido aceptada en el programa.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Identidad del activo</h3><p>Existe un Pasaporte de Activo Digital aprobado, con una raíz de Merkle vigente, para cada unidad que vaya a asignarse.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Vinculación jurídica y operativa</h3><p>La documentación definitiva de la oferta define qué representa un token, cómo se relaciona con las unidades en custodia y conforme a qué ley.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Atestación de reservas</h3><p>El hash del informe de un atestador independiente y su fecha de referencia se publican en ReserveGuard, dentro de la ventana de antigüedad.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Autorización</h3><p>Los parámetros del programa se aprueban y el módulo de emisión se activa con una referencia de autorización por escrito que queda consignada en el registro de auditoría.</p></div>[rc_status s="not_applicable" label="Inactiva"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Controles de emisión</p>
+      <h2>La acuñación está <em>bloqueada salvo prueba en contrario</em></h2>
+      <p class="rc-lead">ReserveToken se niega a acuñar salvo que se aplique uno de dos modos configurados expresamente. Si falta la configuración, no puede acuñarse nada. Una clave que ostente el rol de acuñador nunca puede acuñar una cantidad ilimitada.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">A</span>
+        <h3>Modo de reserva (previsto)</h3>
+        <p>Cada acuñación consulta a ReserveGuard la cantidad máxima acuñable: unidades atestadas × tokens por unidad − suministro actual. El resultado es cero si la relación no está definida, si la ventana de antigüedad no está definida o si la última atestación está desactualizada.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">B</span>
+        <h3>Modo de tope estático (restringido)</h3>
+        <p>Este modo solo se aplica cuando la guarda está desactivada, se ha fijado un tope distinto de cero y el administrador ha habilitado expresamente la acuñación. El suministro nunca puede superar el tope. Está concebido para pruebas, no para una emisión vinculada a reservas.</p>
+      </article>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Control</th><th>Mecanismo</th><th>Valor por defecto</th></tr></thead>
+        <tbody>
+          <tr><td>Techo de reservas</td><td><span class="rc-mono">maxMintable</span> de ReserveGuard, comprobado en cada acuñación</td><td>Cero (relación sin definir)</td></tr>
+          <tr><td>Separación de roles</td><td>Roles separados de acuñador, quemador, pausador, atestador y administrador</td><td>Sin asignar</td></tr>
+          <tr><td>Cambio de administrador</td><td>Dos pasos con un retardo obligatorio; compatible con multifirma</td><td>Retardo fijado en el despliegue</td></tr>
+          <tr><td>Parada de emergencia</td><td>La pausa detiene transferencias, acuñaciones y quemas</td><td>Disponible para el rol de pausador</td></tr>
+          <tr><td>Vinculación documental</td><td>Un token almacena el ID del programa y un URI de documento junto con su hash</td><td>Sin definir</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Ciclo de vida del token y reglas de transferencia</p>
+      <h2>Cada transferencia, <em>contrastada con la elegibilidad</em></h2>
+      <p class="rc-lead">Si alguna vez se emitieran tokens, cada transferencia sería controlada por ComplianceRegistry. Una transferencia solo se ejecuta si tanto el remitente como el destinatario son elegibles. En una acuñación se controla al destinatario, y en una quema, al remitente.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Aprobada</h3><p>La dirección cuenta con una decisión KYC/KYB aprobada, reflejada en cadena por un operador con permisos independientes.</p></article>
+      <article class="rc-card" data-reveal><h3>No congelada</h3><p>El área de cumplimiento puede congelar una dirección concreta sin pausar todo el programa.</p></article>
+      <article class="rc-card" data-reveal><h3>No vencida</h3><p>Cada aprobación tiene una fecha de vencimiento, de modo que un control caducado detiene las transferencias.</p></article>
+      <article class="rc-card" data-reveal><h3>Jurisdicción permitida</h3><p>Cada dirección lleva asociado un código de jurisdicción. Se rechazan los códigos incluidos en el conjunto bloqueado, que se inicializa con los códigos de la UE/EEE.</p></article>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Emisión</h3><p>Acuñación a favor de un destinatario elegible, dentro del techo de reservas, tras la atestación.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Tenencia</h3><p>El token se mantiene en un monedero elegible o en la Treasury controlada por roles, que cuenta con límites diarios y una cola con timelock.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Transferencia</h3><p>Las transferencias solo se permiten entre direcciones elegibles y únicamente cuando la estructura legal definitiva lo permita.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Conciliación</h3><p>En cada cambio, el suministro se compara con las reservas elegibles y los extractos del custodio. Cualquier discrepancia bloquea nuevas acuñaciones.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Retiro o quema</h3><p>Los tokens se queman en caso de reembolso físico, o se retiran si una unidad sale del programa. El suministro quemado se publica.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Parámetros del programa de tokens</p>
+        <h2>Configurables, <em>nunca codificados de forma fija</em></h2>
+      </div>
+      <p class="rc-lead">El suministro, la relación token-kilogramo, la relación token-contenedor o token-bobina, los umbrales de reembolso físico y las asignaciones son campos del registro que pasan por los estados Pendiente, En revisión, Aprobado y Publicado. Hasta su aprobación, muestran «Pendiente». El panel siguiente lee en directo el registro del programa de cobre.</p>
+    </div>
+    [rc_token_params program="copper-powder"]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Participación</p>
+        <h2>Desarrollado <em>y bloqueado deliberadamente</em></h2>
+        <p class="rc-lead">El módulo de adquisición de tokens existe para que sus controles puedan revisarse antes de activar nada. No puede aceptar fondos, conectar monederos ni reservar tokens. Su activación requeriría la estructura legal definitiva, la documentación definitiva de la oferta, controles de elegibilidad y una autorización por escrito.</p>
+        <p><a href="/participation/how-token-acquisition-will-work/">Cómo funcionaría la adquisición de tokens →</a></p>
+      </div>
+      <div>
+        [rc_module module="purchase" title="Módulo de adquisición de tokens"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Regístrese para recibir novedades sobre el desarrollo</h2>
+        <p>Unirse a la lista de espera no constituye una inversión, compra, reserva ni asignación. Solo significa que recibirá novedades e información sobre la elegibilidad futura.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Unirse a la lista de espera</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/eligibility-kyc/">Comprobar la elegibilidad</a>
+        <a class="rc-btn" href="/platform/redemption/">Cómo funciona el reembolso físico</a>
+      </div>
+    </div>
+  </div>
+</section>

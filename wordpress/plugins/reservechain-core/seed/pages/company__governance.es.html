@@ -1,0 +1,240 @@
+<!--
+title: Gobernanza
+excerpt: Cómo se controlan las decisiones, los contenidos y los registros en ReserveChain durante la fase de desarrollo: un flujo de publicación con doble control vinculado a las huellas del contenido, registros de activos condicionados a la aportación de evidencias, funciones separadas, autorización por escrito para los módulos sensibles y un registro de auditoría a prueba de manipulaciones que la propia base de datos se niega a modificar.
+kicker: Empresa · Supervisión y controles
+order: 5
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Marco de gobernanza</p>
+        <h2>Controles que se ejecutan en el software, <em>no solo en las políticas</em></h2>
+      </div>
+      <p class="rc-lead">La gobernanza corporativa formal se establecerá una vez completada la estructura societaria y de emisión suiza. Hasta entonces, los controles más relevantes para una plataforma en fase previa al lanzamiento (quién puede publicar qué, con qué evidencias y con qué registro) ya los aplica la propia plataforma.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <a class="rc-card rc-card--link" href="#corporate" data-reveal><span class="rc-card__num">01</span><h3>Supervisión corporativa</h3><p>Decisiones reservadas y autorizaciones por escrito.</p></a>
+      <a class="rc-card rc-card--link" href="#platform" data-reveal><span class="rc-card__num">02</span><h3>Gobernanza de la plataforma</h3><p>Flujo de doble control y funciones separadas.</p></a>
+      <a class="rc-card rc-card--link" href="#assets" data-reveal><span class="rc-card__num">03</span><h3>Gobernanza de los activos</h3><p>Registros condicionados a evidencias y excepciones.</p></a>
+      <a class="rc-card rc-card--link" href="#audit" data-reveal><span class="rc-card__num">04</span><h3>Registro de auditoría</h3><p>Cadena de hashes, disparadores y anclaje en cadena.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint" id="corporate">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Supervisión corporativa</p>
+      <h2>No se muestra ningún consejo <em>hasta que exista</em></h2>
+      <p>Estructura societaria y de emisión suiza en desarrollo. Los administradores, directivos y miembros de comités solo se darán a conocer una vez que hayan sido nombrados, verificados y aprobados para su publicación. No mostramos nombres, fotografías ni cargos de relleno.</p>
+      [rc_module module="team_profiles" title="Perfiles del equipo confirmados"]
+    </div>
+    <div data-reveal>
+      <h3>Materias reservadas (propuesto)</h3>
+      <p class="rc-fine">Decisiones que requieren la autorización expresa por escrito de los titulares del proyecto y una acción de despliegue independiente. Ninguna de ellas puede activarse mediante una edición de contenido ni producirse de forma automática.</p>
+      <div class="rc-claims">
+        <div><strong>Cambio del modo del sitio web (p. ej., de Prelanzamiento a Elegibilidad)</strong>[rc_status s="proposed" label="Autorización por escrito"]</div>
+        <div><strong>Activación de los módulos de monedero, adquisición de tokens, tenencias o reembolso físico</strong>[rc_status s="proposed" label="Autorización por escrito"]</div>
+        <div><strong>Aprobación del nombre, el símbolo, el suministro y los parámetros del token</strong>[rc_status s="proposed" label="Autorización por escrito"]</div>
+        <div><strong>Publicación de cifras de reservas o de una atestación de Prueba de Reservas</strong>[rc_status s="proposed" label="Evidencias + aprobación"]</div>
+        <div><strong>Cualquier despliegue de contratos inteligentes en la red principal</strong>[rc_status s="proposed" label="Autorización por escrito"]</div>
+        <div><strong>Mención de un socio, custodio, laboratorio o aseguradora</strong>[rc_status s="proposed" label="Acuerdo formalizado"]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark" id="platform">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Gobernanza de la plataforma</p>
+      <h2>Doble control sobre cada registro, <em>vinculado a su huella</em></h2>
+      <p class="rc-lead">Las páginas, los registros de activos, los certificados, los pasaportes y los documentos siguen un único flujo de trabajo. Los borradores y los elementos en revisión nunca son públicos, ni se indexan ni se exponen a través de la API, y los registros publicados se retiran de la publicación o se archivan en lugar de eliminarse.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 960 250" role="img" aria-labelledby="wf-title wf-desc" font-family="Inter Tight, sans-serif">
+        <title id="wf-title">Flujo de publicación</title>
+        <desc id="wf-desc">Borrador, En revisión, Aprobado, Publicado, No publicado, Archivado. Las ediciones posteriores a la aprobación devuelven el elemento a revisión; la solicitud de cambios lo devuelve a borrador; los elementos retirados de la publicación pueden volver a presentarse; cualquier elemento puede archivarse, nunca eliminarse.</desc>
+        <defs><marker id="wf-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D5B167"/></marker><marker id="wf-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C9773F"/></marker></defs>
+        <g fill="none" stroke-width="1.5">
+          <path d="M150 118 H173 M305 118 H328 M460 118 H483 M615 118 H638 M770 118 H793" stroke="#D5B167" marker-end="url(#wf-arr)"/>
+          <path d="M395 90 V58 H260 V88" stroke="#C9773F" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+          <path d="M220 146 V190 H85 V148" stroke="#C9773F" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+          <path d="M705 146 V215 H250 V148" stroke="#A9BBC8" stroke-dasharray="5 4" marker-end="url(#wf-arr2)"/>
+        </g>
+        <g fill="#0A141F" stroke="#D5B167" stroke-width="1.2">
+          <rect x="20" y="90" width="130" height="56" rx="8"/>
+          <rect x="175" y="90" width="130" height="56" rx="8"/>
+          <rect x="330" y="90" width="130" height="56" rx="8"/>
+          <rect x="485" y="90" width="130" height="56" rx="8" stroke="#3FB37F"/>
+          <rect x="640" y="90" width="130" height="56" rx="8"/>
+          <rect x="795" y="90" width="130" height="56" rx="8" stroke="#A9BBC8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="14" font-weight="600" text-anchor="middle">
+          <text x="85" y="123">Borrador</text>
+          <text x="240" y="123">En revisión</text>
+          <text x="395" y="123">Aprobado</text>
+          <text x="550" y="123">Publicado</text>
+          <text x="705" y="123">No publicado</text>
+          <text x="860" y="123">Archivado</text>
+        </g>
+        <g fill="#A9BBC8" font-size="11" text-anchor="middle">
+          <text x="328" y="50">editado tras la aprobación: la huella no coincide</text>
+          <text x="152" y="182">cambios solicitados</text>
+          <text x="478" y="208">presentado de nuevo a revisión</text>
+          <text x="395" y="166">aprobador ≠ remitente</text>
+          <text x="550" y="166">público, indexable</text>
+          <text x="860" y="80">desde cualquier estado</text>
+          <text x="860" y="166">nunca se elimina</text>
+        </g>
+      </svg>
+      <figcaption>Flujo de trabajo tal como está implementado en el CMS. El aprobador debe ser distinto tanto del remitente como del último editor. Al publicar se vuelve a comprobar que el contenido sigue coincidiendo con la huella aprobada.</figcaption>
+    </figure>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Aprobación vinculada al contenido</h3><p>La aprobación almacena una huella SHA-256 del contenido y de los campos del registro. Cualquier cambio posterior, por pequeño que sea, invalida la aprobación y devuelve automáticamente el elemento a revisión.</p></article>
+      <article class="rc-card" data-reveal><h3>Sin puertas traseras</h3><p>La publicación directa mediante el botón de publicación del editor, la API REST o la edición rápida se intercepta y se redirige a revisión. Los editores no disponen de capacidad de publicación.</p></article>
+      <article class="rc-card" data-reveal><h3>Cada transición queda registrada</h3><p>Cada paso se añade al historial del elemento y al registro de auditoría a prueba de manipulaciones, con el usuario, la hora, la acción, el estado anterior y el nuevo, y la huella.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Separación de funciones</p>
+      <h2>Cinco funciones, <em>ningún punto único de aprobación</em></h2>
+    </div>
+    <div class="rc-table-wrap" data-reveal>
+      <table class="rc-table">
+        <thead><tr><th>Función</th><th>Puede</th><th>No puede</th></tr></thead>
+        <tbody>
+          <tr><td>Editor de contenidos</td><td>Redactar páginas y presentarlas a revisión</td><td>Aprobar ni publicar nada</td></tr>
+          <tr><td>Gestor del registro</td><td>Crear y editar lotes, contenedores, bobinas y certificados; presentarlos a revisión</td><td>Aprobar sus propias presentaciones; publicar</td></tr>
+          <tr><td>Revisor</td><td>Aprobar o solicitar cambios; consultar el registro de auditoría</td><td>Aprobar elementos que haya presentado o editado por última vez</td></tr>
+          <tr><td>Responsable de cumplimiento</td><td>Aprobar, publicar, retirar de la publicación y archivar; gestionar el cumplimiento y la lista de espera</td><td>Eludir la comprobación de la huella ni editar el historial de auditoría</td></tr>
+          <tr><td>Auditor (solo lectura)</td><td>Consultar los registros y el registro de auditoría</td><td>Modificar ningún registro</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Las cuentas del personal requieren autenticación multifactor. Los cambios de función, los inicios de sesión, los intentos fallidos de inicio de sesión y los cambios de configuración también se anotan en el registro de auditoría.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint" id="assets">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Gobernanza de los activos</p>
+      <h2>Un estado es una afirmación. <em>Las afirmaciones requieren evidencias.</em></h2>
+      <p>Las afirmaciones sobre propiedad, laboratorio, custodia, seguro y reservas permanecen sin publicar hasta que se hayan aportado y aprobado las evidencias que las respaldan. Cada valor del registro lleva una referencia a su fuente de datos; los valores sin fuente permanecen vacíos.</p>
+      <p><a href="/platform/asset-registry/">Ver el Registro de Activos →</a></p>
+    </div>
+    <ul class="rc-checks" data-reveal>
+      <li>Los datos aportados por el propietario se identifican como aportados por el propietario y están sujetos a verificación documental.</li>
+      <li>Los certificados se transcriben con exactitud y el escaneo original se publica junto con su huella.</li>
+      <li>Los valores de estado proceden de listas restringidas; está previsto que los estados de confirmación requieran evidencias adjuntas y un segundo aprobador.</li>
+      <li>Está previsto que la conciliación detecte y notifique las incoherencias, nunca que las ajuste de forma silenciosa.</li>
+      <li>Las futuras categorías de activos nunca se mezclan con los registros ni con los totales de los programas actuales.</li>
+      <li>El contenido ilustrativo siempre se identifica como datos ilustrativos o de demostración.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <p class="rc-kicker">Gestión de conflictos</p>
+        <h3>Divulgar, separar, registrar</h3>
+        <ul class="rc-list">
+          <li>Las relaciones entre ReserveChain y los propietarios u originadores de activos deberán divulgarse en la documentación del programa.</li>
+          <li>Está previsto que la verificación, la valoración y la custodia independientes las realicen partes no vinculadas al propietario del activo.</li>
+          <li>Cualquier diferencial comercial entre el coste de adquisición, el valor evaluado y el valor de introducción deberá divulgarse conforme a una metodología aprobada.</li>
+          <li>Se propone un registro de conflictos, mantenido bajo el mismo registro de auditoría.</li>
+        </ul>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <p class="rc-kicker">Supervisión de la seguridad y el cumplimiento</p>
+        <h3>Controles ya integrados en el desarrollo</h3>
+        <ul class="rc-list">
+          <li>Acceso basado en funciones, autenticación multifactor para el personal, caducidad de sesiones y protección frente a intentos de inicio de sesión.</li>
+          <li>Lógica de restricción UE/EEE y un modelo de estados de KYC/KYB, AML y control de sanciones (proveedor pendiente).</li>
+          <li>Multifirma propuesta bajo control del emisor para las funciones privilegiadas de los contratos inteligentes; los desarrolladores no conservan ninguna clave.</li>
+          <li>Procedimientos de respuesta a incidentes y de copia de seguridad y restauración, que se ensayarán antes del lanzamiento.</li>
+        </ul>
+        <div class="rc-card__foot">[rc_status s="in_development"] <a href="/platform/security/">Seguridad →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Futuros comités (propuesto)</p>
+      <h2>Órganos de supervisión <em>pendientes de constitución</em></h2>
+      <p>La composición, los mandatos y las líneas de reporte se definirán dentro de la estructura societaria definitiva. Ninguno de estos órganos existe actualmente.</p>
+      <div class="rc-claims">
+        <div><strong>Comité de Admisión de Activos</strong>[rc_status s="proposed"]<small>Aprueba nuevos programas conforme a los criterios de admisión.</small></div>
+        <div><strong>Comité de Supervisión de Reservas</strong>[rc_status s="proposed"]<small>Examina los resultados de la conciliación y las excepciones.</small></div>
+        <div><strong>Comité de Riesgos y Auditoría</strong>[rc_status s="proposed"]<small>Supervisa las auditorías, las conclusiones y las medidas correctoras.</small></div>
+        <div><strong>Comité de Cumplimiento</strong>[rc_status s="proposed"]<small>Reglas de elegibilidad, listas de jurisdicciones y resultados de los controles.</small></div>
+      </div>
+    </div>
+    <div data-reveal>
+      <h3>Políticas</h3>
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead><tr><th>Política</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Política de contenidos, divulgación y publicación</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td>Política de admisión de activos y de evidencias</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td>Política de conflictos de intereses</td><td>[rc_status s="proposed"]</td></tr>
+            <tr><td>Seguridad de la información y gestión de claves</td><td>[rc_status s="in_development"]</td></tr>
+            <tr><td><a href="/legal/privacy/">Política de privacidad</a></td><td>[rc_status s="in_development" label="Borrador, pendiente de revisión jurídica"]</td></tr>
+            <tr><td><a href="/legal/anti-fraud/">Aviso contra el fraude</a></td><td>[rc_status s="in_development" label="Borrador, pendiente de revisión jurídica"]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark" id="audit">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Registro de auditoría a prueba de manipulaciones</p>
+      <h2>Un historial que no puede <em>reescribirse discretamente</em></h2>
+      <p class="rc-lead">Cada transición del flujo de trabajo, carga de documentos, cambio en el registro, inicio de sesión y cambio de configuración se añade a un único registro. Cuatro capas independientes permiten detectar cualquier alteración.</p>
+    </div>
+    <div class="rc-split">
+      <ol class="rc-steps">
+        <li><div><h3>Aplicación</h3><p>Ninguna ruta del código actualiza ni elimina filas de auditoría, y no existe ninguna pantalla de administración que permita hacerlo.</p></div>[rc_status s="provided" label="Activo"]</li>
+        <li><div><h3>Disparadores de la base de datos</h3><p>Los disparadores BEFORE UPDATE y BEFORE DELETE rechazan cualquier cambio en la tabla, incluso desde una conexión directa a la base de datos.</p></div>[rc_status s="provided" label="Activo"]</li>
+        <li><div><h3>Cadena de hashes</h3><p>Cada fila almacena el hash SHA-256 de la fila anterior. Editar, insertar o eliminar cualquier entrada rompe todos los hashes posteriores, y la comprobación de la cadena completa lo notifica.</p></div>[rc_status s="provided" label="Activo"]</li>
+        <li><div><h3>Anclaje en cadena</h3><p>La cabeza de la cadena (número de secuencia y hash) puede escribirse en una cadena de bloques pública mediante el contrato AuditAnchor, de modo que incluso una reescritura completa de la base de datos sería detectable.</p></div>[rc_status s="in_development" label="Red de pruebas"]</li>
+      </ol>
+      <div data-reveal>
+        <p class="rc-fine">Estado en directo, leído de la plataforma al cargar la página:</p>
+        [rc_audit_status]
+        <p class="rc-fine">Si los disparadores figuran como no disponibles o la comprobación de la cadena falla, el resultado se muestra aquí tal cual. No se oculta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Compruebe un registro usted mismo</h2>
+        <p>Calcule en su navegador el hash de cualquier documento publicado y compárelo con el registro, o abra un Pasaporte de Activo Digital para consultar su registro de evidencias.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/verification/">Ver el proceso de verificación</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/passport/RC-CU-LOT-000001/">Ver el Pasaporte de Activo Digital</a>
+      </div>
+    </div>
+  </div>
+</section>

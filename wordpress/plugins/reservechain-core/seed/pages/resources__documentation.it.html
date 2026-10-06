@@ -1,0 +1,159 @@
+<!--
+title: Documentazione
+excerpt: La biblioteca documentale di ReserveChain sottoposta a controllo di versione, organizzata in dodici categorie. Ogni file pubblicato è dotato di impronta SHA-256 e qualsiasi copia può essere confrontata con il registro.
+kicker: Risorse · Biblioteca documentale
+order: 1
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Principi della biblioteca</p>
+        <h2>Un'unica fonte di riferimento <em>per ogni documento</em></h2>
+      </div>
+      <p class="rc-lead">I documenti sono pubblicati solo previa approvazione secondo il principio dei quattro occhi. Una persona prepara la registrazione e una seconda persona autorizzata, diversa dalla prima, la approva. Ogni pubblicazione riceve una versione, una data di emissione, uno stato e un'impronta SHA-256. Le versioni sostituite restano registrate, così che una copia precedente possa ancora essere identificata e datata.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">01</span>
+        <h3>Con controllo di versione</h3>
+        <p>Ogni pubblicazione ha un identificativo di versione e una data di emissione. Qualsiasi modifica, per quanto minima, genera una nuova versione. Un file pubblicato non viene mai sostituito in modo silente.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">02</span>
+        <h3>Con impronta digitale</h3>
+        <p>L'impronta SHA-256 è calcolata a partire dai byte esatti del file. Se cambia un solo byte, l'impronta cambia completamente.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">03</span>
+        <h3>Con etichetta di stato</h3>
+        <p>Ogni documento indica se si tratta di una bozza, di un facsimile, di una copia fornita dal proprietario o di una versione approvata. Lo stato descrive il documento, non l'accordo sottostante.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">04</span>
+        <h3>Registrato nell'audit trail</h3>
+        <p>Ogni caricamento, approvazione e sostituzione è scritto in un audit trail concatenato tramite hash e di sola aggiunta. Qualsiasi successiva alterazione di tale cronologia può essere rilevata.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Dodici categorie</p>
+      <h2>Che cosa conterrà la biblioteca <em>e che cosa contiene oggi</em></h2>
+      <p class="rc-lead">Le categorie riportate di seguito delineano l'intera biblioteca prevista. Molti documenti dipendono da accordi che non esistono ancora, come custodi, attestatori e documentazione d'offerta. Tali categorie restano vuote finché non saranno approvati documenti reali. Non pubblicheremo segnaposto spacciati per evidenze.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead>
+          <tr><th>Categoria</th><th>Contenuto previsto</th><th>Stato attuale</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Piattaforma</strong></td><td>Panoramica della piattaforma, descrizione del ciclo di vita, registro dei moduli, avvisi sulla modalità del sito web</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Tecnologia</strong></td><td>Note sull'architettura, specifiche degli smart contract, riferimento API, registrazioni delle distribuzioni sulla rete di test</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Programmi di asset</strong></td><td>Schede di programma per la polvere di rame ad altissima purezza e il filo di nichel ad alta purezza 0.025 mm, sintesi delle specifiche, descrizioni dell'imballaggio</td><td>[rc_status s="pending_verification"]</td></tr>
+          <tr><td><strong>Certificati</strong></td><td>Certificati di Analisi forniti dal proprietario: IGAS No. 0004512 (Cu) e No. 0004368 (Ni). In seguito, certificati di peso e rapporti di nuova verifica</td><td>[rc_status s="pending_verification" label="Fornito dal proprietario"]</td></tr>
+          <tr><td><strong>Verifica</strong></td><td>Metodologia di campionamento, criteri di selezione dei laboratori, rapporti di nuova verifica</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Custodia</strong></td><td>Sintesi dei contratti di custodia, fedi di deposito, rendiconti di inventario, registrazioni di rilascio</td><td>[rc_status s="not_applicable" label="Nessun custode nominato"]</td></tr>
+          <tr><td><strong>Rapporti sulle riserve</strong></td><td>Attestazioni indipendenti periodiche, ciascuna dotata di impronta e pubblicata on-chain</td><td>[rc_status s="not_applicable" label="Nessun attestatore nominato"]</td></tr>
+          <tr><td><strong>Conformità</strong></td><td>Quadro di idoneità, requisiti KYC/KYB, politica sulle giurisdizioni soggette a restrizioni, politica di controllo delle sanzioni</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Imprese</strong></td><td>Descrizioni dei servizi per le imprese, schede dei moduli di licenza e white label, guide all'integrazione</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Partecipazione</strong></td><td>Panoramica del Programma di Partecipazione Anticipata, documento sulla metodologia di sconto (proposto, soggetto ad approvazione), condizioni della lista d'attesa</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td><strong>Politiche</strong></td><td>Standard di comunicazione, conflitti di interesse, sicurezza delle informazioni, protezione dei dati, politica di controllo documentale</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td><strong>Note legali</strong></td><td>Termini del sito web, informative sulla privacy e sui cookie, informativa sui rischi. Eventuale futura documentazione d'offerta definitiva</td><td>[rc_status s="in_development" label="Bozze — revisione legale"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Gli stati delle categorie descrivono la biblioteca, non gli accordi sottostanti. «Non applicabile» significa che l'accordo corrispondente non esiste ancora e che pertanto nessun documento può essere pubblicato in modo veritiero.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Biblioteca in tempo reale</p>
+      <h2>Documenti pubblicati <em>con le relative impronte</em></h2>
+      <p class="rc-lead">Questo elenco proviene direttamente dal registro. Ogni voce ne indica tipo, versione, data di emissione, stato e impronta SHA-256. Copi un'impronta, oppure scarichi il file e lo verifichi con lo strumento sottostante.</p>
+    </div>
+    [rc_documents]
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Controllo di versione</p>
+      <h2>Come un documento <em>entra nella biblioteca</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Redazione e registrazione</h3><p>Un redattore carica il file. Il sistema ne calcola l'impronta SHA-256 al momento del caricamento e registra il tipo di documento, la versione, la data di emissione, l'emittente e le unità del registro a cui si riferisce.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Approvazione indipendente</h3><p>Una seconda persona autorizzata, diversa dal redattore, esamina il file rispetto alla sua fonte e lo approva o lo respinge. I documenti forniti dal proprietario mantengono tale etichetta anche dopo l'approvazione.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Pubblicazione e registrazione</h3><p>La pubblicazione scrive una voce nell'audit trail concatenato tramite hash. Ogni voce include l'hash di quella precedente, così che la cronologia non possa essere riscritta senza che ciò venga rilevato.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Sostituire, mai sovrascrivere</h3><p>Una rettifica è pubblicata come nuova versione. La versione precedente resta registrata e contrassegnata come sostituita, così che chiunque detenga una copia precedente possa identificarla.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Ancoraggio on-chain</h3><p>È previsto che la testa dell'audit trail sia ancorata periodicamente a una rete di test pubblica tramite il contratto AuditAnchor. Ciò conferisce alla cronologia una marca temporale esterna.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Verifichi qualsiasi copia</p>
+        <h2>Ha ricevuto un documento ReserveChain? <em>Lo verifichi qui.</em></h2>
+        <p>Selezioni il file. Il Suo browser ne calcola localmente l'impronta SHA-256 e la confronta con il registro. Il file non lascia mai il Suo dispositivo. Una corrispondenza indica che la copia è identica a quella da noi pubblicata. Non conferma che l'accordo descritto nel documento sia in essere.</p>
+        <p>Lo stesso strumento è disponibile nella <a href="/platform/verification/">pagina del framework di verifica</a>.</p>
+      </div>
+      <div>
+        [rc_verify]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Lettura dei documenti</p>
+      <h2>Tre limiti da <em>tenere presenti</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Un'impronta prova l'integrità, non la veridicità</h3>
+        <p>La corrispondenza di un'impronta dimostra che un file non è cambiato dalla registrazione. Non dimostra che le affermazioni contenute nel file siano accurate. Ciò dipende dall'emittente e dalla verifica indipendente.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Fornito dal proprietario non significa verificato in modo indipendente</h3>
+        <p>I due Certificati di Analisi sono stati forniti dal proprietario dell'asset. Non sono ancora stati confermati presso il laboratorio emittente né sottoposti a prove da parte di un soggetto indipendente nominato da ReserveChain.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Nessun documento qui presente è un documento d'offerta</h3>
+        <p>Nulla in questa biblioteca è un prospetto o un memorandum d'offerta, e nulla costituisce una sollecitazione. Qualsiasi futura documentazione d'offerta definitiva sarebbe separata. Sarebbe fornita esclusivamente a persone idonee e approvate.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Inizi dal whitepaper</h2>
+        <p>La bozza per la discussione illustra l'intero framework proposto su cui si basano questi documenti.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/resources/whitepaper/">Visualizza il whitepaper</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/verification/">Visualizza il processo di verifica</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,145 @@
+<!--
+title: Pasaportes de Activo Digital
+excerpt: Una identidad digital persistente para cada unidad de activo. Cada pasaporte se compone a partir de registros de evidencia aprobados y se sella con una raíz de Merkle SHA-256. Puede abrirse mediante código QR o descargarse como JSON legible por máquina, y cualquier persona puede comprobarlo de forma independiente.
+kicker: Plataforma · Identidad digital · En funcionamiento con datos aportados por el propietario
+order: 8
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Qué es un pasaporte</p>
+        <h2>No es una página sobre un activo. <em>Es el registro de uno.</em></h2>
+      </div>
+      <p class="rc-lead">Un Pasaporte de Activo Digital se genera, no se redacta. Nadie edita un pasaporte directamente. Se compone a partir de los registros correspondientes a un lote, contenedor o bobina concretos. Por ello, un pasaporte nunca puede afirmar más de lo que respaldan sus evidencias, y cada una de sus afirmaciones puede rastrearse hasta un documento cuya huella usted puede comprobar.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Un pasaporte por unidad controlable</h3><p>Existe un pasaporte para cada lote, cada contenedor y cada bobina. El lote de cobre y su Caja n.º 20 tienen cada uno su propio pasaporte. Cada una de las 30 bobinas de níquel tiene también el suyo.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Identificador permanente</h3><p>Los identificadores siguen el patrón <span class="rc-mono">RC-[metal]-[type]-[sequence]</span>, por ejemplo <span class="rc-mono">RC-NI-COL-000008</span>. Un identificador nunca se reutiliza, ni siquiera después de que una unidad se libere o se retire.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Vínculos entre elementos de origen y derivados</h3><p>Los lotes se vinculan hacia abajo con sus contenedores o bobinas, y las unidades se vinculan hacia arriba con su lote y su programa. La evidencia adjunta a nivel de lote es visible desde cada unidad derivada.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Contenido</p>
+      <h2>Trece secciones, <em>cada una respaldada por un tipo de registro</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Sección</th><th>Qué muestra</th><th>Registro de origen</th></tr></thead>
+        <tbody>
+          <tr><td>Identidad</td><td>Número de pasaporte, tipo de unidad, programa, lote de origen, código QR</td><td>Lote / contenedor / bobina</td></tr>
+          <tr><td>Especificaciones</td><td>Material, forma, pureza y su base, dimensiones, embalaje. Los campos no documentados muestran «Pendiente».</td><td>Esquema del lote y del programa</td></tr>
+          <tr><td>Certificados</td><td>Certificado de Análisis, transcripción exacta, tabla de ensayos, escaneo original, huella</td><td>Certificado de Análisis, laboratorio</td></tr>
+          <tr><td>Procedencia y origen</td><td>Productor, origen, documentos de cadena de titularidad aportados por el propietario (restringidos cuando así se requiera)</td><td>Custodia / propiedad</td></tr>
+          <tr><td>Verificación</td><td>Fuente de la evidencia (aportada por el propietario o independiente), muestreo, fecha de aprobación</td><td>Certificado de Análisis, verificación</td></tr>
+          <tr><td>Custodia</td><td>Estado de custodia, recibo, números de precinto, inspecciones</td><td>Custodia</td></tr>
+          <tr><td>Valoración</td><td>Estado, fecha y metodología de la valoración, una vez aprobada su publicación</td><td>Valoración</td></tr>
+          <tr><td>Estado de la reserva</td><td>Declarado, verificado, elegible o asignado</td><td>Informe de reservas</td></tr>
+          <tr><td>Estado de tokenización</td><td>Programa de tokens vinculado, o «No vinculado»</td><td>Programa de tokens</td></tr>
+          <tr><td>Referencias de blockchain</td><td>Referencias de transacciones de atestación y de quema, una vez que existan. Actualmente, ninguna.</td><td>Programa de tokens, reembolso físico</td></tr>
+          <tr><td>Historial</td><td>Eventos del ciclo de vida versionados e historial de publicación</td><td>Flujo de trabajo y registro de auditoría</td></tr>
+          <tr><td>Documentos</td><td>Cada archivo vinculado, con su huella SHA-256 y su visibilidad</td><td>Documento</td></tr>
+          <tr><td>Integridad</td><td>Raíz de Merkle y número de hojas sobre el registro y sus documentos</td><td>Calculado</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Integridad de Merkle</p>
+        <h2>Un único hash que <em>se compromete con todo</em></h2>
+        <p class="rc-lead">Cada pasaporte incluye una raíz de Merkle SHA-256. Sus hojas son una huella de los campos públicos del pasaporte más la huella de cada documento vinculado. Si se modifica un valor de pureza, se sustituye el escaneo de un certificado o se elimina un recibo, la raíz cambia.</p>
+        <p>La raíz se muestra en el pasaporte y se incluye en la exportación JSON. Los terceros pueden almacenarla y compararla más adelante. Es además un valor compacto, adecuado para su anclaje en un registro público.</p>
+      </div>
+      <figure class="rc-diagram">
+        <svg viewBox="0 0 520 300" role="img" aria-labelledby="rc-mk-title rc-mk-desc" font-family="Inter Tight, sans-serif">
+          <title id="rc-mk-title">Árbol de Merkle del pasaporte</title>
+          <desc id="rc-mk-desc">Cuatro hojas (huella del registro, Certificado de Análisis, escaneo, recibo) se combinan por pares mediante hash en dos nodos, que a su vez se combinan mediante hash en la raíz de Merkle.</desc>
+          <rect x="170" y="16" width="180" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2.5"/>
+          <text x="260" y="43" fill="#E7EBEE" font-size="13" font-weight="600" text-anchor="middle">Raíz de Merkle</text>
+          <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5"><rect x="50" y="120" width="160" height="40" rx="8"/><rect x="310" y="120" width="160" height="40" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="12" text-anchor="middle"><text x="130" y="145">SHA-256(a ‖ b)</text><text x="390" y="145">SHA-256(c ‖ d)</text></g>
+          <g fill="#0E1620" stroke="#C9773F" stroke-width="1.5"><rect x="10" y="226" width="115" height="54" rx="8"/><rect x="135" y="226" width="115" height="54" rx="8"/><rect x="270" y="226" width="115" height="54" rx="8"/><rect x="395" y="226" width="115" height="54" rx="8"/></g>
+          <g fill="#E7EBEE" font-size="11.5" text-anchor="middle"><text x="67" y="249">a · campos</text><text x="67" y="266">del registro</text><text x="192" y="249">b · CoA</text><text x="192" y="266">PDF</text><text x="327" y="249">c · escaneo</text><text x="327" y="266">original</text><text x="452" y="249">d · otros</text><text x="452" y="266">documentos</text></g>
+          <g stroke="#1C2A38" stroke-width="2" fill="none"><path d="M67 226 L130 160"/><path d="M192 226 L130 160"/><path d="M327 226 L390 160"/><path d="M452 226 L390 160"/><path d="M130 120 L260 60"/><path d="M390 120 L260 60"/></g>
+        </svg>
+        <figcaption>Las hojas se deduplican y se ordenan antes del emparejamiento, de modo que la raíz no depende del orden en que se adjuntaron los documentos. Una hoja impar se empareja consigo misma.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Acceso</p>
+      <h2>QR, web y <em>JSON legible por máquina</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Acceso mediante QR</h3><p>Cada pasaporte dispone de un código QR que remite a su URL permanente. En el modelo de custodia propuesto, el código se imprimiría en la etiqueta de la unidad, de modo que cualquier persona que manipule un contenedor pueda abrir su registro.</p></article>
+      <article class="rc-card" data-reveal><h3>Evidencias descargables</h3><p>Añada <span class="rc-mono">?format=json</span> a la URL de cualquier pasaporte para descargar el pasaporte completo: campos, ciclo de vida, huellas de los documentos y raíz de Merkle. Los mismos datos se sirven en <span class="rc-mono">/rc/v1/passports/{no}</span>.</p></article>
+      <article class="rc-card" data-reveal><h3>Comprobación independiente</h3><p>Calcule el hash de un documento que tenga en su poder con cualquier herramienta SHA-256, o utilice la <a href="/platform/verification/#verify">herramienta de verificación</a>, y compare el resultado con la huella indicada en el pasaporte.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Pasaportes en funcionamiento</p>
+        <h2>Abra un <em>registro real</em></h2>
+      </div>
+      <p class="rc-lead">Estos pasaportes están en funcionamiento y contienen evidencias aportadas por el propietario para los dos programas iniciales. Sus etapas muestran «Pendiente» allí donde aún no existe evidencia independiente. Se trata de información exacta, no de trabajo pendiente de realizar.</p>
+    </div>
+    [rc_passports limit="6"]
+    <div class="rc-grid rc-grid--3">
+      <a class="rc-card rc-card--link" href="/passport/RC-CU-LOT-000001/" data-reveal><span class="rc-card__num">Cu 29</span><h3>Polvo de cobre · Lote #03-K-07</h3><p>Un pasaporte a nivel de lote con el CoA 0004512 de IGAS aportado por el propietario, una tabla de ensayos de 30 elementos y el peso neto declarado de 2000 kg.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-NI-COL-000008/" data-reveal><span class="rc-card__num">Ni 28</span><h3>Alambre de níquel · Bobina 8</h3><p>Una de las cuatro bobinas muestreadas para el CoA 0004368 de IGAS aportado por el propietario. Es un pasaporte a nivel de unidad vinculado al Lote 120/NP1.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></a>
+      <a class="rc-card rc-card--link" href="/passport/RC-LOT-000001/" data-reveal><span class="rc-card__num">Plantilla</span><h3>Plantilla ilustrativa de activo de metal industrial</h3><p>Muestra el formato futuro con todos los campos en estado Pendiente. No representa ningún material, documento ni token. <span class="rc-demo-badge">Datos ilustrativos / de demostración</span></p></a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Historial y control de versiones</p>
+        <h2>Un pasaporte <em>recuerda</em></h2>
+        <p class="rc-lead">Los estados anteriores de un pasaporte siguen formando parte de su registro. Cada publicación es una versión, cada versión ha superado la aprobación de doble control (principio de los cuatro ojos) y cada transición consta en el registro de auditoría a prueba de manipulaciones.</p>
+      </div>
+      <ul class="rc-checks">
+        <li>La sustitución de un documento crea una nueva versión del documento, y la raíz del pasaporte cambia de forma visible.</li>
+        <li>Los pasaportes despublicados o archivados se retiran, nunca se eliminan definitivamente.</li>
+        <li>Las etapas del ciclo de vida registran cuándo se añadió la evidencia y quién la aprobó.</li>
+        <li>Estados como «verificado» o «en custodia» solo aparecen cuando existe un registro vinculado y aprobado.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Vea de dónde proceden los pasaportes</h2>
+        <p>Cada pasaporte es una vista del Registro de Metales Industriales.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">Ver el Registro de Activos</a>
+        <a class="rc-btn rc-btn--cream" href="/assets/initial-programs/">Ver los programas iniciales</a>
+        <a class="rc-btn" href="/platform/verification/">Ver el proceso de verificación</a>
+      </div>
+    </div>
+  </div>
+</section>

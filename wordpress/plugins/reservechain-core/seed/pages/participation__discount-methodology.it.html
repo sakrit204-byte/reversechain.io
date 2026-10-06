@@ -1,0 +1,179 @@
+<!--
+title: Metodologia dello sconto del 20% (proposta)
+excerpt: Un quadro proposto su come un parametro di sconto per la partecipazione anticipata potrebbe essere definito, calcolato, limitato e disciplinato. La cifra del 20 % compare esclusivamente nel documento di impostazione del progetto; non è approvata, non è offerta ed è soggetta a revisione legale e ad approvazione scritta.
+kicker: Partecipazione · Metodologia proposta · Non approvata
+order: 3
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Stato di questa metodologia</p>
+        <h2>Un parametro in fase di revisione, <em>non una promozione</em></h2>
+      </div>
+      <p class="rc-lead">Il documento di impostazione del progetto propone uno sconto per la partecipazione anticipata del 20 %. Questa pagina spiega come tale parametro potrebbe funzionare, rispetto a cosa verrebbe misurato e perché esisterebbe. Non offre alcuno sconto, prezzo o token. L'emissione di token resta inattiva fino al lancio formale.</p>
+    </div>
+    <div class="rc-claims" data-reveal>
+      <div><strong>Parametro di sconto d</strong>[rc_status s="proposed" label="Proposto · non approvato"]<small>Indicato nel documento di impostazione nella misura del 20 %. Soggetto a revisione legale, alla documentazione definitiva e a un riferimento di approvazione scritta prima di poter essere pubblicato come condizione.</small></div>
+      <div><strong>Riferimento di valutazione R</strong>[rc_status s="pending_verification"]<small>Richiede una valutazione indipendente delle riserve verificate. Tale valutazione non esiste ancora.</small></div>
+      <div><strong>Limiti e finestra del programma</strong>[rc_status s="proposed"]<small>Non definiti. I campi di configurazione non sono valorizzati per impostazione predefinita.</small></div>
+      <div><strong>Prezzo, simbolo e offerta del token</strong>[rc_status s="not_applicable" label="Non determinati"]<small>Non determinati. Nessun prezzo è indicato o suggerito in alcuna parte di questo sito web.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">1 · Riferimento di valutazione</p>
+      <h2>Rispetto a cosa <em>verrebbe misurato</em> uno sconto</h2>
+      <p class="rc-lead">Uno sconto è privo di significato senza un riferimento sostenibile. Il riferimento proposto deriva da riserve valutate in modo indipendente, verificate e in custodia, mai da un prezzo obiettivo, dal sentiment di mercato o dalla stima di un promotore.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Simbolo</th><th>Significato</th><th>Fonte proposta</th><th>Stato attuale</th></tr></thead>
+        <tbody>
+          <tr><td class="rc-mono">V</td><td>Valutazione indipendente della riserva idonea di un programma</td><td>Perito indipendente qualificato, con una metodologia documentata, esclusivamente su lotti verificati</td><td>[rc_status s="pending_verification" label="Nessuna per ora"]</td></tr>
+          <tr><td class="rc-mono">E</td><td>Unità di riserva idonee accettate nella riserva</td><td>Rapporto di verifica, registri di custodia e attestazione delle riserve</td><td>[rc_status s="pending_verification" label="Nessuna attestata"]</td></tr>
+          <tr><td class="rc-mono">k</td><td>Rapporto asset/token approvato</td><td>Documentazione definitiva; campo di configurazione con riferimento di approvazione scritta</td><td>[rc_status s="proposed" label="Non definito"]</td></tr>
+          <tr><td class="rc-mono">R</td><td>Valore di riferimento per unità di token, R = V ÷ (E × k)</td><td>Derivato; ricalcolato quando V, E o k cambiano</td><td>[rc_status s="not_applicable" label="Non calcolabile"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">I Certificati di Analisi forniti dal proprietario (IGAS n. 0004512 per Cu; n. 0004368 per Ni) descrivono la composizione. Non sono valutazioni e non determinano R.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">2 · Formula di calcolo</p>
+        <h2>Espressa in forma simbolica, <em>per scelta</em></h2>
+        <p>Il riferimento di acquisizione per la partecipazione anticipata proposto <span class="rc-mono">A</span> è una frazione fissa del valore di riferimento:</p>
+        <div class="rc-callout"><p class="rc-mono">A = R × (1 − d)</p></div>
+        <p>dove <span class="rc-mono">d</span> è il parametro di sconto per la partecipazione anticipata, espresso come frazione compresa tra 0 e 1. Il documento di impostazione propone <span class="rc-mono">d = 0.20</span>; tale valore non è approvato. Il corrispettivo per una richiesta accettata sarebbe:</p>
+        <div class="rc-callout"><p class="rc-mono">C = q′ × A,  where  q′ = min(q, l, L − Q)</p></div>
+        <p class="rc-fine">q = unità richieste · l = limite per partecipante · L = tetto del programma per la finestra anticipata · Q = unità già accettate in tale finestra.</p>
+      </div>
+      <div>
+        <p class="rc-kicker">Regole fisse della formula</p>
+        <h2>Proprietà che <em>non ammettono deroghe</em></h2>
+        <ul class="rc-checks">
+          <li>Se <span class="rc-mono">R</span> non può essere calcolato, <span class="rc-mono">A</span> non esiste e nessuna richiesta può essere accettata.</li>
+          <li><span class="rc-mono">d</span> si applica esclusivamente a <span class="rc-mono">R</span>; non è mai cumulato con altri incentivi.</li>
+          <li><span class="rc-mono">L</span> non può mai superare la capacità di emissione consentita dalle riserve attestate, <span class="rc-mono">E × k</span>.</li>
+          <li><span class="rc-mono">d</span>, <span class="rc-mono">l</span> e <span class="rc-mono">L</span> sono valori di configurazione, non valorizzati per impostazione predefinita e pubblicati solo con un riferimento di approvazione scritta.</li>
+          <li>Qualsiasi modifica di <span class="rc-mono">d</span> viene registrata nell'audit trail a prova di manomissione.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">3 · Motivazione</p>
+      <h2>Perché potrebbe esistere uno sconto: <em>compensazione del rischio</em></h2>
+      <p class="rc-lead">Qualora un parametro di partecipazione anticipata venga approvato, la sua unica giustificazione sarebbe che i primi partecipanti sopportano rischi che i partecipanti successivi potrebbero non sopportare. Si tratta di un riconoscimento di tali rischi, non di una promessa di guadagno, rivalutazione o di qualsiasi valore futuro.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Rischio della fase iniziale</h3><p>Partecipare prima che il programma disponga di uno storico operativo, mentre struttura, controparti e processi sono ancora in fase di verifica.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Rischio di uscita</h3><p>Potrebbe non essere disponibile alcun mercato, trasferibilità o via di rimborso fisico per un periodo prolungato, o del tutto.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Periodo di lock-up</h3><p>Le condizioni anticipate comporterebbero verosimilmente un lock-up o una restrizione al trasferimento la cui durata non è ancora definita.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Rischio di esecuzione</h3><p>Custodia, riconciliazione e rimborso fisico dipendono da accordi non ancora in essere.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">4 · Idoneità, limiti, condizioni, esclusioni</p>
+      <h2>Dove il parametro <em>si applicherebbe e dove no</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Elemento</th><th>Regola proposta</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Idoneità</td><td>Solo account approvati: giurisdizione idonea, KYC o KYB approvato, verifiche AML e sulle sanzioni superate. La sola iscrizione alla lista d'attesa non è mai sufficiente.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Finestra del programma</td><td>Un inizio e una fine definiti, pubblicati nei documenti definitivi. Nessuno sconto a tempo indeterminato o rinnovabile.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Tetto del programma (L)</td><td>Un numero fisso di unità per programma, non superiore alla capacità attestata.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Limite per partecipante (l)</td><td>Minimo e massimo per account approvato, aggregati tra account collegati.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Lock-up</td><td>Restrizione al trasferimento per un periodo definito, applicata on-chain.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Condizioni</td><td>Presa d'atto delle versioni esatte dei documenti e delle informative sui rischi, registrata con le relative impronte.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Esclusioni</td><td>Residenti nell'UE/SEE e persone che vi si trovino; giurisdizioni soggette a restrizioni; persone sanzionate; PEP qualora l'adeguata verifica rafforzata non sia soddisfatta; accordi con prestanome o intermediari; membri del team e parti correlate, salvo approvazione separata.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Cumulo con referral o bonus</td><td>Non consentito.</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">5 · Esempio pratico</p>
+      <h2>La formula, <em>solo con simboli</em></h2>
+      <p class="rc-lead"><span class="rc-demo-badge">Dati illustrativi / dimostrativi</span> Questo esempio utilizza segnaposto astratti. Non contiene alcun prezzo del token, alcuna valuta né alcun simbolo e non descrive alcuna transazione reale o proposta.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Passaggio</th><th>Espressione</th><th>Lettura illustrativa <span class="rc-demo-badge">Dati illustrativi / dimostrativi</span></th></tr></thead>
+        <tbody>
+          <tr><td>Valore di riferimento</td><td class="rc-mono">R = V ÷ (E × k)</td><td>R è espresso in un'unità di riferimento astratta "u". Oggi non può essere calcolato.</td></tr>
+          <tr><td>Applicazione del parametro</td><td class="rc-mono">A = R × (1 − d)</td><td>Con il valore non approvato del documento di impostazione, d = 0.20, A ÷ R = 0.80. La relazione è un rapporto, non un prezzo.</td></tr>
+          <tr><td>Applicazione dei limiti</td><td class="rc-mono">q′ = min(q, l, L − Q)</td><td>Se q supera l, vengono considerate solo l unità. Se nella finestra restano meno di l unità, vengono considerate solo L − Q.</td></tr>
+          <tr><td>Corrispettivo</td><td class="rc-mono">C = q′ × A</td><td>Espresso in u. Valuta e modalità di regolamento non sono determinate.</td></tr>
+          <tr><td>Verifica della capacità</td><td class="rc-mono">Q + q′ ≤ L ≤ E × k</td><td>Se la verifica non è superata, la richiesta viene ridotta o respinta. L'emissione non supera mai la capacità attestata.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">6 · Governance e approvazione</p>
+        <h2>Quattro approvazioni <em>prima della pubblicazione</em></h2>
+        <ol class="rc-steps">
+          <li><div><h3>Revisione legale</h3><p>I consulenti legali confermano se, e in quali giurisdizioni, un parametro di partecipazione anticipata sia ammissibile.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Dato di valutazione</h3><p>Una valutazione indipendente determina V per le riserve verificate.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Approvazione dell'emittente</h3><p>Approvazione scritta di d, L, l e della finestra da parte dell'organo di governo autorizzato dell'emittente, una volta costituito, con un numero di riferimento.</p></div>[rc_status s="proposed"]</li>
+          <li><div><h3>Pubblicazione con principio dei quattro occhi</h3><p>Modifica della configurazione inserita da una persona autorizzata, approvata da un'altra e registrata nell'audit trail.</p></div>[rc_status s="in_development"]</li>
+        </ol>
+      </div>
+      <div>
+        <p class="rc-kicker">7 · Informativa sui rischi</p>
+        <h2>Che cosa il parametro <em>non significa</em></h2>
+        <ul class="rc-list">
+          <li>Uno sconto rispetto a R non significa che un token varrà mai R o qualsiasi altro importo.</li>
+          <li>R dipende da valutazioni che possono cambiare, essere riviste o rivelarsi errate.</li>
+          <li>Il metallo sottostante potrebbe non essere realizzabile al valore di stima, o del tutto.</li>
+          <li>Lock-up e restrizioni al trasferimento possono impedire l'uscita quando Lei ne ha bisogno.</li>
+          <li>Il parametro può essere modificato, ridotto a zero o ritirato prima del lancio.</li>
+          <li>Il trattamento regolamentare può variare a seconda della giurisdizione e può cambiare.</li>
+          <li>È possibile la perdita totale dell'importo impegnato.</li>
+        </ul>
+        <p class="rc-fine">Legga l'<a href="/legal/risk-disclosure/">Informativa sui rischi</a> completa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Esamini il programma nel suo contesto</h2><p>Il parametro ha senso solo insieme alle regole di idoneità e alle evidenze verificate sugli asset.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/overview/">Vedi la panoramica del programma</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/eligibility-kyc/">Verifica l'idoneità</a>
+        <a class="rc-btn" href="/platform/verification/">Vedi il processo di verifica</a>
+      </div>
+    </div>
+  </div>
+</section>
