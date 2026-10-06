@@ -214,7 +214,7 @@ final class Rest {
 	}
 
 	public static function documents(): array {
-		$docs = get_posts( array( 'post_type' => 'rc_document', 'post_status' => 'publish', 'posts_per_page' => 200, 'meta_key' => '_rc_public_library', 'meta_value' => 'yes', 'orderby' => 'date', 'order' => 'DESC' ) ); // phpcs:ignore
+		$docs = get_posts( array( 'post_type' => 'rc_document', 'post_status' => 'publish', 'posts_per_page' => 200, 'meta_query' => array( 'relation' => 'AND', array( 'key' => '_rc_public_library', 'value' => 'yes' ), array( 'relation' => 'OR', array( 'key' => '_rc_audience', 'compare' => 'NOT EXISTS' ), array( 'key' => '_rc_audience', 'value' => 'public' ) ) ), 'orderby' => 'date', 'order' => 'DESC' ) ); // phpcs:ignore
 		return array_values( array_filter( array_map( static fn( $d ) => Passport::document( $d->ID ), $docs ) ) );
 	}
 
@@ -336,7 +336,7 @@ final class Rest {
 		if ( ! Security::rate_limit( 'login', 10, 15 * MINUTE_IN_SECONDS ) || ! Security::rate_limit( 'login_acct', 5, 15 * MINUTE_IN_SECONDS, hash( 'sha256', strtolower( $email ) ) ) ) {
 			return new \WP_Error( 'rc_rate', 'Too many attempts. Try again later.', array( 'status' => 429 ) );
 		}
-		$user = get_user_by( 'email', $email );
+		$user = get_user_by( 'email', $email ) ?: get_user_by( 'login', sanitize_user( (string) ( $p['email'] ?? '' ) ) );
 		if ( ! $user || ! wp_check_password( (string) ( $p['password'] ?? '' ), $user->user_pass, $user->ID ) ) {
 			Audit_Log::record( 'auth.api_login_failed', 'user', 0, 'Failed app sign-in', array( 'email_hash' => hash( 'sha256', strtolower( $email ) ) ), 0 );
 			return new \WP_Error( 'rc_invalid_credentials', 'Invalid email or password.', array( 'status' => 401 ) );

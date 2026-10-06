@@ -925,3 +925,97 @@ html.lenis, html.lenis body { height: auto; }
 .rc-claims { background: none; border: 0; border-radius: 0; }
 .rc-claims > div { border-bottom: 1px solid rgba(213, 177, 103, .14); padding: 18px 0; }
 .rc-claims > div:first-child { border-top: 1px solid rgba(213, 177, 103, .14); }
+
+/* --- Proof of Reserves: exception register --- */
+.rc-exc { display: grid; gap: 22px; }
+.rc-exc__prog h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.rc-exc ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(213, 177, 103, .14); }
+.rc-exc__item { display: grid; grid-template-columns: 120px 170px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(213, 177, 103, .1); font-size: .92rem; align-items: baseline; }
+.rc-exc__sev { font: italic 500 .9rem/1 var(--f-serif); }
+.rc-exc__item--critical .rc-exc__sev { color: var(--red); }
+.rc-exc__item--warning .rc-exc__sev { color: var(--copper-light); }
+.rc-exc__item--info .rc-exc__sev { color: var(--nickel); }
+@media (max-width: 720px) { .rc-exc__item { grid-template-columns: 1fr; gap: 2px; } }
+
+/* =====================================================================
+   Portal & Intake modules (class-portal.php / class-intake.php) — participant portal, data room, asset intake
+   ===================================================================== */
+.rc-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.rc-linkbtn { background: none; border: 0; padding: 0; color: var(--gold); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.rc-linkbtn:hover, .rc-linkbtn:focus-visible { color: var(--gold-light); }
+.rc-portal { position: relative; }
+.rc-portal :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.rc-portal h2:focus, .rc-portal h3:focus { outline: none; }
+.rc-portal__loading { color: var(--muted); font-style: italic; }
+.rc-portal__auth { display: flex; justify-content: center; }
+.rc-portal__form { width: 100%; max-width: 520px; }
+.rc-portal__form--wide { max-width: 860px; }
+.rc-portal__form h2 { margin: 6px 0 10px; font-size: clamp(1.5rem, 2.4vw, 2rem); }
+.rc-form__grid--1 { grid-template-columns: 1fr; }
+.rc-portal__alt { margin: 18px 0 0; font-size: .9rem; color: var(--muted); }
+.rc-portal__code { letter-spacing: .3em; font-size: 1.3rem !important; text-align: center; }
+.rc-portal__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid rgba(213, 177, 103, .16); }
+.rc-portal__bar h2 { margin: 4px 0 0; font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
+.rc-portal__bar-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.rc-portal__layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.rc-portal__nav { position: sticky; top: calc(var(--header-h) + 16px); }
+.rc-portal__nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.rc-portal__nav a { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; border-radius: 10px; color: var(--muted); text-decoration: none; font-size: .93rem; border: 1px solid transparent; }
+.rc-portal__nav a:hover { color: var(--text); background: var(--ink-3); }
+.rc-portal__nav a[aria-current] { color: var(--text); background: var(--ink-3); border-color: rgba(213, 177, 103, .3); }
+.rc-portal__nav a[aria-current]::before { content: ""; width: 8px; height: 9px; background: var(--gold); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); flex: none; order: -1; }
+.rc-portal__nav a[aria-current] { justify-content: flex-start; }
+.rc-portal__badge { margin-left: auto; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--gold); color: #1A1306; font: 600 .72rem/22px var(--f-sans); text-align: center; }
+.rc-portal__main { min-width: 0; }
+.rc-portal__panel h3 { margin: 0 0 16px; font-size: 1.35rem; }
+.rc-portal__panel h4 { margin: 26px 0 12px; font: 600 .8rem/1.2 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rc-portal__subform { padding: clamp(18px, 2.4vw, 26px); margin: 18px 0; }
+.rc-portal__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rc-portal__notice { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r); background: var(--white); }
+.rc-portal__notice p { margin: 6px 0 4px; color: var(--muted); font-size: .92rem; }
+.rc-portal__notice.is-unread { border-color: rgba(213, 177, 103, .45); }
+.rc-tag--gold { color: var(--gold-light); border-color: rgba(213, 177, 103, .4); }
+.rc-portal__row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--white); font-size: .93rem; }
+.rc-portal__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.rc-portal__card { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--white); }
+.rc-portal__card h4 { margin: 0; font: 600 1rem/1.3 var(--f-sans); letter-spacing: 0; text-transform: none; color: var(--text); }
+.rc-portal__card p { font-size: .9rem; color: var(--muted); margin: 6px 0 12px; }
+.rc-portal__el { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--ink-3); box-shadow: inset 0 0 0 1px currentColor; color: var(--gold); font: 500 1.05rem/1 var(--f-serif); }
+.rc-portal__qr { width: 200px; max-width: 100%; padding: 10px; background: #fff; border-radius: 12px; margin: 12px 0; }
+.rc-portal__qr svg { display: block; width: 100%; height: auto; }
+.rc-portal__inline { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.rc-portal__inline .rc-field { max-width: 220px; }
+.rc-portal__inline .rc-form__result { flex-basis: 100%; }
+.rc-portal__codes ol { columns: 2; margin: 12px 0; padding-left: 24px; font-size: 1rem; letter-spacing: .06em; }
+.rc-portal .rc-claims > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.rc-portal .rc-locked { margin: 0 0 14px; }
+.rc-portal [hidden] { display: none !important; }
+@media (max-width: 900px) {
+	.rc-portal__layout { grid-template-columns: minmax(0, 1fr); }
+	.rc-portal__nav { position: static; min-width: 0; }
+	.rc-portal__nav ul { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+	.rc-portal__nav a { white-space: nowrap; }
+}
+@media (max-width: 560px) { .rc-portal__notice { flex-direction: column; } .rc-portal__codes ol { columns: 1; } }
+
+.rc-intake__steps { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; counter-reset: none; }
+.rc-intake__steps li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+.rc-intake__steps li span { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); font: 500 .8rem/1 var(--f-mono); }
+.rc-intake__steps li[aria-current] { color: var(--text); border-color: rgba(213, 177, 103, .5); background: var(--ink-3); }
+.rc-intake__steps li[aria-current] span, .rc-intake__steps li.is-done span { background: var(--gold); border-color: var(--gold); color: #1A1306; }
+.rc-intake__step { border: 0; padding: 0; margin: 0 0 8px; min-width: 0; }
+.rc-intake__step > legend { font: 600 1.15rem/1.3 var(--f-serif); margin-bottom: 16px; padding: 0; }
+.rc-intake__step > legend:focus { outline: none; }
+.rc-intake__files { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; font-size: .9rem; }
+.rc-intake .rc-err { color: var(--red); font-size: .82rem; }
+.rc-intake [hidden] { display: none !important; }
+@media (max-width: 720px) { .rc-intake__steps { grid-template-columns: 1fr 1fr; } }
+.rc-portal__bar-actions .rc-fine { overflow-wrap: anywhere; }
+/* dynamic app UI: opt out of the scroll-reveal motion so hidden panels never stay transparent */
+.rc-motion .rc-portal .rc-rv, .rc-motion .rc-intake .rc-rv { opacity: 1 !important; translate: none !important; transition: none !important; }
+:is(.rc-portal, .rc-intake) .rc-field--inline input:is([type=radio], [type=checkbox]) { width: 18px; height: 18px; padding: 0; flex: none; margin: 0; accent-color: var(--gold); box-shadow: none; }
+/* ===================== end Portal & Intake modules ===================== */
+
+/* off-canvas nav must not create horizontal overflow on phones */
+html, body { overflow-x: clip; }
+@media (max-width: 1120px) { .rc-nav:not(.is-open) { visibility: hidden; } .rc-nav { transition: transform .35s var(--ease), visibility 0s linear .35s; } .rc-nav.is-open { transition: transform .35s var(--ease), visibility 0s; } }

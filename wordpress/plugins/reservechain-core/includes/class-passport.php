@@ -296,6 +296,10 @@ final class Passport {
 		if ( ! $doc || 'rc_document' !== $doc->post_type || ( 'publish' !== $doc->post_status && ! $include_private ) ) {
 			return null;
 		}
+		$audience = (string) get_post_meta( $doc_id, '_rc_audience', true );
+		if ( $audience && 'public' !== $audience && ! $include_private ) {
+			return null; // Restricted (data-room) documents never appear in public passports, programs or /verify.
+		}
 		$att  = (int) get_post_meta( $doc_id, '_rc_file', true );
 		$type = get_post_meta( $doc_id, '_rc_doc_type', true );
 		return array(
