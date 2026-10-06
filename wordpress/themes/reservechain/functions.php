@@ -149,3 +149,6 @@ add_filter(
 		return $parts;
 	}
 );
+
+/** Menu labels (including custom group titles) follow the visitor's language. */
+add_filter( 'nav_menu_item_title', static fn( $title ) => rct__( (string) $title ), 10 );

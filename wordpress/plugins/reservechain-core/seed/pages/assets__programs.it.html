@@ -1,0 +1,133 @@
+<!--
+title: Tutti i programmi di asset del mondo reale
+excerpt: La directory principale dei programmi di asset di ReserveChain. Ogni voce mostra la propria struttura di registrazione, la propria unità di controllo e un contrassegno di stato per ogni affermazione. I programmi attivi e le categorie future figurano in elenchi separati.
+kicker: Directory dei programmi
+order: 1
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_provisional]
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Directory · programmi attuali</p>
+        <h2>Due programmi in sviluppo. <em>Zero emessi.</em></h2>
+      </div>
+      <p class="rc-lead">Un programma di asset raggruppa un tipo di materiale fisico secondo un unico insieme di regole: come viene identificato, verificato, detenuto, valutato e, se approvato, rappresentato da una serie di token. Oggi esistono due programmi. Nessuno dei due ha un token emesso né una disponibilità approvata.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>ID del programma</th><th>Programma</th><th>Unità di controllo</th><th>Lotti</th><th>Evidenze agli atti</th><th>Stato del programma</th><th>Serie di token</th></tr></thead>
+        <tbody>
+          <tr><td class="rc-mono"><a href="/assets/industrial-metals/copper-powder/">copper-powder</a></td><td><span class="rc-cu">Cu</span> Polvere di rame ad altissima purezza – 99.9999 %*</td><td>Contenitore (scatola)</td><td><a href="/passport/RC-CU-LOT-000001/">#03-K-07</a></td><td>IGAS CoA 0004512 (fornito dal proprietario)</td><td>[rc_status s="in_development"]</td><td>[rc_status s="pending" label="Non emesso"]</td></tr>
+          <tr><td class="rc-mono"><a href="/assets/industrial-metals/nickel-wire/">nickel-wire</a></td><td><span class="rc-ni">Ni</span> Filo di nichel ad alta purezza – 99.9807 %*</td><td>Bobina (rocchetto)</td><td><a href="/passport/RC-NI-LOT-000001/">120/NP1</a></td><td>IGAS CoA 0004368 (fornito dal proprietario)</td><td>[rc_status s="in_development"]</td><td>[rc_status s="pending" label="Non emesso"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">* Purezza fornita dal proprietario, soggetta a verifica documentale. I conteggi in tempo reale riportati di seguito provengono dal registro.</p>
+    [rc_registry_stats]
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Vocabolario degli stati</p>
+      <h2>Che cosa significa ogni contrassegno <em>e che cosa non significa</em></h2>
+      <p class="rc-lead">Programmi e passaporti utilizzano lo stesso ristretto insieme di stati. Etichette come Verificato, Certificato, In custodia, Tokenizzato, Disponibile o Rimborsabile compaiono solo dopo che lo stato è stato autorizzato. Nessuno è stato autorizzato.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Proposto</strong>[rc_status s="proposed"]<small>Progettato e descritto. Nessuna implementazione o approvazione per ora.</small></div>
+      <div><strong>In sviluppo</strong>[rc_status s="in_development"]<small>In fase di realizzazione o predisposizione, ad esempio registrazioni del registro e passaporti.</small></div>
+      <div><strong>In attesa di verifica</strong>[rc_status s="pending_verification"]<small>Sono state fornite evidenze, ad esempio un certificato fornito dal proprietario, ma non sono state confermate in modo indipendente.</small></div>
+      <div><strong>In attesa</strong>[rc_status s="pending"]<small>Nessuna evidenza ancora fornita. Il campo resta vuoto anziché essere stimato.</small></div>
+      <div><strong>Non applicabile</strong>[rc_status s="not_applicable"]<small>Il campo non si applica a questa classe di asset o unità.</small></div>
+      <div><strong>Categoria futura · pre-lancio</strong>[rc_status s="proposed" label="Categoria futura · pre-lancio"]<small>Solo un concetto. Escluso da ogni conteggio, totale e dato sulle riserve.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Anatomia di una registrazione di programma</p>
+        <h2>Registrazioni separate, <em>collegate da identificativi</em></h2>
+      </div>
+      <p class="rc-lead">Un programma non è una singola riga di database. È un albero di tipi di registrazione separati, ciascuno con le proprie evidenze e il proprio stato, cosicché un'affermazione relativa a una scatola o a un rocchetto non dipende mai dall'intero lotto.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <div class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Programma</h3><p>Categoria di materiale, regole, unità di controllo e un collegamento configurabile a una serie di token.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Lotto o partita</h3><p>Numero di partita, rapporto di laboratorio, quantità dichiarate e analizzate, e base di purezza.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Contenitore o bobina</h3><p>Identificativo dell'unità, numero del sigillo, peso netto, ubicazione e un proprio stato di rimborso fisico.</p></div>
+      <div class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Registrazioni di evidenza</h3><p>Registrazioni relative a proprietà, laboratorio, custodia, valutazione e assicurazione, ciascuna con la propria impronta.</p></div>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Gruppo di campi</th><th>Esempi</th><th>Regola di pubblicazione</th></tr></thead>
+        <tbody>
+          <tr><td>Identità e stato</td><td>ID del programma, ID del lotto/dell'unità e stato di verifica, custodia, riserva, tokenizzazione e rimborso fisico</td><td>Pubblico una volta approvata la registrazione</td></tr>
+          <tr><td>Prodotto e origine</td><td>Forma del materiale, produttore, Paese di origine, data di produzione</td><td>Mostrato come In attesa fino a quando non è supportato da evidenze</td></tr>
+          <tr><td>Quantità e imballaggio</td><td>Peso lordo e netto, numero di unità, imballaggio, numeri dei sigilli</td><td>Dati dichiarati e verificati mostrati separatamente</td></tr>
+          <tr><td>Valutazione</td><td>Prezzo per kg, metodologia, benchmark, perito valutatore, valuta</td><td>Non pubblicato finché non viene approvata una valutazione indipendente</td></tr>
+          <tr><td>Commerciale</td><td>Costo di acquisizione, valore di introduzione, spread</td><td>Riservato. Mai pubblico.</td></tr>
+          <tr><td>Media e cronologia</td><td>Galleria, diritti d'uso, eventi rilevanti relativi al materiale, cronologia delle versioni</td><td>Ogni modifica è registrata nella traccia di audit a prova di manomissione</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Anteprima del modello</p>
+      <h2>Come apparirà <em>una registrazione completa</em></h2>
+      <p>Il Modello illustrativo di asset di metallo industriale mostra il formato futuro di una registrazione di programma. È utilizzato esclusivamente a scopo dimostrativo. Tutti i campi risultano In attesa, la tokenizzazione indica "Non emesso" e la disponibilità indica "Non offerto in vendita".</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--sm" href="/passport/RC-LOT-000001/">Apri il passaporto del modello</a></div>
+    </div>
+    <div class="rc-card">
+      <span class="rc-demo-badge">Dati illustrativi / dimostrativi</span>
+      <h3>Modello illustrativo di asset di metallo industriale</h3>
+      <p class="rc-fine">"Questa presentazione illustra il formato futuro di una pagina di asset di metallo industriale ReserveChain. Questo segnaposto non rappresenta alcun materiale verificato, documento di proprietà, rapporto di laboratorio, valutazione, accordo di custodia, dichiarazione di riserva né token."</p>
+      <dl class="rc-kv">
+        <div><dt>Materiale · Purezza · Lotto</dt><dd>In attesa</dd></div>
+        <div><dt>Proprietà · Valutazione · Custodia</dt><dd>In attesa</dd></div>
+        <div><dt>Stato della tokenizzazione</dt><dd>Non emesso</dd></div>
+        <div><dt>Disponibilità</dt><dd>Non offerto in vendita</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Directory · categorie future</p>
+      <h2>Elencate a parte, <em>mai sommate</em></h2>
+      <p class="rc-lead">Queste categorie non hanno ID di programma, lotto, passaporto né altro stato oltre a "pre-lancio". Sono escluse da ogni conteggio della directory riportata sopra.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Categoria</th><th>ID del programma</th><th>Registrazioni</th><th>Stato</th></tr></thead>
+        <tbody>
+          <tr><td>Metalli preziosi</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+          <tr><td>Pietre preziose</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+          <tr><td>Asset energetici</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+          <tr><td>Immobili</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+          <tr><td>Arte e oggetti da collezione</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+          <tr><td>Altri asset</td><td>Nessuno</td><td>Nessuna</td><td>[rc_status s="proposed" label="Categoria futura · pre-lancio"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div><h2>Dalla directory <em>alle evidenze</em></h2><p>Ogni pagina di programma segue lo stesso modello a 22 blocchi, dalla specifica al rimborso fisico.</p></div>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/initial-programs/">Visualizza i programmi iniziali</a><a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">Come funziona ReserveChain</a><a class="rc-btn" href="/enterprise/asset-owners/">Presenta un asset</a></div>
+    </div>
+  </div>
+</section>

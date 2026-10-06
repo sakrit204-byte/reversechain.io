@@ -18,7 +18,7 @@ services:
       retries: 20
 
   wordpress:
-    image: wordpress:6-php8.2-apache
+    image: wordpress:php8.3-apache
     restart: unless-stopped
     depends_on:
       db:
@@ -43,7 +43,7 @@ services:
       - ./wordpress/plugins/reservechain-core:/var/www/html/wp-content/plugins/reservechain-core
 
   wpcli:
-    image: wordpress:cli-php8.2
+    image: wordpress:cli-php8.3
     profiles: ["tools"]
     user: "33:33"
     depends_on: [wordpress]

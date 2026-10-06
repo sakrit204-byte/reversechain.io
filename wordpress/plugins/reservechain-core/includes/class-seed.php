@@ -61,6 +61,22 @@ final class Seed {
 		update_option( 'permalink_structure', '/%postname%/' );
 		update_option( 'users_can_register', 0 );
 		update_option( 'default_comment_status', 'closed' );
+		update_option( 'default_ping_status', 'closed' );
+		// Remove WordPress sample content.
+		foreach ( array( array( 'hello-world', 'post' ), array( 'sample-page', 'page' ) ) as $sample ) {
+			$sp = get_page_by_path( $sample[0], OBJECT, $sample[1] );
+			if ( $sp ) {
+				wp_delete_post( $sp->ID, true );
+			}
+		}
+		$default_privacy = (int) get_option( 'wp_page_for_privacy_policy' );
+		if ( $default_privacy && 'draft' === get_post_status( $default_privacy ) ) {
+			wp_delete_post( $default_privacy, true );
+		}
+		$ours = get_page_by_path( 'legal/privacy' );
+		if ( $ours ) {
+			update_option( 'wp_page_for_privacy_policy', $ours->ID );
+		}
 		Settings::update( array( 'mfa_enforce_staff' => 'production' === RC_ENV ) );
 		self::say( 'Settings applied (prelaunch mode, gated modules locked).' );
 	}

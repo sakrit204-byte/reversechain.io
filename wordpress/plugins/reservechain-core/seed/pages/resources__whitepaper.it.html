@@ -1,0 +1,196 @@
+<!--
+title: Whitepaper di ReserveChain
+excerpt: La bozza istituzionale per la discussione relativa al registro delle riserve di metalli industriali e al framework di tokenizzazione proposti. La bozza v0.9 (2026) è in preparazione, in attesa dei contributi del proprietario e della revisione legale.
+kicker: Risorse · Bozza v0.9 (2026)
+order: 2
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Stato del documento</p>
+        <h2>Una bozza per la discussione, <em>non un documento d'offerta</em></h2>
+        <p>Il whitepaper descrive una piattaforma proposta e framework operativi proposti. È redatto per lettori istituzionali, quali proprietari di asset, utilizzatori industriali, potenziali fornitori di servizi e consulenti. Il suo scopo è consentire loro di valutare il progetto prima che qualsiasi accordo sia finalizzato.</p>
+        <p>Non è un prospetto né un memorandum d'offerta e non è un documento contenente le informazioni chiave. Nessuna autorità di vigilanza lo ha esaminato. Laddove le informazioni non siano ancora state fornite o verificate, la bozza riporta un segnaposto esplicito anziché una stima.</p>
+      </div>
+      <dl class="rc-kv">
+        <div><dt>Titolo</dt><dd>ReserveChain — Registro delle riserve di metalli industriali e framework di tokenizzazione</dd></div>
+        <div><dt>Versione</dt><dd>Bozza v0.9 (2026)</dd></div>
+        <div><dt>Stato</dt><dd>[rc_status s="in_development" label="Bozza in preparazione — in attesa dei contributi del proprietario"]</dd></div>
+        <div><dt>Approvazione</dt><dd>In attesa — soggetta a revisione legale e ad approvazione finale</dd></div>
+        <div><dt>Formati</dt><dd>PDF (sola lettura) e DOCX modificabile (per la revisione)</dd></div>
+        <div><dt>Capitoli</dt><dd>18</dd></div>
+        <div><dt>Distribuzione</dt><dd>Solo a scopo informativo</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Finalità</p>
+      <h2>A che cosa il documento <em>intende rispondere</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q1</span>
+        <h3>Un'unità di metallo fisico può essere rappresentata fedelmente?</h3>
+        <p>Il documento illustra il modello delle evidenze. Ogni partita, contenitore e bobina riceve il proprio Passaporto dell'Asset Digitale, uno stato delle dichiarazioni a livello di campo, evidenze dotate di impronta e un impegno di Merkle.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q2</span>
+        <h3>Che cosa impedisce che una rappresentazione superi la riserva?</h3>
+        <p>Descrive l'emissione subordinata alle riserve. Il tetto di emissione è pari a zero a meno che non esista un'attestazione indipendente recente e la configurazione non sia completa. Per impostazione predefinita, il progetto si blocca in caso di errore.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Q3</span>
+        <h3>Che cosa manca ancora?</h3>
+        <p>Il documento indica chiaramente ciò che non è ancora stato deciso. Ciò comprende la struttura societaria, il custode, l'assicuratore, l'attestatore, i diritti dei titolari e ogni parametro economico.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Indice</p>
+      <h2>Diciotto capitoli, <em>dal problema al controllo documentale</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>#</th><th>Capitolo</th><th>Ambito</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Sintesi</td><td>Il progetto in una pagina</td></tr>
+          <tr><td>2</td><td>Il problema: la fiducia nelle rappresentazioni di asset fisici</td><td>Perché le dichiarazioni aggregate sulla copertura fisica sono difficili da verificare</td></tr>
+          <tr><td>3</td><td>Modello del progetto</td><td>Panoramica, partecipanti proposti e ciclo di vita proposto</td></tr>
+          <tr><td>4</td><td>I programmi sui metalli</td><td>Polvere di rame (Cu 29), filo di nichel (Ni 28) e perché la registrazione a livello di unità è importante</td></tr>
+          <tr><td>5</td><td>Framework legale, di custodia e delle riserve proposti</td><td>Struttura societaria, custodia, assicurazione e framework delle riserve, tutti proposti</td></tr>
+          <tr><td>6</td><td>Passaporto dell'Asset Digitale e modello delle evidenze</td><td>Gerarchia del registro, passaporti, impronte digitali, impegno di Merkle, verifica lato client, sistema di stato delle dichiarazioni</td></tr>
+          <tr><td>7</td><td>Architettura del token</td><td>Suite di contratti, ruoli, trasferimenti subordinati alla conformità, emissione subordinata alle riserve, configurazione anziché codice</td></tr>
+          <tr><td>8</td><td>Framework di tokenomics</td><td>Parametri da decidere. Ogni valore è da definire</td></tr>
+          <tr><td>9</td><td>Governance</td><td>Principi, flusso di lavoro editoriale e del registro, ruoli nella piattaforma, governance on-chain e societaria prevista</td></tr>
+          <tr><td>10</td><td>Piattaforma tecnologica</td><td>CMS, registro, API, strumenti di verifica e codice sorgente dell'applicazione mobile</td></tr>
+          <tr><td>11</td><td>Sicurezza</td><td>Controlli di sicurezza applicativa, di gestione delle chiavi e operativa</td></tr>
+          <tr><td>12</td><td>Conformità</td><td>Controlli di idoneità, giurisdizioni, registrazione di interesse, protezione dei dati, standard di comunicazione</td></tr>
+          <tr><td>13</td><td>Rimborso fisico (processo proposto)</td><td>Deposito a garanzia, verifica, burn o restituzione al titolare, e rilascio fisico</td></tr>
+          <tr><td>14</td><td>Prova delle Riserve (proposta)</td><td>Registro, attestazione, pubblicazione on-chain e riconciliazione pubblica</td></tr>
+          <tr><td>15</td><td>Roadmap</td><td>Fasi 0–5, scandite dalle dipendenze anziché dalle date</td></tr>
+          <tr><td>16</td><td>Fattori di rischio</td><td>Rischi di progetto, legali, relativi agli asset, alla custodia, alle riserve, tecnologici, di mercato e operativi</td></tr>
+          <tr><td>17</td><td>Glossario</td><td>Termini definiti</td></tr>
+          <tr><td>18</td><td>Controllo documentale</td><td>Versione, responsabile, stato di approvazione e provenienza della build</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Sintesi dei capitoli</p>
+      <h2>Il framework <em>in breve</em></h2>
+      <p class="rc-lead">Brevi sintesi dei capitoli principali. Ciascuna descrive un framework proposto, soggetto a conferma legale, contrattuale, tecnica e operativa definitiva.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Architettura</h3>
+        <p>Quattro livelli. Un registro basato sul CMS costituisce l'unica fonte di riferimento. I Passaporti dell'Asset Digitale pubblici e un'API REST attingono da esso. Un audit trail a prova di manomissione registra ogni azione rilevante. Gli smart contract sulla rete di test rispecchiano lo stato di idoneità e delle riserve senza contenere dati personali.</p>
+        <div class="rc-card__foot"><a href="/platform/infrastructure/">Infrastruttura della piattaforma →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Framework degli asset</h3>
+        <p>I programmi contengono partite, le partite contengono contenitori o bobine e ogni unità ha il proprio passaporto. I programmi iniziali sono la polvere di rame ad altissima purezza, 99.9999 %, e il filo di nichel ad alta purezza 0.025 mm, 99.9807 %. Entrambi si basano su certificati IGAS forniti dal proprietario.</p>
+        <div class="rc-card__foot"><a href="/assets/initial-programs/">Visualizza i programmi iniziali →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Verifica</h3>
+        <p>Le evidenze di laboratorio, le registrazioni di campionamento e la convalida dei certificati sono dotate di impronta e associate alle unità cui si riferiscono. Ogni campo fattuale ha il proprio stato, così che un passaporto possa essere parzialmente documentato senza sopravvalutare l'insieme.</p>
+        <div class="rc-card__foot"><a href="/platform/verification/">Visualizza il processo di verifica →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Custodia</h3>
+        <p>Il modello previsto è la conservazione segregata delle unità registrate presso un custode professionale. Ricezione, trasferimento e rilascio sarebbero documentati mediante registrazioni di custodia in ciascun passaporto. Non è stato nominato alcun custode.</p>
+        <div class="rc-card__foot"><a href="/platform/custody/">Scopra la custodia →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Riserve</h3>
+        <p>Un attestatore, non ancora nominato, riferirebbe sulle unità registrate. Ogni rapporto è dotato di impronta, registrato e pubblicato nel contratto ReserveGuard. Il tetto di emissione deriva dall'ultima attestazione recente. Il modulo è inattivo.</p>
+        <div class="rc-card__foot"><a href="/platform/proof-of-reserves/">Prova delle Riserve →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Tokenizzazione</h3>
+        <p>Una rappresentazione ERC-20, qualora venga mai autorizzata. Ogni trasferimento supera un controllo di idoneità on-chain e l'emissione è limitata dalle attestazioni delle riserve. I contratti esistono come codice sorgente testato esclusivamente per reti di test. Non è stata decisa alcuna tokenomics.</p>
+        <div class="rc-card__foot"><a href="/platform/tokenization/">Scopra la tokenizzazione →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Conformità</h3>
+        <p>KYC per le persone fisiche e KYB per le entità, unitamente a una valutazione del rischio AML e a controlli sulle sanzioni e sulle PEP. L'idoneità giurisdizionale è applicata on-chain tramite un registro che conserva indicatori di stato, mai documenti. Non è previsto che le persone dell'UE/SEE siano idonee.</p>
+        <div class="rc-card__foot"><a href="/participation/eligibility-kyc/">Verifichi l'idoneità →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Modello per le imprese</h3>
+        <p>Il registro, il motore dei passaporti, gli strumenti di verifica e la suite di contratti sono progettati come moduli riutilizzabili. Proprietari di asset e piattaforme terzi potrebbero ottenerli in licenza, subordinatamente ad approvazione.</p>
+        <div class="rc-card__foot"><a href="/enterprise/">Servizi per le imprese →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Roadmap, rischi e governance</h3>
+        <p>La roadmap prevede sei fasi, dalla Fondazione all'Attivazione controllata, e nessuna è datata. Il capitolo sui rischi tratta sette famiglie di rischio. La governance si basa sull'approvazione secondo il principio dei quattro occhi, sulla separazione delle funzioni e sull'amministrazione tramite multisig.</p>
+        <div class="rc-card__foot"><a href="/company/roadmap/">Roadmap →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">In attesa dei contributi del proprietario</p>
+      <h2>Che cosa deve essere fornito <em>prima dell'approvazione</em></h2>
+      <p class="rc-lead">La bozza è completa nella sua struttura. Questi contributi devono provenire da ReserveChain o dalle sue future controparti. Non saranno stimati.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Entità operativa e struttura societaria</strong>[rc_status s="in_development" label="Struttura svizzera in sviluppo"]<small>Non viene indicata alcuna entità, numero di registro o indirizzo.</small></div>
+      <div><strong>Nomina di custode, assicuratore, attestatore e laboratorio</strong>[rc_status s="proposed"]<small>Nessuno nominato. Saranno indicati nel documento solo quando esisteranno accordi.</small></div>
+      <div><strong>Firmatari e soglia del multisig</strong>[rc_status s="proposed"]<small>Da comunicare a cura di ReserveChain.</small></div>
+      <div><strong>Parametri del token ed economici</strong>[rc_status s="not_applicable" label="Da definire"]<small>Nome, simbolo, rapporto, limite massimo di offerta, metodologia di determinazione del prezzo e condizioni del rimborso fisico sono tutti soggetti ad approvazione scritta.</small></div>
+      <div><strong>Conferma indipendente dei due certificati IGAS</strong>[rc_status s="pending_verification"]<small>Attualmente copie fornite dal proprietario.</small></div>
+      <div><strong>Data della presente versione</strong>[rc_status s="pending_verification"]<small>Da inserire al momento dell'approvazione.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Download</p>
+      <h2>PDF e DOCX modificabile, <em>ciascuno con la propria impronta</em></h2>
+      <p class="rc-lead">Il whitepaper sarà pubblicato in due formati. Il PDF è la copia di riferimento. Il DOCX è fornito affinché i revisori possano annotare e commentare. Ogni versione pubblicata reca la propria impronta SHA-256. Se l'elenco sottostante è vuoto, la bozza attuale non è ancora stata approvata per la pubblicazione.</p>
+    </div>
+    [rc_documents type="whitepaper"]
+    <div class="rc-callout"><p>Consideri non verificato qualsiasi whitepaper ottenuto al di fuori di reservechain.io finché la sua impronta non corrisponde a una voce di questa pagina o della <a href="/resources/documentation/">Biblioteca della documentazione</a>.</p></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Segua la bozza fino all'approvazione</h2>
+        <p>Gli iscritti alla lista d'attesa ricevono un avviso quando viene pubblicata una versione approvata. L'iscrizione non crea alcun diritto di alcun tipo.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Iscriviti alla lista d'attesa</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/resources/documentation/">Visualizza i documenti</a>
+      </div>
+    </div>
+  </div>
+</section>

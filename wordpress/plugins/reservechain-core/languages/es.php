@@ -528,4 +528,9 @@ return array(
 	'requires verified evidence' => 'requiere evidencia verificada',
 	'— not provided —' => '— no facilitado —',
 	'— not set —' => '— no definido —',
+	'intact' => 'íntegra',
+	'UPDATE/DELETE blocked' => 'UPDATE/DELETE bloqueados',
+	'pending verification' => 'pendiente de verificación',
+	'SHA-256 fingerprinted' => 'con huella SHA-256',
+	'not active' => 'no activo',
 );

@@ -57,18 +57,19 @@
   var ledger = d.querySelector('[data-rc-ledger]');
   if (ledger && window.fetch) {
     var api = (window.RC && window.RC.api) || (ledger.getAttribute('data-api') || '/wp-json/rc/v1');
+    var T = (window.RC && window.RC.i18n) || {};
     var set = function (k, v) { var el = ledger.querySelector('[data-k="' + k + '"]'); if (el) { el.textContent = v; el.title = v; } };
     Promise.all([
       fetch(api + '/audit/head').then(function (r) { return r.json(); }),
       fetch(api + '/registry/stats').then(function (r) { return r.json(); })
     ]).then(function (res) {
       var h = res[0], s = res[1], e = s.entities || {};
-      set('seq', '#' + h.seq + (h.last_verified && h.last_verified.ok ? ' · intact' : ''));
+      set('seq', '#' + h.seq + (h.last_verified && h.last_verified.ok ? ' · ' + (T.intact || 'intact') : ''));
       set('head', h.chain_head);
-      set('triggers', h.db_triggers ? 'UPDATE/DELETE blocked' : 'not active');
+      set('triggers', h.db_triggers ? (T.blocked || 'UPDATE/DELETE blocked') : (T.notActive || 'not active'));
       var assets = ['rc_lot', 'rc_batch', 'rc_container', 'rc_coil'].reduce(function (n, k) { return n + ((e[k] && e[k].published) || 0); }, 0);
-      set('passports', assets + ' · pending verification');
-      set('docs', ((e.rc_document && e.rc_document.published) || 0) + ' SHA-256 fingerprinted');
+      set('passports', assets + ' · ' + (T.pendingVer || 'pending verification'));
+      set('docs', ((e.rc_document && e.rc_document.published) || 0) + ' ' + (T.fingerprinted || 'SHA-256 fingerprinted'));
       set('verified', String(s.verified_records || 0));
       ledger.classList.add('is-live');
     }).catch(function () { ledger.classList.add('is-offline'); });

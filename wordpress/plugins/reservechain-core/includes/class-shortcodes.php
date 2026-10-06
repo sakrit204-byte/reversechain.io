@@ -66,6 +66,11 @@ final class Shortcodes {
 					'viewPassport' => __( 'View passport', 'reservechain' ),
 					'download'   => __( 'Download', 'reservechain' ),
 					'issuedBy'   => __( 'Issued by', 'reservechain' ),
+					'intact'     => __( 'intact', 'reservechain' ),
+					'blocked'    => __( 'UPDATE/DELETE blocked', 'reservechain' ),
+					'notActive'  => __( 'not active', 'reservechain' ),
+					'pendingVer' => __( 'pending verification', 'reservechain' ),
+					'fingerprinted' => __( 'SHA-256 fingerprinted', 'reservechain' ),
 				),
 			)
 		);

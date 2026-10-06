@@ -28,6 +28,21 @@ final class Security {
 		add_action( 'wp_login_failed', array( __CLASS__, 'login_failed' ) );
 		add_filter( 'login_errors', array( __CLASS__, 'generic_login_error' ) );
 		add_filter( 'auth_cookie_expiration', array( __CLASS__, 'session_length' ), 10, 3 );
+		// Institutional site: comments and pingbacks are disabled everywhere.
+		add_filter( 'comments_open', '__return_false', 20 );
+		add_filter( 'pings_open', '__return_false', 20 );
+		add_filter( 'comments_array', '__return_empty_array', 10 );
+		add_action( 'admin_menu', static fn() => remove_menu_page( 'edit-comments.php' ) );
+		add_action( 'init', static function () {
+			foreach ( get_post_types() as $t ) {
+				remove_post_type_support( $t, 'comments' );
+				remove_post_type_support( $t, 'trackbacks' );
+			}
+		}, 100 );
+		add_action( 'wp_before_admin_bar_render', static function () {
+			global $wp_admin_bar;
+			$wp_admin_bar->remove_menu( 'comments' );
+		} );
 	}
 
 	public static function client_key(): string {
