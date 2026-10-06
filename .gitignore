@@ -27,3 +27,7 @@ GoogleService-Info.plist
 Thumbs.db
 .vscode/
 .idea/
+
+# Local artefacts
+scripts/shots/
+mobile/dist-live/
