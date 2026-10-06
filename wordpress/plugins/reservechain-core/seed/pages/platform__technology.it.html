@@ -38,17 +38,14 @@ order: 3
     </div>
     <div class="rc-grid rc-grid--3">
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">A</span>
         <h3>Impronta del record</h3>
         <p>Per ogni passaporto, la piattaforma calcola un hash SHA-256 sul numero del passaporto, sul tipo di record e su ogni campo pubblico sotto forma di coppie chiave-valore. La modifica di qualsiasi valore pubblicato modifica questa impronta.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">B</span>
         <h3>Foglie dei documenti</h3>
         <p>Ogni documento collegato ha un hash SHA-256, calcolato sul file archiviato al momento del caricamento. Questi hash e l'impronta del record costituiscono le foglie dell'albero di Merkle del passaporto.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">C</span>
         <h3>Radice di Merkle</h3>
         <p>Le foglie vengono deduplicate, ordinate e sottoposte a hash a coppie fino a ottenere un'unica radice SHA-256. Un solo valore di 64 caratteri vincola l'intero insieme di evidenze e chiunque disponga dell'esportazione JSON può ricalcolarlo.</p>
       </article>

@@ -38,17 +38,14 @@ order: 3
     </div>
     <div class="rc-grid rc-grid--3">
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">A</span>
         <h3>Huella del registro</h3>
         <p>Para cada pasaporte, la plataforma calcula un hash SHA-256 sobre el número de pasaporte, el tipo de registro y cada campo público en forma de pares clave-valor. Cualquier cambio en un valor publicado modifica esta huella.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">B</span>
         <h3>Hojas de documentos</h3>
         <p>Cada documento vinculado tiene un hash SHA-256, calculado a partir del archivo almacenado en el momento de su carga. Estos hashes y la huella del registro forman las hojas del árbol de Merkle del pasaporte.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">C</span>
         <h3>Raíz de Merkle</h3>
         <p>Las hojas se deduplican, se ordenan y se combinan por pares mediante hash hasta obtener una única raíz SHA-256. Un solo valor de 64 caracteres se compromete con todo el conjunto de evidencias, y cualquier persona que disponga de la exportación JSON puede recalcularlo.</p>
       </article>

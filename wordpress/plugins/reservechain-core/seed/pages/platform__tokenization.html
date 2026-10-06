@@ -51,12 +51,10 @@ order: 10
     </div>
     <div class="rc-grid rc-grid--2">
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">A</span>
         <h3>Reserve mode (intended)</h3>
         <p>Every mint asks ReserveGuard for the maximum mintable amount: attested units × tokens-per-unit − current supply. The result is zero if the ratio is unset, the staleness window is unset or the latest attestation is out of date.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">B</span>
         <h3>Static-cap mode (restricted)</h3>
         <p>This mode applies only when the guard is disabled, a non-zero cap is set and minting has been explicitly enabled by the administrator. Supply can never exceed the cap. It is intended for testing, not for reserve-linked issuance.</p>
       </article>

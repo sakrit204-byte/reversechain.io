@@ -168,7 +168,7 @@ final class Seed {
 				'verification_status' => 'in_development',
 			),
 			'publish',
-			'Ultra-high-purity copper powder — proposed program, in development.'
+			'Ultra-high-purity copper powder: proposed program, in development.'
 		);
 		update_post_meta( $cu, '_rc_claims', $claims_common );
 		wp_update_post( array( 'ID' => $cu, 'menu_order' => 1 ) );
@@ -188,7 +188,7 @@ final class Seed {
 				'verification_status' => 'in_development',
 			),
 			'publish',
-			'High-purity nickel wire — proposed program, in development.'
+			'High-purity nickel wire: proposed program, in development.'
 		);
 		update_post_meta( $ni, '_rc_claims', $claims_common );
 		wp_update_post( array( 'ID' => $ni, 'menu_order' => 2 ) );
@@ -313,7 +313,7 @@ final class Seed {
 		$cu_lot = self::upsert(
 			'rc_lot',
 			'cu-lot-03-k-07',
-			'Ultrafine Copper Powder — Lot #03-K-07',
+			'Ultrafine Copper Powder: Lot #03-K-07',
 			'Owner-supplied lot record. Values are transcribed from the supplied Certificate of Analysis and remain subject to documentary verification, independent assessment and final approval. Physical-property fields not covered by the certificate are shown as pending.',
 			array_merge(
 				$common_status,
@@ -334,7 +334,7 @@ final class Seed {
 		$cu_box = self::upsert(
 			'rc_container',
 			'cu-lot-03-k-07-box-20',
-			'Lot #03-K-07 — Box no. 20 (sampled box)',
+			'Lot #03-K-07: Box no. 20 (sampled box)',
 			'Box identified on the supplied certificate as the sampling source (10 g sample taken 01.07.2022). Box count and per-box net weight for the remainder of the lot have not yet been provided.',
 			array_merge( $common_status, array( 'program' => $p['cu'], 'lot' => $cu_lot, 'container_id' => 'Box no. 20', 'verification_status' => 'pending_verification' ) )
 		);
@@ -344,7 +344,7 @@ final class Seed {
 		$ni_lot = self::upsert(
 			'rc_lot',
 			'ni-lot-120-np1',
-			'Nickel Wire 0.025 mm — Lot 120/NP1',
+			'Nickel Wire 0.025 mm: Lot 120/NP1',
 			'Owner-supplied lot record ("Nickel wire 0,025 mm dia, DKRNT NP1"). Values are transcribed from the supplied Certificate of Analysis and remain subject to documentary verification, independent assessment and final approval. Mechanical and dimensional-tolerance fields are not covered by the certificate and are shown as pending.',
 			array_merge(
 				$common_status,
@@ -369,20 +369,20 @@ final class Seed {
 			self::upsert(
 				'rc_coil',
 				sprintf( 'ni-lot-120-np1-bobbin-%02d', $i ),
-				sprintf( 'Lot 120/NP1 — Bobbin no. %d%s', $i, $sampled ? ' (sampled)' : '' ),
+				sprintf( 'Lot 120/NP1: Bobbin no. %d%s', $i, $sampled ? ' (sampled)' : '' ),
 				$sampled ? 'One of the four bobbins sampled by the laboratory on 14.10.2021 (per supplied CoA). Individual bobbin weight and length have not yet been provided.' : 'Bobbin within Lot 120/NP1 (30 bobbins per supplied CoA). Individual bobbin weight and length have not yet been provided.',
 				array_merge( $common_status, array( 'program' => $p['ni'], 'lot' => $ni_lot, 'coil_id' => sprintf( 'Bobbin no. %d', $i ), 'wire_diameter' => '0,025 mm (as described on supplied CoA)', 'verification_status' => 'pending_verification' ) )
 			);
 		}
 
 		/* ---------------- Evidence: certificate scans + transcriptions ---------------- */
-		$cu_doc = self::evidence_file( 'igas-coa-0004512', 'igas-coa-0004512-copper-powder.png', 'Certificate of Analysis No. 0004512 — Ultrafine Copper Powder (owner-supplied copy)', 'coa', 'IGAS research, Goslar (as shown on certificate)', '2022-07-04', array( $cu_lot ), 'Scan of the owner-supplied certificate. The customer address block is redacted on the supplied copy. Publication subject to approval; not yet independently confirmed with the issuing laboratory.' );
-		$ni_doc = self::evidence_file( 'igas-coa-0004368', 'igas-coa-0004368-nickel-wire.png', 'Certificate of Analysis No. 0004368 — Nickel Wire 0.025 mm (owner-supplied copy)', 'coa', 'IGAS research, Goslar (as shown on certificate)', '2021-10-19', array( $ni_lot ), 'Scan of the owner-supplied certificate. The customer address block is redacted on the supplied copy. Publication subject to approval; not yet independently confirmed with the issuing laboratory.' );
+		$cu_doc = self::evidence_file( 'igas-coa-0004512', 'igas-coa-0004512-copper-powder.png', 'Certificate of Analysis No. 0004512: Ultrafine Copper Powder (owner-supplied copy)', 'coa', 'IGAS research, Goslar (as shown on certificate)', '2022-07-04', array( $cu_lot ), 'Scan of the owner-supplied certificate. The customer address block is redacted on the supplied copy. Publication subject to approval; not yet independently confirmed with the issuing laboratory.' );
+		$ni_doc = self::evidence_file( 'igas-coa-0004368', 'igas-coa-0004368-nickel-wire.png', 'Certificate of Analysis No. 0004368: Nickel Wire 0.025 mm (owner-supplied copy)', 'coa', 'IGAS research, Goslar (as shown on certificate)', '2021-10-19', array( $ni_lot ), 'Scan of the owner-supplied certificate. The customer address block is redacted on the supplied copy. Publication subject to approval; not yet independently confirmed with the issuing laboratory.' );
 
 		self::upsert(
 			'rc_coa',
 			'coa-0004512',
-			'CoA 0004512 — Ultrafine Copper Powder, Lot #03-K-07',
+			'CoA 0004512: Ultrafine Copper Powder, Lot #03-K-07',
 			'Exact transcription of the owner-supplied certificate. Values are reproduced as printed (comma decimals).',
 			array(
 				'subject'              => array( $cu_lot ),
@@ -408,7 +408,7 @@ final class Seed {
 		self::upsert(
 			'rc_coa',
 			'coa-0004368',
-			'CoA 0004368 — Nickel Wire 0.025 mm, Lot 120/NP1',
+			'CoA 0004368: Nickel Wire 0.025 mm, Lot 120/NP1',
 			'Exact transcription of the owner-supplied certificate. Values are reproduced as printed (comma decimals).',
 			array(
 				'subject'            => array( $ni_lot ),
@@ -420,7 +420,7 @@ final class Seed {
 				'result_purity'      => '99,9807 %',
 				'purity_basis'       => 'Impurities acc. GOST 2179-75 (As, Cu, Fe, Mn, Pb, Si): 0,0193 % by weight',
 				'goods_description'  => 'Nickel wire 0,025 mm dia, DKRNT NP1, Lot "120/NP1"',
-				'declared_quantity'  => 'Total net weight 5000 g* — 30 bobbins in 1 box (*net weight according to information given by customer)',
+				'declared_quantity'  => 'Total net weight 5000 g*: 30 bobbins in 1 box (*net weight according to information given by customer)',
 				'sample_description' => '0,8 g, taken from bobbins no. 8, 10, 19, 27 by the laboratory',
 				'sampling_location'  => 'Goslar (DE)',
 				'sampling_date'      => '2021-10-14',
@@ -445,10 +445,10 @@ final class Seed {
 		$notice = array( 'small', Settings::DISCLOSURE );
 		self::document(
 			'specimen-coa-template',
-			'Certificate of Analysis — required-fields template',
+			'Certificate of Analysis: required-fields template',
 			'specimen',
 			array(
-				array( 'h1', 'Certificate of Analysis — REQUIRED-FIELDS TEMPLATE' ),
+				array( 'h1', 'Certificate of Analysis: REQUIRED-FIELDS TEMPLATE' ),
 				array( 'p', 'THIS IS NOT A CERTIFICATE. It lists the fields ReserveChain requires from an accredited laboratory before a Certificate of Analysis can be accepted as verified evidence for a Digital Asset Passport.' ),
 				array( 'rule' ),
 				array( 'h2', 'Required fields' ),
@@ -463,10 +463,10 @@ final class Seed {
 		);
 		self::document(
 			'dap-data-model',
-			'Digital Asset Passport — data model specification',
+			'Digital Asset Passport: data model specification',
 			'policy',
 			array(
-				array( 'h1', 'Digital Asset Passport — data model (reservechain.dap/1.0)' ),
+				array( 'h1', 'Digital Asset Passport: data model (reservechain.dap/1.0)' ),
 				array( 'p', 'A Digital Asset Passport is assembled from registry records; it is never typed by hand. This document describes the structure published at /passport/{passport_no}/ and its machine-readable JSON form (?format=json).' ),
 				array( 'h2', '1. Identity' ),
 				array( 'p', 'passport_no (immutable, e.g. RC-CU-LOT-000001), entity type (lot, batch, container, coil), program (element symbol and atomic number), verification, custody, reserve, tokenization and redemption status.' ),
@@ -504,10 +504,10 @@ final class Seed {
 
 		$wp_pdf = RC_DIR . 'seed/evidence/reservechain-whitepaper-draft.pdf';
 		if ( is_readable( $wp_pdf ) && ! get_page_by_path( 'reservechain-whitepaper-draft-v0-9', OBJECT, 'rc_document' ) ) {
-			$wid = self::import_document( $wp_pdf, 'ReserveChain Whitepaper — Draft v0.9', 'whitepaper', true, 'Draft v0.9' );
+			$wid = self::import_document( $wp_pdf, 'ReserveChain Whitepaper: Draft v0.9', 'whitepaper', true, 'Draft v0.9' );
 			if ( $wid ) {
 				wp_update_post( array( 'ID' => $wid, 'post_name' => 'reservechain-whitepaper-draft-v0-9', 'post_content' => 'Draft in preparation. Pending owner inputs are clearly marked; final version subject to legal review and approval.' ) );
-				update_post_meta( $wid, '_rc_issued_by', 'ReserveChain (draft — subject to legal review)' );
+				update_post_meta( $wid, '_rc_issued_by', 'ReserveChain (draft: subject to legal review)' );
 			}
 		}
 		self::say( 'Registry: Cu Lot #03-K-07 (+Box 20), Ni Lot 120/NP1 (+30 bobbins), 2 owner-supplied CoAs transcribed, illustrative template, 5 fingerprinted documents.' );
@@ -522,14 +522,14 @@ final class Seed {
 		wp_set_current_user( $author->ID );
 		$lot = get_page_by_path( 'cu-lot-03-k-07', OBJECT, 'rc_lot' );
 		$id  = Workflow::bypass(
-			static fn() => self::upsert( 'rc_custody', 'specimen-custody-intake-cu', 'Custody intake — Lot #03-K-07 (draft for review)', 'Draft custody intake record prepared by the registry manager and awaiting four-eyes review. No custodian has been appointed; the custodian field is intentionally empty.', array( 'subject' => array( $lot->ID ), 'record_type' => 'custody_intake', 'verification_status' => 'pending_verification' ), 'draft' )
+			static fn() => self::upsert( 'rc_custody', 'specimen-custody-intake-cu', 'Custody intake: Lot #03-K-07 (draft for review)', 'Draft custody intake record prepared by the registry manager and awaiting four-eyes review. No custodian has been appointed; the custodian field is intentionally empty.', array( 'subject' => array( $lot->ID ), 'record_type' => 'custody_intake', 'verification_status' => 'pending_verification' ), 'draft' )
 		);
 		update_post_meta( $id, '_edit_last', $author->ID );
 		Workflow::apply( 'submit', $id, 'Seeded for workflow demonstration.' );
 
 		$faq = get_page_by_path( 'resources/faq' );
 		if ( $faq ) {
-			$draft = wp_insert_post( array( 'post_type' => 'page', 'post_title' => 'Proposed update — FAQ additions (draft)', 'post_content' => '<p>Draft content awaiting review. Demonstrates that page edits follow the same four-eyes workflow as registry records.</p>', 'post_status' => 'draft', 'post_author' => $author->ID ) );
+			$draft = wp_insert_post( array( 'post_type' => 'page', 'post_title' => 'Proposed update: FAQ additions (draft)', 'post_content' => '<p>Draft content awaiting review. Demonstrates that page edits follow the same four-eyes workflow as registry records.</p>', 'post_status' => 'draft', 'post_author' => $author->ID ) );
 			update_post_meta( $draft, '_edit_last', $author->ID );
 			Workflow::apply( 'submit', (int) $draft, 'Seeded for workflow demonstration.' );
 		}
@@ -669,7 +669,7 @@ final class Seed {
 		$footer['Legal'] = array( 'legal', 'legal/risk-disclosure', 'legal/anti-fraud', 'legal/privacy', 'legal/terms', 'legal/cookies' );
 		$n = 0;
 		foreach ( $footer as $group => $paths ) {
-			$fid = $reset( 'Footer — ' . $group );
+			$fid = $reset( 'Footer: ' . $group );
 			foreach ( $paths as $i => $path ) {
 				$add( $fid, $path, 0, $i + 1 );
 			}

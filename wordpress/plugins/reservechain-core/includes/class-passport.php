@@ -357,12 +357,12 @@ final class Passport {
 			'note'      => null,
 			'counted'   => false,
 		);
-		$stages[] = $stage( 'laboratory', 'Laboratory analysis (Certificate of Analysis)', $find( 'rc_coa' ), 'Pending — awaiting accredited laboratory certificate' );
-		$stages[] = $stage( 'custody', 'Custody intake', $find( 'rc_custody', 'custody_intake' ), 'Pending — custody arrangement not yet confirmed' );
-		$stages[] = $stage( 'ownership', 'Legal ownership record', $find( 'rc_custody', 'ownership' ), 'Pending — subject to final legal structure' );
-		$stages[] = $stage( 'insurance', 'Insurance', $find( 'rc_insurance' ), 'Pending — insurance not yet arranged' );
-		$stages[] = $stage( 'valuation', 'Independent valuation', $find( 'rc_valuation' ), 'Pending — independent valuation not yet performed' );
-		$stages[] = $stage( 'reserve', 'Reserve attestation', $find( 'rc_reserve_report' ), 'Pending — Proof of Reserves module in development' );
+		$stages[] = $stage( 'laboratory', 'Laboratory analysis (Certificate of Analysis)', $find( 'rc_coa' ), 'Pending: awaiting accredited laboratory certificate' );
+		$stages[] = $stage( 'custody', 'Custody intake', $find( 'rc_custody', 'custody_intake' ), 'Pending: custody arrangement not yet confirmed' );
+		$stages[] = $stage( 'ownership', 'Legal ownership record', $find( 'rc_custody', 'ownership' ), 'Pending: subject to final legal structure' );
+		$stages[] = $stage( 'insurance', 'Insurance', $find( 'rc_insurance' ), 'Pending: insurance not yet arranged' );
+		$stages[] = $stage( 'valuation', 'Independent valuation', $find( 'rc_valuation' ), 'Pending: independent valuation not yet performed' );
+		$stages[] = $stage( 'reserve', 'Reserve attestation', $find( 'rc_reserve_report' ), 'Pending: Proof of Reserves module in development' );
 
 		$token = null;
 		if ( $program_id ) {
@@ -371,7 +371,7 @@ final class Passport {
 				$token = array( 'status' => get_post_meta( $tp[0]->ID, '_rc_verification_status', true ), 'record_no' => get_post_meta( $tp[0]->ID, '_rc_record_no', true ), 'date' => null );
 			}
 		}
-		$stages[] = $stage( 'token', 'Token program linkage', $token, 'Not linked — tokenization subject to final approval', false );
+		$stages[] = $stage( 'token', 'Token program linkage', $token, 'Not linked: tokenization subject to final approval', false );
 		return $stages;
 	}
 

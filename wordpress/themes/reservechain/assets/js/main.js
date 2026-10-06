@@ -27,18 +27,8 @@
     nav.addEventListener('click', function (e) { if (e.target.closest('a')) setNav(false); });
   }
 
-  // Reveal on scroll (stagger siblings).
-  var els = d.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && els.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    els.forEach(function (el) {
-      var sib = el.parentNode ? Array.prototype.indexOf.call(el.parentNode.querySelectorAll(':scope > [data-reveal]'), el) : 0;
-      if (sib > 0) el.style.setProperty('--d', Math.min(sib, 6) * 0.07 + 's');
-      io.observe(el);
-    });
-  } else { els.forEach(function (el) { el.classList.add('is-in'); }); }
+  // Scroll reveals live in motion.js; legacy data-reveal content is shown immediately.
+  d.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-in'); });
 
   // Passport: print + active section in TOC.
   d.addEventListener('click', function (e) { if (e.target.closest('[data-print]')) window.print(); });

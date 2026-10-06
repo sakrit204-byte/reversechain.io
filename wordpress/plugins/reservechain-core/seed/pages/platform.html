@@ -70,73 +70,61 @@ order: 2
     </div>
     <div class="rc-grid rc-grid--3">
       <a class="rc-card rc-card--link" href="/platform/how-it-works/" data-reveal>
-        <span class="rc-card__num">01</span>
         <h3>How ReserveChain Works</h3>
         <p>The eight-stage lifecycle from source to redemption. For each stage it shows who performs it, the evidence produced, the controls applied and what participants can see.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/verification/" data-reveal>
-        <span class="rc-card__num">02</span>
         <h3>Independent Verification</h3>
         <p>Sampling, accredited testing, certificate validation and re-verification. It also separates owner-supplied evidence from independently verified evidence. Includes a live document-fingerprint checker.</p>
         <div class="rc-card__foot">[rc_status s="proposed"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/custody/" data-reveal>
-        <span class="rc-card__num">03</span>
         <h3>Custody &amp; Vault Structure</h3>
         <p>Segregation by lot, container and bobbin, seal discipline, inventory records, inspections and dual-controlled release. Custodian to be appointed.</p>
         <div class="rc-card__foot">[rc_status s="proposed"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/digital-asset-passports/" data-reveal>
-        <span class="rc-card__num">04</span>
         <h3>Digital Asset Passports</h3>
         <p>A persistent identity for every unit. It is assembled from evidence records, sealed with a SHA-256 Merkle root and can be downloaded as JSON.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/asset-registry/" data-reveal>
-        <span class="rc-card__num">05</span>
         <h3>Industrial Metals Registry</h3>
         <p>The single source of truth. It holds fourteen record types under four-eyes publication control and keeps full version history.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/proof-of-reserves/" data-reveal>
-        <span class="rc-card__num">06</span>
         <h3>Proof of Reserves</h3>
         <p>A live dashboard that computes reserves from approved registry data. It shows declared and verified quantities separately and never displays a coverage ratio it cannot support.</p>
         <div class="rc-card__foot">[rc_status s="proposed"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/tokenization/" data-reveal>
-        <span class="rc-card__num">07</span>
         <h3>Tokenization</h3>
         <p>ERC-20 issuance controls. Minting fails closed unless attested reserves permit it, and transfers are screened for eligibility. Testnet only.</p>
         <div class="rc-card__foot">[rc_status s="proposed"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/redemption/" data-reveal>
-        <span class="rc-card__num">08</span>
         <h3>Physical Redemption</h3>
         <p>Seven controlled stages from request to completion. Tokens are escrowed, then burned, and only then is the physical unit released.</p>
         <div class="rc-card__foot">[rc_status s="proposed"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/infrastructure/" data-reveal>
-        <span class="rc-card__num">09</span>
         <h3>Platform Infrastructure</h3>
         <p>The functional architecture: registry, passports, workflow, compliance, reserve engine, token layer, APIs and portals, and how they connect.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/technology/" data-reveal>
-        <span class="rc-card__num">10</span>
         <h3>Technology</h3>
         <p>The implementation: the CMS core, the REST API shared by web and mobile, six smart contracts and on-chain anchoring of the audit trail.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/platform/security/" data-reveal>
-        <span class="rc-card__num">11</span>
         <h3>Security</h3>
         <p>Role separation, MFA, session controls, a tamper-evident audit trail, key-management design and incident response. We make no certification claims.</p>
         <div class="rc-card__foot">[rc_status s="in_development"]</div>
       </a>
       <a class="rc-card rc-card--link" href="/assets/initial-programs/" data-reveal>
-        <span class="rc-card__num">12</span>
         <h3>Initial Asset Programs</h3>
         <p>The two programs the chain is being built around: Ultra-High-Purity Copper Powder and High-Purity Nickel Wire 0.025 mm.</p>
         <div class="rc-card__foot">[rc_status s="pending_verification"]</div>
@@ -174,23 +162,19 @@ order: 2
     </div>
     <div class="rc-grid rc-grid--4">
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">I</span>
-        <h3>Evidence before claims</h3>
+        <span class="rc-card__num">I</span><h3>Evidence before claims</h3>
         <p>Passport lifecycle stages are derived from linked evidence records, and statuses change only through approval. Without an approved record, a stage stays "Pending".</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">II</span>
-        <h3>Fail closed</h3>
+        <span class="rc-card__num">II</span><h3>Fail closed</h3>
         <p>Minting, redemption, wallet and purchase functions default to off. Missing configuration blocks the action. It never permits it.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">III</span>
-        <h3>Four eyes on everything public</h3>
+        <span class="rc-card__num">III</span><h3>Four eyes on everything public</h3>
         <p>The person who edits a record cannot approve it. An approval is bound to a fingerprint of the exact content approved, so any later edit sends the record back to review.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">IV</span>
-        <h3>One source of truth</h3>
+        <span class="rc-card__num">IV</span><h3>One source of truth</h3>
         <p>The website, the passports, the Proof-of-Reserves dashboard and the mobile apps all read the same approved registry data through one API.</p>
       </article>
     </div>

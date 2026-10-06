@@ -38,17 +38,14 @@ order: 3
     </div>
     <div class="rc-grid rc-grid--3">
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">A</span>
         <h3>Record fingerprint</h3>
         <p>For each passport, the platform computes a SHA-256 hash over the passport number, record type and every public field as key-value pairs. Changing any published value changes this fingerprint.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">B</span>
         <h3>Document leaves</h3>
         <p>Every linked document has a SHA-256 hash, computed from the stored file when it is uploaded. These hashes and the record fingerprint form the leaves of the passport's Merkle tree.</p>
       </article>
       <article class="rc-card" data-reveal>
-        <span class="rc-card__num">C</span>
         <h3>Merkle root</h3>
         <p>The leaves are de-duplicated, sorted and hashed in pairs up to a single SHA-256 root. One 64-character value commits to the entire evidence set, and anyone holding the JSON export can recompute it.</p>
       </article>
