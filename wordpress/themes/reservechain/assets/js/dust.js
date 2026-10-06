@@ -262,9 +262,14 @@
   w.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { sizeHero(); sizeAmbient(); }, 120); });
 
   d.addEventListener('visibilitychange', function () { if (!d.hidden) t0 = performance.now() - 1; });
+  /* QA perf: cap at ~60 fps. Particle physics is per-frame, so on 120/144/165 Hz displays the
+     uncapped loop both burned 2-3x the CPU and ran the motion faster than designed. */
+  var lastFrame = 0;
   (function loop(now) {
+    requestAnimationFrame(loop);
+    if (now - lastFrame < 15) return;
+    lastFrame = now;
     heroFrame(now);
     ambientFrame(now);
-    requestAnimationFrame(loop);
   })(performance.now());
 })();

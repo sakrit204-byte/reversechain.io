@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?><!doctype html>
-<html <?php language_attributes(); ?> lang="<?php echo esc_attr( rct_lang() ); ?>">
+<html <?php language_attributes(); /* QA: single lang attribute (language_attributes already reflects ?lang) */ ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 
 <header class="rc-header" data-rc-header>
 	<div class="rc-wrap rc-header__inner">
-		<a class="rc-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="ReserveChain — <?php esc_attr_e( 'Home', 'reservechain' ); ?>"><?php echo rct_logo(); // phpcs:ignore ?></a>
+		<a class="rc-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo rct_logo(); // phpcs:ignore ?><span class="screen-reader-text"> — <?php esc_html_e( 'Home', 'reservechain' ); ?></span></a>
 		<nav class="rc-nav" id="rc-nav" aria-label="<?php esc_attr_e( 'Primary', 'reservechain' ); ?>">
 			<?php
 			wp_nav_menu(

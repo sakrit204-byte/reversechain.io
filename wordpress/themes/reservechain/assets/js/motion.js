@@ -24,7 +24,12 @@
       var a = e.target.closest('a[href^="#"]');
       if (a && a.getAttribute('href').length > 1) {
         var t = d.querySelector(a.getAttribute('href'));
-        if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -90 }); }
+        if (t) {
+          e.preventDefault(); lenis.scrollTo(t, { offset: -90 });
+          /* QA a11y: keep keyboard focus in sync with the smooth scroll (skip link, in-page TOC). */
+          if (!t.matches('a[href], button, input, select, textarea, [tabindex]')) t.setAttribute('tabindex', '-1');
+          t.focus({ preventScroll: true });
+        }
       }
     });
   }
@@ -73,7 +78,7 @@
 
   /* ---------- counters (numeric figures only, never invented) ---------- */
   function countUp(scope) {
-    $$('.rc-por__grid dd, .rc-stats dd', scope.matches && scope.matches('.rc-por__grid dd, .rc-stats dd') ? scope.parentNode : scope).forEach(function (dd) {
+    $$('.rc-por__grid dd:not(.rc-por__note), .rc-stats dd', scope.matches && scope.matches('.rc-por__grid dd, .rc-stats dd') ? scope.parentNode : scope).forEach(function (dd) {
       if (dd.dataset.counted) return; dd.dataset.counted = '1';
       var raw = dd.textContent.trim(), m = raw.match(/^([\d,.]+)(.*)$/);
       if (!m) return;
@@ -91,8 +96,12 @@
   /* ---------- parallax layers ---------- */
   var layers = [];
   function addLayer(el, speed, opts) { if (el) layers.push({ el: el, speed: speed, o: opts || {} }); }
-  $$('.rc-hero .rc-element').forEach(function (el, i) { addLayer(el, i ? -0.16 : -0.08); });
-  addLayer(d.querySelector('.rc-hero .rc-ledger'), -0.04);
+  /* QA fix: when the hero stacks (<= 980px) the upward parallax pushed the element cards over the
+     hero micro-disclosure text above them; keep the hero cards static on stacked layouts. */
+  if (w.matchMedia('(min-width: 981px)').matches) {
+    $$('.rc-hero .rc-element').forEach(function (el, i) { addLayer(el, i ? -0.16 : -0.08); });
+    addLayer(d.querySelector('.rc-hero .rc-ledger'), -0.04);
+  }
   addLayer(d.querySelector('.rc-hero .rc-hero__grid > div:first-child'), 0.06, { fade: true });
   $$('.rc-pagehero .rc-wrap, .rc-dap-hero .rc-wrap').forEach(function (el) { addLayer(el, 0.22, { fade: true }); });
   $$('.rc-pagehero__grid').forEach(function (el) { addLayer(el, 0.35); });

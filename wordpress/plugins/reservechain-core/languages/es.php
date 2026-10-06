@@ -1041,4 +1041,5 @@ return array(
 	'via lot' => 'a través del lote',
 	'— not provided —' => '— no facilitado —',
 	'— not set —' => '— no definido —',
+	'Copy' => 'Copiar',
 );

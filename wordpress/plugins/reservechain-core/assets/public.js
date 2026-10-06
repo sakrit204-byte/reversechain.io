@@ -37,13 +37,25 @@
   function showErrors(form, fields) {
     $$('.rc-field--error', form).forEach(function (el) { el.classList.remove('rc-field--error'); });
     $$('.rc-err', form).forEach(function (el) { el.remove(); });
+    /* QA a11y: expose errors programmatically (aria-invalid + aria-describedby). */
+    $$('[aria-invalid]', form).forEach(function (el) {
+      el.removeAttribute('aria-invalid');
+      var ids = (el.getAttribute('aria-describedby') || '').split(' ').filter(function (id) { return id && id.indexOf('rc-err-') !== 0; });
+      if (ids.length) el.setAttribute('aria-describedby', ids.join(' ')); else el.removeAttribute('aria-describedby');
+    });
+    var formKey = form.getAttribute('data-rc-form') || 'form';
     Object.keys(fields || {}).forEach(function (k) {
       var el = form.querySelector('[name="' + k + '"]') || form.querySelector('[name="' + k + '[]"]');
       if (!el) return;
       var wrap = el.closest('.rc-field, .rc-check') || el.parentNode;
       wrap.classList.add('rc-field--error');
       var m = document.createElement('small'); m.className = 'rc-err'; m.textContent = fields[k];
+      m.id = 'rc-err-' + formKey + '-' + k.replace(/[^a-z0-9_-]/gi, '');
       wrap.appendChild(m);
+      $$('[name="' + k + '"], [name="' + k + '[]"]', form).forEach(function (f) {
+        f.setAttribute('aria-invalid', 'true');
+        f.setAttribute('aria-describedby', ((f.getAttribute('aria-describedby') || '') + ' ' + m.id).trim());
+      });
     });
     var first = form.querySelector('.rc-field--error input, .rc-field--error select, .rc-field--error textarea');
     if (first) first.focus();
@@ -161,6 +173,15 @@
   });
 
   /* ---------------- copy-to-clipboard ---------------- */
+  /* QA a11y: copyable hashes are reachable and operable by keyboard. */
+  $$('[data-copy]').forEach(function (el) {
+    if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT)$/.test(el.tagName) || el.hasAttribute('tabindex')) return;
+    el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+    if (!el.hasAttribute('aria-label')) el.setAttribute('aria-label', (t.copy || 'Copy') + ': ' + el.textContent.trim());
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-copy][role=button]')) { e.preventDefault(); e.target.click(); }
+  });
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-copy]');
     if (!el || !navigator.clipboard) return;

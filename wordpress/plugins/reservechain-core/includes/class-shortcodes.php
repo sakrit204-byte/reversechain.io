@@ -42,8 +42,8 @@ final class Shortcodes {
 	}
 
 	public static function register_assets(): void {
-		wp_register_script( 'rc-qrcode', RC_URL . 'assets/vendor/qrcode.js', array(), '1.4.4', true );
-		wp_register_script( 'rc-public', RC_URL . 'assets/public.js', array( 'rc-qrcode' ), RC_VERSION, true );
+		wp_register_script( 'rc-qrcode', RC_URL . 'assets/vendor/qrcode.js', array(), '1.4.4', array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_register_script( 'rc-public', RC_URL . 'assets/public.js', array( 'rc-qrcode' ), RC_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 		wp_localize_script(
 			'rc-public',
 			'RC',
@@ -62,6 +62,7 @@ final class Shortcodes {
 					'error'      => __( 'Something went wrong. Please try again.', 'reservechain' ),
 					'sending'    => __( 'Submitting…', 'reservechain' ),
 					'copied'     => __( 'Copied', 'reservechain' ),
+					'copy'       => __( 'Copy', 'reservechain' ),
 					'restricted' => __( 'Residents of your selected country are not eligible for any future token offering. You may still opt in to general project updates.', 'reservechain' ),
 					'viewPassport' => __( 'View passport', 'reservechain' ),
 					'download'   => __( 'Download', 'reservechain' ),
@@ -234,7 +235,7 @@ final class Shortcodes {
 			);
 			$out .= '<section class="rc-por__prog rc-por__prog--' . esc_attr( strtolower( $sym ) ) . '" data-el="' . esc_attr( $sym ) . '"><header><span class="rc-por__el">' . esc_html( $sym ) . '</span><h3>' . esc_html( get_the_title( $pid ) ) . '</h3>' . self::pill( 'in_development', __( 'Live from registry · no attestation', 'reservechain' ) ) . '</header><dl class="rc-por__grid">';
 			foreach ( $cells as $c ) {
-				$out .= '<div><dt>' . esc_html( $c[0] ) . '</dt><dd>' . esc_html( $c[1] ) . '</dd><small>' . esc_html( $c[2] ) . '</small></div>';
+				$out .= '<div><dt>' . esc_html( $c[0] ) . '</dt><dd>' . esc_html( $c[1] ) . '</dd><dd class="rc-por__note"><small>' . esc_html( $c[2] ) . '</small></dd></div>';
 			}
 			$out .= '</dl></section>';
 		}
@@ -380,7 +381,7 @@ final class Shortcodes {
 		ob_start();
 		?>
 		<div class="rc-verify" data-rc-verify>
-			<label class="rc-drop" tabindex="0">
+			<label class="rc-drop">
 				<input type="file" class="rc-drop__input" aria-label="<?php esc_attr_e( 'Choose a document to verify', 'reservechain' ); ?>">
 				<span class="rc-drop__icon" aria-hidden="true"></span>
 				<strong><?php esc_html_e( 'Drop a document here, or click to choose', 'reservechain' ); ?></strong>

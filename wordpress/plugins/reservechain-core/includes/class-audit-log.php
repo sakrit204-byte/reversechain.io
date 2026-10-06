@@ -107,8 +107,29 @@ final class Audit_Log {
 		return hash( 'sha256', implode( "\x1f", $parts ) );
 	}
 
+	/**
+	 * Real client IP. X-Forwarded-For is trusted only when the direct peer is a private/loopback address
+	 * (our own reverse proxy, e.g. Caddy on the Docker network); the right-most untrusted hop is used.
+	 */
+	public static function client_ip(): string {
+		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		if ( '' === $remote ) {
+			return 'cli';
+		}
+		$private = static fn( string $ip ) => false === filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
+		if ( $private( $remote ) && ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			$hops = array_reverse( array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ) ) );
+			foreach ( $hops as $hop ) {
+				if ( filter_var( $hop, FILTER_VALIDATE_IP ) && ! $private( $hop ) ) {
+					return $hop;
+				}
+			}
+		}
+		return $remote;
+	}
+
 	public static function ip_hash(): string {
-		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'cli';
+		$ip = self::client_ip();
 		return hash_hmac( 'sha256', $ip, wp_salt( 'auth' ) );
 	}
 
