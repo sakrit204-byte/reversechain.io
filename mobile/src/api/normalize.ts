@@ -46,7 +46,7 @@ export function toClaimStatus(v: unknown): ClaimStatus {
 /** Like toClaimStatus, but returns null when the payload carries no claim status at all. */
 function optionalStatus(o: Obj): ClaimStatus | null {
   if (typeof o.status === 'string') return toClaimStatus(o.status);
-  if (o.pending === true || o.state === 'pending') return 'pending_verification';
+  // A missing value is not a claim awaiting verification: no pill unless the backend sends a claim status.
   return null;
 }
 
@@ -59,6 +59,7 @@ export function toField(v: unknown, i = 0): DataField {
     value: pending ? null : str(o.value),
     unit: str(o.unit),
     status: optionalStatus(o),
+    pendingText: typeof o.pending === 'string' && o.pending ? o.pending : null,
   };
 }
 

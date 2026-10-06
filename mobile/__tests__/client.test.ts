@@ -174,7 +174,7 @@ describe('normalisation', () => {
     });
     expect(p.program).toBe('copper-powder');
     expect(p.fields[0]?.value).toBeNull();
-    expect(p.fields[0]?.status).toBe('pending_verification');
+    expect(p.fields[0]?.status).toBeNull(); // empty values are not claims awaiting verification
     expect(p.documents[0]?.sha256).toBe('ab'.repeat(32));
     expect(p.documents[0]?.type).toBe('Certificate');
     expect(p.timeline[0]?.status).toBe('pending_verification');

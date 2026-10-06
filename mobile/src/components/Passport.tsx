@@ -14,11 +14,8 @@ export function FieldRow({ field, label }: { field: DataField; label?: string })
   const { t } = useTranslation();
   const name = label ?? field.label;
   const pendingText =
-    field.status === 'not_applicable'
-      ? t('status.not_applicable')
-      : field.status === 'proposed' || field.status === 'in_development'
-        ? t('common.notProvided')
-        : t('common.pendingAwaiting');
+    field.pendingText ??
+    (field.status === 'not_applicable' ? t('status.not_applicable') : t('common.notProvided'));
   const shown = field.value !== null ? [field.value, field.unit].filter(Boolean).join(' ') : null;
   const statusA11y = field.status ? ` ${t('status.a11y', { status: t(`status.${field.status}`) })}` : '';
   return (

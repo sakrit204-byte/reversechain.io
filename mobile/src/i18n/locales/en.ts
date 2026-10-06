@@ -21,7 +21,7 @@ const en = {
     copied: 'Copied to clipboard',
     open: 'Open',
     pending: 'Pending',
-    pendingAwaiting: 'Pending — awaiting verification',
+    pendingAwaiting: 'Not yet provided',
     notProvided: 'Not yet provided',
     subjectToApproval: 'Subject to final approval',
     dateTbd: 'Date not yet set',

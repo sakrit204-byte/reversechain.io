@@ -20,7 +20,7 @@ const it: Translation = {
     copied: 'Copiato negli appunti',
     open: 'Apri',
     pending: 'In sospeso',
-    pendingAwaiting: 'In sospeso — in attesa di verifica',
+    pendingAwaiting: 'Non ancora fornito',
     notProvided: 'Non ancora fornito',
     subjectToApproval: 'Soggetto ad approvazione finale',
     dateTbd: 'Data non ancora definita',

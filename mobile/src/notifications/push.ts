@@ -1,10 +1,26 @@
 import { Platform } from 'react-native';
-import Constants from 'expo-constants';
+import Constants, { ExecutionEnvironment } from 'expo-constants';
 import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
 import { api, ApiError } from '@/api';
 
 export type PushResult = 'registered' | 'local_only' | 'denied' | 'unavailable';
+
+/**
+ * Expo Go (SDK 53+) no longer ships remote-notification support on Android and throws as soon as
+ * expo-notifications is imported. Push is therefore loaded lazily and only in real (EAS/dev) builds.
+ */
+const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
+
+type NotificationsModule = typeof import('expo-notifications');
+function loadNotifications(): NotificationsModule | null {
+  if (Platform.OS === 'web' || isExpoGo) return null;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('expo-notifications') as NotificationsModule;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Push registration scaffold.
@@ -14,7 +30,8 @@ export type PushResult = 'registered' | 'local_only' | 'denied' | 'unavailable';
  * offline backend leaves the token registered locally only.
  */
 export async function registerForPush(): Promise<PushResult> {
-  if (Platform.OS === 'web' || !Device.isDevice) return 'unavailable';
+  const Notifications = loadNotifications();
+  if (!Notifications || !Device.isDevice) return 'unavailable';
 
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
@@ -56,7 +73,8 @@ export async function registerForPush(): Promise<PushResult> {
 
 /** Foreground presentation: show banners for notifications received while the app is open. */
 export function configureNotificationHandler(): void {
-  if (Platform.OS === 'web') return;
+  const Notifications = loadNotifications();
+  if (!Notifications) return;
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowBanner: true,

@@ -82,7 +82,7 @@ describe('app smoke test (mock mode)', () => {
     seedSignedIn();
     const screen = renderRouter('./app', { initialUrl: '/passport/RC-CU-LOT-000001' });
     await waitFor(() => expect(screen.getByText('RC-CU-LOT-000001')).toBeTruthy(), { timeout: 8000 });
-    expect(screen.getAllByText('Pending — awaiting verification').length).toBeGreaterThan(0);
+    expect(screen.queryAllByText(/Not yet provided|Pending:|Not yet determined/).length).toBeGreaterThan(0);
     expect(screen.getByText('fe17d073 3d955431 d7ecf698 eebec77f 0bb2265e a83be3e7 bf90cd28 56f5af76')).toBeTruthy();
     expect(screen.getAllByText('Fingerprint pending — document not yet provided').length).toBeGreaterThan(0);
   });

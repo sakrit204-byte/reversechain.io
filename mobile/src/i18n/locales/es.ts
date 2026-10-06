@@ -20,7 +20,7 @@ const es: Translation = {
     copied: 'Copiado al portapapeles',
     open: 'Abrir',
     pending: 'Pendiente',
-    pendingAwaiting: 'Pendiente — a la espera de verificación',
+    pendingAwaiting: 'Aún no facilitado',
     notProvided: 'Aún no facilitado',
     subjectToApproval: 'Sujeto a aprobación final',
     dateTbd: 'Fecha aún no fijada',

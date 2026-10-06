@@ -77,6 +77,8 @@ export interface DataField {
   value: string | null;
   unit: string | null;
   status: ClaimStatus | null;
+  /** Exact wording supplied by the backend for a missing value, e.g. "Not yet determined: subject to written approval". */
+  pendingText?: string | null;
 }
 
 /** All token parameters are configuration and nullable (SPEC rule 5). */
