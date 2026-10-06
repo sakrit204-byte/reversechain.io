@@ -632,6 +632,36 @@ final class Seed {
 		return $meta;
 	}
 
+	/** Short footer labels (translated through the UI dictionaries). */
+	public const FOOTER_LABELS = array(
+		'platform/how-it-works' => 'How it works',
+		'platform/verification' => 'Verification',
+		'platform/custody' => 'Custody',
+		'platform/proof-of-reserves' => 'Proof of Reserves',
+		'platform/digital-asset-passports' => 'Asset Passports',
+		'platform/tokenization' => 'Tokenization',
+		'assets/industrial-metals/copper-powder' => 'Copper Powder',
+		'assets/industrial-metals/nickel-wire' => 'Nickel Wire 0.025 mm',
+		'platform/asset-registry' => 'Asset Registry',
+		'assets/future-categories' => 'Future categories',
+		'participation' => 'Overview',
+		'participation/waitlist' => 'Join the waitlist',
+		'participation/eligibility-kyc' => 'Eligibility & KYC',
+		'participation/restricted-jurisdictions' => 'Restricted jurisdictions',
+		'enterprise' => 'Enterprise',
+		'company' => 'About',
+		'company/development-status' => 'Development status',
+		'company/roadmap' => 'Roadmap',
+		'resources/documentation' => 'Documentation',
+		'company/contact' => 'Contact',
+		'legal' => 'Legal & disclosures',
+		'legal/risk-disclosure' => 'Risk disclosure',
+		'legal/anti-fraud' => 'Anti-fraud',
+		'legal/privacy' => 'Privacy',
+		'legal/terms' => 'Terms of use',
+		'legal/cookies' => 'Cookies',
+	);
+
 	/** Information architecture from the Website Developer Instructions (p.3) — same IA on desktop and mobile. */
 	public const IA = array(
 		'Platform'      => array( 'platform', 'platform/how-it-works', 'platform/infrastructure', 'platform/technology', 'platform/security', 'platform/verification', 'platform/custody', 'platform/proof-of-reserves', 'platform/digital-asset-passports', 'platform/asset-registry', 'platform/tokenization', 'platform/redemption' ),
@@ -675,18 +705,26 @@ final class Seed {
 		}
 		$locations['primary'] = $mid;
 
-		// Footer: one column per group + legal.
-		$footer = self::IA;
-		$footer['Legal'] = array( 'legal', 'legal/risk-disclosure', 'legal/anti-fraud', 'legal/privacy', 'legal/terms', 'legal/cookies' );
+		// Footer: five curated columns (the full IA lives in the header mega menu).
+		$footer = array(
+			'Platform'      => array( 'platform/how-it-works', 'platform/verification', 'platform/custody', 'platform/proof-of-reserves', 'platform/digital-asset-passports', 'platform/tokenization' ),
+			'Assets'        => array( 'assets/industrial-metals/copper-powder', 'assets/industrial-metals/nickel-wire', 'platform/asset-registry', 'assets/future-categories' ),
+			'Participation' => array( 'participation', 'participation/waitlist', 'participation/eligibility-kyc', 'participation/restricted-jurisdictions', 'enterprise' ),
+			'Company'       => array( 'company', 'company/development-status', 'company/roadmap', 'resources/documentation', 'company/contact' ),
+			'Legal'         => array( 'legal', 'legal/risk-disclosure', 'legal/anti-fraud', 'legal/privacy', 'legal/terms', 'legal/cookies' ),
+		);
+		for ( $k = 6; $k <= 7; $k++ ) {
+			unset( $locations[ 'footer-' . $k ] );
+		}
 		$n = 0;
 		foreach ( $footer as $group => $paths ) {
 			$fid = $reset( 'Footer: ' . $group );
 			foreach ( $paths as $i => $path ) {
-				$add( $fid, $path, 0, $i + 1 );
+				$add( $fid, $path, 0, $i + 1, self::FOOTER_LABELS[ $path ] ?? '' );
 			}
 			$locations[ 'footer-' . ( ++$n ) ] = $fid;
 		}
 		set_theme_mod( 'nav_menu_locations', $locations );
-		self::say( 'Menus built: mega menu (6 groups) + 7 footer columns.' );
+		self::say( 'Menus built: mega menu (6 groups) + 5 footer columns.' );
 	}
 }

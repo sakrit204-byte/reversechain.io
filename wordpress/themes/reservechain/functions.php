@@ -30,11 +30,9 @@ add_action(
 				'primary'  => __( 'Primary navigation', 'reservechain' ),
 				'footer-1' => __( 'Footer — Platform', 'reservechain' ),
 				'footer-2' => __( 'Footer — Assets', 'reservechain' ),
-				'footer-3' => __( 'Footer — Enterprise', 'reservechain' ),
-				'footer-4' => __( 'Footer — Participation', 'reservechain' ),
-				'footer-5' => __( 'Footer — Company', 'reservechain' ),
-				'footer-6' => __( 'Footer — Resources', 'reservechain' ),
-				'footer-7' => __( 'Footer — Legal', 'reservechain' ),
+				'footer-3' => __( 'Footer — Participation', 'reservechain' ),
+				'footer-4' => __( 'Footer — Company', 'reservechain' ),
+				'footer-5' => __( 'Footer — Legal', 'reservechain' ),
 			)
 		);
 	}
@@ -157,4 +155,12 @@ add_filter(
 );
 
 /** Menu labels (including custom group titles) follow the visitor's language. */
-add_filter( 'nav_menu_item_title', static fn( $title ) => rct__( (string) $title ), 10 );
+add_filter(
+	'nav_menu_item_title',
+	static function ( $title ) {
+		$plain = wp_specialchars_decode( (string) $title, ENT_QUOTES );
+		$tr    = rct__( $plain );
+		return $tr === $plain ? $title : esc_html( $tr );
+	},
+	10
+);
