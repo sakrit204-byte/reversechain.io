@@ -1,0 +1,196 @@
+<!--
+title: Portal de Reembolso Físico
+excerpt: El Portal de Reembolso Físico previsto: tenencias elegibles, creación de solicitudes, selección de unidades por contenedor y por bobina, nuevas comprobaciones de cumplimiento, bloqueo y quema de tokens, liberación de la custodia, entrega o recogida, documentos e historial. Todos los módulos están desarrollados pero inactivos, y esta página describe únicamente un marco propuesto.
+kicker: Portal · Marco propuesto, inactivo
+order: 31
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Concepto del Portal de Reembolso Físico</p>
+      <h2>De un registro de tokens <em>a una unidad física concreta</em></h2>
+      <p class="rc-lead">Esta página describe un marco propuesto, sujeto a confirmación final jurídica, contractual, técnica y operativa. El reembolso físico no está disponible. No se ha emitido ningún token, por lo que no hay nada que pueda reembolsarse.</p>
+      <p>El portal se ha diseñado en torno a una idea: una solicitud de reembolso físico debe identificar el contenedor o la bobina exactos que se liberarán, mostrar cada comprobación que debe superar y dejar un registro completo (quema, instrucción de liberación, documentos de entrega y de titularidad) adjunto al Pasaporte de Activo Digital de esa unidad.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Estado del portal</dt><dd>[rc_status s="proposed" label="Inactivo"]</dd></div>
+      <div><dt>Unidad de reembolso físico, cobre</dt><dd>Contenedor por contenedor (propuesto)</dd></div>
+      <div><dt>Unidad de reembolso físico, níquel</dt><dd>Bobina por bobina (propuesto)</dd></div>
+      <div><dt>Umbrales y comisiones</dt><dd>Se muestran solo una vez aprobados</dd></div>
+      <div><dt>Condiciones aplicables</dt><dd>Condiciones definitivas del token y condiciones de reembolso físico, aún no emitidas</dd></div>
+      <div><dt>Activación</dt><dd>Autorización por escrito y una acción de despliegue</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Estado de los módulos</p>
+      <h2>Tres módulos, <em>todos bloqueados</em></h2>
+      <p class="rc-lead">Estos paneles se leen en tiempo real a partir de la configuración de módulos de la plataforma. No pueden activarse automáticamente.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <div data-reveal>[rc_module module="redemption" title="Solicitudes de reembolso físico"]</div>
+      <div data-reveal>[rc_module module="unit_selection" title="Selección de contenedor / bobina"]</div>
+      <div data-reveal>[rc_module module="logistics" title="Logística y entrega"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Ciclo de vida de la solicitud</p>
+      <h2>Siete etapas, <em>todas visibles para el participante</em></h2>
+      <p class="rc-lead">Flujo de trabajo propuesto. Cada etapa mostraría su estado actual en el portal y en las aplicaciones, con aprobación por doble control (preparador y verificador) por parte del operador.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Solicitud de reembolso físico</h3><p>Selección de las tenencias elegibles, el programa y las unidades concretas; aceptación de las condiciones aplicables mediante firma electrónica.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Elegibilidad</h3><p>KYC/KYB, sanciones y jurisdicción se vuelven a comprobar en el momento de la solicitud, sin basarse en las comprobaciones de la incorporación.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verificación</h3><p>Confirmación del saldo y de la titularidad del monedero; comprobación de la disponibilidad de las unidades y de las restricciones de embalaje frente al registro.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Liquidación y quema</h3><p>Los tokens se bloquean al aprobarse la solicitud y después se queman; la transacción de quema se registra vinculada a la solicitud.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Liberación de la custodia</h3><p>Se emite al custodio una instrucción de liberación para las unidades indicadas, con comprobación de los números de precinto en el momento de la liberación.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Logística o recogida</h3><p>Evaluación de la manipulación, campos de aduanas y de exportación o importación, envío o recogida, seguimiento.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Finalización</h3><p>Confirmación de la entrega y documentos de transmisión de la titularidad; registros del registro, de la reserva y del suministro actualizados y conciliados.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Selección de unidades</p>
+      <h2>Unidades físicas, <em>no fracciones de un fondo común</em></h2>
+      <p class="rc-lead">Ambos programas iniciales están embalados en unidades discretas, por lo que se propone el reembolso físico por unidad. Las unidades mínimas y las normas de embalaje son configurables y están sujetas a aprobación.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">CU 29 · NIVEL DE CONTENEDOR</span>
+        <h3>Polvo de cobre ultrafino</h3>
+        <p>Los registros aportados por el propietario describen ampollas de vidrio embaladas en cajas de cartón. Se propone el reembolso físico caja por caja, cada una identificada por su propio pasaporte (por ejemplo, <a href="/passport/RC-CU-CTN-000001/">Caja n.º 20</a>). El polvo ultrafino requiere una evaluación de manipulación y transporte antes de cualquier liberación.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/assets/industrial-metals/copper-powder/">Ver el programa de cobre →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">NI 28 · NIVEL DE BOBINA</span>
+        <h3>Alambre de níquel 0.025 mm</h3>
+        <p>Los registros aportados por el propietario describen 30 carretes en una caja. Se propone el reembolso físico carrete por carrete, cada uno con su propio pasaporte (por ejemplo, <a href="/passport/RC-NI-COL-000008/">carrete 8</a>). Las normas de embalaje para alambre de este diámetro deben confirmarse con el custodio.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/assets/industrial-metals/nickel-wire/">Ver el programa de níquel →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Recorrido por una interfaz simulada</p>
+      <h2>Cuatro pantallas, <em>ningún dato real</em></h2>
+      <p class="rc-lead"><span class="rc-demo-badge">Datos ilustrativos / de demostración</span> Estas pantallas muestran únicamente el diseño y los estados. Los identificadores de unidad están enmascarados, las cantidades se omiten deliberadamente y nada de lo que aquí aparece representa una tenencia o solicitud real.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">PANTALLA 1 · TENENCIAS ELEGIBLES</span>
+        <span class="rc-demo-badge">Datos ilustrativos / de demostración</span>
+        <div class="rc-table-wrap">
+          <table class="rc-table">
+            <thead><tr><th>Programa</th><th>Tipo de unidad</th><th>Unidades elegibles</th></tr></thead>
+            <tbody>
+              <tr><td>Polvo de cobre</td><td>Contenedor</td><td>—</td></tr>
+              <tr><td>Alambre de níquel 0.025 mm</td><td>Bobina</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">PANTALLA 2 · CREAR SOLICITUD</span>
+        <span class="rc-demo-badge">Datos ilustrativos / de demostración</span>
+        <dl class="rc-kv">
+          <div><dt>Programa</dt><dd>Alambre de níquel 0.025 mm</dd></div>
+          <div><dt>Tipo de unidad</dt><dd>Bobina (carrete)</dd></div>
+          <div><dt>Unidad seleccionada</dt><dd><span class="rc-mono">RC-NI-COL-••••••</span></dd></div>
+          <div><dt>Cantidad</dt><dd>—</dd></div>
+          <div><dt>Ejecución</dt><dd>Entrega o recogida, por seleccionar</dd></div>
+        </dl>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">PANTALLA 3 · CUMPLIMIENTO Y LIQUIDACIÓN</span>
+        <span class="rc-demo-badge">Datos ilustrativos / de demostración</span>
+        <div class="rc-claims">
+          <div><strong>Nueva comprobación de KYC / sanciones</strong>[rc_status s="pending" label="No iniciada"]</div>
+          <div><strong>Comprobación jurisdiccional</strong>[rc_status s="pending" label="No iniciada"]</div>
+          <div><strong>Aprobación del operador (doble control)</strong>[rc_status s="pending" label="No iniciada"]</div>
+          <div><strong>Bloqueo del token y posterior quema</strong>[rc_status s="pending" label="No iniciado"]</div>
+        </div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">PANTALLA 4 · LIBERACIÓN Y ENTREGA</span>
+        <span class="rc-demo-badge">Datos ilustrativos / de demostración</span>
+        <div class="rc-claims">
+          <div><strong>Instrucción de liberación de la custodia</strong>[rc_status s="pending" label="No iniciada"]</div>
+          <div><strong>Comprobación del precinto en la liberación</strong>[rc_status s="pending" label="No iniciada"]</div>
+          <div><strong>Seguimiento del envío o de la recogida</strong>[rc_status s="pending" label="No iniciado"]</div>
+          <div><strong>Documentos de transmisión de la titularidad</strong>[rc_status s="pending" label="No iniciado"]</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Cargos y umbrales</p>
+      <h2>Se muestran <em>solo una vez aprobados</em></h2>
+      <p>Cada cargo es un campo configurable. No se ha fijado ninguno, y el portal mostraría el coste total antes de que el participante confirme cualquier solicitud.</p>
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Unidad mínima de reembolso físico</td><td class="rc-pending">Pendiente de aprobación</td></tr>
+            <tr><td>Comisión de reembolso físico</td><td class="rc-pending">Pendiente de aprobación</td></tr>
+            <tr><td>Liberación de la custodia y embalaje</td><td class="rc-pending">Pendiente de aprobación</td></tr>
+            <tr><td>Envío y seguro de transporte</td><td class="rc-pending">Pendiente de aprobación</td></tr>
+            <tr><td>Impuestos, aranceles y aduanas</td><td class="rc-pending">Pendiente de aprobación</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div data-reveal>
+      <h3>Documentos e historial</h3>
+      <p class="rc-fine">Cada solicitud completada dejaría estos registros, con su huella digital y vinculados al pasaporte de la unidad y al registro de auditoría a prueba de manipulaciones.</p>
+      <ul class="rc-checks">
+        <li>Solicitud firmada y aceptación de las condiciones (versión, hora, cuenta)</li>
+        <li>Resultado de la nueva comprobación de elegibilidad</li>
+        <li>Registro del bloqueo y de la quema del token con referencia de la transacción</li>
+        <li>Instrucción de liberación de la custodia y verificación del precinto</li>
+        <li>Documentos de aduanas, exportación y entrega</li>
+        <li>Confirmación de la entrega o de la recogida</li>
+        <li>Documentación de la transmisión de la titularidad</li>
+        <li>Asiento de conciliación del registro y de la reserva</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Lea el marco completo de reembolso físico</h2>
+        <p>Elegibilidad, normas por unidad, liberación de la custodia y la conciliación que sigue a cada reembolso físico, según la propuesta actual.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/redemption/">Cómo funciona el reembolso físico</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/custody/">Explorar la custodia</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/portal/">Acceder al portal</a>
+      </div>
+    </div>
+  </div>
+</section>

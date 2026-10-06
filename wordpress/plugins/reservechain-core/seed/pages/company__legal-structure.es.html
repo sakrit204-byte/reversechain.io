@@ -1,0 +1,230 @@
+<!--
+title: Estructura jurídica y de tenencia de activos propuesta
+excerpt: Las funciones que previsiblemente requerirá una estructura definitiva de ReserveChain (emisor, vehículo tenedor de activos, custodio, fiduciario o agente, laboratorio independiente y tasador) y las opciones que se están evaluando para cada una. Nada de lo indicado en esta página describe una entidad o un acuerdo existentes; cada elemento es una propuesta y queda sujeto al criterio de los asesores jurídicos.
+kicker: Empresa · Estructura propuesta
+order: 4
+-->
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Finalidad de esta página</p>
+      <h2>Primero la estructura, <em>explicada antes de ser definitiva</em></h2>
+      <p class="rc-lead">Estructura societaria y de emisión suiza en desarrollo. Esta página expone las funciones que prevemos que requerirá una estructura definitiva y las cuestiones a las que deberán responder los asesores jurídicos, para que los lectores puedan ver cómo está previsto que se relacionen las distintas piezas.</p>
+      <p>No describe una entidad constituida, un acuerdo formalizado ni una contraparte designada. Nada de lo publicado en este sitio web crea ni representa derechos legales sobre ningún metal industrial. Cada función, relación y opción que figura a continuación sigue sujeta a revisión jurídica final, documentación contractual y aprobación.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Entidad emisora</dt><dd>Estructura suiza en desarrollo [rc_status s="in_development"]</dd></div>
+      <div><dt>Vehículo tenedor de activos</dt><dd>Opción en evaluación [rc_status s="proposed"]</dd></div>
+      <div><dt>Custodio / almacén</dt><dd>No designado [rc_status s="proposed"]</dd></div>
+      <div><dt>Fiduciario / agente de garantías</dt><dd>Opción en evaluación [rc_status s="proposed"]</dd></div>
+      <div><dt>Laboratorio / tasador</dt><dd>No designado [rc_status s="proposed"]</dd></div>
+      <div><dt>Ley aplicable</dt><dd>Pendiente de confirmación por los asesores jurídicos</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Relaciones propuestas</p>
+      <h2>Cómo está previsto <em>que se conecten las funciones</em></h2>
+      <p class="rc-lead">Los contornos discontinuos señalan funciones propuestas y aún no establecidas. No se nombra a ninguna parte porque no se ha designado a ninguna.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 960 540" role="img" aria-labelledby="ls-title ls-desc" font-family="Inter Tight, sans-serif">
+        <title id="ls-title">Relaciones jurídicas y de tenencia de activos propuestas</title>
+        <desc id="ls-desc">El propietario del activo transmite la titularidad a un vehículo tenedor de activos propuesto; el material lo conserva un custodio propuesto; un emisor propuesto podría emitir tokens vinculados a la reserva a participantes elegibles; un fiduciario o agente es una opción en evaluación; la plataforma de ReserveChain se limita a llevar registros. Todas las funciones son propuestas.</desc>
+        <defs>
+          <marker id="ls-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D5B167"/></marker>
+          <marker id="ls-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A9BBC8"/></marker>
+        </defs>
+        <g fill="none" stroke-width="1.5">
+          <path d="M160 108 V129 H440 V148" stroke="#D5B167" marker-end="url(#ls-arr)"/>
+          <path d="M800 108 V129 H520 V148" stroke="#A9BBC8" stroke-dasharray="4 4" marker-end="url(#ls-arr2)"/>
+          <path d="M602 189 H678" stroke="#D5B167" marker-start="url(#ls-arr)" marker-end="url(#ls-arr)"/>
+          <path d="M480 228 V288" stroke="#D5B167" marker-end="url(#ls-arr)"/>
+          <path d="M740 290 V256 H560 V230" stroke="#A9BBC8" stroke-dasharray="4 4" marker-end="url(#ls-arr2)"/>
+          <path d="M678 329 H602" stroke="#A9BBC8" stroke-dasharray="4 4" marker-start="url(#ls-arr2)" marker-end="url(#ls-arr2)"/>
+          <path d="M480 368 V428" stroke="#D5B167" marker-end="url(#ls-arr)"/>
+          <path d="M600 469 H940 V189 H922" stroke="#C9773F" stroke-dasharray="6 4" marker-end="url(#ls-arr)"/>
+          <path d="M280 189 H358 M280 329 H358 M280 469 H358" stroke="#A9BBC8" stroke-dasharray="2 4"/>
+        </g>
+        <g font-size="11" fill="#A9BBC8">
+          <text x="300" y="122" text-anchor="middle">transmisión de la titularidad</text>
+          <text x="660" y="122" text-anchor="middle">informes de ensayo, inspección y valoración</text>
+          <text x="640" y="180" text-anchor="middle">acuerdo</text>
+          <text x="640" y="202" text-anchor="middle">de custodia</text>
+          <text x="490" y="278">vínculo con la reserva</text>
+          <text x="650" y="250" text-anchor="middle">garantía (opción)</text>
+          <text x="640" y="320" text-anchor="middle">fideicomiso</text>
+          <text x="640" y="345" text-anchor="middle">(opción)</text>
+          <text x="490" y="402">emisión, solo si se aprueba</text>
+          <text x="780" y="462" text-anchor="middle">reembolso físico y liberación (propuesto)</text>
+          <text x="319" y="181" text-anchor="middle">registros</text>
+        </g>
+        <g fill="#0A141F" stroke="#D5B167" stroke-width="1.2" stroke-dasharray="6 4">
+          <rect x="40" y="30" width="240" height="78" rx="10"/>
+          <rect x="680" y="30" width="240" height="78" rx="10"/>
+          <rect x="360" y="150" width="240" height="78" rx="10"/>
+          <rect x="680" y="150" width="240" height="78" rx="10"/>
+          <rect x="360" y="290" width="240" height="78" rx="10"/>
+          <rect x="680" y="290" width="240" height="78" rx="10"/>
+          <rect x="360" y="430" width="240" height="78" rx="10"/>
+        </g>
+        <rect x="40" y="150" width="240" height="358" rx="10" fill="#101C29" stroke="#A9BBC8" stroke-width="1.2" stroke-dasharray="6 4"/>
+        <g fill="#E7EBEE" font-size="15" font-weight="600">
+          <text x="56" y="58">Propietario / originador</text>
+          <text x="696" y="58">Laboratorio, inspector, tasador</text>
+          <text x="376" y="178">Vehículo tenedor de activos</text>
+          <text x="696" y="178">Custodio / almacén</text>
+          <text x="376" y="318">Emisor</text>
+          <text x="696" y="318">Fiduciario / agente de garantías</text>
+          <text x="376" y="458">Participantes elegibles</text>
+          <text x="56" y="178">Plataforma ReserveChain</text>
+        </g>
+        <g fill="#A9BBC8" font-size="12">
+          <text x="56" y="78">Aporta el material y los títulos</text>
+          <text x="696" y="78">Independiente; informa al registro</text>
+          <text x="376" y="198">p. ej., una SPV segregada titular</text>
+          <text x="696" y="198">Almacenamiento sellado y segregado</text>
+          <text x="376" y="338">Estructura suiza en desarrollo</text>
+          <text x="696" y="338">Ostenta derechos para los titulares</text>
+          <text x="376" y="478">Tras KYC/KYB y elegibilidad</text>
+          <text x="56" y="200">Solo capa tecnológica:</text>
+          <text x="56" y="220">Registro de Metales Industriales</text>
+          <text x="56" y="240">Pasaportes de Activo Digital</text>
+          <text x="56" y="260">Huellas de documentos</text>
+          <text x="56" y="280">Auditoría a prueba de manipulación</text>
+          <text x="56" y="300">Conciliación de reservas</text>
+          <text x="56" y="330">No destinada a ostentar la</text>
+          <text x="56" y="350">titularidad de ningún metal.</text>
+        </g>
+        <g fill="#D5B167" font-size="10" font-weight="600" letter-spacing="1.2">
+          <text x="56" y="98">PROPUESTO</text>
+          <text x="696" y="98">PROPUESTO</text>
+          <text x="376" y="218">PROPUESTO · OPCIÓN</text>
+          <text x="696" y="218">PROPUESTO</text>
+          <text x="376" y="358">PROPUESTO</text>
+          <text x="696" y="358">PROPUESTO · OPCIÓN</text>
+          <text x="376" y="498">PROPUESTO</text>
+          <text x="56" y="494">PROPUESTO · EN DESARROLLO</text>
+        </g>
+      </svg>
+      <figcaption>Únicamente relaciones propuestas. Las funciones, entidades y acuerdos están sujetos a revisión jurídica final, documentación contractual y aprobación. No se ha designado a ninguna parte. No describe una estructura existente.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Funciones en evaluación</p>
+      <h2>Quién está previsto <em>que haga qué</em></h2>
+      <p class="rc-lead">La separación de estas funciones es la razón de ser de la estructura: la parte que registra el activo no debe ser la parte que lo custodia, lo valora o lo certifica.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 01</span>
+        <h3>Emisor</h3>
+        <p>La entidad que emitiría cualquier token o serie de tokens conforme a una documentación de oferta definitiva. Está previsto que forme parte de la estructura societaria y de emisión suiza actualmente en desarrollo.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 02</span>
+        <h3>Vehículo tenedor de activos</h3>
+        <p>Un vehículo segregado destinado a ostentar la titularidad del material del programa, aislado de la actividad operativa. Se está evaluando si estará separado del emisor y en qué jurisdicción.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 03</span>
+        <h3>Custodio o almacén</h3>
+        <p>Un operador independiente encargado del ingreso sellado, el almacenamiento segregado, los registros de inventario, las inspecciones y las instrucciones de liberación. Ubicación y operador pendientes de confirmación.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/platform/custody/">Explorar la custodia →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 04</span>
+        <h3>Fiduciario o agente de garantías</h3>
+        <p>Una opción en evaluación: una parte independiente que ostentaría garantías o derechos sobre la reserva en beneficio de los titulares de tokens, actuando conforme a instrucciones definidas.</p>
+        <div class="rc-card__foot">[rc_status s="proposed" label="Opción"]</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 05</span>
+        <h3>Laboratorio, inspector y tasador</h3>
+        <p>Partes independientes que generan evidencias de ensayo, inspección y valoración. Sus informes se registrarían con su huella y se adjuntarían a cada Pasaporte de Activo Digital.</p>
+        <div class="rc-card__foot">[rc_status s="proposed"] <a href="/platform/verification/">Verificación →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">FUNCIÓN 06</span>
+        <h3>Operador de la plataforma</h3>
+        <p>La capa tecnológica de ReserveChain: registro, pasaportes, registro de auditoría, conciliación y portales. Destinada a registrar y conciliar, no a ostentar la titularidad del metal.</p>
+        <div class="rc-card__foot">[rc_status s="in_development"] <a href="/platform/infrastructure/">Infraestructura →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Opciones estructurales</p>
+      <h2>Tres modelos <em>que evaluarán los asesores jurídicos</em></h2>
+      <p class="rc-lead">Se trata de modelos genéricos utilizados para enmarcar la revisión jurídica. No se ha seleccionado ninguno, y las consideraciones indicadas son preguntas, no conclusiones.</p>
+    </div>
+    <div class="rc-table-wrap" data-reveal>
+      <table class="rc-table">
+        <thead><tr><th>Opción</th><th>Esquema</th><th>Preguntas para los asesores jurídicos</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>A · Entidad única</td><td>El emisor ostenta directamente la titularidad del material y emite los tokens.</td><td>Aislamiento de la reserva frente a los acreedores operativos; sencillez frente a segregación.</td><td>[rc_status s="proposed" label="En evaluación"]</td></tr>
+          <tr><td>B · Emisor más SPV</td><td>Un vehículo tenedor de activos independiente ostenta la titularidad; el emisor emite los tokens conforme a un acuerdo que los vincula a la reserva.</td><td>Exigibilidad del vínculo; aislamiento frente a la insolvencia; condiciones entre sociedades del grupo.</td><td>[rc_status s="proposed" label="En evaluación"]</td></tr>
+          <tr><td>C · Estructura fiduciaria</td><td>Un fiduciario o agente de garantías ostenta garantías o la titularidad en favor de los titulares de tokens; el custodio actúa siguiendo sus instrucciones.</td><td>Reconocimiento del fideicomiso en las jurisdicciones pertinentes; coste; mecánica de instrucciones en el reembolso físico.</td><td>[rc_status s="proposed" label="En evaluación"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Cuestiones jurídicas abiertas</p>
+      <h2>Lo que debe responderse <em>antes de cualquier emisión</em></h2>
+      <p>Hasta que los asesores jurídicos respondan por escrito a estas cuestiones y las respuestas se reflejen en la documentación definitiva, la emisión de tokens permanece inactiva y ninguna página describe los tokens como generadores de derechos.</p>
+    </div>
+    <ul class="rc-checks" data-reveal>
+      <li>Qué derecho, en su caso, representaría un token sobre el material subyacente.</li>
+      <li>Cómo se transmite la titularidad en el reembolso físico, y en qué momento.</li>
+      <li>Qué prelación tendría la reserva si alguna de las partes de la estructura entrara en insolvencia.</li>
+      <li>Calificación regulatoria del token en cada jurisdicción permitida.</li>
+      <li>Ley aplicable y resolución de controversias para cada acuerdo.</li>
+      <li>Jurisdicción de la custodia y restricciones de exportación e importación aplicables al material.</li>
+      <li>Reglas de elegibilidad, incluida la exclusión de los residentes en la UE/EEE y de las personas ubicadas en ella.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Documentos legales</p>
+      <h2>Publicados solo <em>una vez aprobados</em></h2>
+      <p class="rc-lead">Los documentos societarios, las condiciones de los tokens, los resúmenes de custodia y las condiciones de reembolso físico aparecerán aquí, con sus huellas, cuando existan y hayan sido aprobados. Una lista vacía refleja con exactitud la situación actual.</p>
+    </div>
+    [rc_documents type="legal"]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Vea cómo se propone que funcionen la custodia y el reembolso físico</h2>
+        <p>La estructura existe para que la vertiente física sea fiable. Estas páginas describen los marcos operativos a los que daría soporte.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/custody/">Explorar la custodia</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/platform/redemption/">Cómo funciona el reembolso físico</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/resources/documentation/">Ver los documentos</a>
+      </div>
+    </div>
+  </div>
+</section>

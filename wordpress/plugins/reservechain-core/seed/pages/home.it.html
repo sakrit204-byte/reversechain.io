@@ -1,0 +1,397 @@
+<!--
+title: Home
+excerpt: ReserveChain sta sviluppando una piattaforma istituzionale destinata a collegare asset documentati di metalli industriali con un'infrastruttura di tokenizzazione digitale, verifica, custodia e rimborso fisico.
+order: 0
+-->
+<section class="rc-hero">
+  <div class="rc-wrap rc-hero__grid">
+    <div>
+      <p class="rc-kicker">Struttura societaria e di emissione svizzera in sviluppo</p>
+      <h1>Costruire l'infrastruttura per i <em>metalli industriali tokenizzati</em></h1>
+      <p class="rc-lead">ReserveChain sta sviluppando una piattaforma istituzionale destinata a collegare asset documentati di metalli industriali con un'infrastruttura di tokenizzazione digitale, verifica, custodia e rimborso fisico. Gli assetti societari, legali, di custodia, di verifica degli asset e tecnici sono attualmente in fase di finalizzazione.</p>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Si iscriva alla lista d'attesa del progetto</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">Esplori il modello proposto</a>
+      </div>
+      <div class="rc-btn-row rc-btn-row--quiet">
+        <a class="rc-btn rc-btn--sm rc-btn--ghost-light" href="/assets/industrial-metals/">Visualizza i programmi di metalli industriali</a>
+        <a class="rc-btn rc-btn--sm rc-btn--ghost-light" href="/enterprise/">Richieda informazioni per le imprese</a>
+      </div>
+      <p class="rc-hero__micro">Riceva aggiornamenti sullo sviluppo del progetto e informazioni sulla futura idoneità. La registrazione non costituisce un investimento, un acquisto di token né una prenotazione di metalli industriali.</p>
+    </div>
+    <div class="rc-hero__visual">
+      <div class="rc-elements rc-elements--hero">
+        <a class="rc-element" href="/assets/industrial-metals/copper-powder/"><span class="rc-element__n">29</span><span class="rc-element__s">Cu</span><span class="rc-element__l">Polvere di rame <small>99.9999 %*<br>Lotto #03-K-07</small></span></a>
+        <a class="rc-element rc-element--ni" href="/assets/industrial-metals/nickel-wire/"><span class="rc-element__n">28</span><span class="rc-element__s">Ni</span><span class="rc-element__l">Filo di nichel <small>99.9807 %*<br>0.025 mm</small></span></a>
+      </div>
+      <div class="rc-ledger" data-rc-ledger data-api="/wp-json/rc/v1">
+        <div class="rc-ledger__head"><span>Registro di integrità in tempo reale</span><span class="rc-ledger__live">letto dall'API</span></div>
+        <dl>
+          <div><dt>Catena di audit</dt><dd data-k="seq">—</dd></div>
+          <div><dt>Testa della catena</dt><dd data-k="head">—</dd></div>
+          <div><dt>Immutabilità</dt><dd data-k="triggers">—</dd></div>
+          <div><dt>Unità registrate</dt><dd data-k="passports">—</dd></div>
+          <div><dt>File di evidenza</dt><dd data-k="docs">—</dd></div>
+          <div><dt>Record verificati</dt><dd data-k="verified">—</dd></div>
+        </dl>
+      </div>
+      <p class="rc-hero__foot">* Purezza come indicata nei Certificati di Analisi forniti dal proprietario — soggetta a verifica documentale, valutazione indipendente e approvazione finale.</p>
+    </div>
+  </div>
+  <div class="rc-wrap">
+    <ul class="rc-trustbar" aria-label="Quadro di fiducia proposto">
+      <li><span>01</span>Quadro di verifica degli asset industriali</li>
+      <li><span>02</span>Struttura di custodia in sviluppo</li>
+      <li><span>03</span>Architettura di riconciliazione delle riserve</li>
+      <li><span>04</span>Infrastruttura ERC-20 pianificata</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Il modello ReserveChain proposto</p>
+        <h2>Prima le evidenze. <em>I token solo se approvati.</em></h2>
+      </div>
+      <p class="rc-lead">ReserveChain sta progettando un'unica catena di fiducia coerente tra un lotto fisico di metallo industriale e qualsiasi sua futura rappresentazione digitale. Ogni affermazione su questa piattaforma reca uno stato, ogni documento reca un'impronta e nulla viene presentato come confermato finché l'evidenza che lo sostiene non è stata approvata.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01 · Fisico</span><h3>Materiale documentato</h3><p>Polvere di rame ad altissima purezza e filo di nichel ad alta purezza, identificati fino al livello del singolo contenitore e del singolo rocchetto.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02 · Evidenze</span><h3>Documenti con impronta</h3><p>Certificati e registrazioni di custodia e proprietà vengono sottoposti a hashing SHA-256 al caricamento; chiunque può confrontare un file con il registro.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03 · Identità</span><h3>Passaporti dell'Asset Digitale</h3><p>Ogni lotto, contenitore e bobina riceve un passaporto costruito a partire dalle evidenze — mai inserito manualmente — con una radice di Merkle sui relativi documenti.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04 · Tokenizzazione</span><h3>Livello ERC-20 pianificato</h3><p>Smart contract su testnet in cui il minting si blocca per impostazione predefinita in caso di anomalia ed è vincolato a riserve attestate. Non esiste alcun token; nulla viene offerto.</p></article>
+    </div>
+    <div class="rc-statusline">
+      <span>Stato di ciascuna affermazione:</span>
+      [rc_status s="proposed"] [rc_status s="in_development"] [rc_status s="pending_verification"] [rc_status s="verified"] [rc_status s="not_applicable"]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Come funzionerà il modello proposto</p>
+      <h2>Dal lotto fisico <em>alla registrazione digitale</em></h2>
+      <p class="rc-lead">Il flusso di lavoro proposto per la tokenizzazione dei metalli industriali. Ogni fase produce evidenze; la fase successiva non può iniziare finché tali evidenze non sono state esaminate secondo il principio del doppio controllo (principio dei quattro occhi).</p>
+    </div>
+    <figure class="rc-diagram rc-diagram--chain" data-reveal>
+      <svg viewBox="0 0 1180 150" role="img" aria-label="Catena di fiducia: asset fisico, verificare, valutare, custodire, Passaporto dell'Asset Digitale, tokenizzare, riconciliare, partecipare, rimborsare" font-family="Inter Tight, sans-serif">
+        <defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#C9773F"/><stop offset=".5" stop-color="#D5B167"/><stop offset="1" stop-color="#A9BBC8"/></linearGradient></defs>
+        <line x1="60" y1="60" x2="1120" y2="60" stroke="url(#hg)" stroke-width="2" stroke-dasharray="4 6"/>
+        <g text-anchor="middle" fill="#E7EBEE" font-size="13">
+          <g><circle cx="60" cy="60" r="26" fill="#0B1621" stroke="#C9773F" stroke-width="2"/><text x="60" y="65" fill="#E8A06A" font-size="14">1</text><text x="60" y="118">Asset fisico</text></g>
+          <g><circle cx="192" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="192" y="65" fill="#D5B167" font-size="14">2</text><text x="192" y="118">Verificare</text></g>
+          <g><circle cx="324" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="324" y="65" fill="#D5B167" font-size="14">3</text><text x="324" y="118">Valutare</text></g>
+          <g><circle cx="456" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="456" y="65" fill="#D5B167" font-size="14">4</text><text x="456" y="118">Custodire</text></g>
+          <g><circle cx="588" cy="60" r="30" fill="#D5B167"/><text x="588" y="65" fill="#0B1621" font-size="14" font-weight="700">DAP</text><text x="588" y="118" fill="#fff">Passaporto dell'Asset Digitale</text></g>
+          <g><circle cx="720" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="720" y="65" fill="#D5B167" font-size="14">6</text><text x="720" y="118">Tokenizzare</text></g>
+          <g><circle cx="852" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="852" y="65" fill="#D5B167" font-size="14">7</text><text x="852" y="118">Riconciliare</text></g>
+          <g><circle cx="984" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="984" y="65" fill="#D5B167" font-size="14">8</text><text x="984" y="118">Partecipare</text></g>
+          <g><circle cx="1116" cy="60" r="26" fill="#0B1621" stroke="#A9BBC8" stroke-width="2"/><text x="1116" y="65" fill="#D2DDE5" font-size="14">9</text><text x="1116" y="118">Rimborsare</text></g>
+        </g>
+      </svg>
+      <figcaption>Catena di fiducia. Le fasi 6–9 sono proposte e restano inattive fino ad autorizzazione formale.</figcaption>
+    </figure>
+    <ol class="rc-steps">
+      <li><div><h3>Selezione del programma di asset</h3><p>Viene selezionato un programma definito di metallo industriale, con le relative specifiche di prodotto, la struttura delle unità (lotto, contenitore, bobina) e i requisiti documentali.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Verifica indipendente del materiale</h3><p>Laboratori accreditati analizzano il materiale campionato rispetto alle specifiche dichiarate; i certificati vengono registrati con la relativa impronta e collegati alle esatte unità fisiche campionate.</p></div>[rc_status s="pending_verification"]</li>
+      <li><div><h3>Documentazione di proprietà e custodia</h3><p>Le registrazioni relative alla titolarità, alla catena dei titoli di proprietà e alla custodia vengono raccolte ed esaminate prima che un asset possa essere preso in considerazione per una riserva.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Passaporto dell'Asset Digitale</h3><p>Ogni unità approvata riceve un passaporto permanente che riunisce specifiche, evidenze, custodia e cronologia degli stati, con accesso tramite codice QR ed esportazione leggibile da macchina.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Tokenizzazione</h3><p>Token ERC-20 o serie di token per programma di asset potranno essere emessi nell'ambito della struttura legale e societaria definitiva, esclusivamente a fronte di riserve attestate e solo previa autorizzazione scritta.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Amministrazione e riconciliazione delle riserve</h3><p>Offerta di token, inventario fisico e registrazioni di custodia vengono riconciliati; le discrepanze emergono come eccezioni anziché essere attenuate.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Trasferimento e rimborso fisico</h3><p>I detentori idonei potranno, secondo i termini definitivi, richiedere il rimborso fisico per contenitore o bobina, con il burn dei token al momento del rilascio.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/how-it-works/">Come funziona ReserveChain</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div data-reveal>
+      <p class="rc-kicker">Programma di asset iniziale · Cu 29</p>
+      <h2><em class="rc-cu">Polvere di rame</em> ad altissima purezza</h2>
+      <p class="rc-lead">Una polvere di rame ultrafine documentata da un Certificato di Analisi fornito dal proprietario, che indica una purezza chimica del 99.9999 % su una base di impurità definita.</p>
+      <dl class="rc-kv">
+        <div><dt>Lotto</dt><dd class="rc-mono">#03-K-07</dd></div>
+        <div><dt>Quantità dichiarata</dt><dd>2000 kg* — fiale di vetro in scatole di cartone</dd></div>
+        <div><dt>Certificato</dt><dd>CoA No. 0004512 · 04.07.2022 · ICP/OES</dd></div>
+        <div><dt>Unità campionata</dt><dd>Scatola n. 20 · <a href="/passport/RC-CU-CTN-000001/">passaporto RC-CU-CTN-000001</a></dd></div>
+        <div><dt>Stato</dt><dd>[rc_status s="pending_verification" label="Fornito dal proprietario — in attesa di verifica"]</dd></div>
+      </dl>
+      <p class="rc-fine">* Peso netto come dichiarato dal cliente al laboratorio. Dimensione delle particelle, morfologia, densità, ossigeno e umidità sono in attesa.</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/industrial-metals/copper-powder/">Visualizza il programma del rame</a><a class="rc-btn" href="/passport/RC-CU-LOT-000001/">Visualizza il Passaporto dell'Asset Digitale</a></div>
+    </div>
+    <div class="rc-program-visual rc-program-visual--cu" aria-hidden="true">
+      <svg viewBox="0 0 400 320"><defs><radialGradient id="cupile" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#F0B38A"/><stop offset=".55" stop-color="#C9773F"/><stop offset="1" stop-color="#5B2B10"/></radialGradient></defs><ellipse cx="200" cy="262" rx="150" ry="22" fill="#000" opacity=".45"/><path d="M60 258 C110 150, 160 92, 200 88 C240 92, 290 150, 340 258 Z" fill="url(#cupile)"/><g fill="#F6C9A6" opacity=".7"><circle cx="150" cy="200" r="1.6"/><circle cx="180" cy="160" r="1.2"/><circle cx="230" cy="180" r="1.4"/><circle cx="260" cy="220" r="1.2"/><circle cx="205" cy="130" r="1.1"/><circle cx="120" cy="236" r="1.3"/><circle cx="290" cy="240" r="1.5"/></g><text x="200" y="304" text-anchor="middle" fill="#8E99A5" font-family="Inter Tight" font-size="11" letter-spacing="2">SCHEMA — NON È UNA FOTOGRAFIA DEL PRODOTTO</text></svg>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div class="rc-program-visual rc-program-visual--ni" aria-hidden="true">
+      <svg viewBox="0 0 400 320"><defs><linearGradient id="nispool" x1="0" x2="1"><stop offset="0" stop-color="#5F7686"/><stop offset=".5" stop-color="#E1E9EF"/><stop offset="1" stop-color="#5F7686"/></linearGradient></defs><ellipse cx="200" cy="270" rx="120" ry="16" fill="#000" opacity=".45"/><rect x="110" y="70" width="180" height="190" rx="10" fill="#101C29" stroke="#2A3542"/><rect x="128" y="86" width="144" height="158" rx="6" fill="url(#nispool)"/><g stroke="#C9D6DF" stroke-width=".6" opacity=".55"><line x1="128" y1="96" x2="272" y2="96"/><line x1="128" y1="108" x2="272" y2="108"/><line x1="128" y1="120" x2="272" y2="120"/><line x1="128" y1="132" x2="272" y2="132"/><line x1="128" y1="144" x2="272" y2="144"/><line x1="128" y1="156" x2="272" y2="156"/><line x1="128" y1="168" x2="272" y2="168"/><line x1="128" y1="180" x2="272" y2="180"/><line x1="128" y1="192" x2="272" y2="192"/><line x1="128" y1="204" x2="272" y2="204"/><line x1="128" y1="216" x2="272" y2="216"/><line x1="128" y1="228" x2="272" y2="228"/></g><path d="M272 150 C 320 140, 340 120, 372 60" stroke="#D2DDE5" stroke-width=".5" fill="none"/><text x="200" y="304" text-anchor="middle" fill="#8E99A5" font-family="Inter Tight" font-size="11" letter-spacing="2">SCHEMA — NON È UNA FOTOGRAFIA DEL PRODOTTO</text></svg>
+    </div>
+    <div data-reveal>
+      <p class="rc-kicker">Programma di asset iniziale · Ni 28</p>
+      <h2><em class="rc-ni">Filo di nichel da 0.025 mm</em> ad alta purezza</h2>
+      <p class="rc-lead">Un filo di nichel ultrafine descritto nel relativo certificato fornito dal proprietario come "Nickel wire 0,025 mm dia, DKRNT NP1", con un grado di purezza dichiarato del 99.9807 %.</p>
+      <dl class="rc-kv">
+        <div><dt>Lotto</dt><dd class="rc-mono">120/NP1</dd></div>
+        <div><dt>Quantità dichiarata</dt><dd>5000 g* su 30 rocchetti in 1 scatola</dd></div>
+        <div><dt>Certificato</dt><dd>CoA No. 0004368 · 19.10.2021 · ICP/MS e ICP/OES</dd></div>
+        <div><dt>Controllo a livello di bobina</dt><dd>30 passaporti di rocchetto · rocchetti campionati 8, 10, 19, 27 · <a href="/passport/RC-NI-COL-000008/">rocchetto 8</a></dd></div>
+        <div><dt>Stato</dt><dd>[rc_status s="pending_verification" label="Fornito dal proprietario — in attesa di verifica"]</dd></div>
+      </dl>
+      <p class="rc-fine">* Peso netto secondo le informazioni fornite dal cliente. Tolleranza del diametro, tempra, resistenza a trazione e allungamento sono in attesa.</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/industrial-metals/nickel-wire/">Visualizza il programma del nichel</a><a class="rc-btn" href="/passport/RC-NI-LOT-000001/">Visualizza il Passaporto dell'Asset Digitale</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Presentazione illustrativa di un programma di asset</p>
+        <h2>Ogni unità, <em>il suo passaporto</em></h2>
+      </div>
+      <p class="rc-lead">Questi passaporti sono generati in tempo reale a partire dal registro. Le lacune sono mostrate come lacune: l'indicatore di completezza conta solo le evidenze esistenti. Il modello illustrativo di asset di metallo industriale mostra il formato futuro di una registrazione completamente documentata.</p>
+    </div>
+    [rc_passports limit="6"]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">Visualizza il Registro degli Asset</a><a class="rc-btn" href="/passport/RC-LOT-000001/">Modello illustrativo <span class="rc-demo-badge">Illustrativo</span></a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Quadro di verifica indipendente proposto</p>
+      <h2>La fiducia si costruisce <em>prima</em> che un asset venga tokenizzato</h2>
+      <p class="rc-lead">Si descrive un quadro proposto, soggetto a conferma legale, contrattuale, tecnica e operativa definitiva.</p>
+      <ul class="rc-checks">
+        <li>Campionamento eseguito dal laboratorio stesso, con registrazione del contenitore o del rocchetto campionato</li>
+        <li>Metodi accreditati (ad es. ISO/IEC 17025) — ReserveChain non ha ancora nominato alcun laboratorio</li>
+        <li>Certificati distinti in base alla provenienza: forniti dal proprietario, ricevuti direttamente dal laboratorio, verificati in modo indipendente</li>
+        <li>Nuova verifica in caso di trasferimento della custodia, invecchiamento o qualsiasi discrepanza</li>
+      </ul>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/verification/">Visualizza il processo di verifica</a></div>
+    </div>
+    <div class="rc-card" data-reveal>
+      <p class="rc-kicker">Provi ora</p>
+      <h3>Verifichi un documento senza caricarlo</h3>
+      <p>Trascini qualsiasi documento ReserveChain — ad esempio la scansione di un Certificato di Analisi — nella pagina di verifica. Il Suo browser calcola localmente la relativa impronta SHA-256 e confronta con il registro solo l'impronta. Basta modificare un singolo pixel perché la verifica non vada a buon fine.</p>
+      <div class="rc-card__foot"><span class="rc-mono">SHA-256 · lato client</span><a href="/platform/verification/#verify">Apra lo strumento di verifica →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Quadro di custodia e stoccaggio proposto</p>
+      <h2>Sicuro. Controllato. <em>Verificabile.</em></h2>
+      <p class="rc-lead">Si descrive un quadro proposto, soggetto a conferma legale, contrattuale, tecnica e operativa definitiva. Non è stato nominato alcun custode, magazzino o assicuratore.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Stoccaggio segregato a livello di unità</h3><p>È previsto che i materiali siano detenuti in forma segregata e identificati per contenitore o rocchetto, con registrazione dei numeri dei sigilli antimanomissione alla presa in custodia.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><h3>Catena di custodia</h3><p>Ogni presa in custodia, trasferimento e rilascio genera una registrazione di custodia collegata al passaporto dell'unità e a una ricevuta con impronta.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><h3>Controlli di ispezione e rilascio</h3><p>Ispezioni periodiche, riconciliazione con il custode e procedure di rilascio a doppio controllo per qualsiasi futuro rimborso fisico.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/platform/custody/">Esplori la custodia</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Quadro di Prova delle Riserve proposto</p>
+        <h2>Riserve calcolate, <em>mai dichiarate</em></h2>
+      </div>
+      <p class="rc-lead">Il dashboard seguente è calcolato in tempo reale a partire dal registro. Le quantità dichiarate restano separate da quelle verificate e la copertura delle riserve è calcolata solo sulla base di un'attestazione indipendente; finora non ne è stata pubblicata alcuna.</p>
+    </div>
+    [rc_por]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/proof-of-reserves/">Visualizza il rapporto sulle riserve</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Struttura legale e di detenzione degli asset proposta</p>
+      <h2>Una struttura progettata <em>attorno all'asset</em></h2>
+      <p class="rc-lead">ReserveChain sta completando la propria struttura societaria, legale e di emissione svizzera. I ruoli indicati sono proposti e soggetti a consulenza legale; nessuna parte è stata nominata e non si deve presumere l'esistenza di alcuna entità qui menzionata.</p>
+      <div class="rc-btn-row"><a class="rc-btn" href="/company/legal-structure/">Struttura legale e di detenzione degli asset proposta</a></div>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 520 300" role="img" aria-label="Struttura proposta: emittente, veicolo di detenzione degli asset, custode, laboratorio, detentori di token — tutti proposti" font-family="Inter Tight, sans-serif" font-size="12">
+        <g fill="#0B1621" stroke="#D5B167" stroke-width="1.2">
+          <rect x="190" y="18" width="140" height="52" rx="10"/><rect x="18" y="124" width="150" height="52" rx="10"/><rect x="352" y="124" width="150" height="52" rx="10"/><rect x="190" y="124" width="140" height="52" rx="10" stroke="#C9773F"/><rect x="190" y="228" width="140" height="52" rx="10" stroke="#A9BBC8"/>
+        </g>
+        <g fill="#E7EBEE" text-anchor="middle">
+          <text x="260" y="42">Emittente (Svizzera)</text><text x="260" y="58" fill="#8E99A5" font-size="10">proposto · in costituzione</text>
+          <text x="93" y="148">Laboratorio</text><text x="93" y="164" fill="#8E99A5" font-size="10">da nominare</text>
+          <text x="427" y="148">Custode</text><text x="427" y="164" fill="#8E99A5" font-size="10">da nominare</text>
+          <text x="260" y="148">Veicolo di detenzione</text><text x="260" y="164" fill="#8E99A5" font-size="10">proposto</text>
+          <text x="260" y="252">Detentori idonei</text><text x="260" y="268" fill="#8E99A5" font-size="10">futuro · previa approvazione</text>
+        </g>
+        <g stroke="#3A4856" stroke-width="1.2" stroke-dasharray="4 5" fill="none"><path d="M260 70 V124"/><path d="M168 150 H190"/><path d="M330 150 H352"/><path d="M260 176 V228"/></g>
+      </svg>
+      <figcaption>Ogni riquadro è proposto. Ruoli, parti e diritti definitivi dipendono dalla struttura legale definitiva.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Architettura di tokenizzazione ERC-20 proposta</p>
+      <h2>Contratti che <em>si bloccano in caso di anomalia</em></h2>
+      <p class="rc-lead">Una suite su testnet con test automatizzati. Nulla è distribuito sulla mainnet di Ethereum, nessun indirizzo di contratto è pubblicato e ogni parametro di tokenomics è deliberatamente lasciato non definito in attesa di approvazione scritta.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">ReserveToken</span><h3>Emissione controllata</h3><p>Nome, simbolo e tetto massimo configurabili. Il minting è bloccato salvo che sia coperto dal meccanismo di salvaguardia delle riserve o da un tetto espressamente approvato. Sospendibile, basato su ruoli, predisposto per il multisig.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">ReserveGuard</span><h3>Minting ≤ riserva attestata</h3><p>Gli attestatori pubblicano i rapporti sulle riserve tramite il relativo hash; l'importo coniabile ne deriva e decade quando un'attestazione non è più aggiornata.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">ComplianceRegistry</span><h3>Restrizioni ai trasferimenti</h3><p>Stato di idoneità, codici giurisdizionali, scadenza e indicatori di congelamento verificati a ogni trasferimento, con codici UE/SEE bloccabili tramite configurazione.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">RedemptionManager</span><h3>Escrow, poi burn</h3><p>Le richieste di rimborso fisico pongono i token in escrow, sono sottoposte a verifica di conformità e comportano il burn solo al rilascio fisico approvato. Disattivato per impostazione predefinita.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">Treasury</span><h3>Limiti e timelock</h3><p>Limiti giornalieri di prelievo e una coda timelock opzionale per i movimenti di importo elevato, amministrati in base ai ruoli.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">AuditAnchor</span><h3>Audit trail on-chain</h3><p>Registra periodicamente la testa del registro di audit della piattaforma, concatenato tramite hash, in modo che anche una riscrittura completa del database risulterebbe rilevabile.</p></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Scopra di più sulla tokenizzazione</a><a class="rc-btn" href="/resources/contract-addresses/">Indirizzi dei contratti: non distribuiti</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Processo di rimborso fisico proposto</p>
+      <h2>Dalla posizione digitale <em>alla consegna fisica</em></h2>
+      <p class="rc-lead">Si descrive un quadro proposto, soggetto a conferma legale, contrattuale, tecnica e operativa definitiva. Il rimborso fisico non è disponibile.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Richiesta di rimborso fisico</h3><p>Un detentore idoneo seleziona un programma e, ove consentito, specifici contenitori o bobine.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Nuova verifica di idoneità e conformità</h3><p>KYC/KYB, sanzioni e giurisdizione vengono nuovamente verificati al momento della richiesta.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Verifica delle unità</h3><p>Passaporti, sigilli e registrazioni di custodia delle unità selezionate vengono riconciliati prima del rilascio.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Regolamento e burn</h3><p>I token in escrow vengono bruciati on-chain; la transazione di burn viene registrata nel passaporto dell'unità.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Rilascio dalla custodia, logistica e consegna</h3><p>Rilascio a doppio controllo, documentazione doganale e conferma della consegna. Commissioni e soglie da determinare.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+    <div class="rc-btn-row"><a class="rc-btn" href="/platform/redemption/">Come funziona il rimborso fisico</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Servizi di tokenizzazione per le imprese</p>
+      <h2>Lo stesso motore delle evidenze, <em>per i Suoi asset</em></h2>
+      <p class="rc-lead">Il registro, il motore dei passaporti, gli strumenti di verifica e i controlli di conformità alla base di ReserveChain vengono progettati come moduli che le istituzioni potrebbero acquisire in licenza o utilizzare come servizio gestito.</p>
+      <ul class="rc-list"><li>Registro degli asset e Passaporti dell'Asset Digitale</li><li>Impronta digitale dei documenti e verifica pubblica</li><li>Audit trail a prova di manomissione con ancoraggio on-chain</li><li>Controlli di conformità, idoneità e restrizioni ai trasferimenti</li><li>API, portali white-label e reportistica</li></ul>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/enterprise/">Servizi per le imprese</a><a class="rc-btn" href="/enterprise/licensing-white-label/">Licenze tecnologiche</a></div>
+    </div>
+    <div class="rc-card" data-reveal>
+      <p class="rc-kicker">Proprietari di asset e originatori</p>
+      <h3>Inserisca materiale documentato nel registro</h3>
+      <p>Produttori, proprietari e detentori istituzionali di metalli industriali possono sottoporre un programma a due diligence: esame documentale, analisi indipendenti, valutazione, custodia e creazione dei passaporti — prima che venga presa in considerazione qualsiasi ipotesi di tokenizzazione.</p>
+      <div class="rc-card__foot"><span>Prima la due diligence</span><a href="/enterprise/asset-owners/">Sottoponga un asset →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Rischi e limitazioni</p>
+      <h2>Comprenda i rischi <em>prima di partecipare</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Fase di sviluppo</h3><p>La struttura societaria e legale, la custodia, l'assicurazione, la valutazione e i termini dei token non sono definitivi e potrebbero cambiare o non concretizzarsi.</p></article>
+      <article class="rc-card" data-reveal><h3>Rischio relativo alle evidenze</h3><p>Gli attuali certificati sono forniti dal proprietario e non sono ancora stati verificati in modo indipendente. I pesi dichiarati provengono dal cliente, non dal laboratorio.</p></article>
+      <article class="rc-card" data-reveal><h3>Mercato e liquidità</h3><p>Il valore dei metalli industriali varia; non viene promessa né lasciata intendere alcuna liquidità, prezzo, rendimento o rivalutazione.</p></article>
+      <article class="rc-card" data-reveal><h3>Aspetti regolamentari</h3><p>La classificazione dei token e le giurisdizioni consentite sono soggette a esame legale; i residenti nell'UE/SEE non sono partecipanti previsti.</p></article>
+      <article class="rc-card" data-reveal><h3>Tecnologia</h3><p>Smart contract, wallet e blockchain comportano rischi tecnici. I contratti non sono stati sottoposti ad audit e operano solo su testnet.</p></article>
+      <article class="rc-card" data-reveal><h3>Rimborso fisico e logistica</h3><p>Qualsiasi futuro rimborso fisico dipende da custodia, logistica, dogana e commissioni ancora da determinare.</p></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/legal/risk-disclosure/">Legga l'informativa completa sui rischi</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div><p class="rc-kicker">Centro documentazione</p><h2>Ogni documento, <em>con la sua impronta</em></h2></div>
+      <p class="rc-lead">Ogni file della biblioteca reca la propria impronta SHA-256. Le etichette di stato indicano se un documento è un modello, un'evidenza fornita dal proprietario o un documento verificato.</p>
+    </div>
+    [rc_documents]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/resources/documentation/">Visualizza i documenti</a><a class="rc-btn" href="/resources/whitepaper/">Visualizza il whitepaper</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Domande frequenti</p>
+      <h2>Domande, <em>risposte chiare</em></h2>
+      <div class="rc-faq">
+        <details><summary>Posso acquistare oggi token ReserveChain?</summary><div><p>No. ReserveChain è in fase di sviluppo. Non esiste alcun token, nessun token viene offerto o venduto e la registrazione di interesse non dà luogo ad alcuna assegnazione, prenotazione o diritto.</p></div></details>
+        <details><summary>I materiali di rame e nichel sono verificati?</summary><div><p>I programmi sono documentati da Certificati di Analisi forniti dal proprietario, registrati con la relativa impronta e pubblicati con una trascrizione esatta. Non sono ancora stati verificati in modo indipendente da ReserveChain; il loro stato è indicato come in attesa di verifica.</p></div></details>
+        <details><summary>Dove sono custoditi i metalli e sono assicurati?</summary><div><p>Non è stato nominato alcun custode, magazzino o assicuratore. Custodia e assicurazione sono assetti proposti, soggetti ad approvazione finale.</p></div></details>
+        <details><summary>Che cos'è un Passaporto dell'Asset Digitale?</summary><div><p>Una registrazione pubblica, derivata dalle evidenze, relativa a un lotto, contenitore o bobina: specifiche, certificati, custodia e cronologia degli stati, una radice di Merkle sui relativi documenti, un codice QR e un'esportazione JSON.</p></div></details>
+        <details><summary>I residenti nell'UE o nel SEE possono partecipare?</summary><div><p>Attualmente ReserveChain non intende offrire token a residenti nell'UE/SEE né a persone che si trovino nell'UE/SEE.</p></div></details>
+        <details><summary>Come posso sapere se un documento proviene davvero da ReserveChain?</summary><div><p>Verifichi la relativa impronta SHA-256 nella pagina di verifica. Il controllo viene eseguito nel Suo browser; il file non viene mai caricato.</p></div></details>
+      </div>
+      <div class="rc-btn-row"><a class="rc-btn" href="/resources/faq/">Tutte le domande frequenti</a></div>
+    </div>
+    <div id="waitlist">
+      <p class="rc-kicker">Lista d'attesa del progetto</p>
+      <h2>Riceva <em>aggiornamenti sul progetto</em></h2>
+      <p class="rc-lead">Riceva aggiornamenti sullo sviluppo del progetto e informazioni sulla futura idoneità. La registrazione non costituisce un investimento, un acquisto di token né una prenotazione di metalli industriali.</p>
+      [rc_waitlist]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div><p class="rc-kicker">Stato dello sviluppo societario</p><h2>Sviluppo trasparente, <em>descritto con precisione</em></h2></div>
+      <p class="rc-lead">Ciò che esiste oggi, ciò che è in corso e ciò che non è ancora iniziato. Gli stati indicati su questo sito non anticipano mai le evidenze.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Struttura societaria e di emissione svizzera</strong>[rc_status s="in_development"]<small>In sviluppo con i consulenti; nessun dato relativo alle entità sarà pubblicato finché non sarà definitivo.</small></div>
+      <div><strong>Sito web, CMS, Registro dei Metalli Industriali e Passaporti dell'Asset Digitale</strong>[rc_status s="in_development" label="Realizzato — pre-lancio"]<small>Operativi in questo ambiente di pre-lancio, con flusso di pubblicazione a doppio controllo (principio dei quattro occhi).</small></div>
+      <div><strong>Audit trail a prova di manomissione</strong>[rc_status s="in_development" label="Realizzato — pre-lancio"]<small>Concatenato tramite hash, di sola aggiunta, imposto a livello di database; ancoraggio on-chain predisposto per la testnet.</small></div>
+      <div><strong>Suite di smart contract ERC-20</strong>[rc_status s="in_development"]<small>Test automatizzati superati; solo testnet; prima di qualsiasi utilizzo è richiesto un audit indipendente.</small></div>
+      <div><strong>Applicazioni iOS e Android</strong>[rc_status s="in_development"]<small>Collegate alla stessa API; test su TestFlight e Google Play in attesa.</small></div>
+      <div><strong>Verifica indipendente, custodia, assicurazione, valutazione</strong>[rc_status s="proposed"]<small>Non è stato nominato alcun laboratorio, custode, assicuratore o perito valutatore.</small></div>
+      <div><strong>Emissione di token, partecipazione, rimborso fisico</strong>[rc_status s="proposed"]<small>Inattivi fino ad autorizzazione formale.</small></div>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/company/development-status/">Stato dello sviluppo societario</a><a class="rc-btn" href="/company/roadmap/">Roadmap</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-grid rc-grid--2">
+    <article class="rc-card" data-reveal>
+      <p class="rc-kicker">Informazioni di contatto ufficiali</p>
+      <h3>Contatti ReserveChain.io</h3>
+      <p>L'unico sito web ufficiale è <strong>reservechain.io</strong>. Utilizzi il modulo di contatto per richieste generali, aziendali, di proprietari di asset, dei media, di conformità o di sicurezza. Ulteriori canali ufficiali saranno elencati nella Directory dei canali ufficiali una volta confermati.</p>
+      <div class="rc-card__foot"><a href="/company/official-channels/">Directory dei canali ufficiali</a><a href="/company/contact/">Contatti ReserveChain →</a></div>
+    </article>
+    <article class="rc-card rc-card--alert" data-reveal>
+      <p class="rc-kicker">Avviso antifrode</p>
+      <h3>Nessun token è in vendita — in nessun luogo</h3>
+      <p>ReserveChain non chiede mai chiavi private, seed phrase, password o pagamenti e non esiste alcuna prevendita. Chiunque offra token, assegnazioni o sconti ReserveChain non agisce per conto di ReserveChain. Verifichi l'impronta di qualsiasi documento prima di fidarsene.</p>
+      <div class="rc-card__foot"><span>Segnali attività sospette</span><a href="/legal/anti-fraud/">Avviso antifrode →</a></div>
+    </article>
+  </div>
+</section>

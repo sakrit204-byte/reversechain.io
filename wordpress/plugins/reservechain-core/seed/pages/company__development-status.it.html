@@ -1,0 +1,195 @@
+<!--
+title: Stato di sviluppo della società
+excerpt: Un quadro di stato, area per area, che copre gli ambiti societario, tecnologico, di piattaforma, legale, di onboarding degli asset, verifica, custodia, tokenizzazione, documentazione e preparazione al lancio. Ogni voce è contrassegnata come completata, in corso o pianificata, e nulla viene considerato concluso finché non può essere dimostrato.
+kicker: Società · Quadro di stato
+order: 3
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Come leggere questo quadro</p>
+        <h2>Tre stati, <em>un'unica definizione di «concluso»</em></h2>
+      </div>
+      <p class="rc-lead">Una voce è «completata» solo quando esiste, può essere dimostrata ed è stata testata. Le attività che dipendono da una parte indipendente (laboratorio, custode, assicuratore, revisore, consulente legale) restano «pianificate» finché tale parte non è stata incaricata e le sue evidenze non sono state approvate.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <div class="rc-legend">[rc_status s="provided" label="Completato"]</div>
+        <h3>Completato</h3>
+        <p>Sviluppato, testato e dimostrabile nella build pre-lancio attuale. Non implica il deployment in produzione né l'attivazione pubblica.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <div class="rc-legend">[rc_status s="in_development" label="In corso"]</div>
+        <h3>In corso</h3>
+        <p>In fase di preparazione attiva. Esito e tempistiche restano soggetti ai consulenti, ai contributi del proprietario e all'approvazione finale.</p>
+      </article>
+      <article class="rc-card" data-reveal>
+        <div class="rc-legend">[rc_status s="proposed" label="Pianificato"]</div>
+        <h3>Pianificato o in attesa</h3>
+        <p>Definito nel quadro proposto ma non avviato, di solito perché una terza parte non è ancora stata incaricata o perché è richiesta un'autorizzazione scritta.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Aree 01–04</p>
+      <h2>Ambito societario, tecnologia, <em>piattaforma e ambito legale</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>
+        <h3>01 · Ambito societario</h3>
+        <div class="rc-claims">
+          <div><strong>Struttura societaria e di emissione svizzera</strong>[rc_status s="in_development" label="In corso"]<small>Struttura societaria e di emissione svizzera in sviluppo. Non vengono pubblicati denominazione dell'entità, indirizzo o numero di registro.</small></div>
+          <div><strong>Profili del team confermati</strong>[rc_status s="proposed" label="Pianificato"]<small>Le informazioni sul team fondatore saranno pubblicate una volta confermate. Il modulo dei profili è sviluppato e inattivo.</small></div>
+          <div><strong>Conferma dei canali ufficiali</strong>[rc_status s="in_development" label="In corso"]<small>Dominio confermato; canali e-mail e social da confermare.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>02 · Tecnologia</h3>
+        <div class="rc-claims">
+          <div><strong>Suite di smart contract, pronta per la testnet</strong>[rc_status s="provided" label="Completato"]<small>Contratti di token, registro di compliance, gestore del rimborso fisico, salvaguardia delle riserve, tesoreria e ancoraggio dell'audit, con test automatizzati. Nessun deployment sulla mainnet.</small></div>
+          <div><strong>Codice sorgente delle app iOS e Android</strong>[rc_status s="in_development" label="In corso"]<small>Stesso backend, autenticazione e flag dei moduli del sito web. Test su TestFlight e Google Play in attesa.</small></div>
+          <div><strong>Audit indipendente degli smart contract</strong>[rc_status s="proposed" label="Pianificato"]<small>Revisore non ancora incaricato.</small></div>
+          <div><strong>Penetration test e valutazione della sicurezza mobile</strong>[rc_status s="proposed" label="Pianificato"]<small>Fornitore non ancora incaricato.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>03 · Piattaforma</h3>
+        <div class="rc-claims">
+          <div><strong>Sito web pre-lancio e CMS</strong>[rc_status s="provided" label="Completato"]<small>Ogni pagina è modificabile nel CMS; hosting di produzione in attesa.</small></div>
+          <div><strong>Flusso di pubblicazione a doppio controllo</strong>[rc_status s="provided" label="Completato"]<small>Chi approva deve essere diverso da chi inserisce; l'approvazione è vincolata a un'impronta digitale del contenuto.</small></div>
+          <div><strong>Audit trail a prova di manomissione</strong>[rc_status s="provided" label="Completato"]<small>Catena di hash e trigger del database; ancoraggio on-chain predisposto sulla testnet.</small></div>
+          <div><strong>Lista d'attesa del progetto</strong>[rc_status s="provided" label="Completato"]<small>Doppio opt-in, registrazione del consenso, logica di restrizione per l'UE/SEE. L'iscrizione non costituisce un'offerta.</small></div>
+          <div><strong>Portali dei partecipanti e del rimborso fisico</strong>[rc_status s="in_development" label="Sviluppato, inattivo"]<small>Solo accesso graduale; posizioni detenute, wallet e rimborso fisico bloccati.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>04 · Ambito legale</h3>
+        <div class="rc-claims">
+          <div><strong>Struttura dell'emittente e di detenzione degli asset</strong>[rc_status s="in_development" label="In corso"]<small>Opzioni in fase di valutazione; si veda <a href="/company/legal-structure/">Struttura legale e di detenzione degli asset proposta</a>.</small></div>
+          <div><strong>Note legali del sito web</strong>[rc_status s="in_development" label="In corso"]<small>Pubblicate come bozze in attesa dell'approvazione del consulente legale.</small></div>
+          <div><strong>Termini del token e documentazione dell'offerta</strong>[rc_status s="proposed" label="Pianificato"]<small>Dipendono dalla struttura societaria definitiva.</small></div>
+          <div><strong>Elenchi delle giurisdizioni e regole di idoneità</strong>[rc_status s="in_development" label="In corso"]<small>UE/SEE escluse per impostazione predefinita; elenchi definitivi soggetti ad approvazione legale.</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Aree 05–08</p>
+      <h2>Asset, verifica, <em>custodia e tokenizzazione</em></h2>
+      <p class="rc-lead">Queste aree sono quelle che dipendono maggiormente da parti indipendenti. Nulla di quanto qui riportato è presentato come confermato e il registro rifletterà ogni modifica solo dopo l'approvazione.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>
+        <h3>05 · Onboarding degli asset</h3>
+        <div class="rc-claims">
+          <div><strong>Certificati forniti dal proprietario registrati</strong>[rc_status s="provided" label="Completato"]<small>CoA IGAS 0004512 (Cu) e 0004368 (Ni) trascritti fedelmente e con impronta SHA-256.</small></div>
+          <div><strong>Registrazioni e passaporti a livello di unità</strong>[rc_status s="provided" label="Completato"]<small>Cu: Lotto #03-K-07 e Scatola n. 20; Ni: Lotto 120/NP1 e registrazioni delle bobine 1–30.</small></div>
+          <div><strong>Documenti di proprietà e della catena di titolarità</strong>[rc_status s="pending" label="In attesa"]<small>Informazioni o documentazione in attesa di essere fornite o approvate dai titolari del progetto o dai loro consulenti professionali incaricati.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>06 · Verifica</h3>
+        <div class="rc-claims">
+          <div><strong>Nuova analisi da parte di un laboratorio indipendente</strong>[rc_status s="proposed" label="Pianificato"]<small>Laboratorio non incaricato. I certificati esistenti sono forniti dal proprietario.</small></div>
+          <div><strong>Ispezione fisica e campionamento</strong>[rc_status s="proposed" label="Pianificato"]<small>Metodologia definita; nessuna ispezione eseguita.</small></div>
+          <div><strong>Valutazione indipendente</strong>[rc_status s="proposed" label="Pianificato"]<small>Nessuna valutazione è stata commissionata o pubblicata.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>07 · Custodia</h3>
+        <div class="rc-claims">
+          <div><strong>Nomina del custode o del magazzino</strong>[rc_status s="proposed" label="Pianificato"]<small>Nessun custode, caveau o luogo è confermato.</small></div>
+          <div><strong>Registrazioni della presa in carico sigillata e della segregazione</strong>[rc_status s="proposed" label="Pianificato"]<small>Modello di dati sviluppato; numeri dei sigilli in attesa della presa in custodia.</small></div>
+          <div><strong>Coperture assicurative</strong>[rc_status s="proposed" label="Pianificato"]<small>Nessun assicuratore incaricato. Nulla è descritto come assicurato.</small></div>
+        </div>
+      </div>
+      <div data-reveal>
+        <h3>08 · Tokenizzazione e riserve</h3>
+        <div class="rc-claims">
+          <div><strong>Nome, simbolo e parametri del token</strong>[rc_status s="pending" label="In attesa della decisione del proprietario"]<small>Nessun nome, simbolo, offerta complessiva o prezzo è stato approvato.</small></div>
+          <div><strong>Attestazione della Prova delle Riserve</strong>[rc_status s="proposed" label="Pianificato"]<small>Logica della dashboard sviluppata; mostra le quantità dichiarate rispetto a quelle verificate e nessun dato di copertura fino all'attestazione.</small></div>
+          <div><strong>Emissione dei token</strong>[rc_status s="proposed" label="Pianificato"]<small>Non attiva. Richiede un'autorizzazione scritta e un'azione di deployment.</small></div>
+          <div><strong>Rimborso fisico</strong>[rc_status s="proposed" label="Pianificato"]<small>Flusso sviluppato e bloccato; si veda il <a href="/portal/redemption/">Portale del rimborso fisico</a>.</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Aree 09–10</p>
+      <h2>Documentazione <em>e preparazione al lancio</em></h2>
+    </div>
+    <div class="rc-table-wrap" data-reveal>
+      <table class="rc-table">
+        <thead><tr><th>Area</th><th>Voce</th><th>Stato</th><th>Dipendenza</th></tr></thead>
+        <tbody>
+          <tr><td>09 · Documentazione</td><td>Archivio documentale con impronte SHA-256</td><td>[rc_status s="provided" label="Completato"]</td><td>Nessuna</td></tr>
+          <tr><td>09 · Documentazione</td><td>Documenti di architettura, sicurezza, backup e passaggio di consegne</td><td>[rc_status s="in_development" label="In corso"]</td><td>Decisioni definitive sull'hosting</td></tr>
+          <tr><td>09 · Documentazione</td><td>Whitepaper, bozza istituzionale della Fase 1</td><td>[rc_status s="in_development" label="In corso"]</td><td>Contributi del proprietario; sezioni proposte contrassegnate</td></tr>
+          <tr><td>09 · Documentazione</td><td>Whitepaper, versione definitiva della Fase 2</td><td>[rc_status s="proposed" label="Pianificato"]</td><td>Struttura svizzera, verifica e custodia completate</td></tr>
+          <tr><td>10 · Preparazione al lancio</td><td>Fornitore di servizi KYC/KYB, AML e controllo delle sanzioni</td><td>[rc_status s="proposed" label="Pianificato"]</td><td>Selezione del fornitore</td></tr>
+          <tr><td>10 · Preparazione al lancio</td><td>Hosting di produzione, monitoraggio ed esercitazioni di backup</td><td>[rc_status s="proposed" label="Pianificato"]</td><td>Account intestati a ReserveChain</td></tr>
+          <tr><td>10 · Preparazione al lancio</td><td>Invio delle app iOS e Android agli store</td><td>[rc_status s="proposed" label="Pianificato"]</td><td>Account sviluppatore; revisione degli store</td></tr>
+          <tr><td>10 · Preparazione al lancio</td><td>Autorizzazione scritta al lancio</td><td>[rc_status s="not_applicable" label="Non richiesta"]</td><td>Tutti i requisiti precedenti</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Condizioni ostative al lancio</p>
+      <h2>Che cosa deve essere vero <em>prima che qualcosa diventi operativo</em></h2>
+      <p>Il lancio è un requisito scritto, non una data. Il quadro proposto blocca l'attivazione finché permane una qualsiasi di queste condizioni.</p>
+    </div>
+    <ul class="rc-list" data-reveal>
+      <li>Difetti critici non risolti o rilievi critici emersi dall'audit degli smart contract.</li>
+      <li>Rilievi di sicurezza ad alto rischio non accettati.</li>
+      <li>Riconciliazione dell'offerta, dei moduli o del rimborso fisico non riuscita.</li>
+      <li>Un test di ripristino da backup non riuscito.</li>
+      <li>Trasferimento incompleto di chiavi, ruoli e account sotto il controllo dell'emittente.</li>
+      <li>Mancanza di autorizzazione scritta per qualsiasi modulo soggetto a controllo.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Integrità</p>
+      <h2>Questo quadro è gestito <em>come una registrazione del registro</em></h2>
+      <p>Le modifiche di stato su questa pagina passano attraverso il flusso a doppio controllo e sono scritte nell'audit trail a prova di manomissione. Lo stato della catena in tempo reale è mostrato qui affinché qualsiasi riscrittura silenziosa della cronologia sia rilevabile.</p>
+      <p><a href="/company/governance/#audit">Come funziona l'audit trail →</a></p>
+    </div>
+    <div data-reveal>[rc_audit_status]</div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Segua l'avanzamento fase per fase</h2>
+        <p>La <a href="/company/roadmap/">roadmap</a> raggruppa queste aree in fasi soggette a requisiti, senza impegni di calendario.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/project-overview/">Visualizza la panoramica del programma</a>
+        <a class="rc-btn rc-btn--ghost-light" href="/participation/waitlist/">Iscriviti alla lista d'attesa</a>
+      </div>
+    </div>
+  </div>
+</section>

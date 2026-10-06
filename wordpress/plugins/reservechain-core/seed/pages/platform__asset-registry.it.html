@@ -1,0 +1,130 @@
+<!--
+title: Registro dei Metalli Industriali
+excerpt: L'unica fonte di verità alla base di ogni passaporto, dato sulle riserve e pagina di programma. Quattordici tipi di record tipizzati sono gestiti con un controllo di pubblicazione a doppia verifica, con cronologia completa delle versioni e stato a livello di unità, fino a ogni singolo contenitore e rocchetto.
+kicker: Piattaforma · Registro · Operativo con dati forniti dal proprietario
+order: 9
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_provisional]
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Conteggi in tempo reale</p>
+        <h2>Che cosa contiene <em>oggi il registro</em></h2>
+      </div>
+      <p class="rc-lead">I conteggi riportati di seguito sono letti direttamente dai record pubblicati. Le bozze e i record in revisione sono esclusi per progettazione, quindi il registro non mostra mai nulla che non sia passato attraverso l'approvazione.</p>
+    </div>
+    [rc_registry_stats]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Tipi di record</p>
+      <h2>Quattordici tipi di record, <em>ciascuno un fatto distinto</em></h2>
+      <p class="rc-lead">Il registro conserva fatti distinti in record distinti. Un certificato non è un campo di un lotto. È un record a sé stante, collegato al lotto, con il proprio emittente, la propria data, impronta e approvazione. Un record può quindi essere corretto, sostituito o ritirato senza intervenire sugli altri.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Programmi di asset</h3><p>Definizioni dei programmi Cu e Ni, relativo stato e documenti a livello di programma.</p></article>
+      <article class="rc-card" data-reveal><h3>Lotti</h3><p>Lotti di produzione, come Cu #03-K-07 e Ni 120/NP1, con quantità dichiarata e specifiche.</p></article>
+      <article class="rc-card" data-reveal><h3>Partite</h3><p>Partite di produzione o di strutturazione inferiori al lotto, nei casi in cui un lotto venga suddiviso.</p></article>
+      <article class="rc-card" data-reveal><h3>Contenitori</h3><p>Scatole e colli. È l'unità di rimborso fisico per la polvere di rame.</p></article>
+      <article class="rc-card" data-reveal><h3>Bobine</h3><p>Rocchetti e bobine. È l'unità di rimborso fisico per il filo di nichel. Il Lotto 120/NP1 comprende 30 rocchetti.</p></article>
+      <article class="rc-card" data-reveal><h3>Laboratori</h3><p>Identità dell'emittente, ubicazione ed evidenza dell'accreditamento, ove fornita.</p></article>
+      <article class="rc-card" data-reveal><h3>Certificati di Analisi</h3><p>Trascrizione esatta, tabella delle analisi, metodo, norma, registrazione del campione, fonte e impronta.</p></article>
+      <article class="rc-card" data-reveal><h3>Custodia e proprietà</h3><p>Presa in custodia, ricevute, sigilli, catena dei titoli e registrazioni di proprietà.</p></article>
+      <article class="rc-card" data-reveal><h3>Valutazioni</h3><p>Metodologia, benchmark, valuta, data, perito valutatore e data di revisione.</p></article>
+      <article class="rc-card" data-reveal><h3>Assicurazione</h3><p>Schede di polizza e periodi di copertura, ove stipulati. Attualmente non ne è stipulata alcuna.</p></article>
+      <article class="rc-card" data-reveal><h3>Rapporti sulle riserve</h3><p>Istantanee di riconciliazione, file di attestazione e date di riferimento.</p></article>
+      <article class="rc-card" data-reveal><h3>Programmi di token</h3><p>Parametri proposti per ciascun programma. Sono tutti in attesa e nessuno è codificato in modo fisso.</p></article>
+      <article class="rc-card" data-reveal><h3>Rimborsi fisici</h3><p>Richieste, decisioni sull'idoneità, riferimenti di burn e registrazioni di rilascio.</p></article>
+      <article class="rc-card" data-reveal><h3>Documenti</h3><p>Ogni file, con la relativa impronta SHA-256, versione e livello di visibilità.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Registro a livello di unità</p>
+      <h2>Ogni lotto, contenitore e rocchetto, <em>ciascuno con la propria riga di stato</em></h2>
+      <p class="rc-lead">Ogni riga è un'unità con il proprio passaporto. Gli stati di verifica, custodia, riserva, tokenizzazione, rimborso fisico e disponibilità cambiano solo tramite il flusso di lavoro a doppio controllo, quando l'evidenza a supporto viene approvata.</p>
+    </div>
+    [rc_registry_table]
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Controllo della pubblicazione</p>
+        <h2>Nulla è pubblico <em>finché una seconda persona non lo approva</em></h2>
+        <p class="rc-lead">Le dichiarazioni relative a proprietà, laboratorio, custodia, assicurazione e riserve restano non pubblicate finché le evidenze non vengono fornite e approvate. È il flusso di lavoro a imporlo; non dipende da prassi redazionali.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Bozza</h3><p>Visibile solo al redattore e ai ruoli con diritti di revisione. Mai indicizzata e mai restituita dall'API.</p></div></li>
+        <li><div><h3>In revisione</h3><p>Inviato insieme alle relative evidenze. Chi lo invia non può approvarlo.</p></div></li>
+        <li><div><h3>Approvato</h3><p>Una seconda persona lo approva, e l'approvazione è vincolata a un'impronta SHA-256 del contenuto e dei campi.</p></div></li>
+        <li><div><h3>Pubblicato</h3><p>L'impronta viene prima ricontrollata. Qualsiasi modifica apportata dopo l'approvazione rimanda il record in revisione.</p></div></li>
+        <li><div><h3>Non più pubblicato o archiviato</h3><p>I record pubblicati vengono ritirati, mai eliminati definitivamente. La loro cronologia resta intatta.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Controllo delle versioni e disciplina dei campi</p>
+      <h2>Come il registro <em>resta fedele ai fatti</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Dichiarato e testato</h3><p>Quantità e purezze conservano la propria fonte. I pesi netti di 2000 kg (Cu) e 5000 g (Ni) sono memorizzati come dichiarati dal cliente, esattamente come riportato nei relativi certificati.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Stringhe originali conservate</h3><p>I valori dei certificati sono memorizzati così come stampati, ad esempio «99,9807 %» con la virgola decimale, insieme ai numeri normalizzati. La vista delle evidenze non rappresenta mai un valore in modo diverso dalla sua fonte.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>«In attesa» è un valore</h3><p>I campi privi di evidenza, come la dimensione delle particelle, la densità dopo assestamento, la resistenza a trazione e la tempra, sono memorizzati e mostrati come «In attesa». Non vengono mai lasciati vuoti né stimati.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Visibilità a livello di campo</h3><p>Ogni campo è contrassegnato come pubblico, per i partecipanti, per i revisori o riservato. Il costo di acquisizione e le condizioni commerciali restano riservati.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Cronologia completa delle modifiche</h3><p>Ogni transizione registra chi l'ha effettuata, quando, lo stato precedente e quello nuovo, e il motivo. La registrazione è conservata nella traccia di audit concatenata tramite hash.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Operazioni massive, stessi controlli</h3><p>Importazioni ed esportazioni passano attraverso lo stesso flusso di lavoro. Un'importazione massiva genera bozze, non record pubblicati.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Chi consulta il registro</p>
+      <h2>Un unico registro, <em>molte viste</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Utilizzatore</th><th>Legge</th><th>Accesso</th></tr></thead>
+        <tbody>
+          <tr><td>Pagine dei programmi e passaporti</td><td>Record pubblicati e campi pubblici</td><td>Pubblico</td></tr>
+          <tr><td>Dashboard della Prova delle Riserve</td><td>Quantità pubblicate per stato</td><td>Pubblico</td></tr>
+          <tr><td>App iOS e Android</td><td>Gli stessi record, tramite <span class="rc-mono">rc/v1</span></td><td>Pubblico; per i partecipanti una volta attivato</td></tr>
+          <tr><td>Revisori</td><td>Campi riservati e traccia di audit</td><td>Ruolo di revisore</td></tr>
+          <tr><td>Clienti aziendali (previsto)</td><td>I propri programmi e le proprie unità</td><td>Limitato al singolo cliente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Da una riga del registro a un passaporto</h2>
+        <p>Apra qualsiasi unità per visualizzare l'insieme completo delle sue evidenze e la radice di Merkle.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/digital-asset-passports/">Visualizza il Passaporto dell'Asset Digitale</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/proof-of-reserves/">Visualizza il rapporto sulle riserve</a>
+        <a class="rc-btn" href="/enterprise/asset-owners/">Presenti un asset</a>
+      </div>
+    </div>
+  </div>
+</section>

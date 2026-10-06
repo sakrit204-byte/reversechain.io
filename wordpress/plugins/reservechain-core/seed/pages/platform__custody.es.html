@@ -1,0 +1,145 @@
+<!--
+title: Estructura propuesta de custodia y cámara acorazada
+excerpt: Controlada y auditable. Este es el modelo de custodia propuesto para metales industriales. Cada contenedor y carrete se segrega, se precinta, se contabiliza y solo se libera contra una instrucción registrada y sujeta a doble control. Aún no se ha designado ningún custodio.
+kicker: Plataforma · Marco propuesto · Custodia
+order: 6
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Alcance de esta página</p>
+        <h2>El modelo de custodia, <em>antes que el custodio</em></h2>
+        <p class="rc-lead">Esta página describe un marco de custodia propuesto, sujeto a confirmación legal, contractual, técnica y operativa definitiva. No se ha designado ningún custodio, almacén, cámara acorazada ni aseguradora. Ninguna unidad descrita en este sitio se mantiene en custodia profesional conforme a este marco.</p>
+        <p>Publicamos el modelo antes de cualquier designación para que los posibles custodios, propietarios de activos y participantes puedan valorar el estándar de control que ReserveChain pretende exigir.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Modelo de datos de custodia (recibos, precintos, ubicaciones, inspecciones)</strong>[rc_status s="in_development"]<small>Implementado en el registro y listo para cargar datos.</small></div>
+        <div><strong>Custodio profesional</strong>[rc_status s="proposed"]<small>La selección está sujeta a diligencia debida y a un contrato de custodia.</small></div>
+        <div><strong>Lugar de almacenamiento</strong>[rc_status s="proposed" label="Por confirmar"]<small>No se publica ninguna ubicación de cámara acorazada ni de almacén.</small></div>
+        <div><strong>Seguro</strong>[rc_status s="proposed" label="Por confirmar"]<small>Sujeto a los acuerdos de seguro definitivos. Actualmente ninguna unidad está cubierta.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Modelo de custodia</p>
+      <h2>Asignada, segregada, <em>identificable por unidad</em></h2>
+      <p class="rc-lead">El modelo propuesto es de custodia asignada. Cada unidad física se mantiene con su propia identidad y se registra al nivel más pequeño que puede ser objeto de reembolso físico: el contenedor para el polvo de cobre y el carrete para el alambre de níquel.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Segregación</h3><p>Los activos de los programas se mantienen separados de las existencias propias del custodio y de las de otros clientes. Cada programa está, además, segregado del otro. Una unidad nunca se agrupa ni se intercambia por otra «similar».</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Identidad a nivel de unidad</h3><p>Cada contenedor y carrete lleva una etiqueta que coincide con su identificador en el registro y con su pasaporte. La caja de cobre n.º 20, por ejemplo, se registra como <span class="rc-mono">RC-CU-CTN-000001</span>.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Almacenamiento adecuado al material</h3><p>Las condiciones se establecen para cada material. Las ampollas selladas se protegen contra roturas y la exposición a la oxidación. El alambre fino se protege contra deformaciones, humedad y daños por manipulación. Los requisitos específicos están pendientes de documentación.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Cadena de custodia</p>
+      <h2>Cada movimiento <em>deja un registro</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Entrada</h3><p>El custodio recibe las unidades contra un registro de recepción prevista. Los precintos se cotejan con el registro de inspección y, a continuación, las unidades se pesan y se fotografían.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Recibo</h3><p>El custodio emite un certificado de depósito para cada unidad. El recibo se carga, se le calcula la huella y se vincula al pasaporte.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Tenencia</h3><p>La unidad se almacena en la ubicación asignada. Cualquier movimiento dentro de las instalaciones se registra con la hora, la persona y el motivo.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Inspección</h3><p>Se realizan recuentos y comprobaciones de precintos programados sobre una muestra de unidades, con un recuento completo al menos una vez al año. La plataforma o un atestador pueden solicitar inspecciones extraordinarias.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Liberación</h3><p>Únicamente contra una orden de liberación aprobada por una segunda persona autorizada y que haga referencia a una quema completada en cadena.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Controles de acceso y registros de inventario</p>
+      <h2>Dos llaves para cada puerta, <em>un registro para cada unidad</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Controles de acceso</h3>
+        <ul class="rc-list">
+          <li>Doble control para el acceso físico a las existencias de los programas</li>
+          <li>Ningún miembro del personal de ReserveChain puede retirar una unidad por sí solo</li>
+          <li>Registros de visitantes y de acceso facilitados a la plataforma</li>
+          <li>Personal del custodio sometido a controles conforme al contrato de custodia</li>
+          <li>Instrucciones de liberación únicamente a través del flujo de trabajo autenticado, nunca por correo electrónico ni por teléfono</li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Registros de inventario</h3>
+        <ul class="rc-list">
+          <li>Identificador de la unidad, número de precinto, peso bruto y neto</li>
+          <li>Referencia de ubicación, publicada al nivel aprobado</li>
+          <li>Número y fecha del recibo</li>
+          <li>Historial de inspecciones con sus resultados</li>
+          <li>Estado de cargas y restricciones</li>
+          <li>Historial de liberaciones, vinculado a los registros de reembolso físico</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Auditoría, conciliación y seguro</p>
+      <h2>Independiente de la <em>propia palabra del custodio</em></h2>
+      <p class="rc-lead">La declaración de un custodio es una evidencia, pero por sí sola no constituye una prueba. El marco propuesto compara tres registros independientes y trata cualquier diferencia como una excepción.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Registro</th><th>Fuente</th><th>Se coteja con</th><th>Frecuencia (propuesta)</th></tr></thead>
+        <tbody>
+          <tr><td>Estado de inventario del custodio</td><td>Custodio (pendiente de designación)</td><td>Unidades del registro en custodia</td><td>Mensual y antes de cualquier acuñación</td></tr>
+          <tr><td>Registros de custodia del registro</td><td>Registro de ReserveChain</td><td>Suministro de tokens por programa</td><td>En cada cambio del suministro</td></tr>
+          <tr><td>Recuento físico</td><td>Inspector o atestador independiente (pendiente de designación)</td><td>Estado del custodio y registro</td><td>Muestra trimestral; recuento completo anual</td></tr>
+          <tr><td>Condiciones del seguro</td><td>Aseguradora o corredor (pendiente de designación)</td><td>Unidades en custodia y su valoración aprobada</td><td>En cada renovación y ante cambios significativos</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Las frecuencias son propuestas sujetas a las condiciones contractuales definitivas. El seguro, cuando proceda, depende de los acuerdos de seguro definitivos, y actualmente no existe ninguna cobertura.</p>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Controles de liberación y reembolso físico</p>
+        <h2>Primero, la quema. <em>Después, la liberación.</em></h2>
+        <p class="rc-lead">La liberación física es el momento en que un registro digital y un activo físico se separan. Por ello, el orden de las operaciones es fijo.</p>
+      </div>
+      <ul class="rc-checks">
+        <li>Los tokens del titular se depositan en garantía (escrow) en el contrato RedemptionManager.</li>
+        <li>El área de cumplimiento aprueba la solicitud y el contenedor o carrete concreto que se va a liberar.</li>
+        <li>Los tokens se queman en cadena y la transacción de quema se registra en relación con la solicitud.</li>
+        <li>Solo entonces recibe el custodio una orden de liberación con doble aprobación que hace referencia a la quema.</li>
+        <li>El pasaporte pasa a «Liberado» y las cifras de reservas se actualizan tras la conciliación.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Siga la custodia hasta el informe de reservas</h2>
+        <p>Los registros de custodia alimentan el panel de Prueba de Reservas. Hasta que se designe un custodio, el panel indica la custodia como pendiente.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/proof-of-reserves/">Ver informe de reservas</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/redemption/">Cómo funciona el reembolso físico</a>
+        <a class="rc-btn" href="/company/contact/">Contactar con ReserveChain</a>
+      </div>
+    </div>
+  </div>
+</section>

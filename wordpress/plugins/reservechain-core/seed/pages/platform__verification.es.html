@@ -1,0 +1,157 @@
+<!--
+title: Marco de verificación independiente propuesto
+excerpt: La confianza se construye antes de tokenizar un activo. Esta página expone cómo propone ReserveChain muestrear, analizar, validar y volver a verificar unidades de metales industriales. También explica cómo se mantiene la evidencia aportada por el propietario separada de la evidencia verificada de forma independiente.
+kicker: Plataforma · Marco propuesto · Verificación
+order: 5
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Alcance de esta página</p>
+        <h2>Un marco propuesto, <em>presentado como tal</em></h2>
+        <p class="rc-lead">Esta página describe un marco de verificación propuesto, sujeto a confirmación jurídica, contractual, técnica y operativa definitiva. ReserveChain no ha designado ningún laboratorio independiente. Ninguna unidad de este sitio ha sido verificada de forma independiente conforme a este marco.</p>
+      </div>
+      <div class="rc-claims">
+        <div><strong>Certificados de Análisis aportados por el propietario disponibles en archivo</strong>[rc_status s="pending_verification"]<small>IGAS CoA 0004512 (Cu, 04.07.2022) y CoA 0004368 (Ni, 19.10.2021), aportados por el propietario del activo.</small></div>
+        <div><strong>Huellas de los documentos registradas y comprobables públicamente</strong>[rc_status s="in_development"]<small>Cada archivo almacenado lleva una huella SHA-256. Utilice la herramienta que figura más abajo para comprobar una.</small></div>
+        <div><strong>Muestreo y análisis independientes</strong>[rc_status s="proposed"]<small>Requiere la designación contractual de un laboratorio acreditado.</small></div>
+        <div><strong>Revisión de la valoración</strong>[rc_status s="proposed"]<small>Requiere la designación contractual de un tasador independiente.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">La distinción que importa</p>
+      <h2>Aportado por el propietario <em>no equivale a verificado</em></h2>
+      <p class="rc-lead">Un certificado aportado por el propietario de un activo puede ser exacto. Aun así, sigue siendo una afirmación realizada por una parte interesada sobre una muestra que ella misma gestionó. ReserveChain registra la fuente de cada certificado y la muestra en cada pasaporte.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <h3>Evidencia aportada por el propietario</h3>
+        <ul class="rc-list">
+          <li>Encargada por el propietario o por un tenedor anterior</li>
+          <li>ReserveChain no presenció la toma de la muestra ni su cadena de custodia</li>
+          <li>Las cantidades suelen figurar «según el cliente», como en ambos certificados de IGAS</li>
+          <li>Se muestra como transcripción exacta junto con el escaneo original</li>
+          <li>Estado mostrado: <strong>Pendiente de verificación</strong></li>
+        </ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Evidencia verificada de forma independiente (propuesto)</h3>
+        <ul class="rc-list">
+          <li>Encargada contractualmente por la plataforma, no por el propietario</li>
+          <li>Muestras tomadas por el laboratorio o por un inspector en presencia de testigos y, a continuación, precintadas</li>
+          <li>Analizadas por un laboratorio acreditado mediante un método y una norma de referencia declarados</li>
+          <li>El emisor confirma el certificado directamente</li>
+          <li>El estado «verificado» solo puede mostrarse una vez que exista un registro aprobado</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Flujo de trabajo</p>
+      <h2>Siete pasos <em>desde la presentación hasta el estado</em></h2>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Recepción de documentos</h3><p>El propietario presenta los certificados, especificaciones y listas de embalaje existentes. Se calcula la huella de cada archivo en el momento de la carga y este se conserva sin modificaciones.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Validación de documentos</h3><p>Los números de certificado, las fechas, las referencias de lote y las firmas se cotejan con el laboratorio emisor. Cualquier discrepancia se registra como excepción y el certificado no se utiliza.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Inspección física</h3><p>Un inspector comprueba el embalaje, las etiquetas, los números de precinto y el número de unidades con respecto al registro y, a continuación, pesa y fotografía las unidades.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Muestreo</h3><p>Las muestras se toman conforme al plan de muestreo que figura más abajo. Los recipientes de las muestras se precintan, se registran los números de precinto y las muestras se envían al laboratorio acompañadas de un formulario de cadena de custodia.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Análisis</h3><p>El laboratorio realiza el análisis acordado, por ejemplo ICP-MS o ICP-OES para elementos traza, además de los ensayos físicos adecuados a la forma del material, y emite un certificado.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Revisión y aprobación</h3><p>Un revisor compara los resultados con la especificación declarada. Una segunda persona aprueba el registro de verificación, y la aprobación queda vinculada a la huella del registro.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Publicación del estado</h3><p>El pasaporte de la unidad muestra el registro de verificación, el certificado, su huella y la fecha en la que corresponde volver a verificar.</p></div>[rc_status s="in_development"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Metodología de muestreo y laboratorios</p>
+      <h2>Planes adaptados a <em>la forma del material</em></h2>
+      <p class="rc-lead">Un polvo sellado en ampollas de vidrio y un alambre de 0,025 mm enrollado en carretes requieren planes de muestreo diferentes. Los planes propuestos que figuran a continuación están sujetos a los procedimientos propios del laboratorio designado y a la aprobación final.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th></th><th>Polvo de cobre (ampollas en cajas)</th><th>Alambre de níquel de 0,025 mm (carretes)</th></tr></thead>
+        <tbody>
+          <tr><td>Unidad de control</td><td>Contenedor (caja), registrado por ampolla cuando sea viable</td><td>Carrete («bobina» en el registro)</td></tr>
+          <tr><td>Selección</td><td>Selección aleatoria de cajas en todo el lote. El número de cajas lo fija el laboratorio en función del tamaño del lote.</td><td>Selección aleatoria de carretes en toda la caja. Cada carrete se pesa y se inspecciona visualmente.</td></tr>
+          <tr><td>Química</td><td>Análisis de elementos traza con respecto a una base de impurezas determinada</td><td>Análisis de elementos traza con respecto a una base de impurezas determinada</td></tr>
+          <tr><td>Física</td><td>Distribución granulométrica, morfología, densidad aparente y compactada, oxígeno y humedad: todo <strong>Pendiente</strong></td><td>Diámetro y tolerancia, resistencia a la tracción, alargamiento y acabado superficial: todo <strong>Pendiente</strong></td></tr>
+          <tr><td>Referencia aportada por el propietario</td><td>CoA 0004512: muestra de 10 g de la caja n.º 20, ICP/OES</td><td>CoA 0004368: muestra de 0,8 g de los carretes 8, 10, 19 y 27, ICP/MS + ICP/OES</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Acreditación obligatoria</h3><p>Todo laboratorio que se utilice para la verificación independiente debe estar acreditado conforme a la norma ISO/IEC 17025 para los métodos que aplique. Se trata de un requisito exigido al laboratorio, no de una afirmación sobre ReserveChain.</p></article>
+      <article class="rc-card" data-reveal><h3>Independencia obligatoria</h3><p>El laboratorio no debe tener ninguna relación comercial con el propietario del activo respecto de la unidad analizada, y es contratado y remunerado por la plataforma.</p></article>
+      <article class="rc-card" data-reveal><h3>Ninguno designado</h3><p>No se ha designado ningún laboratorio. Los nombres de los socios solo aparecen una vez firmado un contrato y después de que el socio haya autorizado el uso de su nombre.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Cadena de evidencias y nueva verificación</p>
+        <h2>Evidencias que <em>permanecen vinculadas a la unidad</em></h2>
+        <p class="rc-lead">Cada registro de verificación se vincula a la unidad exacta que cubre, al archivo del certificado, al registro de muestreo y a la persona que lo aprobó. La sustitución de un documento crea una nueva versión y una nueva huella. La versión anterior permanece en el historial.</p>
+      </div>
+      <ul class="rc-checks">
+        <li><strong>Nueva verificación programada:</strong> se fija una fecha límite por programa y, una vez vencida, el pasaporte muestra el registro como desactualizado.</li>
+        <li><strong>Nueva verificación por eventos:</strong> obligatoria tras la rotura de un precinto, una transferencia de custodia, una discrepancia de peso o un bulto dañado.</li>
+        <li><strong>Comprobación previa al reembolso físico:</strong> el contenedor o carrete concreto se coteja con su registro antes de su liberación.</li>
+        <li><strong>Revisión de la valoración:</strong> cada valoración está vinculada a la especificación verificada. Si la especificación cambia, la valoración se revisa de nuevo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream" id="verify">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Herramienta en directo</p>
+      <h2>Verifique la <em>huella de un documento</em></h2>
+      <p class="rc-lead">Arrastre aquí cualquier documento que haya recibido y que afirme proceder de ReserveChain. Su navegador calcula localmente su huella SHA-256 y el archivo nunca se carga. A continuación, la herramienta coteja la huella con el registro publicado. Una coincidencia demuestra que el archivo es idéntico byte a byte a la versión publicada. Por sí sola, no demuestra que el contenido sea veraz.</p>
+    </div>
+    [rc_verify]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Certificados en archivo</p>
+      <h2><em>Certificados de Análisis</em> aportados por el propietario</h2>
+      <p class="rc-lead">Cada certificado se publica con su escaneo original, una transcripción exacta y su huella. La publicación está sujeta a aprobación y no indica una verificación independiente.</p>
+    </div>
+    [rc_documents type="coa"]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Consulte el estado de verificación de cada unidad</h2>
+        <p>Cada pasaporte muestra su registro de verificación, la fuente del certificado y su huella.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/passport/RC-NI-COL-000008/">Ver el Pasaporte de Activo Digital</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/asset-registry/">Ver el Registro de Activos</a>
+        <a class="rc-btn" href="/enterprise/asset-owners/">Presentar un activo</a>
+      </div>
+    </div>
+  </div>
+</section>

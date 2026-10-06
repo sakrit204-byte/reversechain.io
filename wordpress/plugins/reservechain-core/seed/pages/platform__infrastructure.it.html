@@ -1,0 +1,164 @@
+<!--
+title: Infrastruttura della piattaforma per asset del mondo reale
+excerpt: Infrastruttura istituzionale per asset fisici. Questa pagina illustra l'architettura funzionale: un registro delle evidenze, passaporti, un flusso di lavoro governato, controlli di conformità, un motore delle riserve e un livello token. Tutti si trovano dietro un'unica API condivisa dal sito web, dal portale e dalle app mobili.
+kicker: Piattaforma · Architettura funzionale · In sviluppo
+order: 2
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">L'architettura in sintesi</p>
+        <h2>Le evidenze alla base, <em>il ledger al vertice</em></h2>
+      </div>
+      <p class="rc-lead">L'architettura è organizzata a livelli, in modo che nessun livello possa affermare più di quanto supportato dal livello sottostante. Il ledger ricava le riserve dalle attestazioni. Le attestazioni si basano sul registro. Il registro si basa su evidenze approvate. Nulla risale in senso inverso senza revisione.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 470" role="img" aria-labelledby="rc-arch-title rc-arch-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-arch-title">Architettura della piattaforma ReserveChain</title>
+        <desc id="rc-arch-desc">Quattro livelli. Canali: sito web, portale dei partecipanti, app iOS e Android, portale per le imprese. Interfaccia: API REST rc/v1. Nucleo: registro, motore dei passaporti, flusso di lavoro, audit trail, conformità, motore delle riserve. Ledger sulla testnet Ethereum: ReserveToken, ComplianceRegistry, ReserveGuard, RedemptionManager, Treasury, AuditAnchor.</desc>
+        <g font-size="11" fill="#A9BBC8" letter-spacing="1.2">
+          <text x="20" y="28">CANALI</text><text x="20" y="128">INTERFACCIA</text><text x="20" y="208">NUCLEO · PLUGIN RESERVECHAIN CORE SU WORDPRESS</text><text x="20" y="348">LEDGER · SOLO TESTNET ETHEREUM</text>
+        </g>
+        <g fill="#0E1620" stroke="#1C2A38" stroke-width="1.5">
+          <rect x="20" y="40" width="225" height="52" rx="8"/><rect x="265" y="40" width="225" height="52" rx="8"/><rect x="510" y="40" width="225" height="52" rx="8"/><rect x="755" y="40" width="225" height="52" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="13" text-anchor="middle">
+          <text x="132" y="71">Sito web pubblico</text><text x="377" y="71">Portale dei partecipanti</text><text x="622" y="71">App iOS e Android</text><text x="867" y="71">Portale imprese (previsto)</text>
+        </g>
+        <rect x="20" y="140" width="960" height="44" rx="8" fill="#0E1620" stroke="#D5B167" stroke-width="2"/>
+        <text x="500" y="167" fill="#E7EBEE" font-size="13.5" text-anchor="middle" font-weight="600">API REST  rc/v1  ·  lettura pubblica  ·  JWT bearer  ·  MFA TOTP  ·  limitazione delle richieste</text>
+        <g stroke="#D5B167" stroke-width="1.5"><line x1="132" y1="92" x2="132" y2="140"/><line x1="377" y1="92" x2="377" y2="140"/><line x1="622" y1="92" x2="622" y2="140"/><line x1="867" y1="92" x2="867" y2="140" stroke-dasharray="4 4"/></g>
+        <g fill="#0E1620" stroke="#1C2A38" stroke-width="1.5">
+          <rect x="20" y="220" width="148" height="96" rx="8"/><rect x="183" y="220" width="148" height="96" rx="8"/><rect x="346" y="220" width="148" height="96" rx="8"/><rect x="509" y="220" width="148" height="96" rx="8"/><rect x="672" y="220" width="148" height="96" rx="8"/><rect x="835" y="220" width="145" height="96" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="12.5" font-weight="600" text-anchor="middle">
+          <text x="94" y="252">Registro</text><text x="257" y="252">Motore passaporti</text><text x="420" y="252">Flusso di lavoro</text><text x="583" y="252">Audit trail</text><text x="746" y="252">Conformità</text><text x="907" y="252">Motore riserve</text>
+        </g>
+        <g fill="#A9BBC8" font-size="10.5" text-anchor="middle">
+          <text x="94" y="274">14 tipi di record</text><text x="94" y="290">schema dichiarativo</text>
+          <text x="257" y="274">composizione evidenze</text><text x="257" y="290">radice Merkle SHA-256</text>
+          <text x="420" y="274">doppio controllo</text><text x="420" y="290">vincolato all'impronta</text>
+          <text x="583" y="274">solo aggiunta</text><text x="583" y="290">righe concatenate via hash</text>
+          <text x="746" y="274">stato KYC/KYB</text><text x="746" y="290">regole giurisdizionali</text>
+          <text x="907" y="274">dichiarato vs verificato</text><text x="907" y="290">nessuna copertura fittizia</text>
+        </g>
+        <g stroke="#C9773F" stroke-width="1.5" stroke-dasharray="4 4">
+          <line x1="583" y1="316" x2="583" y2="360"/><line x1="746" y1="316" x2="746" y2="360"/><line x1="907" y1="316" x2="907" y2="360"/>
+        </g>
+        <g fill="#0E1620" stroke="#A9BBC8" stroke-width="1.5">
+          <rect x="20" y="360" width="148" height="80" rx="8"/><rect x="183" y="360" width="148" height="80" rx="8"/><rect x="346" y="360" width="148" height="80" rx="8"/><rect x="509" y="360" width="148" height="80" rx="8"/><rect x="672" y="360" width="148" height="80" rx="8"/><rect x="835" y="360" width="145" height="80" rx="8"/>
+        </g>
+        <g fill="#E7EBEE" font-size="12" font-weight="600" text-anchor="middle">
+          <text x="94" y="392">ReserveToken</text><text x="257" y="392">Treasury</text><text x="420" y="392">RedemptionManager</text><text x="583" y="392">AuditAnchor</text><text x="746" y="392">ComplianceRegistry</text><text x="907" y="392">ReserveGuard</text>
+        </g>
+        <g fill="#A9BBC8" font-size="10.5" text-anchor="middle">
+          <text x="94" y="414">ERC-20 · conio fail-closed</text><text x="257" y="414">limiti · timelock</text><text x="420" y="414">escrow → burn</text><text x="583" y="414">ancoraggi della testa</text><text x="746" y="414">screening dei trasferimenti</text><text x="907" y="414">conio ≤ riserva attestata</text>
+        </g>
+        <text x="500" y="462" fill="#A9BBC8" font-size="10.5" text-anchor="middle">Collegamenti tratteggiati: le teste della catena di audit sono ancorate on-chain; le decisioni di idoneità e le attestazioni delle riserve sono registrate da operatori con autorizzazioni separate.</text>
+      </svg>
+      <figcaption>Architettura implementata. I canali, l'API e il nucleo sono attualmente operativi nell'ambiente di sviluppo. I contratti del ledger sono distribuiti esclusivamente su reti di test. Non esiste alcuna distribuzione sulla mainnet e nessun indirizzo di contratto è pubblicato.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Componenti funzionali</p>
+      <h2>Undici componenti, <em>un unico modello di dati</em></h2>
+      <p class="rc-lead">Ogni componente ha un unico compito e un unico ruolo responsabile. I componenti condividono un unico modello di dati, per cui un dato mostrato in un punto non può essere in contrasto con lo stesso dato mostrato altrove.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Registro dei Metalli Industriali</h3><p>Record tipizzati per programmi, lotti, partite, contenitori, bobine, laboratori, certificati, custodia, valutazioni, assicurazioni, rapporti sulle riserve, programmi di token, rimborsi fisici e documenti. I campi sono dichiarati una sola volta in uno schema, e tale schema governa l'editor, l'API e il passaporto.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Passaporti dell'Asset Digitale</h3><p>Generati su richiesta a partire da record approvati. Ogni passaporto riporta il proprio ciclo di vita fase per fase, i documenti collegati con le relative impronte, le unità padre e figlie e una radice di Merkle calcolata sull'insieme.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Record di verifica</h3><p>I record di laboratorio, dei certificati e del campionamento sono collegati all'unità che descrivono. Ogni certificato contiene un campo relativo alla fonte che distingue le evidenze fornite dal proprietario da quelle commissionate in modo indipendente.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Record di custodia</h3><p>Ricevute, numeri dei sigilli, ubicazioni ed eventi di ispezione sono collegati a contenitori e bobine. Il modello di dati è pronto, ma non è stato nominato alcun custode per alimentarlo.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Controlli di conformità</h3><p>Stato KYC/KYB, elenchi delle giurisdizioni, decisioni di idoneità e restrizioni. Le decisioni off-chain sono replicate nel ComplianceRegistry on-chain da un operatore con autorizzazioni separate.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Motore di tokenizzazione</h3><p>I record dei programmi di token contengono ogni parametro economico, e tutti sono non impostati per impostazione predefinita. I contratti applicano il conio subordinato alle riserve, lo screening dei trasferimenti, la pausa e la separazione dei ruoli.</p><div class="rc-card__foot">[rc_status s="in_development" label="Solo testnet"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">07</span><h3>Motore delle riserve e della riconciliazione</h3><p>Calcola le quantità dichiarate e verificate per programma, metallo e unità a partire da dati approvati. Le attestazioni delle riserve sono pubblicate su ReserveGuard con un hash del rapporto e una data di riferimento.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">08</span><h3>API</h3><p>Uno spazio dei nomi REST con controllo delle versioni, <span class="rc-mono">rc/v1</span>, fornisce endpoint pubblici di lettura per programmi, passaporti, documenti, verifica e statistiche del registro, nonché endpoint autenticati per i partecipanti.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">09</span><h3>Accesso dei partecipanti</h3><p>Accesso al portale e alle app mobili con MFA, token detenuti, notifiche e richieste di rimborso fisico. Le funzioni che movimentano valore restano bloccate finché un'autorizzazione scritta non le attiva.</p><div class="rc-card__foot">[rc_status s="not_applicable" label="Inattivo"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">10</span><h3>Portale per le imprese</h3><p>Una vista dedicata prevista per proprietari di asset e clienti aziendali. Consentirà la presentazione di asset, il caricamento di documenti e la reportistica dei programmi sullo stesso registro e sulla stessa API.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">11</span><h3>Reportistica</h3><p>Rapporti sulle riserve, esportazioni del registro, verifica dell'audit trail ed esportazioni JSON dei passaporti. Ogni rapporto è riproducibile a partire dagli stessi dati approvati.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Flusso dei dati</p>
+        <h2>Come un dato <em>raggiunge il pubblico</em></h2>
+        <p class="rc-lead">Un valore di un certificato segue lo stesso percorso di qualsiasi altro dato. Se salta un passaggio, non viene pubblicato.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Acquisito</h3><p>Un gestore del registro inserisce il record e carica il documento di origine. La piattaforma calcola l'impronta SHA-256 del file al momento del caricamento.</p></div></li>
+        <li><div><h3>Inviato</h3><p>Il record passa allo stato «In revisione». I contenuti in bozza o in revisione non sono mai pubblici, mai indicizzati e mai restituiti dall'API.</p></div></li>
+        <li><div><h3>Approvato</h3><p>Un utente diverso lo approva. L'approvazione è vincolata a un'impronta del contenuto e dei campi del registro in quel momento.</p></div></li>
+        <li><div><h3>Pubblicato</h3><p>Prima della pubblicazione, la piattaforma verifica nuovamente l'impronta. Se qualcosa è cambiato dopo l'approvazione, il record torna in revisione.</p></div></li>
+        <li><div><h3>Erogato</h3><p>Il sito web, il passaporto, la dashboard della Prova delle Riserve e le app leggono il record pubblicato tramite <span class="rc-mono">rc/v1</span>.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Modalità operative</p>
+      <h2>Funzionalità attivate <em>tramite autorizzazione, non tramite distribuzione</em></h2>
+      <p class="rc-lead">La piattaforma prevede dieci modalità del sito web, da Sviluppo a Onboarding delle imprese. I moduli che movimentano valore o raccolgono impegni sono rilasciati già realizzati ma bloccati. L'attivazione di un modulo richiede un'autorizzazione specifica e un riferimento di autorizzazione scritta, e l'attivazione viene registrata nell'audit trail.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Modulo</th><th>Realizzato</th><th>Stato attuale</th><th>L'attivazione richiede</th></tr></thead>
+        <tbody>
+          <tr><td>Registro, passaporti, strumento di verifica</td><td>Sì</td><td>[rc_status s="in_development" label="Pubblico, dati forniti dal proprietario"]</td><td>Approvazione a doppio controllo per ogni record</td></tr>
+          <tr><td>Dashboard della Prova delle Riserve</td><td>Sì</td><td>[rc_status s="in_development" label="Operativo, solo dati dichiarati"]</td><td>Attestazione indipendente prima che vengano mostrati dati «verificati»</td></tr>
+          <tr><td>Connessione del wallet</td><td>Sì</td><td>[rc_status s="not_applicable" label="Bloccato"]</td><td>Struttura legale definitiva; autorizzazione scritta</td></tr>
+          <tr><td>Modulo di acquisizione dei token</td><td>Sì</td><td>[rc_status s="not_applicable" label="Bloccato"]</td><td>Documentazione d'offerta; controlli di idoneità; autorizzazione scritta</td></tr>
+          <tr><td>Richieste di rimborso fisico</td><td>Sì</td><td>[rc_status s="not_applicable" label="Bloccato"]</td><td>Custode, logistica e condizioni di rimborso fisico; autorizzazione scritta</td></tr>
+          <tr><td>Portale per le imprese</td><td>In parte</td><td>[rc_status s="proposed"]</td><td>Condizioni commerciali; verifica dell'isolamento tra clienti</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--center">
+      <p class="rc-kicker">Progettata per estendersi</p>
+      <h2>Nuove classi di asset sono <em>nuovi schemi, non nuove piattaforme</em></h2>
+      <p class="rc-lead">I tipi di record e i relativi campi sono dichiarati, non codificati in modo fisso. Una categoria futura, come i metalli preziosi, aggiungerebbe uno schema e un record di programma. Il flusso di lavoro, i passaporti, l'audit trail e i contratti restano invariati. Le categorie future restano in fase di pre-lancio fino all'approvazione.</p>
+    </div>
+    <div class="rc-btn-row">
+      <a class="rc-btn rc-btn--sm" href="/assets/future-categories/">Categorie di asset future</a>
+      <a class="rc-btn rc-btn--sm" href="/enterprise/licensing-white-label/">Licenze tecnologiche</a>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>Approfondisca di un livello</h2>
+        <p>La pagina <a href="/platform/technology/">Tecnologia</a> tratta l'implementazione: lo stack, i contratti, l'API e le modalità di ancoraggio dell'audit trail. La pagina <a href="/platform/security/">Sicurezza</a> tratta i controlli che li circondano.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/how-it-works/">Come funziona ReserveChain</a>
+        <a class="rc-btn rc-btn--cream" href="/enterprise/">Servizi per le imprese</a>
+        <a class="rc-btn" href="/resources/documentation/">Visualizza i documenti</a>
+      </div>
+    </div>
+  </div>
+</section>

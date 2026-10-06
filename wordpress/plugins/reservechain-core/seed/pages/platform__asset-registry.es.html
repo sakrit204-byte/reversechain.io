@@ -1,0 +1,130 @@
+<!--
+title: Registro de Metales Industriales
+excerpt: La única fuente de verdad detrás de cada pasaporte, cifra de reservas y página de programa. Catorce tipos de registro tipificados se mantienen bajo un control de publicación con doble verificación, con historial completo de versiones y estado a nivel de unidad, hasta cada contenedor y carrete.
+kicker: Plataforma · Registro · En funcionamiento con datos aportados por el propietario
+order: 9
+-->
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_provisional]
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Recuentos en tiempo real</p>
+        <h2>Lo que el registro <em>contiene hoy</em></h2>
+      </div>
+      <p class="rc-lead">Los recuentos que figuran a continuación se leen directamente de los registros publicados. Los borradores y los registros en revisión quedan excluidos por diseño, de modo que el registro nunca muestra nada que no haya pasado por el proceso de aprobación.</p>
+    </div>
+    [rc_registry_stats]
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Tipos de registro</p>
+      <h2>Catorce tipos de registro, <em>cada uno un hecho independiente</em></h2>
+      <p class="rc-lead">El registro conserva hechos distintos en registros distintos. Un certificado no es un campo de un lote. Es un registro propio, vinculado al lote, con su propio emisor, fecha, huella y aprobación. Así, un registro puede corregirse, sustituirse o retirarse sin afectar a los demás.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><h3>Programas de activos</h3><p>Definiciones de los programas de Cu y Ni, su estado y los documentos a nivel de programa.</p></article>
+      <article class="rc-card" data-reveal><h3>Lotes</h3><p>Lotes de producción, como Cu #03-K-07 y Ni 120/NP1, con su cantidad declarada y su especificación.</p></article>
+      <article class="rc-card" data-reveal><h3>Lotes de producción</h3><p>Lotes de producción o de estructuración inferiores al lote, cuando este se divide.</p></article>
+      <article class="rc-card" data-reveal><h3>Contenedores</h3><p>Cajas y bultos. Es la unidad de reembolso físico del polvo de cobre.</p></article>
+      <article class="rc-card" data-reveal><h3>Bobinas</h3><p>Carretes y bobinas. Es la unidad de reembolso físico del alambre de níquel. El lote 120/NP1 contiene 30 carretes.</p></article>
+      <article class="rc-card" data-reveal><h3>Laboratorios</h3><p>Identidad del emisor, ubicación y evidencia de acreditación, cuando se haya facilitado.</p></article>
+      <article class="rc-card" data-reveal><h3>Certificados de Análisis</h3><p>Transcripción exacta, tabla de ensayos, método, norma, registro de la muestra, fuente y huella.</p></article>
+      <article class="rc-card" data-reveal><h3>Custodia y propiedad</h3><p>Ingreso en custodia, recibos, precintos, cadena de titularidad y registros de propiedad.</p></article>
+      <article class="rc-card" data-reveal><h3>Valoraciones</h3><p>Metodología, referencia, moneda, fecha, tasador y fecha de revisión.</p></article>
+      <article class="rc-card" data-reveal><h3>Seguro</h3><p>Condiciones particulares de las pólizas y períodos de cobertura, cuando se hayan contratado. Actualmente no hay ninguno contratado.</p></article>
+      <article class="rc-card" data-reveal><h3>Informes de reservas</h3><p>Instantáneas de conciliación, archivos de atestación y fechas de referencia.</p></article>
+      <article class="rc-card" data-reveal><h3>Programas de tokens</h3><p>Parámetros propuestos para cada programa. Todos están pendientes y ninguno está fijado en el código.</p></article>
+      <article class="rc-card" data-reveal><h3>Reembolsos físicos</h3><p>Solicitudes, decisiones de elegibilidad, referencias de quema y registros de liberación.</p></article>
+      <article class="rc-card" data-reveal><h3>Documentos</h3><p>Cada archivo, con su huella SHA-256, su versión y su nivel de visibilidad.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Registro a nivel de unidad</p>
+      <h2>Cada lote, contenedor y carrete, <em>cada uno con su propia línea de estado</em></h2>
+      <p class="rc-lead">Cada fila es una unidad con su propio pasaporte. Los estados de verificación, custodia, reserva, tokenización, reembolso físico y disponibilidad solo cambian mediante el flujo de trabajo de doble control, cuando se aprueba la evidencia justificativa.</p>
+    </div>
+    [rc_registry_table]
+  </div>
+</section>
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Control de publicación</p>
+        <h2>Nada es público <em>hasta que una segunda persona lo aprueba</em></h2>
+        <p class="rc-lead">Las afirmaciones sobre propiedad, laboratorio, custodia, seguro y reservas permanecen sin publicar hasta que se aportan y aprueban las evidencias. El flujo de trabajo lo impone; no depende de la práctica editorial.</p>
+      </div>
+      <ol class="rc-steps">
+        <li><div><h3>Borrador</h3><p>Visible solo para el editor y para los roles con permisos de revisión. Nunca se indexa ni lo devuelve la API.</p></div></li>
+        <li><div><h3>En revisión</h3><p>Se envía junto con sus evidencias. Quien lo envía no puede aprobarlo.</p></div></li>
+        <li><div><h3>Aprobado</h3><p>Una segunda persona lo aprueba, y la aprobación queda vinculada a una huella SHA-256 del contenido y de los campos.</p></div></li>
+        <li><div><h3>Publicado</h3><p>Primero se vuelve a comprobar la huella. Cualquier edición realizada tras la aprobación devuelve el registro a revisión.</p></div></li>
+        <li><div><h3>Despublicado o archivado</h3><p>Los registros publicados se retiran, nunca se eliminan definitivamente. Su historial permanece intacto.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Control de versiones y disciplina de campos</p>
+      <h2>Cómo el registro <em>se mantiene fiel a los hechos</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>Declarado frente a ensayado</h3><p>Las cantidades y las purezas conservan su fuente. Los pesos netos de 2000 kg (Cu) y 5000 g (Ni) se almacenan tal como los declaró el cliente, exactamente como figuran en sus certificados.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Se conservan las cadenas originales</h3><p>Los valores de los certificados se almacenan tal como están impresos, por ejemplo «99,9807 %» con coma decimal, junto con los números normalizados. La vista de evidencias nunca representa un valor de forma distinta a su fuente.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>«Pendiente» es un valor</h3><p>Los campos sin evidencia, como el tamaño de partícula, la densidad compactada, la resistencia a la tracción y el temple, se almacenan y se muestran como «Pendiente». Nunca se dejan en blanco ni se estiman.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04</span><h3>Visibilidad a nivel de campo</h3><p>Cada campo se marca como público, de participante, de auditor o restringido. El coste de adquisición y las condiciones comerciales permanecen restringidos.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">05</span><h3>Historial completo de cambios</h3><p>Cada transición registra quién la realizó, cuándo, el estado anterior y el nuevo, y el motivo. El registro se conserva en la pista de auditoría encadenada mediante hashes.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">06</span><h3>Operaciones masivas, mismos controles</h3><p>Las importaciones y exportaciones pasan por el mismo flujo de trabajo. Una importación masiva genera borradores, no registros publicados.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Quién consulta el registro</p>
+      <h2>Un único registro, <em>muchas vistas</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Consumidor</th><th>Lee</th><th>Acceso</th></tr></thead>
+        <tbody>
+          <tr><td>Páginas de programas y pasaportes</td><td>Registros publicados y campos públicos</td><td>Público</td></tr>
+          <tr><td>Panel de Prueba de Reservas</td><td>Cantidades publicadas por estado</td><td>Público</td></tr>
+          <tr><td>Aplicaciones para iOS y Android</td><td>Los mismos registros, a través de <span class="rc-mono">rc/v1</span></td><td>Público; de participante una vez activado</td></tr>
+          <tr><td>Auditores</td><td>Campos restringidos y pista de auditoría</td><td>Rol de auditor</td></tr>
+          <tr><td>Clientes corporativos (previsto)</td><td>Sus propios programas y unidades</td><td>Limitado a su ámbito de cliente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>De una fila del registro a un pasaporte</h2>
+        <p>Abra cualquier unidad para ver su conjunto completo de evidencias y su raíz de Merkle.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/digital-asset-passports/">Ver Pasaporte de Activo Digital</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/proof-of-reserves/">Ver informe de reservas</a>
+        <a class="rc-btn" href="/enterprise/asset-owners/">Presentar un activo</a>
+      </div>
+    </div>
+  </div>
+</section>

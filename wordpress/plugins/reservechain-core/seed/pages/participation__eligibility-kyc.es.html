@@ -1,0 +1,155 @@
+<!--
+title: Elegibilidad y KYC
+excerpt: El marco de elegibilidad propuesto para cualquier participación futura: quién puede cumplir los requisitos, qué controles de identidad, de empresa, AML y de sanciones se aplican, qué documentos se esperan y cómo se registra cada decisión.
+kicker: Participación · Cumplimiento normativo · Marco propuesto
+order: 4
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Cómo funciona la elegibilidad</p>
+        <h2>Todos los controles deben superarse, <em>siempre</em></h2>
+      </div>
+      <p class="rc-lead">La elegibilidad es el resultado de varios controles independientes. Un solo control no superado o caducado bloquea el acceso. ReserveChain no verifica las identidades por sí misma: los resultados procederán de un proveedor externo de KYC/KYB y de controles, que aún no ha sido seleccionado. La emisión de tokens permanece inactiva hasta su lanzamiento formal, por lo que ninguno de los controles indicados a continuación otorga hoy derecho alguno.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">IND</span>
+        <h3>Personas físicas</h3>
+        <ul class="rc-checks">
+          <li>Mayor de edad con plena capacidad jurídica</li>
+          <li>Residente en una jurisdicción permitida y que se encuentre en ella</li>
+          <li>KYC aprobado (identidad, domicilio, prueba de vida)</li>
+          <li>Controles AML, de sanciones y PEP superados, o diligencia debida reforzada (EDD) satisfecha</li>
+          <li>Origen de los fondos explicado; origen del patrimonio cuando se requiera</li>
+          <li>Condición de participante profesional o cualificado cuando la estructura definitiva lo exija</li>
+        </ul>
+        <div class="rc-card__foot">Controles requeridos: KYC · AML · Sanciones/PEP · KYB no aplicable</div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">ORG</span>
+        <h3>Empresas e instituciones</h3>
+        <ul class="rc-checks">
+          <li>Debidamente constituidas y en situación regular</li>
+          <li>Registradas en una jurisdicción permitida y que operen desde ella</li>
+          <li>KYB aprobado, incluidos los titulares reales últimos</li>
+          <li>Administradores, personas que ejercen el control y firmantes autorizados sometidos a control</li>
+          <li>Estructura de propiedad transparente; sin capas societarias injustificadas</li>
+          <li>Clasificación como institucional o profesional cuando se requiera</li>
+        </ul>
+        <div class="rc-card__foot">Controles requeridos: KYB · AML · Sanciones/PEP · KYC no aplicable a nivel de entidad</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Catálogo de controles</p>
+      <h2>Qué <em>pretende establecer</em> cada control</h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Control</th><th>Finalidad</th><th>Evidencia habitual</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>KYC</td><td>Confirmar la identidad y la residencia de una persona física</td><td>Documento oficial de identidad con fotografía, prueba de vida, justificante de domicilio</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>KYB</td><td>Confirmar que una organización existe y quién la controla</td><td>Extracto registral, documentos constitutivos, declaración de titularidad real (UBO), lista de administradores, poderes de firma</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Control AML</td><td>Identificar indicadores de riesgo de blanqueo de capitales y de financiación del terrorismo</td><td>Puntuación de riesgo del proveedor, resultados de medios adversos</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Sanciones y PEP</td><td>Detectar personas designadas y personas del medio político (PEP), incluidos familiares y allegados</td><td>Contraste con las listas aplicables, con nuevos controles continuos</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Origen de los fondos (SoF)</td><td>Demostrar de dónde procede el dinero de una participación concreta</td><td>Extractos bancarios, documentos de venta o de nómina, cuentas de la sociedad</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Origen del patrimonio (SoW)</td><td>Explicar cómo se ha acumulado el patrimonio total, cuando el riesgo lo requiera</td><td>Explicación escrita con documentos justificativos</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Diligencia debida reforzada (EDD)</td><td>Revisión adicional para perfiles de mayor riesgo, PEP o estructuras complejas</td><td>Aprobación de un responsable sénior de cumplimiento, documentos adicionales, entrevista cuando proceda</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rc-fine">Las listas definitivas de documentos, los umbrales y las reglas de puntuación de riesgo se establecerán con el proveedor seleccionado y los asesores jurídicos.</p>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Estados de aprobación</p>
+      <h2>Cinco estados, <em>mostrados de forma idéntica en todas partes</em></h2>
+      <p class="rc-lead">Los mismos cinco estados se utilizan en el portal de participantes, la aplicación móvil, la API y el back office de cumplimiento. Cada control (KYC, KYB, AML, sanciones/PEP) tiene su propio estado.</p>
+    </div>
+    <div class="rc-claims" data-reveal>
+      <div><strong>No iniciado</strong>[rc_status s="not_applicable" label="No iniciado"]<small>No se ha realizado ninguna presentación para este control.</small></div>
+      <div><strong>Pendiente</strong>[rc_status s="pending" label="Pendiente"]<small>Presentado y en revisión por el proveedor o el equipo de cumplimiento.</small></div>
+      <div><strong>Aprobado</strong>[rc_status s="eligible" label="Aprobado"]<small>El control se ha superado. La aprobación puede tener una fecha de caducidad y puede retirarse tras un nuevo control.</small></div>
+      <div><strong>Rechazado</strong>[rc_status s="restricted" label="Rechazado"]<small>El control no se ha superado. Es posible que el motivo no siempre se comunique cuando la ley lo prohíba.</small></div>
+      <div><strong>No aplicable</strong>[rc_status s="not_applicable"]<small>El control no se aplica a este tipo de cuenta (por ejemplo, KYB para una persona física).</small></div>
+    </div>
+    <div class="rc-callout"><p>La elegibilidad global se muestra como <strong>restringida</strong>, <strong>incompleta</strong> o <strong>elegible, sujeta a aprobación final</strong>. Ni siquiera este último estado confiere ningún derecho a participar en ninguna oferta futura.</p></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Restricciones de acceso</p>
+        <h2>Qué <em>controla</em> la elegibilidad</h2>
+        <ul class="rc-list">
+          <li>Las cuentas restringidas solo pueden consultar información pública y recibir novedades generales.</li>
+          <li>Los documentos del programa y el módulo de adquisición de tokens solo serían visibles para las cuentas aprobadas.</li>
+          <li>Los tokens, si llegaran a emitirse, solo podrían transferirse a direcciones aprobadas en el ComplianceRegistry en cadena.</li>
+          <li>Las aprobaciones pueden caducar; una aprobación caducada bloquea las transferencias hasta su renovación.</li>
+          <li>Una cuenta puede congelarse ante nueva información sobre sanciones o AML, en cadena y fuera de cadena simultáneamente.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="rc-kicker">Controles contra testaferros</p>
+        <h2>Ninguna participación <em>por cuenta de terceros</em></h2>
+        <ul class="rc-list">
+          <li>Declaración de que el participante actúa por cuenta propia</li>
+          <li>Los fondos deben proceder de una cuenta a nombre del propio participante</li>
+          <li>Comprobaciones de titularidad del monedero antes de aprobar una dirección</li>
+          <li>Detección de dispositivos, direcciones y fuentes de pago compartidos entre cuentas</li>
+          <li>Límites de cuentas vinculadas agregados a efectos de los topes del programa</li>
+          <li>Rechazo y posible comunicación a las autoridades cuando se sospeche una elusión</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Conservación de registros</p>
+      <h2>Decisiones que se pueden <em>rastrear y comprobar</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01</span><h3>En cadena, el resultado, no la identidad</h3><p>El ComplianceRegistry solo almacena, por dirección, el estado, el código de jurisdicción, la fecha de caducidad y un indicador de congelación. No se escribe en ninguna cadena de bloques ningún nombre, documento ni dato personal.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02</span><h3>Pista de auditoría a prueba de manipulaciones</h3><p>Cada cambio de estado registra quién lo realizó, cuándo, el valor anterior y el nuevo, y su origen. Las filas están encadenadas mediante hashes y no pueden editarse ni eliminarse desde la administración.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03</span><h3>Conservación y privacidad</h3><p>Los documentos de identidad serían conservados por el proveedor y el emisor durante los plazos de conservación establecidos por la normativa AML aplicable, según se describe en la <a href="/legal/privacy/">Política de privacidad</a>.</p></article>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="kyc_kyb" title="Controles KYC / KYB"]</div>
+      <div data-reveal>[rc_module module="eligibility" title="Decisiones de elegibilidad jurisdiccional"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-faq">
+      <h3>Preguntas sobre la elegibilidad</h3>
+      <details><summary>¿Puedo iniciar ya el proceso KYC?</summary><div><p>No. El módulo KYC/KYB está desarrollado, pero inactivo, y no se ha seleccionado ningún proveedor. ReserveChain nunca le pedirá documentos de identidad por correo electrónico, chat ni redes sociales.</p></div></details>
+      <details><summary>¿Superar el KYC significa que puedo participar?</summary><div><p>No. El KYC es una de varias condiciones. La participación también requiere una jurisdicción elegible, controles superados, documentación aprobada y un programa activado.</p></div></details>
+      <details><summary>Vivo fuera de la UE/EEE, pero tengo pasaporte de la UE. ¿Soy elegible?</summary><div><p>La residencia, la ubicación actual y, cuando lo exija la ley, la nacionalidad pueden ser todas relevantes. Las reglas definitivas están sujetas a revisión jurídica y se establecerán en los documentos definitivos.</p></div></details>
+    </div>
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>A continuación, consulte las reglas por jurisdicción</h2><p>La elegibilidad empieza por dónde reside y dónde se encuentra.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/restricted-jurisdictions/">Comprobar la elegibilidad</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Unirse a la lista de espera</a>
+        <a class="rc-btn" href="/legal/">Ver documentos</a>
+      </div>
+    </div>
+  </div>
+</section>

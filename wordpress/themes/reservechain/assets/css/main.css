@@ -705,3 +705,12 @@ a.rc-element:hover { transform: translateY(-6px) rotateX(4deg); color: var(--ink
 .rc-dap__sub { margin: 32px 0 14px; font-size: 1.25rem; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .rc-dap__sub small { font: 500 .7rem/1 var(--f-mono); letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
 .rc-dap-hero .rc-provisional { margin-bottom: 24px; }
+
+/* header fit: 6 mega-menu groups + language + 3 actions */
+.rc-header .rc-wrap { max-width: 1480px; }
+.rc-nav { gap: 18px; }
+.rc-nav__extra { gap: 10px; }
+.rc-nav__list > li > a { padding: 8px 9px; font-size: .9rem; }
+.rc-nav__list > li.menu-item-has-children > a { padding-right: 22px; }
+@media (max-width: 1560px) and (min-width: 1121px) { .rc-logo__tag { display: none; } .rc-nav__portal { display: none; } }
+@media (max-width: 1320px) and (min-width: 1121px) { .rc-nav__extra .rc-btn:not(.rc-btn--primary) { display: none; } .rc-nav__list > li > a { padding: 8px 7px; font-size: .86rem; } .rc-nav__list > li.menu-item-has-children > a { padding-right: 18px; } .rc-nav__list > li.menu-item-has-children > a::after { right: 6px; } }
