@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> draft: create snapshot<br/>(canonical JSON, SHA-256,<br/>Merkle root over units)
+    draft --> approved: approve<br/>(approver ≠ creator)
+    draft --> rejected: reject
+    approved --> rejected: reject
+    approved --> published: publish<br/>(only if PoR module authorised)
+    published --> superseded: newer snapshot published

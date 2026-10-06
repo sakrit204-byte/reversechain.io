@@ -365,7 +365,7 @@ def title_page(doc):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(12)
     r = p.add_run(
-        "Version: Draft 0.9 — subject to legal review and final approval\n"
+        "Version: Draft v0.10 — subject to legal review and final approval\n"
         "Date of this version: [To be inserted on approval by ReserveChain]\nreservechain.io"
     )
     set_font(r, MONO, 9.5, MUTED)
@@ -404,7 +404,7 @@ def furniture(doc):
         hp = s.header.paragraphs[0]
         r = hp.add_run("ReserveChain — Institutional Whitepaper")
         set_font(r, SERIF, 8, COPPER)
-        r = hp.add_run("\tDiscussion draft 0.9 · subject to final approval")
+        r = hp.add_run("\tDiscussion draft v0.10 · subject to final approval")
         set_font(r, SANS, 7.5, MUTED)
         hp.paragraph_format.tab_stops.add_tab_stop(Cm(17.0), alignment=2)
         fp = s.footer.paragraphs[0]
@@ -441,7 +441,7 @@ def main():
     upd.set(qn("w:val"), "true")
     settings.append(upd)
     core = doc.core_properties
-    core.title = "ReserveChain — Institutional Whitepaper (Discussion Draft 0.9)"
+    core.title = "ReserveChain — Institutional Whitepaper (Discussion Draft v0.10)"
     core.author = "ReserveChain (in development)"
     core.subject = "Not an offering document"
     doc.save(OUT)

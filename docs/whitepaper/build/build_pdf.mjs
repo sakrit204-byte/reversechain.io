@@ -23,7 +23,7 @@ const footer = `
 </div>`;
 const header = `
 <div style="width:100%;font-family:Georgia,serif;font-size:7.5px;color:#C46A3A;padding:0 18mm;display:flex;justify-content:space-between;">
-  <span>ReserveChain — Institutional Whitepaper</span><span style="color:#5E6B78;font-family:Arial,sans-serif;">Discussion draft 0.9 · subject to final approval</span>
+  <span>ReserveChain — Institutional Whitepaper</span><span style="color:#5E6B78;font-family:Arial,sans-serif;">Discussion draft v0.10 · subject to final approval</span>
 </div>`;
 
 const browser = await chromium.launch({ executablePath, args: ["--no-sandbox"] });
@@ -53,7 +53,7 @@ for (const f of ["cover.pdf", "body.pdf"]) {
   const src = await PDFDocument.load(readFileSync(join(here, "out", f)));
   for (const p of await merged.copyPages(src, src.getPageIndices())) merged.addPage(p);
 }
-merged.setTitle("ReserveChain — Institutional Whitepaper (Discussion Draft 0.9)");
+merged.setTitle("ReserveChain — Institutional Whitepaper (Discussion Draft v0.10)");
 merged.setAuthor("ReserveChain (in development)");
 merged.setSubject("Industrial-metals reserve registry and tokenization framework — not an offering document");
 writeFileSync(out, await merged.save());

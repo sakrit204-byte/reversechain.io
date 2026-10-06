@@ -1,0 +1,2169 @@
+openapi: 3.1.0
+info:
+  title: ReserveChain Platform API
+  version: 0.9.0
+  summary: Curated REST API (namespace rc/v1) shared by the website, the participant portal and the iOS / Android apps.
+  description: |
+    Source of truth: `wordpress/plugins/reservechain-core/includes/class-*.php` (Rest, Por, Redemption, Web3,
+    Portal, Monitoring). Human-readable guide: `docs/API.md`.
+
+    ReserveChain is currently in development. No tokens are being offered or sold. Endpoints that belong to
+    gated modules (wallet, USDT payments, redemption, Proof-of-Reserves publication, data rooms) are built but
+    **inactive** and answer with a documented `403` until the module is authorized in writing and, where
+    applicable, the matching site mode is set. Examples marked "live" were captured from the local development
+    instance (`RC_ENV=development`, site mode `prelaunch`); tokens, secrets and personal data are redacted.
+
+    All errors use the WordPress REST error envelope `{ code, message, data: { status, ... } }`, except the
+    redemption endpoints, which return `{ code, message }` with the HTTP status set.
+  license:
+    name: Proprietary
+    identifier: LicenseRef-Proprietary
+  contact:
+    name: ReserveChain platform team
+servers:
+  - url: http://localhost:8088/wp-json/rc/v1
+    description: Local development (docker-compose)
+  - url: https://{host}/wp-json/rc/v1
+    description: Deployed environment
+    variables:
+      host:
+        default: staging.reservechain.io
+security: []
+tags:
+  - name: Public
+    description: Public, unauthenticated read endpoints (rate limited, blocked in maintenance mode).
+  - name: Forms
+    description: Public write endpoints (waitlist, contact).
+  - name: Auth
+    description: Sign-in, MFA (TOTP), token refresh rotation and logout for apps and the portal.
+  - name: Account
+    description: Signed-in participant account (bearer JWT).
+  - name: Proof of Reserves
+    description: Reconciliation overview and published reserve snapshots.
+  - name: Redemption
+    description: Physical-redemption requests (gated module `redemption` + site mode `redemption`; inactive).
+  - name: Wallet
+    description: Wallet linking via EIP-4361 / SIWE-style challenge (gated module `wallet`; inactive).
+  - name: Payments
+    description: USDT (ERC-20, testnet) payment intents (gated modules `purchase` + `usdt_payments`; inactive).
+  - name: Data room
+    description: Audience-restricted documents and signed, expiring download links.
+  - name: Operations
+    description: Health checks and audit anchoring.
+
+paths:
+  /config:
+    get:
+      tags: [Public]
+      operationId: getConfig
+      summary: Platform configuration, site mode, module flags and verbatim disclosures
+      description: Apps must render `disclosure` and `eu_notice` verbatim and hide every feature whose module flag is `false`.
+      responses:
+        '200':
+          description: Configuration
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Config' }
+              examples:
+                live:
+                  summary: Live (development, prelaunch) — module and section lists shortened
+                  value:
+                    site_mode: prelaunch
+                    environment: development
+                    modules: { wallet: false, purchase: false, usdt_payments: false, proof_of_reserves: false, redemption: false, investor_portal: false, enterprise_portal: false, waitlist: true, registry_public: true, passports_public: true, verify_tool: true, app_registration: true, news: true }
+                    sections: { platform: true, 'platform/proof-of-reserves': true, portal: true, 'portal/redemption': true }
+                    languages: [en, es, it]
+                    disclosure: ReserveChain is currently in development. No tokens are being offered or sold through this website. Registration of interest does not constitute an investment, token purchase, asset reservation, price reservation, token allocation or entitlement to participate in any future offering. Any future availability will be subject to the final Swiss corporate and legal structure, definitive offering documentation, asset verification, custody arrangements, jurisdictional eligibility, KYC/KYB, sanctions screening and final approval.
+                    eu_notice: ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.
+                    disclosure_hash: 66a533ef6a60c307e69138e7f463b00ebd58cbace9257d2671da63a9609128c3
+                    claim_statuses: { proposed: Proposed, in_development: In development, pending_verification: Pending verification, verified: Verified, not_applicable: Not applicable }
+                    network: { chain_id: 11155111, name: Ethereum Sepolia (testnet), explorer: 'https://sepolia.etherscan.io', token_address: null, anchor_address: null, testnet_only: true }
+                    version: 0.9.0
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /programs:
+    get:
+      tags: [Public]
+      operationId: listPrograms
+      summary: Metal programs (summary, max 50)
+      responses:
+        '200':
+          description: Programs
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProgramSummary' }
+              examples:
+                live:
+                  summary: Live (first program, claims shortened)
+                  value:
+                    - id: 181
+                      slug: copper-powder
+                      record_no: RC-CU-PRG-000001
+                      symbol: Cu
+                      atomic_number: 29
+                      name: Ultra-High-Purity Copper Powder
+                      summary: 'Ultra-high-purity copper powder: proposed program, in development.'
+                      status: in_development
+                      claims:
+                        - { label: Program structure, status: proposed, note: Subject to the final Swiss corporate and legal structure. }
+                        - { label: Proof of Reserves, status: in_development, note: Module built; no attestation published. }
+                        - { label: Token issuance, status: proposed, note: No tokens exist. Testnet contracts only. }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /programs/{slug}:
+    get:
+      tags: [Public]
+      operationId: getProgram
+      summary: One metal program with fields, token program, passports and documents
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string, pattern: '^[a-z0-9-]+$' }
+          example: copper-powder
+      responses:
+        '200':
+          description: Program detail
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProgramDetail' }
+        '404':
+          description: Unknown or unpublished program
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_not_found, message: Program not found., data: { status: 404 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /passports:
+    get:
+      tags: [Public]
+      operationId: listPassports
+      summary: Digital Asset Passports (lots, batches, containers, coils)
+      description: 'Gated by module `passports_public`. Ordered lots → batches → containers → coils, then by record number. Page size is fixed at 50.'
+      parameters:
+        - { name: program, in: query, schema: { type: string }, description: Program slug filter, example: nickel-wire }
+        - { name: type, in: query, schema: { $ref: '#/components/schemas/PassportType' } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+      responses:
+        '200':
+          description: Passport summaries (empty array past the last page or for an unknown program)
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PassportSummary' }
+              examples:
+                live:
+                  value:
+                    - id: 191
+                      passport_no: RC-CU-LOT-000001
+                      entity_type: rc_lot
+                      entity_label: Lot
+                      title: 'Ultrafine Copper Powder: Lot #03-K-07'
+                      program: copper-powder
+                      symbol: Cu
+                      status: pending_verification
+                      updated_at: '2026-10-06T11:47:18+00:00'
+                      url: http://localhost:8088/passport/RC-CU-LOT-000001/
+        '403':
+          description: Module `passports_public` off
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_disabled, message: Passports are not public., data: { status: 403 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /passports/{no}:
+    get:
+      tags: [Public]
+      operationId: getPassport
+      summary: One Digital Asset Passport (schema reservechain.dap/1.0)
+      parameters:
+        - name: no
+          in: path
+          required: true
+          schema: { type: string, pattern: '^[A-Za-z0-9-]+$' }
+          example: RC-CU-LOT-000001
+      responses:
+        '200':
+          description: Passport
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Passport' }
+        '404':
+          description: Not a published passport, or module `passports_public` off
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_not_found, message: Passport not found., data: { status: 404 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /verify:
+    get:
+      tags: [Public]
+      operationId: verifyDocumentHash
+      summary: Look up a document by SHA-256 fingerprint
+      description: Every lookup is written to the audit chain (hash only). Withdrawn/archived documents match but their `url` is null.
+      parameters:
+        - name: hash
+          in: query
+          required: true
+          schema: { type: string, pattern: '^[a-fA-F0-9]{64}$' }
+          example: 398f2de542ac855f6a099efd18f84209dffc4ad086b786afecc32d908c58a3ea
+      responses:
+        '200':
+          description: Match result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VerifyResult' }
+              examples:
+                match:
+                  summary: Live — owner-supplied Cu CoA scan
+                  value:
+                    match: true
+                    hash: 398f2de542ac855f6a099efd18f84209dffc4ad086b786afecc32d908c58a3ea
+                    checked_at: '2026-10-06T15:11:43+00:00'
+                    state: current
+                    document:
+                      id: 258
+                      record_no: RC-DOC-000001
+                      title: 'Certificate of Analysis No. 0004512: Ultrafine Copper Powder (owner-supplied copy)'
+                      type: coa
+                      type_label: Certificate of Analysis
+                      sha256: 398f2de542ac855f6a099efd18f84209dffc4ad086b786afecc32d908c58a3ea
+                      status: pending_verification
+                      issued_by: IGAS research, Goslar (as shown on certificate)
+                      issue_date: '2022-07-04'
+                      version: Owner-supplied copy
+                      url: http://localhost:8088/wp-content/uploads/2026/10/igas-coa-0004512-copper-powder-1.png
+                      size: 1936931
+                      mime: image/png
+                      description: Scan of the owner-supplied certificate. The customer address block is redacted on the supplied copy. Publication subject to approval; not yet independently confirmed with the issuing laboratory.
+                    passports:
+                      - { id: 191, passport_no: RC-CU-LOT-000001, entity_type: rc_lot, entity_label: Lot, title: 'Ultrafine Copper Powder: Lot #03-K-07', program: copper-powder, symbol: Cu, status: pending_verification, updated_at: '2026-10-06T11:47:18+00:00', url: 'http://localhost:8088/passport/RC-CU-LOT-000001/' }
+                noMatch:
+                  summary: Live — no match
+                  value: { match: false, hash: '0000000000000000000000000000000000000000000000000000000000000000', checked_at: '2026-10-06T15:11:23+00:00' }
+        '400':
+          description: Not a 64-hex SHA-256
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_bad_hash, message: Provide a SHA-256 hash (64 hex characters)., data: { status: 400 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /documents:
+    get:
+      tags: [Public]
+      operationId: listPublicDocuments
+      summary: Public document library (audience `public`, newest first, max 200)
+      responses:
+        '200':
+          description: Documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Document' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /registry/stats:
+    get:
+      tags: [Public]
+      operationId: registryStats
+      summary: Published record counts per registry entity, verified count, audit head
+      responses:
+        '200':
+          description: Stats
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RegistryStats' }
+              examples:
+                live:
+                  summary: Live (entities shortened)
+                  value:
+                    entities:
+                      rc_program: { label: Metal Programs, published: 2 }
+                      rc_lot: { label: Lots, published: 3 }
+                      rc_coil: { label: Coils / Spools, published: 30 }
+                      rc_coa: { label: Certificates of Analysis, published: 2 }
+                      rc_reserve_report: { label: Reserve Reports, published: 0 }
+                    verified_records: 0
+                    audit: { seq: 1020, chain_head: 1b946a7f74ff9112a39d4bce9ba884e600d687225a8e324abe39665c66532216, at: '2026-10-06 15:07:51.596575Z' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /audit/head:
+    get:
+      tags: [Public, Operations]
+      operationId: auditHead
+      summary: Current head of the hash-chained audit log
+      responses:
+        '200':
+          description: Audit head
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuditHead' }
+              examples:
+                live:
+                  value:
+                    seq: 1020
+                    chain_head: 1b946a7f74ff9112a39d4bce9ba884e600d687225a8e324abe39665c66532216
+                    at: '2026-10-06 15:07:51.596575Z'
+                    algorithm: sha256-chain/v1
+                    last_verified: { ok: true, checked: 1019, at: '2026-10-06T15:06:38+00:00' }
+                    last_anchor: null
+                    db_triggers: true
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /audit/anchor:
+    post:
+      tags: [Operations]
+      operationId: recordAuditAnchor
+      summary: Record an on-chain (testnet) anchor of an audit-chain head
+      description: Staff only — requires the WordPress capability `rc_anchor_audit` (cookie session + `X-WP-Nonce`). Not rate limited by the public gate.
+      security:
+        - wpNonce: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [seq, chain_head, network, tx_hash]
+              properties:
+                seq: { type: integer }
+                chain_head: { type: string, pattern: '^[a-f0-9]{64}$' }
+                network: { type: string, example: sepolia }
+                tx_hash: { type: string, pattern: '^0x[a-fA-F0-9]{64}$' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401':
+          description: No capability (WordPress core response)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rest_forbidden, message: 'Sorry, you are not allowed to do that.', data: { status: 401 } }
+        '409':
+          description: Chain head does not match the stored entry
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_anchor_mismatch, message: Chain head does not match the stored entry., data: { status: 409 } }
+
+  /waitlist:
+    post:
+      tags: [Forms]
+      operationId: joinWaitlist
+      summary: Register interest (never an investment, reservation or allocation)
+      description: |
+        Gated by module `waitlist`; closed in site mode `maintenance`. Extra limit: 5 submissions / hour / client.
+        `source: "app"` skips the web timing check. Restricted jurisdictions (EU/EEA when configured) are only stored
+        with `general_updates: true`. Double opt-in: a confirmation email is sent. `dev_confirm_url` appears only in
+        `RC_ENV=development`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WaitlistRequest' }
+      responses:
+        '200':
+          description: Accepted (also returned for honeypot hits)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WaitlistResponse' }
+              examples:
+                pending:
+                  summary: Shape from code (no live submission made for documentation)
+                  value: { ok: true, status: pending_confirmation, jurisdiction: eligible, message: Thank you. Please confirm your email address using the link we sent you. }
+                restricted:
+                  summary: Restricted jurisdiction without general-updates opt-in (shape from code)
+                  value: { ok: true, status: ineligible_jurisdiction, reason: '…', message: 'ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.', stored: false }
+        '403':
+          description: Waitlist closed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_closed, message: The waitlist is currently closed., data: { status: 403 } }
+        '422':
+          description: Field validation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ValidationError' }
+              example:
+                code: rc_invalid
+                message: Please correct the highlighted fields.
+                data:
+                  status: 422
+                  fields: { name: Please enter your name., materials: Please select the material of interest., email: Please enter a valid email address., country: Please select your country of residence., consent_disclosure: You must acknowledge the disclosure., consent_privacy: You must accept the privacy notice. }
+        '429':
+          description: '`rc_too_fast` (web form submitted < 3 s after render), `rc_rate` (5/hour) or `rc_rate_limited` (gate)'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /contact:
+    post:
+      tags: [Forms]
+      operationId: contact
+      summary: Website contact / enquiry
+      description: Extra limit 5 / hour / client. Honeypot field `website` returns `{ok:true}` without storing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, message, consent_privacy]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                subject: { type: string, default: Website enquiry }
+                topic: { type: string, default: general }
+                message: { type: string, minLength: 10 }
+                consent_privacy: { type: boolean }
+                website: { type: string, description: Honeypot — leave empty }
+      responses:
+        '200': { $ref: '#/components/responses/Ticket' }
+        '422':
+          description: Validation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_invalid, message: 'Please provide a valid email, a message and accept the privacy notice.', data: { status: 422 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      operationId: register
+      summary: Create a participant account (module `app_registration`)
+      description: Extra limit 5 / hour / client. The response never reveals whether the email already exists.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RegisterRequest' }
+      responses:
+        '200':
+          description: Accepted (identical whether or not the account was created)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OkMessage' }
+              example: { ok: true, message: 'If the address can be registered, you can now sign in.' }
+        '403':
+          description: Registration closed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_closed, message: Registration is currently closed., data: { status: 403 } }
+        '422':
+          description: Validation (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ValidationError' }
+              example:
+                code: rc_invalid
+                message: Validation failed.
+                data:
+                  status: 422
+                  fields: { email: Invalid email address., password: Use at least 12 characters with upper- and lower-case letters and a number., country: Select your country of residence., consent: You must acknowledge the disclosure and accept the terms. }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500':
+          description: User creation failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      operationId: login
+      summary: Sign in with email + password
+      description: 'Limits: 10 / 15 min per client and 5 / 15 min per account (email hash). If MFA is enabled the response carries a 5-minute `mfa_token` instead of tokens.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, description: Email (a WordPress login name is also accepted) }
+                password: { type: string, format: password }
+                client: { type: string, default: app, description: 'Client label stored with the refresh token (e.g. ios, android, portal)' }
+      responses:
+        '200':
+          description: Tokens, or an MFA challenge
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - { $ref: '#/components/schemas/LoginTokens' }
+                  - { $ref: '#/components/schemas/MfaChallenge' }
+              examples:
+                noMfa:
+                  summary: Live — account without MFA (tokens redacted)
+                  value: { mfa_required: false, mfa_recommended: true, access_token: '<jwt>', refresh_token: '<opaque-64>', token_type: Bearer, expires_in: 3600 }
+                mfa:
+                  summary: Account with MFA (shape from code)
+                  value: { mfa_required: true, mfa_token: '<jwt typ=mfa, 5 min>' }
+        '401':
+          description: Invalid credentials (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_invalid_credentials, message: Invalid email or password., data: { status: 401 } }
+        '429':
+          description: Too many attempts
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_rate, message: Too many attempts. Try again later., data: { status: 429 } }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /auth/mfa/verify:
+    post:
+      tags: [Auth]
+      operationId: mfaVerify
+      summary: Complete sign-in with a TOTP or recovery code
+      description: 5 attempts / 5 min per user. TOTP accepts ±1 step drift with replay protection; recovery codes are single use.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mfa_token, code]
+              properties:
+                mfa_token: { type: string }
+                code: { type: string, description: 6-digit TOTP or 10-character recovery code }
+                client: { type: string, default: app }
+      responses:
+        '200':
+          description: Tokens
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Tokens' }
+        '401':
+          description: '`rc_mfa_expired` (bad/expired mfa_token) or `rc_mfa_invalid` (wrong code / rate limited)'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_mfa_expired, message: The sign-in session expired. Please sign in again., data: { status: 401 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /auth/mfa/setup:
+    post:
+      tags: [Auth]
+      operationId: mfaSetup
+      summary: Start TOTP enrolment (returns secret + otpauth URL)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Pending secret (not active until /auth/mfa/enable)
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [secret, otpauth_url]
+                properties:
+                  secret: { type: string, description: Base32 secret (160 bit) }
+                  otpauth_url: { type: string }
+              example: { secret: '<BASE32-SECRET>', otpauth_url: 'otpauth://totp/ReserveChain%3A<email>?secret=<BASE32-SECRET>&issuer=ReserveChain&algorithm=SHA1&digits=6&period=30' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /auth/mfa/enable:
+    post:
+      tags: [Auth]
+      operationId: mfaEnable
+      summary: Confirm TOTP enrolment; returns 8 single-use recovery codes (shown once)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string, pattern: '^\d{6}$' }
+      responses:
+        '200':
+          description: Enabled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean, const: true }
+                  recovery_codes: { type: array, items: { type: string }, minItems: 8, maxItems: 8 }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '422':
+          description: Wrong code (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_mfa_invalid, message: Invalid code., data: { status: 422 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      operationId: refreshTokens
+      summary: Rotate a refresh token (single use) for a new token pair
+      description: 30 / min per client. The presented refresh token is consumed; replaying it returns 401.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token: { type: string }
+      responses:
+        '200':
+          description: New token pair (live, redacted)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Tokens' }
+              example: { access_token: '<jwt>', refresh_token: '<opaque-64>', token_type: Bearer, expires_in: 3600 }
+        '401':
+          description: Unknown, expired or already-used refresh token (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_refresh_invalid, message: Session expired. Please sign in again., data: { status: 401 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logout
+      summary: Sign out everywhere (revokes all access and refresh tokens of the user)
+      security:
+        - bearerAuth: []
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me:
+    get:
+      tags: [Account]
+      operationId: getMe
+      summary: Current participant profile and eligibility
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Profile
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Me' }
+              examples:
+                live:
+                  summary: Live demo participant (name/email redacted)
+                  value:
+                    id: 7
+                    name: '<display name>'
+                    email: '<email>'
+                    country: CH
+                    entity_type: individual
+                    language: en
+                    mfa_enabled: false
+                    eligibility: { country: CH, entity_type: individual, jurisdiction: eligible, kyc: pending, kyb: not_applicable, aml: not_started, sanctions: not_started, overall: incomplete, note: Eligibility status does not confer any right to participate in any future offering. }
+                    created_at: '2026-10-06T11:47:18+00:00'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+    patch:
+      tags: [Account]
+      operationId: updateMe
+      summary: Update display name and/or language
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                language: { type: string, enum: [en, es, it] }
+      responses:
+        '200':
+          description: Updated profile (same shape as GET /me)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Me' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/holdings:
+    get:
+      tags: [Account]
+      operationId: getHoldings
+      summary: Token holdings (gated module `wallet`; placeholder)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Gated placeholder (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Gated' }
+              example: { enabled: false, reason: Not yet available — subject to written authorization and final approval., items: [] }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/transactions:
+    get:
+      tags: [Account]
+      operationId: getTransactions
+      summary: Token transactions (gated module `wallet`; placeholder)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Gated placeholder (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Gated' }
+              example: { enabled: false, reason: Not yet available — subject to written authorization and final approval., items: [] }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/notifications:
+    get:
+      tags: [Account]
+      operationId: getNotifications
+      summary: Personal + broadcast notifications (newest first, latest 50)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 50
+                items: { $ref: '#/components/schemas/Notification' }
+              examples:
+                live:
+                  value:
+                    - { id: 39, title: Compliance status updated, body: 'Sanctions / PEP screening status: Approved.', category: compliance, created_at: '2026-10-06 14:59:26Z', read: true, broadcast: false }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/notifications/{id}/read:
+    post:
+      tags: [Account]
+      operationId: markNotificationRead
+      summary: Mark one personal notification as read (idempotent; broadcasts are not affected)
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/devices:
+    post:
+      tags: [Account]
+      operationId: registerDevice
+      summary: Register a push token (keeps the 5 most recent)
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                push_token: { type: string }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /support:
+    post:
+      tags: [Account]
+      operationId: createSupportTicket
+      summary: In-app support request
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                subject: { type: string, default: App support }
+                topic: { type: string, default: general }
+                message: { type: string, minLength: 10 }
+      responses:
+        '200': { $ref: '#/components/responses/Ticket' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '422':
+          description: Message too short (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_invalid, message: Please describe your request., data: { status: 422 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/delete:
+    post:
+      tags: [Account]
+      operationId: deleteAccount
+      summary: Delete (or anonymise) the account — app-store and GDPR/FADP erasure
+      description: |
+        Accounts without compliance history are deleted. Accounts with KYC/KYB/AML/sanctions outcomes are anonymised
+        and locked; only the minimum compliance record required by law is retained. All sessions are revoked.
+        Staff accounts are never deleted through the API.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password, confirm]
+              properties:
+                password: { type: string, format: password }
+                confirm: { type: string, const: DELETE }
+      responses:
+        '200':
+          description: Done
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
+                  mode: { type: string, enum: [deleted, anonymised] }
+                  message: { type: string }
+              example: { ok: true, mode: deleted, message: Your account and personal data have been deleted. }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403':
+          description: Staff account
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_delete_staff, message: Staff accounts are closed by an administrator., data: { status: 403 } }
+        '422':
+          description: Wrong password or confirmation word (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_delete_confirm, message: Confirm with your password and the word DELETE., data: { status: 422 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /por:
+    get:
+      tags: [Proof of Reserves]
+      operationId: porOverview
+      summary: Live reconciliation overview per program (always available; publication is gated separately)
+      description: Computed from the registry on each call. Declared quantities are owner-supplied and are not verified reserves; coverage is never estimated.
+      responses:
+        '200':
+          description: Overview
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PorOverview' }
+              examples:
+                live:
+                  summary: Live (Cu program only)
+                  value:
+                    module_enabled: false
+                    programs:
+                      - program: { id: 181, record_no: RC-CU-PRG-000001, name: Ultra-High-Purity Copper Powder, symbol: Cu }
+                        inventory: { units_total: 2, by_type: { rc_lot: 1, rc_container: 1 }, declared_kg: 2000, verified_kg: 0, units_verified: 0, units_in_custody: 0, units_eligible: 0, units_accepted: 0, units_in_redemption: 0 }
+                        supply: { status: not_deployed, issued: 0 }
+                        attestation: null
+                        coverage: { status: not_computed, value: null, reason: 'Computed only from a verified attestation, an approved asset-to-token ratio and a known token supply.' }
+                        exceptions: { critical: 0, warning: 0, info: 2 }
+                        latest_published: null
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /por/snapshots:
+    get:
+      tags: [Proof of Reserves]
+      operationId: listPorSnapshots
+      summary: Published reserve snapshots (module `proof_of_reserves`)
+      responses:
+        '200':
+          description: Snapshots (current + superseded)
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PorSnapshotListItem' }
+        '403':
+          description: Module inactive (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_module_inactive, message: Reserve reports are not published until the Proof of Reserves module is authorized., data: { status: 403 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /por/snapshots/{id}:
+    get:
+      tags: [Proof of Reserves]
+      operationId: getPorSnapshot
+      summary: One published snapshot with integrity check
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200':
+          description: Snapshot (`intact` = stored JSON still hashes to `sha256`)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PorSnapshot' }
+        '404':
+          description: Unknown, draft/approved-but-unpublished, or module inactive (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_not_found, message: Snapshot not found., data: { status: 404 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /me/redemptions:
+    get:
+      tags: [Redemption]
+      operationId: listMyRedemptions
+      summary: My redemption requests (max 100)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List with module state (live, inactive)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enabled: { type: boolean }
+                  reason: { type: [string, 'null'] }
+                  items: { type: array, items: { $ref: '#/components/schemas/RedemptionSummary' } }
+              example: { enabled: false, reason: Physical redemption is not available. The module is inactive pending written authorization and final approval., items: [] }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+    post:
+      tags: [Redemption]
+      operationId: createRedemption
+      summary: Request physical redemption
+      description: |
+        Requires module `redemption` AND site mode `redemption`. 5 requests / hour / user. Compliance eligibility
+        (jurisdiction + KYC/KYB, AML, sanctions) is checked at request and re-checked at approval. Minimum and fee
+        schedule must be set by written approval, otherwise `rc_terms_undetermined`. Selecting `units` / `lot`
+        via the API additionally requires module `unit_selection`.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RedemptionCreate' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Redemption' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403':
+          description: '`rc_module_inactive` (live) · `rc_restricted` · `rc_not_eligible` · `rc_terms_undetermined`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+              example: { code: rc_module_inactive, message: Physical redemption is not available. The module is inactive pending written authorization and final approval. }
+        '409':
+          description: '`rc_unit_unavailable` · `rc_unit_taken` · `rc_busy`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+        '422':
+          description: '`rc_invalid` · `rc_below_minimum` · `rc_wrong_program`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/redemptions/{id}:
+    get:
+      tags: [Redemption]
+      operationId: getMyRedemption
+      summary: One of my redemptions with units, history and evidence references
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200':
+          description: Redemption
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Redemption' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404':
+          description: Not found or not the caller's (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+              example: { code: rc_not_found, message: Redemption not found. }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/redemptions/{id}/cancel:
+    post:
+      tags: [Redemption]
+      operationId: cancelMyRedemption
+      summary: Cancel my redemption (only in `requested` or `compliance_review`)
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string }
+      responses:
+        '200':
+          description: Updated redemption
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Redemption' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403':
+          description: '`rc_forbidden` / `rc_module_inactive`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+        '404':
+          description: Not found (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+              example: { code: rc_not_found, message: Redemption not found. }
+        '409':
+          description: '`rc_state` (not cancellable in current state) / `rc_busy`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlainError' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/wallet/challenge:
+    post:
+      tags: [Wallet]
+      operationId: walletChallenge
+      summary: Issue a SIWE (EIP-4361) challenge to link a wallet
+      description: Module `wallet`. 10 / 10 min / user. Challenge is single use, valid 600 s. Max 3 wallets per account; a wallet can belong to one account only. Testnet chains only (11155111, 80002, 31337).
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [address]
+              properties:
+                address: { $ref: '#/components/schemas/EthAddress' }
+      responses:
+        '200':
+          description: Challenge
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address: { $ref: '#/components/schemas/EthAddress' }
+                  chain_id: { type: integer }
+                  nonce: { type: string, pattern: '^[a-f0-9]{24}$' }
+                  expires_at: { type: string, format: date-time }
+                  message: { type: string, description: Exact EIP-4361 text to sign with personal_sign }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/WalletDisabled' }
+        '409':
+          description: '`rc_not_testnet` · `rc_wallet_exists` · `rc_wallet_limit` · `rc_wallet_unavailable`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '422':
+          description: '`rc_invalid_address`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/wallet/verify:
+    post:
+      tags: [Wallet]
+      operationId: walletVerify
+      summary: Submit the signed challenge; the server recovers the signer (EIP-191) and links the wallet
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [address, nonce, signature]
+              properties:
+                address: { $ref: '#/components/schemas/EthAddress' }
+                nonce: { type: string }
+                signature: { type: string, pattern: '^0x[a-fA-F0-9]{130}$' }
+                message: { type: string, description: Optional; if sent it must equal the server-built message }
+      responses:
+        '200':
+          description: Linked
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: '#/components/schemas/Wallets' }
+                  - type: object
+                    properties:
+                      ok: { type: boolean }
+                      linked: { $ref: '#/components/schemas/EthAddress' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/WalletDisabled' }
+        '409':
+          description: '`rc_wallet_exists` · `rc_wallet_limit` · `rc_wallet_unavailable`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '422':
+          description: '`rc_wallet_verify_failed` with `data.reason` one of no_challenge, expired, mismatch, chain_changed, message_mismatch, bad_signature'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/wallets:
+    get:
+      tags: [Wallet]
+      operationId: listWallets
+      summary: My linked wallets
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      responses:
+        '200':
+          description: Wallets
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Wallets' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/WalletDisabled' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/wallets/{address}:
+    delete:
+      tags: [Wallet]
+      operationId: unlinkWallet
+      summary: Unlink a wallet (refused while a payment intent on it is pending)
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      parameters:
+        - { name: address, in: path, required: true, schema: { $ref: '#/components/schemas/EthAddress' } }
+      responses:
+        '200':
+          description: Remaining wallets
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: '#/components/schemas/Wallets' }
+                  - type: object
+                    properties:
+                      ok: { type: boolean }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/WalletDisabled' }
+        '404':
+          description: '`rc_not_found` — not linked to this account'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '409':
+          description: '`rc_wallet_in_use`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/payments:
+    get:
+      tags: [Payments]
+      operationId: listPayments
+      summary: My USDT payment intents (latest 50)
+      description: Requires modules `purchase` + `usdt_payments` and site mode `live_offering` or `early_participation`.
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      responses:
+        '200':
+          description: Intents
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items: { type: array, items: { $ref: '#/components/schemas/PaymentIntent' } }
+                  note: { type: string }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/PaymentsDisabled' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+    post:
+      tags: [Payments]
+      operationId: createPayment
+      summary: Request a payment intent (amount is set and approved by staff, four-eyes)
+      description: 5 / hour / user; max 3 open intents. Requires eligibility `eligible_subject_to_final_approval` and a linked wallet. There is no pricing logic in the API.
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [program_id]
+              properties:
+                program_id: { type: integer, description: rc_token_program id }
+                wallet: { $ref: '#/components/schemas/EthAddress' }
+      responses:
+        '200':
+          description: Intent in status `created`
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaymentIntent' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403':
+          description: '`rc_module_disabled` (live) or `rc_not_eligible`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_module_disabled, message: 'USDT payments are not available — they require the purchase and USDT payment modules (written authorization) and a live offering or early participation site mode.', data: { status: 403, modules: [purchase, usdt_payments] } }
+        '409':
+          description: '`rc_no_wallet` · `rc_not_testnet` · `rc_too_many_intents`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '422':
+          description: '`rc_invalid_wallet` · `rc_invalid_program`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/payments/{id}:
+    get:
+      tags: [Payments]
+      operationId: getPayment
+      summary: One of my payment intents
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200':
+          description: Intent
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaymentIntent' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/PaymentsDisabled' }
+        '404':
+          description: '`rc_not_found`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/payments/{id}/tx:
+    post:
+      tags: [Payments]
+      operationId: submitPaymentTx
+      summary: Submit the transfer transaction hash for on-chain verification
+      description: Only in status `awaiting_tx`. The server checks receipt status, an ERC-20 Transfer log from the configured USDT contract (from = linked wallet, to = treasury, value == approved amount) and N confirmations; a cron job re-checks pending intents.
+      security:
+        - bearerAuth: []
+        - wpNonce: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tx_hash]
+              properties:
+                tx_hash: { type: string, pattern: '^0x[a-fA-F0-9]{64}$' }
+      responses:
+        '200':
+          description: Intent after the first verification attempt (`confirming` / `confirmed` / `failed`)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaymentIntent' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/PaymentsDisabled' }
+        '404':
+          description: '`rc_not_found`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '409':
+          description: '`rc_invalid_state` · `rc_expired` · `rc_no_wallet` · `rc_tx_used`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '422':
+          description: '`rc_invalid_tx`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/documents:
+    get:
+      tags: [Data room]
+      operationId: myDocuments
+      summary: Restricted documents visible to me, my audiences and data-room state
+      description: Audiences public / investor / enterprise / auditor / custodian / staff. Investor and enterprise rooms are additionally gated by modules `investor_portal` / `enterprise_portal` for non-staff.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Data room (live)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MyDocuments' }
+              example:
+                items: []
+                audiences: []
+                rooms:
+                  investor: { member: false, enabled: false, module: investor_portal }
+                  enterprise: { member: false, enabled: false, module: enterprise_portal }
+                link_ttl: 600
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /me/documents/{id}/link:
+    get:
+      tags: [Data room]
+      operationId: documentLink
+      summary: Get a signed download link (valid 600 s, bound to the user)
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200':
+          description: Signed URL (live, signature redacted)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, format: uri }
+                  expires_in: { type: integer }
+              example: { url: 'http://localhost:8088/wp-json/rc/v1/documents/258/download?u=7&exp=1791300122&sig=0000000000000000000000000000000000000000000000000000000000000000', expires_in: 600 }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403':
+          description: No access to the document's audience
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_forbidden, message: You do not have access to this document., data: { status: 403 } }
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /documents/{id}/download:
+    get:
+      tags: [Data room]
+      operationId: downloadDocument
+      summary: Stream a document through a signed link (access re-checked; every download audited)
+      description: Public gate (rate limit, maintenance) — authorization is the HMAC signature in the query plus a fresh access check for user `u`.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+        - { name: u, in: query, required: true, schema: { type: integer } }
+        - { name: exp, in: query, required: true, schema: { type: integer }, description: Unix expiry (≤ now + 24 h) }
+        - { name: sig, in: query, required: true, schema: { type: string, pattern: '^[a-f0-9]{64}$' } }
+      responses:
+        '200':
+          description: 'File stream (`Content-Disposition` attachment, `Cache-Control` private/no-store, `X-Robots-Tag` noindex)'
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+        '403':
+          description: '`rc_link_invalid` (live) or `rc_forbidden`'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_link_invalid, message: This download link is invalid or has expired. Request a new link from the portal., data: { status: 403 } }
+        '404':
+          description: '`rc_not_found` — document or file unavailable'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '503': { $ref: '#/components/responses/Maintenance' }
+
+  /health:
+    get:
+      tags: [Operations]
+      operationId: health
+      summary: Public health summary for uptime monitors (60 / min / client; not blocked by maintenance mode)
+      description: '`status` is `ok` or `degraded`; `env`, `php`, `wp`, `rc` are omitted in production.'
+      responses:
+        '200':
+          description: Summary (always 200; read `status`)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Health' }
+              examples:
+                live:
+                  value:
+                    status: degraded
+                    time: '2026-10-06T15:11:23+00:00'
+                    db: true
+                    audit: { seq: 1020, chain_head: 1b946a7f74ff9112a39d4bce9ba884e600d687225a8e324abe39665c66532216, last_verify_ok: true, last_verify_age_s: 285 }
+                    triggers: true
+                    cron_age_s: null
+                    disk_free_pct: 93.9
+                    backup_ok: true
+                    env: development
+                    php: 8.3.35
+                    wp: 7.1.2
+                    rc: 0.9.0
+        '429': { $ref: '#/components/responses/RateLimited' }
+
+  /health/full:
+    get:
+      tags: [Operations]
+      operationId: healthFull
+      summary: Detailed health (checks, versions, backup, cron, alerts) — health token required
+      security:
+        - healthToken: []
+      responses:
+        '200':
+          description: Full report
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok, degraded] }
+                  time: { type: string, format: date-time }
+                  env: { type: string }
+                  versions: { type: object, additionalProperties: { type: string } }
+                  checks: { type: object, additionalProperties: true }
+                  audit: { type: object, additionalProperties: true }
+                  backup: { type: object, additionalProperties: true }
+                  failures_24h: { type: object, additionalProperties: true }
+                  cron: { type: object, additionalProperties: true }
+                  alerts: { type: object, additionalProperties: true }
+                  site_mode: { type: string }
+                  smtp: { type: boolean }
+        '401':
+          description: Wrong or missing token
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_unauthorized, message: Invalid health token., data: { status: 401 } }
+        '404':
+          description: RC_HEALTH_TOKEN not configured (< 16 chars) — live in local development
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: rc_health_disabled, message: Detailed health is disabled (RC_HEALTH_TOKEN not configured)., data: { status: 404 } }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: HS256 access JWT from /auth/login, /auth/mfa/verify or /auth/refresh (claims iss, sub, iat, exp, typ=access, ver, mfa). Lifetime 3600 s. Invalidated on logout, MFA disable and account deletion (token version bump).
+    wpNonce:
+      type: apiKey
+      in: header
+      name: X-WP-Nonce
+      description: WordPress logged-in cookie session plus a `wp_rest` nonce (website / portal). Accepted by the Web3 endpoints and by staff endpoints (`/audit/anchor` requires capability `rc_anchor_audit`).
+    healthToken:
+      type: apiKey
+      in: header
+      name: X-RC-Health-Token
+      description: Value of the RC_HEALTH_TOKEN constant (≥ 16 characters) in wp-config.php.
+
+  responses:
+    Ok:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok: { type: boolean, const: true }
+          example: { ok: true }
+    Ticket:
+      description: Stored; ticket reference returned
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok: { type: boolean }
+              ticket: { type: string, pattern: '^RC-SUP-\d{6}$' }
+          example: { ok: true, ticket: RC-SUP-000012 }
+    Unauthorized:
+      description: Missing, invalid, expired or revoked bearer token (live)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: rc_unauthorized, message: Authentication required., data: { status: 401 } }
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: rc_rate_limited, message: Too many requests., data: { status: 429 } }
+    Maintenance:
+      description: Site mode `maintenance` (staff with edit_posts are exempt)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: rc_maintenance, message: Platform under maintenance., data: { status: 503 } }
+    WalletDisabled:
+      description: Module `wallet` inactive (live)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: rc_module_disabled, message: 'Wallet linking is not available — the wallet module is not activated (subject to written authorization and final approval).', data: { status: 403, module: wallet } }
+    PaymentsDisabled:
+      description: Modules `purchase` / `usdt_payments` inactive or wrong site mode (live)
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: rc_module_disabled, message: 'USDT payments are not available — they require the purchase and USDT payment modules (written authorization) and a live offering or early participation site mode.', data: { status: 403, modules: [purchase, usdt_payments] } }
+
+  schemas:
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: string, examples: [rc_unauthorized] }
+        message: { type: string }
+        data:
+          type: object
+          properties:
+            status: { type: integer }
+          additionalProperties: true
+    PlainError:
+      type: object
+      description: Error body used by the redemption endpoints (status in the HTTP status line only).
+      required: [code, message]
+      properties:
+        code: { type: string }
+        message: { type: string }
+    ValidationError:
+      allOf:
+        - { $ref: '#/components/schemas/Error' }
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status: { type: integer, const: 422 }
+                fields: { type: object, additionalProperties: { type: string } }
+    OkMessage:
+      type: object
+      properties:
+        ok: { type: boolean }
+        message: { type: string }
+    Gated:
+      type: object
+      required: [enabled, reason, items]
+      properties:
+        enabled: { type: boolean }
+        reason: { type: [string, 'null'] }
+        items: { type: array, items: {} }
+    ClaimStatus:
+      type: string
+      enum: [proposed, in_development, pending_verification, verified, not_applicable]
+    SiteMode:
+      type: string
+      enum: [development, prelaunch, waitlist, documentation_release, asset_verification, enterprise_onboarding, eligibility, early_participation, live_offering, redemption, maintenance]
+    Config:
+      type: object
+      required: [site_mode, environment, modules, disclosure, eu_notice, disclosure_hash, network, version]
+      properties:
+        site_mode: { $ref: '#/components/schemas/SiteMode' }
+        environment: { type: string, enum: [development, staging, production] }
+        modules: { type: object, additionalProperties: { type: boolean } }
+        sections: { type: object, additionalProperties: { type: boolean } }
+        languages: { type: array, items: { type: string } }
+        disclosure: { type: string, description: Render verbatim }
+        eu_notice: { type: string, description: Render verbatim }
+        disclosure_hash: { type: string, description: SHA-256 of the disclosure; stored with consents }
+        claim_statuses: { type: object, additionalProperties: { type: string } }
+        network:
+          type: object
+          properties:
+            chain_id: { type: integer }
+            name: { type: string }
+            explorer: { type: string }
+            token_address: { type: [string, 'null'] }
+            anchor_address: { type: [string, 'null'] }
+            testnet_only: { type: boolean, const: true }
+        version: { type: string }
+    Claim:
+      type: object
+      properties:
+        label: { type: string }
+        status: { $ref: '#/components/schemas/ClaimStatus' }
+        note: { type: string }
+    Field:
+      type: object
+      properties:
+        key: { type: string }
+        label: { type: string }
+        value: { type: [string, 'null'] }
+        unit: { type: [string, 'null'] }
+        type: { type: string }
+        scope: { type: [string, 'null'] }
+        state: { type: string, enum: [provided, pending] }
+        pending: { type: [string, 'null'], description: 'Reason shown instead of a value, e.g. "Not yet determined: subject to written approval"' }
+    ProgramSummary:
+      type: object
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        record_no: { type: string }
+        symbol: { type: string }
+        atomic_number: { type: [integer, 'null'] }
+        name: { type: string }
+        summary: { type: string }
+        status: { $ref: '#/components/schemas/ClaimStatus' }
+        claims: { type: array, items: { $ref: '#/components/schemas/Claim' } }
+    ProgramDetail:
+      allOf:
+        - { $ref: '#/components/schemas/ProgramSummary' }
+        - type: object
+          properties:
+            description: { type: string }
+            fields: { type: array, items: { $ref: '#/components/schemas/Field' } }
+            token_program:
+              type: [object, 'null']
+              properties:
+                record_no: { type: string }
+                status: { $ref: '#/components/schemas/ClaimStatus' }
+                fields: { type: array, items: { $ref: '#/components/schemas/Field' } }
+            passports: { type: array, items: { $ref: '#/components/schemas/PassportSummary' } }
+            documents: { type: array, items: { $ref: '#/components/schemas/Document' } }
+    PassportType:
+      type: string
+      enum: [rc_lot, rc_batch, rc_container, rc_coil]
+    PassportSummary:
+      type: object
+      properties:
+        id: { type: integer }
+        passport_no: { type: string }
+        entity_type: { $ref: '#/components/schemas/PassportType' }
+        entity_label: { type: string }
+        title: { type: string }
+        program: { type: string }
+        symbol: { type: string }
+        status: { $ref: '#/components/schemas/ClaimStatus' }
+        updated_at: { type: string, format: date-time }
+        url: { type: string, format: uri }
+    Passport:
+      type: object
+      description: Digital Asset Passport, schema `reservechain.dap/1.0`.
+      properties:
+        passport_no: { type: string }
+        entity_type: { $ref: '#/components/schemas/PassportType' }
+        entity_label: { type: string }
+        title: { type: string }
+        description: { type: string }
+        status: { $ref: '#/components/schemas/ClaimStatus' }
+        program: { type: object, additionalProperties: true }
+        lineage: { type: array, items: { type: object, additionalProperties: true } }
+        children: { type: array, items: { type: object, additionalProperties: true } }
+        fields: { type: array, items: { $ref: '#/components/schemas/Field' } }
+        evidence: { type: array, items: { type: object, additionalProperties: true } }
+        documents: { type: array, items: { $ref: '#/components/schemas/Document' } }
+        timeline: { type: array, items: { type: object, additionalProperties: true } }
+        record_fingerprint: { type: string }
+        merkle_root: { type: string }
+        merkle_leaves: { type: integer }
+        completeness:
+          type: object
+          properties:
+            present: { type: integer }
+            total: { type: integer }
+            percent: { type: integer }
+        url: { type: string }
+        json_url: { type: string }
+        qr_url: { type: string }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        disclosure: { type: string }
+        schema: { type: string, const: reservechain.dap/1.0 }
+      example:
+        passport_no: RC-CU-LOT-000001
+        entity_type: rc_lot
+        entity_label: Lot
+        title: 'Ultrafine Copper Powder: Lot #03-K-07'
+        status: pending_verification
+        program: { id: 181, record_no: RC-CU-PRG-000001, name: Ultra-High-Purity Copper Powder, slug: copper-powder, symbol: Cu, atomic_number: 29 }
+        children: [{ record_no: RC-CU-CTN-000001, type: Container, title: 'Lot #03-K-07: Box no. 20 (sampled box)' }]
+        record_fingerprint: ddf8443101ac293f068f7f835deaab621e3872aa1fdd9629e3e6f3469c2d8fb9
+        merkle_root: f2732f19c68374cddef49a7ad74e156e850c68a73d4a66d0ecf92e50a40262ac
+        merkle_leaves: 4
+        completeness: { present: 6, total: 34, percent: 18 }
+        schema: reservechain.dap/1.0
+    Document:
+      type: object
+      properties:
+        id: { type: integer }
+        record_no: { type: string }
+        title: { type: string }
+        type: { type: string }
+        type_label: { type: string }
+        sha256: { type: string }
+        status: { $ref: '#/components/schemas/ClaimStatus' }
+        issued_by: { type: [string, 'null'] }
+        issue_date: { type: [string, 'null'], format: date }
+        version: { type: [string, 'null'] }
+        url: { type: [string, 'null'] }
+        size: { type: [integer, 'null'] }
+        mime: { type: [string, 'null'] }
+        description: { type: [string, 'null'] }
+    VerifyResult:
+      type: object
+      required: [match, hash, checked_at]
+      properties:
+        match: { type: boolean }
+        hash: { type: string }
+        checked_at: { type: string, format: date-time }
+        state: { type: string, enum: [current, archived, withdrawn] }
+        document: { $ref: '#/components/schemas/Document' }
+        passports: { type: array, items: { $ref: '#/components/schemas/PassportSummary' } }
+    AuditHeadCore:
+      type: object
+      properties:
+        seq: { type: integer }
+        chain_head: { type: string }
+        at: { type: string }
+    AuditHead:
+      allOf:
+        - { $ref: '#/components/schemas/AuditHeadCore' }
+        - type: object
+          properties:
+            algorithm: { type: string, const: sha256-chain/v1 }
+            last_verified:
+              type: [object, 'null']
+              properties:
+                ok: { type: boolean }
+                checked: { type: integer }
+                at: { type: string, format: date-time }
+            last_anchor:
+              type: [object, 'null']
+              properties:
+                seq: { type: integer }
+                chain_head: { type: string }
+                network: { type: string }
+                tx_hash: { type: string }
+                at: { type: string }
+            db_triggers: { type: boolean }
+    RegistryStats:
+      type: object
+      properties:
+        entities:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              label: { type: string }
+              published: { type: integer }
+        verified_records: { type: integer }
+        audit: { $ref: '#/components/schemas/AuditHeadCore' }
+    WaitlistRequest:
+      type: object
+      required: [email, country, consent_disclosure, consent_privacy]
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        name: { type: string, description: Used when first/last are absent }
+        email: { type: string, format: email }
+        country: { type: string, description: ISO 3166-1 alpha-2 country of residence }
+        entity_type: { type: string, enum: [individual, institution], default: individual }
+        organisation: { type: string, description: Required for institution }
+        materials: { type: string, enum: [cu, ni, both, future] }
+        interest: { type: array, items: { type: string, enum: [cu, ni, enterprise] } }
+        interest_range: { type: string, enum: [undisclosed, lt10k, 10k_50k, 50k_250k, 250k_1m, gt1m], description: Indicative and non-binding }
+        participation_type: { type: string, enum: [updates, early, buyer, owner, enterprise, research] }
+        buyer_interest: { type: boolean }
+        owner_interest: { type: boolean }
+        consent_updates: { type: boolean }
+        consent_disclosure: { type: boolean }
+        consent_privacy: { type: boolean }
+        general_updates: { type: boolean, description: Required for restricted jurisdictions to be stored }
+        nationality: { type: string, description: Only when module waitlist_nationality is on }
+        current_location: { type: string, description: Only when module waitlist_nationality is on }
+        campaign_source: { type: string, maxLength: 100 }
+        language: { type: string, enum: [en, es, it] }
+        source: { type: string, enum: [web, app] }
+        ts: { type: integer, description: Unix time the web form was rendered }
+        website: { type: string, description: Honeypot — leave empty }
+    WaitlistResponse:
+      type: object
+      properties:
+        ok: { type: boolean }
+        status: { type: string, enum: [pending_confirmation, confirmed, ineligible_jurisdiction] }
+        jurisdiction: { type: string, enum: [eligible, restricted, pending] }
+        reason: { type: string }
+        message: { type: string }
+        stored: { type: boolean }
+        dev_confirm_url: { type: string, description: Development only }
+    RegisterRequest:
+      type: object
+      required: [email, password, country, accept_disclosure, accept_terms]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, format: password, minLength: 12, description: Upper- and lower-case letters and a digit }
+        name: { type: string }
+        country: { type: string }
+        entity_type: { type: string, enum: [individual, institution] }
+        accept_disclosure: { type: boolean }
+        accept_terms: { type: boolean }
+    Tokens:
+      type: object
+      required: [access_token, refresh_token, token_type, expires_in]
+      properties:
+        access_token: { type: string }
+        refresh_token: { type: string, description: 'Opaque 64-char, single use, 30-day lifetime; max 10 live per user' }
+        token_type: { type: string, const: Bearer }
+        expires_in: { type: integer, const: 3600 }
+    LoginTokens:
+      allOf:
+        - { $ref: '#/components/schemas/Tokens' }
+        - type: object
+          properties:
+            mfa_required: { type: boolean, const: false }
+            mfa_recommended: { type: boolean }
+    MfaChallenge:
+      type: object
+      required: [mfa_required, mfa_token]
+      properties:
+        mfa_required: { type: boolean, const: true }
+        mfa_token: { type: string, description: 'JWT typ=mfa, 300 s' }
+    Eligibility:
+      type: object
+      properties:
+        country: { type: [string, 'null'] }
+        entity_type: { type: string, enum: [individual, institution] }
+        jurisdiction: { type: string, enum: [eligible, restricted, pending] }
+        kyc: { $ref: '#/components/schemas/CheckState' }
+        kyb: { $ref: '#/components/schemas/CheckState' }
+        aml: { $ref: '#/components/schemas/CheckState' }
+        sanctions: { $ref: '#/components/schemas/CheckState' }
+        overall: { type: string, enum: [incomplete, restricted, eligible_subject_to_final_approval] }
+        note: { type: string }
+    CheckState:
+      type: string
+      enum: [not_started, pending, approved, rejected, not_applicable]
+    Me:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        country: { type: [string, 'null'] }
+        entity_type: { type: string }
+        language: { type: string }
+        mfa_enabled: { type: boolean }
+        eligibility: { $ref: '#/components/schemas/Eligibility' }
+        created_at: { type: string, format: date-time }
+    Notification:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        body: { type: string }
+        category: { type: string }
+        created_at: { type: string }
+        read: { type: boolean }
+        broadcast: { type: boolean }
+    PorOverview:
+      type: object
+      properties:
+        module_enabled: { type: boolean }
+        programs:
+          type: array
+          items:
+            type: object
+            properties:
+              program: { type: object, additionalProperties: true }
+              inventory: { $ref: '#/components/schemas/PorInventory' }
+              supply:
+                type: object
+                properties:
+                  status: { type: string }
+                  issued: { type: number }
+              attestation: { type: [object, 'null'], additionalProperties: true }
+              coverage: { $ref: '#/components/schemas/PorCoverage' }
+              exceptions:
+                type: object
+                properties:
+                  critical: { type: integer }
+                  warning: { type: integer }
+                  info: { type: integer }
+              latest_published:
+                type: [object, 'null']
+                properties:
+                  id: { type: integer }
+                  sha256: { type: string }
+                  published_at: { type: string }
+    PorInventory:
+      type: object
+      properties:
+        units_total: { type: integer }
+        by_type: { type: object, additionalProperties: { type: integer } }
+        declared_kg: { type: number, description: Owner-supplied; not a verified reserve }
+        verified_kg: { type: number }
+        units_verified: { type: integer }
+        units_in_custody: { type: integer }
+        units_eligible: { type: integer }
+        units_accepted: { type: integer }
+        units_in_redemption: { type: integer }
+    PorCoverage:
+      type: object
+      properties:
+        status: { type: string, enum: [not_computed, computed] }
+        value: { type: [number, 'null'] }
+        reason: { type: [string, 'null'] }
+    PorException:
+      type: object
+      properties:
+        severity: { type: string, enum: [critical, warning, info] }
+        code:
+          type: string
+          enum: [no_coa, owner_supplied_only, reserve_without_custody, missing_weight, redemption_overlap, unfingerprinted_document, insurance_expired, insurance_expiring, stale_valuation, stale_attestation, no_attestation, supply_without_attestation, supply_exceeds_reserve]
+        ref: { type: string }
+        message: { type: string }
+    PorSnapshotListItem:
+      type: object
+      properties:
+        id: { type: integer }
+        program_id: { type: integer }
+        published_at: { type: string }
+        sha256: { type: string }
+        merkle_root: { type: string }
+        exceptions: { type: integer }
+        current: { type: boolean }
+    PorSnapshot:
+      type: object
+      properties:
+        id: { type: integer }
+        sha256: { type: string }
+        intact: { type: boolean }
+        published_at: { type: string }
+        snapshot:
+          type: object
+          description: Canonical JSON whose SHA-256 is `sha256`.
+          properties:
+            schema: { type: string, const: reservechain.por/1.0 }
+            program: { type: object, additionalProperties: true }
+            generated_at: { type: string, format: date-time }
+            inventory: { $ref: '#/components/schemas/PorInventory' }
+            attestation: { type: [object, 'null'], additionalProperties: true }
+            supply: { type: object, additionalProperties: true }
+            coverage: { $ref: '#/components/schemas/PorCoverage' }
+            exceptions: { type: array, items: { $ref: '#/components/schemas/PorException' } }
+            units: { type: array, items: { type: object, additionalProperties: true } }
+            units_merkle_root: { type: string }
+            audit_head: { $ref: '#/components/schemas/AuditHeadCore' }
+            statement: { type: string }
+    RedemptionState:
+      type: string
+      enum: [requested, compliance_review, approved, tokens_burned, custody_released, in_logistics, delivered, on_hold, rejected, cancelled]
+    RedemptionCreate:
+      type: object
+      required: [token_program, amount, delivery_method]
+      properties:
+        token_program: { type: integer, description: rc_token_program id }
+        amount: { type: string, description: Token amount > 0, examples: ['1'] }
+        delivery_method: { type: string, enum: [collection, delivery] }
+        delivery_address: { type: string, maxLength: 1000, description: Required (≥ 10 chars) for delivery; encrypted at rest }
+        units: { type: array, items: { type: integer }, description: Container/coil ids (module unit_selection) }
+        lot: { type: integer, description: Lot id (module unit_selection) }
+        note: { type: string }
+    RedemptionSummary:
+      type: object
+      properties:
+        id: { type: integer }
+        record_no: { type: string }
+        test: { type: boolean }
+        state: { $ref: '#/components/schemas/RedemptionState' }
+        state_label: { type: string }
+        token_program:
+          type: [object, 'null']
+          properties:
+            id: { type: integer }
+            record_no: { type: string }
+            name: { type: string }
+        amount: { type: string }
+        delivery_method: { type: string }
+        created_at: { type: string, format: date-time }
+        can_cancel: { type: boolean }
+    Redemption:
+      allOf:
+        - { $ref: '#/components/schemas/RedemptionSummary' }
+        - type: object
+          properties:
+            minimum: { type: string, description: 'Approved minimum or "To be determined — subject to written approval"' }
+            fees: { type: string }
+            delivery_address_set: { type: boolean }
+            units:
+              type: array
+              items:
+                type: object
+                properties:
+                  record_no: { type: string }
+                  type: { type: string, enum: [rc_container, rc_coil] }
+                  title: { type: string }
+                  redemption_status: { type: string, enum: [not_available, eligible, requested, released, delivered] }
+            lot:
+              type: [object, 'null']
+              properties:
+                record_no: { type: string }
+                title: { type: string }
+            burn_tx: { type: [string, 'null'] }
+            burn_tx_url: { type: [string, 'null'] }
+            carrier: { type: [string, 'null'] }
+            tracking_ref: { type: [string, 'null'] }
+            history:
+              type: array
+              items:
+                type: object
+                properties:
+                  at: { type: string }
+                  action: { type: string }
+                  from: { type: [string, 'null'] }
+                  to: { type: string }
+                  reason: { type: [string, 'null'] }
+            notice: { type: [string, 'null'] }
+    EthAddress:
+      type: string
+      pattern: '^0x[a-fA-F0-9]{40}$'
+    Wallets:
+      type: object
+      properties:
+        max: { type: integer, const: 3 }
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              address: { $ref: '#/components/schemas/EthAddress' }
+              chain_id: { type: integer }
+              linked_at: { type: string, format: date-time }
+              explorer: { type: [string, 'null'] }
+    PaymentIntent:
+      type: object
+      properties:
+        id: { type: integer }
+        program_id: { type: integer }
+        program: { type: [string, 'null'] }
+        status: { type: string, enum: [created, awaiting_tx, confirming, confirmed, failed, expired] }
+        amount_minor: { type: [string, 'null'], description: Staff-approved amount in token minor units }
+        amount_approved: { type: boolean }
+        wallet: { $ref: '#/components/schemas/EthAddress' }
+        treasury: { type: [string, 'null'], description: Only shown once approved }
+        token_contract: { type: [string, 'null'] }
+        chain_id: { type: integer }
+        tx_hash: { type: [string, 'null'] }
+        tx_url: { type: [string, 'null'] }
+        confirmations: { type: integer }
+        required_confirmations: { type: integer }
+        failure_reason: { type: [string, 'null'] }
+        expires_at: { type: [string, 'null'] }
+        created_at: { type: string }
+        updated_at: { type: string }
+    MyDocuments:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Document' } }
+        audiences: { type: array, items: { type: string, enum: [public, investor, enterprise, auditor, custodian, staff] } }
+        rooms:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              member: { type: boolean }
+              enabled: { type: boolean }
+              module: { type: string }
+        link_ttl: { type: integer }
+    Health:
+      type: object
+      properties:
+        status: { type: string, enum: [ok, degraded] }
+        time: { type: string, format: date-time }
+        db: { type: boolean }
+        audit:
+          type: object
+          properties:
+            seq: { type: [integer, 'null'] }
+            chain_head: { type: [string, 'null'] }
+            last_verify_ok: { type: [boolean, 'null'] }
+            last_verify_age_s: { type: [integer, 'null'] }
+        triggers: { type: boolean }
+        cron_age_s: { type: [integer, 'null'] }
+        disk_free_pct: { type: [number, 'null'] }
+        backup_ok: { type: boolean }
+        env: { type: string }
+        php: { type: string }
+        wp: { type: string }
+        rc: { type: string }

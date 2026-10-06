@@ -1,0 +1,21 @@
+stateDiagram-v2
+    [*] --> requested
+    requested --> compliance_review: start review
+    compliance_review --> approved: approve (four-eyes,<br/>compliance re-check)
+    approved --> tokens_burned: record burn<br/>(testnet tx hash)
+    tokens_burned --> custody_released: release custody
+    custody_released --> in_logistics: dispatch
+    in_logistics --> delivered: confirm delivery
+    delivered --> [*]
+    requested --> cancelled: requester cancels
+    compliance_review --> cancelled: requester cancels
+    requested --> rejected: reject (before burn)
+    compliance_review --> rejected
+    approved --> rejected
+    requested --> on_hold: hold (resumed to prior state<br/>by a different user)
+    compliance_review --> on_hold
+    approved --> on_hold
+    tokens_burned --> on_hold
+    custody_released --> on_hold
+    in_logistics --> on_hold
+    on_hold --> rejected

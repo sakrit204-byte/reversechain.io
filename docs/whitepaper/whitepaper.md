@@ -1,7 +1,7 @@
 ---
 title: "ReserveChain — Industrial-Metals Reserve Registry and Tokenization Framework"
 subtitle: "Institutional Whitepaper — Discussion Draft"
-version: "Draft 0.9 — subject to legal review and final approval"
+version: "Draft v0.10 — subject to legal review and final approval"
 status: "In development"
 ---
 
@@ -10,7 +10,7 @@ status: "In development"
 ## Industrial-Metals Reserve Registry and Tokenization Framework
 
 **Institutional Whitepaper — Discussion Draft**
-Version: Draft 0.9 — subject to legal review and final approval
+Version: Draft v0.10 — subject to legal review and final approval
 Date of this version: [To be inserted on approval by ReserveChain]
 
 ---
@@ -51,10 +51,13 @@ Recipients should obtain independent legal, tax, regulatory and financial advice
 12. Compliance
 13. Redemption (Proposed Process)
 14. Proof of Reserves (Proposed)
-15. Roadmap
-16. Risk Factors
-17. Glossary
-18. Document Control
+15. Wallet Linking and Payment Verification (Inactive Modules)
+16. Participant Portal, Data Rooms and Asset-Owner Intake
+17. Operations: Monitoring, Backups and Disaster Recovery
+18. Roadmap
+19. Risk Factors
+20. Glossary
+21. Document Control
 
 ---
 
@@ -67,6 +70,8 @@ The platform's central proposition is that a token representing a physical asset
 On top of that evidence layer, ReserveChain has designed a **token architecture** based on audited open-source building blocks (OpenZeppelin Contracts v5) with compliance-gated transfers, a reserve-gated mint ceiling that is fail-closed by default, a proposed redemption workflow, a role-controlled treasury and an audit-anchoring contract. All economic parameters — supply, asset-to-token ratio, price, redemption thresholds, allocations — are **unset** and remain **to be determined, subject to written approval**. The token, wallet, purchase, Proof-of-Reserves and redemption features are implemented as **inactive modules**, switched off until authorised.
 
 Every factual claim on the platform carries a visible **Claim Status** — *proposed*, *in development*, *pending verification*, *verified* or *not applicable* — so that readers can distinguish intention from evidence at a glance.
+
+Since the previous draft, the platform in development has gained: a **Proof-of-Reserves reconciliation engine** with explicit exception rules and four-eyes-approved, fingerprinted snapshots (Section 14); an off-chain **redemption workflow** with compliance re-checks and unit-level status (Section 13); **wallet linking** and **USDT payment verification** modules that are implemented but **inactive** and restricted to test networks (Section 15); a **participant portal** with audience-restricted data rooms and an **asset-owner intake** pipeline (Section 16); and **operations monitoring, backups and disaster-recovery** procedures (Section 17). For each metal program, the asset owner has supplied a laboratory **Certificate of Analysis**; these are recorded as **owner-supplied** and remain **subject to documentary verification** (Section 4).
 
 ---
 
@@ -169,7 +174,9 @@ At present ReserveChain operates only in the state labelled *"Registry & passpor
 
 ## 4. The Metal Programs
 
-> This section describes the two materials in general industrial terms only. **No specification, purity figure, quantity, origin, price or counterparty for ReserveChain's own assets is stated or implied.** Asset-specific data will be published in the registry and Digital Asset Passports only when provided and evidenced.
+> **Provisional Asset Notice.** Preliminary illustrative information only - subject to documentary verification, independent assessment and final approval. No asset or token is currently offered for sale through this website.
+
+> This section describes the two materials in general industrial terms and reproduces facts stated on **owner-supplied** Certificates of Analysis (CoA). Those facts are recorded as *pending verification*: ReserveChain has **not yet independently confirmed** the certificates with the issuing laboratory, and their reproduction here does not imply any verification, valuation, custody arrangement, reserve claim or token. **No price, value, custody location or counterparty arrangement for ReserveChain's assets is stated or implied.** Further asset-specific data will be published in the registry and Digital Asset Passports only when provided and evidenced.
 
 ### 4.1 Copper Powder — Cu 29
 
@@ -179,15 +186,15 @@ At present ReserveChain operates only in the state labelled *"Registry & passpor
 
 | Parameter | Value | Claim status |
 |---|---|---|
-| Material form | **[To be provided by ReserveChain]** | Proposed |
-| Target purity grade | **Pending — to be confirmed by laboratory analysis** | Pending verification |
-| Specification standard | **Pending — standard to be confirmed** | Proposed |
+| Material form | Ultrafine copper powder (as described on owner-supplied CoA 0004512) | Pending verification |
+| Stated purity | 99.9999 % as stated on owner-supplied CoA 0004512 — **subject to documentary verification** | Pending verification |
+| Purity basis | Chemical purity based on the impurities Al, Cd, Fe, Mg, Mo, Ni, Sb, Ti, Zn per TU 1793-011-50316079-2004 (as stated on the certificate) | Pending verification |
 | Particle size distribution | **Pending — laboratory analysis required** | Pending verification |
-| Packaging and atmosphere | **[To be provided by ReserveChain]** | Proposed |
+| Packaging | Glass ampoules packed in cardboard boxes (per owner-supplied CoA) | Pending verification |
 | Producer / origin | **Pending — producer to be disclosed** | Proposed |
-| Quantity in program | **[To be provided by ReserveChain]** | Proposed |
+| Declared quantity | Lot #03-K-07: 2000 kg declared (net weight according to data supplied by the customer to the laboratory) | Pending verification |
 | Unit of account | **Not yet determined** | Proposed |
-| Laboratory | **Laboratory to be appointed** | Proposed |
+| Laboratory | IGAS research, Goslar — named on the owner-supplied certificate; not yet independently confirmed; no partnership, endorsement or accreditation implied | Pending verification |
 | Custodian / location | **Custodian to be appointed — subject to final approval** | Proposed |
 | Insurance | **Insurance not yet arranged — subject to final approval** | Proposed |
 
@@ -199,19 +206,44 @@ At present ReserveChain operates only in the state labelled *"Registry & passpor
 
 | Parameter | Value | Claim status |
 |---|---|---|
-| Material form | **[To be provided by ReserveChain]** | Proposed |
-| Target purity grade | **Pending — to be confirmed by laboratory analysis** | Pending verification |
-| Specification standard | **Pending — standard to be confirmed** | Proposed |
-| Wire diameter / tolerance | **Pending — laboratory analysis required** | Pending verification |
+| Material form | Nickel wire, 0.025 mm diameter (as described on owner-supplied CoA 0004368 — dimensional inspection pending) | Pending verification |
+| Stated purity | 99.9807 % as stated on owner-supplied CoA 0004368 — **subject to documentary verification** | Pending verification |
+| Purity basis | Impurities per GOST 2179-75 (As, Cu, Fe, Mn, Pb, Si) stated as 0,0193 % by weight | Pending verification |
+| Wire diameter tolerance | **Pending — laboratory analysis required** | Pending verification |
 | Temper / condition | **[To be provided by ReserveChain]** | Proposed |
-| Coil / spool format | **[To be provided by ReserveChain]** | Proposed |
+| Coil / spool format | 30 bobbins in one box (per owner-supplied CoA) | Pending verification |
 | Producer / origin | **Pending — producer to be disclosed** | Proposed |
-| Quantity in program | **[To be provided by ReserveChain]** | Proposed |
-| Laboratory | **Laboratory to be appointed** | Proposed |
+| Declared quantity | Lot 120/NP1: 5000 g total net weight declared (according to information given by the customer to the laboratory) | Pending verification |
+| Laboratory | IGAS research, Goslar — named on the owner-supplied certificate; not yet independently confirmed; no partnership, endorsement or accreditation implied | Pending verification |
 | Custodian / location | **Custodian to be appointed — subject to final approval** | Proposed |
 | Insurance | **Insurance not yet arranged — subject to final approval** | Proposed |
 
-### 4.3 Why unit-level registration matters for industrial metals
+### 4.3 Owner-supplied Certificates of Analysis
+
+The asset owner has supplied one IGAS Certificate of Analysis for each program. ReserveChain has registered a scan of each certificate as an evidence document (SHA-256 fingerprinted; the customer address block is redacted on the supplied copy) and transcribed its stated values into a CoA record. Both records carry provenance **owner-supplied** and Claim Status **pending verification**. The figures below are reproduced as stated on the certificates; they are **not** ReserveChain findings.
+
+| Item | Copper — CoA 0004512 | Nickel — CoA 0004368 |
+|---|---|---|
+| Provenance | Owner-supplied — subject to documentary verification | Owner-supplied — subject to documentary verification |
+| Laboratory named on certificate | IGAS research, Goslar (DE) | IGAS research, Goslar (DE) |
+| Date of certificate | 04.07.2022 | 19.10.2021 |
+| Goods described | Ultrafine Copper Powder, Lot #03-K-07 | Nickel wire 0,025 mm dia, DKRNT NP1, Lot 120/NP1 |
+| Declared quantity | 2000 kg (net weight according to data supplied by customer) | 5000 g total net weight, 30 bobbins in 1 box (according to information given by customer) |
+| Sample (as stated) | 10 g, from Box no. 20, sampled 01.07.2022 | 0,8 g, from bobbins no. 8, 10, 19 and 27, sampled 14.10.2021 |
+| Method | ICP/OES | ICP/MS and ICP/OES |
+| Stated purity | 99.9999 % | 99.9807 % |
+| Purity basis | Impurities Al, Cd, Fe, Mg, Mo, Ni, Sb, Ti, Zn per TU 1793-011-50316079-2004 | Impurities per GOST 2179-75 (As, Cu, Fe, Mn, Pb, Si): 0,0193 % by weight |
+| Verification status | Pending verification — not yet confirmed with the issuing laboratory | Pending verification — not yet confirmed with the issuing laboratory |
+
+Important limitations:
+
+- The declared quantities are **net weights declared by the customer** to the laboratory; they have not been weighed or verified by ReserveChain, by a custodian or by an independent inspector.
+- A certificate describes the sample analysed at the time stated. It does not establish the present existence, location, condition, ownership or quantity of the material.
+- A purity figure computed on a stated impurity basis is not necessarily comparable with purity figures computed on other bases or standards.
+- Physical-property and dimensional fields not covered by the certificates (for example particle size distribution, diameter tolerance and temper) remain **pending**.
+- In the Proof-of-Reserves reconciliation (Section 14), a unit whose only certificate is owner-supplied raises an *owner-supplied only* exception until independent verification is recorded.
+
+### 4.4 Why unit-level registration matters for industrial metals
 
 Industrial materials are not fungible in the way that standardised bullion bars are. Two lots of nominally identical copper powder may differ in particle size distribution or oxygen content, and two coils of nickel wire may differ in temper or diameter tolerance. ReserveChain's proposed registry therefore tracks **specific physical units** — lots, batches, containers and coils — each with its own evidence and passport, rather than an undifferentiated pool. Any future token program would need to define, in its offering documentation, exactly which registered units it relates to and how differences between units are treated. That definition is **[To be determined — subject to written approval]**.
 
@@ -580,8 +612,8 @@ ReserveChain's proposed security programme comprises:
 | Abuse | Edge WAF, rate limiting, honeypots, optional challenge |
 | Secrets | Secrets manager; no secrets in source; scheduled rotation |
 | Data protection | Hashed IPs and emails for de-duplication; PII restricted to compliance roles; KYC documents held by provider, not by the platform |
-| Backups | 3-2-1 strategy with immutable off-site copy; scheduled restore drills |
-| Monitoring | Uptime, error rates, integrity job, backup status, certificate expiry |
+| Backups | 3-2-1 strategy with immutable off-site copy; scheduled restore drills (see Section 17) |
+| Monitoring | Health endpoints, audit-chain and trigger checks, failed sign-ins, backup age, disk and scheduler checks, with alerting (see Section 17) |
 | Vulnerability management | Dependency and image scanning; static analysis (PHP and Solidity); external penetration test and smart-contract audit **[firms to be appointed by ReserveChain]** |
 | Incident response | Severity model; maintenance mode; contract pause via multisig; evidence preservation against on-chain anchors |
 | Keys | Hardware-backed multisig for contract administration; low-privilege anchor key; deployer admin renounced after deployment |
@@ -634,6 +666,8 @@ Public materials use the terms *proposed*, *planned*, *in development* and *subj
 
 > Redemption is a **proposed** feature. It is **disabled** in the platform and in the RedemptionManager contract. No redemption right exists. Thresholds, fees, delivery terms, eligible locations and timelines are **To be determined — subject to written approval**.
 
+### 13.1 On-chain process (testnet contract)
+
 <!-- diagram: 12-redemption-flow -->
 ```mermaid
 sequenceDiagram
@@ -660,6 +694,48 @@ sequenceDiagram
 
 Design properties of the proposed process: tokens are escrowed (not burned) until approval, so a rejection is fully reversible; approvals and rejections are recorded on-chain with a fulfilment reference or reason hash; the corresponding CMS redemption record mirrors the state; physical release would be evidenced by custody records attached to the affected passports.
 
+### 13.2 Off-chain redemption workflow (in development, module inactive)
+
+The platform contains an off-chain workflow that mirrors the RedemptionManager contract. It is part of the gated `redemption` module, which is **inactive** until written authorization. While the module is off, staff can create only clearly labelled **test** redemptions in the development environment.
+
+<!-- diagram: 13-redemption-states -->
+```mermaid
+stateDiagram-v2
+    [*] --> requested
+    requested --> compliance_review: start review
+    compliance_review --> approved: approve (four-eyes,<br/>compliance re-check)
+    approved --> tokens_burned: record burn<br/>(testnet tx hash)
+    tokens_burned --> custody_released: release custody
+    custody_released --> in_logistics: dispatch
+    in_logistics --> delivered: confirm delivery
+    delivered --> [*]
+    requested --> cancelled: requester cancels
+    compliance_review --> cancelled: requester cancels
+    requested --> rejected: reject (before burn)
+    compliance_review --> rejected
+    approved --> rejected
+    requested --> on_hold: hold (resumed to prior state<br/>by a different user)
+    compliance_review --> on_hold
+    approved --> on_hold
+    tokens_burned --> on_hold
+    custody_released --> on_hold
+    in_logistics --> on_hold
+    on_hold --> rejected
+```
+
+| Control | Implementation (in development) |
+|---|---|
+| States | requested → compliance review → approved → tokens burned → custody released → in logistics / customs → delivered; side exits: rejected (staff, before burn), cancelled (requester, before approval), on hold (staff, resumable to the prior state) |
+| Reversibility | Rejection and cancellation are possible only before the burn is recorded, matching the on-chain escrow model; the burn step must carry the test-network burn transaction hash as evidence |
+| Four-eyes | Every transition is capability-checked; the approver must differ from the requester and the preparing operator; the burn recorder must differ from the approver; the delivery confirmer must differ from the dispatcher; a hold must be released by a different user from the one who placed it |
+| Approval binding | Approval is bound to a fingerprint of what was approved (units, lot, amount, program, delivery method, delivery-address hash); a later change invalidates the approval |
+| Compliance re-checks | Eligibility (jurisdiction plus KYC/KYB, AML and sanctions status) is snapshotted at request **and** re-checked at approval; a restricted jurisdiction or any required check not approved blocks the step and is recorded in the audit trail |
+| Unit-level status | Selected containers, coils or lot are locked against double selection; each unit's redemption status follows the workflow (requested → released → delivered) and is restored on rejection or cancellation, with audit diffs |
+| Thresholds and fees | Never invented: read from the token program or platform settings; when missing they are displayed as *to be determined* and a live (non-test) request is refused |
+| Personal data | The delivery address is encrypted at rest; only its SHA-256 hash enters the audit trail |
+
+The reconciliation engine (Section 14) flags any unit that is accepted into reserve while a redemption is open, to prevent double counting.
+
 ---
 
 ## 14. Proof of Reserves (Proposed)
@@ -673,7 +749,7 @@ The proposed approach combines four elements:
 3. **On-chain posting** — the attestor posts the attested quantity, the report hash and its URI to ReserveGuard; the mint ceiling is derived from the most recent fresh attestation.
 4. **Public reconciliation** — a reserves page would display, per program, the attested units, report date, attestor, report fingerprint, on-chain transaction, and tokens outstanding (currently: *Not applicable — no tokens issued*).
 
-<!-- diagram: 13-proof-of-reserves -->
+<!-- diagram: 14-proof-of-reserves -->
 ```mermaid
 flowchart LR
     reg["Registered units<br/>(passports)"] --> att["Independent attestor<br/>(to be appointed)"]
@@ -686,15 +762,119 @@ flowchart LR
     rg --> pub
 ```
 
-Limitations: an on-chain attestation records a statement by a key holder; its reliability depends entirely on the independence, competence and procedures of the attestor and the custodian. A reserve report at a point in time does not guarantee reserves at other times.
+### 14.1 Reconciliation engine (in development)
+
+For each program, the platform computes a deterministic reconciliation from the registry: registered units by type; declared versus verified weight; custody evidence; reserve eligibility; token supply (read from a test-network contract only when one is configured — otherwise shown as *not deployed* or *RPC not configured*); the latest attestation; and coverage. **Coverage is computed only** from a verified attestation, an approved asset-to-token ratio and a known token supply; otherwise it is shown as *not computed*. No figure is estimated or filled in. Uploaded information is never described as "independently verified" unless the corresponding reserve report itself has been approved with status *verified*.
+
+### 14.2 Exception rules
+
+Exceptions surface problems instead of smoothing them away. Each carries a severity (critical, warning, information) and a reference to the affected unit, document or program.
+
+| Exception | Severity | Condition |
+|---|---|---|
+| Reserve without custody | Critical | Unit marked reserve-eligible but custody not evidenced |
+| Unfingerprinted document | Critical | Linked document has no SHA-256 fingerprint |
+| Insurance expired | Critical | Linked insurance record has expired |
+| Supply without attestation | Critical | Tokens outstanding but no verified attestation exists |
+| Supply exceeds reserve | Critical | Token supply exceeds the attested reserve allowance |
+| No CoA | Warning | No Certificate of Analysis linked to the lot |
+| Missing weight | Warning | Net weight not recorded |
+| Redemption overlap | Warning | Unit accepted into reserve while a redemption is open (double-counting risk) |
+| Insurance expiring | Warning | Linked insurance record approaching expiry |
+| Stale valuation | Warning | Valuation missing or older than 180 days for a reserve unit |
+| Stale attestation | Warning | Latest attestation older than 90 days or undated |
+| Owner-supplied only | Information | Certificate is owner-supplied and not independently verified |
+| No attestation | Information | No reserve attestation published for the program |
+
+A daily job records an audit entry and alerts compliance staff whenever the set of open exceptions changes.
+
+### 14.3 Reserve snapshots
+
+<!-- diagram: 15-por-snapshot-lifecycle -->
+```mermaid
+stateDiagram-v2
+    [*] --> draft: create snapshot<br/>(canonical JSON, SHA-256,<br/>Merkle root over units)
+    draft --> approved: approve<br/>(approver ≠ creator)
+    draft --> rejected: reject
+    approved --> rejected: reject
+    approved --> published: publish<br/>(only if PoR module authorised)
+    published --> superseded: newer snapshot published
+```
+
+A snapshot freezes a reconciliation as canonical JSON, records its SHA-256 hash and a Merkle root over the unit fingerprints, and counts its open exceptions. Snapshots are created manually or as a weekly automatic draft for review. Under the four-eyes rule the creator of a snapshot cannot approve it; only an approved snapshot can be published, and **publication is locked until the Proof of Reserves module is authorised**. Each published snapshot supersedes the previous one for its program, and its integrity can be re-checked against the stored hash. Every step is recorded in the audit trail together with the snapshot hash, so published reports are anchored whenever the audit chain is anchored on-chain. Attestation reports can be uploaded, fingerprinted and routed as draft reserve-report records to the review queue.
+
+Limitations: an on-chain attestation records a statement by a key holder; its reliability depends entirely on the independence, competence and procedures of the attestor and the custodian. A reserve report at a point in time does not guarantee reserves at other times. A reconciliation is only as complete as the registry data behind it.
 
 ---
 
-## 15. Roadmap
+## 15. Wallet Linking and Payment Verification (Inactive Modules)
+
+> The modules in this section are implemented as source code but are **inactive**. They operate only against **test networks**, and they cannot be activated without written authorization. No purchase, payment or token acquisition is possible through the platform. Nothing in this section is an offer or an invitation to pay.
+
+### 15.1 Wallet linking (module `wallet`)
+
+A participant could link up to three wallets to an account by signing a Sign-In-with-Ethereum-style (EIP-4361) challenge with `personal_sign` (EIP-191). The signed statement reads *"Link this wallet to your ReserveChain account. No transaction, no fees."* Challenges expire after ten minutes. Signatures are verified **server-side**: the message is rebuilt from the stored challenge, hashed (Keccak-256) and the signer recovered with secp256k1 in pure PHP; where the required maths library is unavailable, the test-network ecrecover precompile is used instead. Linking a wallet creates no entitlement of any kind.
+
+### 15.2 USDT payment verification (modules `purchase` and `usdt_payments`)
+
+This module would verify ERC-20 USDT transfers. It is gated by **both** the `purchase` and `usdt_payments` modules **and** by a site mode that permits participation, none of which is enabled. There is **no pricing logic** anywhere in the platform: any amount would be entered and approved by staff under four-eyes control, bound to a fingerprint. Verification would require a successful transaction receipt containing a Transfer event from the configured USDT contract, from the participant's linked wallet, to the configured treasury, for exactly the approved amount, with the configured number of confirmations; a scheduled job re-checks pending payment intents (states: created, awaiting transaction, confirming, confirmed, failed, expired).
+
+### 15.3 Test networks only
+
+Every RPC call first checks the network chain ID against an allow-list of test networks (Ethereum Sepolia, Polygon Amoy, local development) **and** against the platform network setting. Mainnet calls are refused.
+
+---
+
+## 16. Participant Portal, Data Rooms and Asset-Owner Intake
+
+### 16.1 Participant portal (in development)
+
+The participant portal is a single-page interface on top of the platform API, offering sign-in with multi-factor authentication and a personal dashboard. It is the staged-access entry point; registration follows the platform's registration settings. Use of the portal creates no entitlement and is not a channel for any offering.
+
+### 16.2 Restricted documents and data rooms
+
+Each evidence document carries an **audience**: public, investor, enterprise, auditor, custodian or staff. Restricted files are moved to private storage that denies direct web access and uses unguessable file names; they are only ever streamed through the application via a **signed link that expires after ten minutes** and re-checks access on use. Read-only participant roles (investor data room, enterprise client, custodian) have no administrative access. The investor and enterprise data rooms are **gated** by the `investor_portal` and `enterprise_portal` modules, which are inactive; until they are authorised, non-staff members cannot see documents in those audiences.
+
+### 16.3 Asset-owner / originator intake (module `asset_owner_portal`)
+
+Producers, owners, originators and custodians of copper powder or nickel wire could submit material for consideration through an intake form gated by the `asset_owner_portal` module. Submissions become private records that move through the pipeline **received → initial review → due diligence → accepted for onboarding | declined**. Final decisions are four-eyes: one manager proposes and a different authorised user confirms, bound to a fingerprint of the submission as proposed. Supporting certificates (PDF or images, up to five files of 20 MB) are stored privately, SHA-256 fingerprinted and accessible to staff only. **A submission is not an acceptance, a valuation or a commitment by either side.**
+
+---
+
+## 17. Operations: Monitoring, Backups and Disaster Recovery
+
+> Operational targets in this section are **proposed** and subject to final approval by ReserveChain; they are not commitments of any hosting provider.
+
+### 17.1 Monitoring and alerting (implemented for the single-server deployment)
+
+| Element | Description |
+|---|---|
+| Public health endpoint | `GET /wp-json/rc/v1/health` — rate-limited, no secrets; reports overall status (ok / degraded), audit chain head and last verification, trigger presence, cron age, disk headroom and backup status |
+| Detailed health endpoint | Token-protected; returns every check with detail, versions, last backup record, recent failures and alert state |
+| Scheduled checks | Database reachability; audit-chain verification; presence of the audit-immutability triggers; failed sign-ins (threshold 20 per hour); waitlist / contact / mail failures; age of last successful backup (26-hour limit); disk usage (85 % threshold); scheduler heartbeat |
+| Alerting | E-mail and optional chat webhook, de-duplicated (repeat interval six hours); an operations widget on the staff dashboard |
+
+### 17.2 Backups (proposed targets)
+
+The proposed backup strategy follows a **3-2-1** model with one off-site, immutable copy held under a separate account and provider whose credentials are not available to the production application. Proposed schedule: continuous point-in-time recovery logs, daily database snapshots, daily encrypted logical dumps off-site, versioned object storage and a daily export of the audit log to write-once storage. Retention periods are subject to counsel's retention policy.
+
+| Metric | Proposed target |
+|---|---|
+| RPO (data loss) | ≤ 15 minutes (point-in-time recovery) |
+| RTO (service restore, same region) | ≤ 4 hours |
+| RTO (region loss) | ≤ 24 hours |
+
+### 17.3 Restore and disaster-recovery drills
+
+The restore procedure verifies the archive checksum before decryption, refuses to overwrite production without an explicit override, confirms that the audit-immutability triggers are present straight from the dump, never rewrites the audit tables, and succeeds only if the tamper test, a full audit-chain verification, the home page and the health endpoint all pass. A local restore drill was performed on 2026-10-06 against a throwaway environment: the triggers were present after import, tamper attempts were rejected and the audit chain verified intact. That drill used development data only; drills with production archives are proposed to be repeated quarterly, and a full rebuild in a disaster-recovery region annually and before launch. External assurance of these procedures has **not yet been performed**.
+
+---
+
+## 18. Roadmap
 
 > The roadmap is **phase-based**. No dates are given; timing depends on legal, regulatory, commercial and technical dependencies, many outside ReserveChain's control. Completion of any phase does not imply that later phases will occur.
 
-<!-- diagram: 14-roadmap -->
+<!-- diagram: 16-roadmap -->
 ```mermaid
 flowchart TB
     p0["Phase 0<br/>Foundation<br/>platform in development · registry · passports · waitlist"] --> p1["Phase 1<br/>Structuring<br/>proposed Swiss structure · legal analysis · counterparties"]
@@ -706,7 +886,7 @@ flowchart TB
 
 | Phase | Objectives | Status |
 |---|---|---|
-| 0 — Foundation | Website, CMS, registry, Digital Asset Passports, audit trail, waitlist, testnet contracts, mobile app source, documentation | In development |
+| 0 — Foundation | Website, CMS, registry, Digital Asset Passports, audit trail, waitlist, testnet contracts, mobile app source, documentation; reserve reconciliation and snapshots, redemption workflow, wallet and payment-verification modules (inactive), participant portal and data rooms, asset-owner intake, operations monitoring and backups; registration of owner-supplied certificates (pending verification) | In development |
 | 1 — Structuring | Corporate and legal structure; regulatory analysis; selection of providers | Proposed |
 | 2 — Evidence | Laboratory, custody and insurance arrangements; first units registered with evidence | Proposed |
 | 3 — Assurance | Penetration test, smart-contract audit, attestor appointment, first reserve report | Proposed |
@@ -715,11 +895,11 @@ flowchart TB
 
 ---
 
-## 16. Risk Factors
+## 19. Risk Factors
 
 The following non-exhaustive risks apply to the project and to any future representation of physical metals. They should be read together with the Important Notice.
 
-### 16.1 Project and structural risks
+### 19.1 Project and structural risks
 
 - **Development risk.** The platform is in development; features may change, be delayed or never be completed.
 - **Entity risk.** The proposed Swiss structure has not been formed or authorised; it may not be formed, or may be formed in a different form or jurisdiction.
@@ -727,7 +907,7 @@ The following non-exhaustive risks apply to the project and to any future repres
 - **Funding and continuity risk.** The project may lack resources to complete development or operate the platform.
 - **Key-person risk.** The project may depend on a small number of individuals.
 
-### 16.2 Legal and regulatory risks
+### 19.2 Legal and regulatory risks
 
 - **Characterisation risk.** Tokens may be characterised as securities, financial instruments, deposits, commodities derivatives or other regulated products, with licensing, prospectus and conduct consequences.
 - **Regulatory change.** Laws on crypto-assets, tokenised securities, AML, sanctions and data protection are evolving and may restrict or prohibit the proposed activities.
@@ -735,9 +915,10 @@ The following non-exhaustive risks apply to the project and to any future repres
 - **Enforceability.** Holder rights (if any) may be uncertain or unenforceable in some jurisdictions or in insolvency.
 - **Sanctions and AML.** Counterparties, sourcing or participants could become subject to sanctions, triggering freezes or exclusions.
 
-### 16.3 Asset and custody risks
+### 19.3 Asset and custody risks
 
 - **Specification risk.** Material may not meet target specifications; laboratory results may vary between methods and laboratories.
+- **Owner-supplied evidence risk.** The certificates currently registered were supplied by the asset owner and have not been independently confirmed with the issuing laboratory; they may prove inaccurate, incomplete, outdated or not attributable to the material. Declared quantities are customer declarations, not verified weights.
 - **Degradation risk.** Fine metal powders can oxidise or absorb moisture; wire can be damaged or corrode; storage conditions matter.
 - **Custody risk.** Loss, theft, fraud, misallocation, commingling, or custodian insolvency.
 - **Insurance risk.** Insurance may be unavailable, insufficient, subject to exclusions or not pay out.
@@ -745,28 +926,29 @@ The following non-exhaustive risks apply to the project and to any future repres
 - **Provenance and ESG risk.** Sourcing may be subject to responsible-sourcing, environmental and human-rights scrutiny; documentation may be incomplete.
 - **Logistics risk.** Transport, export controls, customs, hazardous-material handling and delivery may delay or prevent physical movements.
 
-### 16.4 Reserve and redemption risks
+### 19.4 Reserve and redemption risks
 
 - **Attestation risk.** Attestations are statements at a point in time and depend on the attestor's procedures and independence.
-- **Mismatch risk.** Operational errors could cause registry, reserve reports and on-chain state to diverge.
+- **Mismatch risk.** Operational errors could cause registry, reserve reports and on-chain state to diverge. Reconciliation exceptions are designed to surface such divergences but cannot detect errors that are not reflected in the recorded data.
 - **Redemption risk.** Redemption may never be available; if available, it may be subject to thresholds, fees, delays, suspension, jurisdiction limits and delivery constraints.
 
-### 16.5 Technology risks
+### 19.5 Technology risks
 
 - **Smart-contract risk.** Contracts may contain vulnerabilities despite testing and use of established libraries; audits have not yet been performed.
 - **Key-management risk.** Loss or compromise of administrative or signer keys.
 - **Blockchain risk.** Network congestion, forks, reorganisations, fee spikes, client bugs, or changes to the underlying network.
 - **Oracle / attestor key risk.** A compromised attestor key could post incorrect data (mitigated, not eliminated, by staleness windows, caps and multisig oversight).
+- **Wallet and payment risk.** If ever activated, wallet linking and payment verification would depend on correct signature verification, RPC providers and stablecoin contracts; payments sent to wrong addresses, in wrong amounts or on wrong networks may be unrecoverable. These modules are currently inactive.
 - **Platform risk.** Web, CMS, API or app vulnerabilities; third-party dependency compromise; outages.
 - **Data risk.** Data loss or corruption despite backups; restoration may lose recent data.
 
-### 16.6 Market and liquidity risks
+### 19.6 Market and liquidity risks
 
 - **No liquidity.** No secondary market or liquidity arrangement exists or is represented.
 - **Price risk.** Any token, if issued, could trade (where permitted) at prices different from any reference value of the underlying material.
 - **Concentration risk.** Two programs only; exposure to two metals and to specific forms.
 
-### 16.7 Operational and reputational risks
+### 19.7 Operational and reputational risks
 
 - **Human error** in data entry or approvals, mitigated but not eliminated by four-eyes controls.
 - **Fraud by insiders or counterparties.**
@@ -774,7 +956,7 @@ The following non-exhaustive risks apply to the project and to any future repres
 
 ---
 
-## 17. Glossary
+## 20. Glossary
 
 | Term | Definition |
 |---|---|
@@ -786,6 +968,7 @@ The following non-exhaustive risks apply to the project and to any future repres
 | Claim Status | Visible status of a factual claim: proposed, in development, pending verification, verified, not applicable |
 | Coil / spool | A wound unit of wire tracked individually in the registry |
 | Custody record | Evidence of receipt, holding, transfer or release of a unit by a custodian |
+| Data room | Audience-restricted document area served only through signed, expiring links; investor and enterprise data rooms are gated modules |
 | DAP — Digital Asset Passport | Public, per-unit page showing identity, fields with status, timeline, evidence ledger and Merkle root |
 | EEA | European Economic Area (EU member states plus Iceland, Liechtenstein, Norway) |
 | ERC-20 | A standard interface for fungible tokens on Ethereum-compatible blockchains |
@@ -795,27 +978,33 @@ The following non-exhaustive risks apply to the project and to any future repres
 | KYC | Know Your Customer — verification of an individual's identity |
 | Merkle root | A single hash committing to a set of hashes, enabling inclusion proofs |
 | Multisig | A wallet requiring signatures from multiple keys to execute a transaction |
+| Owner-supplied | Provenance label for evidence provided by the asset owner and not yet independently confirmed with its issuer |
 | PEP | Politically exposed person |
 | Proof of Reserves (PoR) | A process for demonstrating that represented assets exist, proposed here as a combination of registry, attestation and on-chain posting |
+| Reconciliation exception | A rule-based flag raised when registry, custody, insurance, attestation or supply data are missing, stale or inconsistent |
+| Reserve snapshot | A fingerprinted, four-eyes-approved record of a program's reconciliation at a point in time |
 | ReserveGuard | Contract computing a mint ceiling from attested units and a configured ratio |
 | SHA-256 | Cryptographic hash function producing a 256-bit fingerprint |
+| SIWE | Sign-In with Ethereum (EIP-4361): a signed text challenge proving control of a wallet without a transaction |
 | Testnet | A public blockchain network used for testing, whose tokens have no economic value |
+| USDT | A US-dollar stablecoin issued by a third party as an ERC-20 token; referenced only by the inactive payment-verification module |
 | Waitlist | Registration of interest; creates no entitlement |
 
 ---
 
-## 18. Document Control
+## 21. Document Control
 
 | Item | Value |
 |---|---|
 | Document | ReserveChain Institutional Whitepaper — Discussion Draft |
-| Version | Draft 0.9 |
+| Version | Draft v0.10 |
 | Status | In development — subject to legal review and final approval |
 | Owner | ReserveChain **[responsible person to be provided]** |
 | Approval | **Pending — subject to final approval** |
 | Distribution | Information only; not an offering document |
 | Diagram sources | `docs/whitepaper/diagrams/*.mmd` |
 | Build | `docs/whitepaper/build/` (Markdown → DOCX and PDF) |
+| Changes in Draft v0.10 | Owner-supplied certificates (Section 4.3); off-chain redemption workflow (Section 13.2); reserve reconciliation, exceptions and snapshots (Sections 14.1–14.3); new Sections 15–17; risk factors and glossary updated |
 
 > **Mandatory disclosure.** ReserveChain is currently in development. No tokens are being offered or sold through this website. Registration of interest does not constitute an investment, token purchase, asset reservation, price reservation, token allocation or entitlement to participate in any future offering. Any future availability will be subject to the final Swiss corporate and legal structure, definitive offering documentation, asset verification, custody arrangements, jurisdictional eligibility, KYC/KYB, sanctions screening and final approval.
 >

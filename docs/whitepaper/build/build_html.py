@@ -113,7 +113,7 @@ def cover() -> str:
     <h1>ReserveChain</h1>
     <div class="sub">Industrial-Metals Reserve Registry<br/>and Tokenization Framework</div>
     <div class="status">Institutional whitepaper · Discussion draft · In development</div>
-    <div class="meta">Version: Draft 0.9 — subject to legal review and final approval<br/>
+    <div class="meta">Version: Draft v0.10 — subject to legal review and final approval<br/>
       Date of this version: [To be inserted on approval by ReserveChain]<br/>reservechain.io</div>
   </div>
   <div class="disc"><b>Mandatory disclosure.</b> {html.escape(DISCLOSURE)}<br/><br/><b>EU/EEA notice.</b> {html.escape(EU_NOTICE)}</div>

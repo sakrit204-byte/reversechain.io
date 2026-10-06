@@ -16,17 +16,25 @@ final class Rest {
 
 	public static function init(): void {
 		add_action( 'rest_api_init', array( __CLASS__, 'routes' ) );
+		// Replace WordPress core's permissive CORS (it echoes any Origin with credentials) with an allow-list.
+		add_action( 'rest_api_init', static function () {
+			remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+		}, 15 );
 		add_filter( 'rest_pre_serve_request', array( __CLASS__, 'cors' ), 10, 4 );
 	}
 
 	public static function cors( $served, $result, $request, $server ) {
+		$origins = array_unique( array_filter( apply_filters( 'rc_cors_origins', array( home_url(), site_url() ) ) ) );
+		$origins = array_map( static fn( $o ) => untrailingslashit( (string) wp_parse_url( $o, PHP_URL_SCHEME ) . '://' . wp_parse_url( $o, PHP_URL_HOST ) . ( wp_parse_url( $o, PHP_URL_PORT ) ? ':' . wp_parse_url( $o, PHP_URL_PORT ) : '' ) ), $origins );
+		$origin  = get_http_origin();
+		if ( $origin && in_array( untrailingslashit( $origin ), $origins, true ) ) {
+			header( 'Access-Control-Allow-Origin: ' . $origin );
+			header( 'Access-Control-Allow-Credentials: true' );
+			header( 'Access-Control-Allow-Methods: GET, POST, PATCH, DELETE, OPTIONS' );
+			header( 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce' );
+		}
+		header( 'Vary: Origin', false );
 		if ( 0 === strpos( $request->get_route(), '/' . self::NS ) ) {
-			$origins = apply_filters( 'rc_cors_origins', array( home_url() ) );
-			$origin  = get_http_origin();
-			if ( $origin && in_array( $origin, $origins, true ) ) {
-				header( 'Access-Control-Allow-Origin: ' . $origin );
-				header( 'Vary: Origin' );
-			}
 			header( 'Cache-Control: no-store' );
 		}
 		return $served;
