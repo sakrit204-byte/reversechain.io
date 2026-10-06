@@ -502,6 +502,14 @@ final class Seed {
 			'in_development'
 		);
 
+		$wp_pdf = RC_DIR . 'seed/evidence/reservechain-whitepaper-draft.pdf';
+		if ( is_readable( $wp_pdf ) && ! get_page_by_path( 'reservechain-whitepaper-draft-v0-9', OBJECT, 'rc_document' ) ) {
+			$wid = self::import_document( $wp_pdf, 'ReserveChain Whitepaper — Draft v0.9', 'whitepaper', true, 'Draft v0.9' );
+			if ( $wid ) {
+				wp_update_post( array( 'ID' => $wid, 'post_name' => 'reservechain-whitepaper-draft-v0-9', 'post_content' => 'Draft in preparation. Pending owner inputs are clearly marked; final version subject to legal review and approval.' ) );
+				update_post_meta( $wid, '_rc_issued_by', 'ReserveChain (draft — subject to legal review)' );
+			}
+		}
 		self::say( 'Registry: Cu Lot #03-K-07 (+Box 20), Ni Lot 120/NP1 (+30 bobbins), 2 owner-supplied CoAs transcribed, illustrative template, 5 fingerprinted documents.' );
 	}
 
