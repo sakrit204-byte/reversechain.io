@@ -232,7 +232,7 @@ final class Shortcodes {
 				array( __( 'Tokens issued', 'reservechain' ), '0', __( 'no tokens exist', 'reservechain' ) ),
 				array( __( 'Reserve coverage', 'reservechain' ), __( 'Not computed', 'reservechain' ), __( 'computed only from an attested report', 'reservechain' ) ),
 			);
-			$out .= '<section class="rc-por__prog rc-por__prog--' . esc_attr( strtolower( $sym ) ) . '"><header><span class="rc-por__el">' . esc_html( $sym ) . '</span><h3>' . esc_html( get_the_title( $pid ) ) . '</h3>' . self::pill( 'in_development', __( 'Live from registry · no attestation', 'reservechain' ) ) . '</header><dl class="rc-por__grid">';
+			$out .= '<section class="rc-por__prog rc-por__prog--' . esc_attr( strtolower( $sym ) ) . '" data-el="' . esc_attr( $sym ) . '"><header><span class="rc-por__el">' . esc_html( $sym ) . '</span><h3>' . esc_html( get_the_title( $pid ) ) . '</h3>' . self::pill( 'in_development', __( 'Live from registry · no attestation', 'reservechain' ) ) . '</header><dl class="rc-por__grid">';
 			foreach ( $cells as $c ) {
 				$out .= '<div><dt>' . esc_html( $c[0] ) . '</dt><dd>' . esc_html( $c[1] ) . '</dd><small>' . esc_html( $c[2] ) . '</small></div>';
 			}

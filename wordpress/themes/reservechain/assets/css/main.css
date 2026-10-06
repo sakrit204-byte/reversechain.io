@@ -815,3 +815,113 @@ html.lenis, html.lenis body { height: auto; }
 .rc-hero > .rc-wrap { position: relative; z-index: 1; }
 .rc-dust-ambient { position: fixed; inset: 0; z-index: 60; pointer-events: none; mix-blend-mode: screen; }
 @media (prefers-reduced-motion: reduce) { .rc-dust-hero, .rc-dust-ambient { display: none; } }
+
+/* =====================================================================
+   Hallmark system — status as an assay stamp with a maturity gauge,
+   open editorial columns instead of boxed cards, seals instead of
+   side stripes.
+   ===================================================================== */
+
+/* ---------- status hallmark ---------- */
+.rc-pill {
+	--lv: 0;
+	--c: var(--s-na);
+	display: inline-flex; align-items: center; gap: 9px;
+	padding: 5px 12px 5px 10px; border: 0; border-radius: 0;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--c) 16%, transparent), color-mix(in srgb, var(--c) 6%, transparent));
+	clip-path: polygon(7px 0, calc(100% - 7px) 0, 100% 50%, calc(100% - 7px) 100%, 7px 100%, 0 50%);
+	color: color-mix(in srgb, var(--c) 45%, #fff);
+	font: italic 500 .84rem/1.15 var(--f-serif); letter-spacing: 0; white-space: nowrap;
+}
+.rc-pill i {
+	width: 30px; height: 8px; flex: none; border-radius: 0;
+	background: linear-gradient(90deg, var(--c) calc(var(--lv) * 25%), rgba(255, 255, 255, .14) 0);
+	-webkit-mask: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px);
+	mask: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px);
+	transform: skewX(-24deg);
+	animation: none !important;
+}
+.rc-pill--not_applicable { --lv: 0; }
+.rc-pill--pending, .rc-pill--proposed { --lv: 1; }
+.rc-pill--in_development { --lv: 2; }
+.rc-pill--pending_verification { --lv: 3; }
+.rc-pill--verified, .rc-pill--eligible, .rc-pill--provided { --lv: 4; }
+.rc-pill--restricted { --lv: 4; }
+.rc-pill--not_applicable i { background: transparent; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); -webkit-mask: none; mask: none; height: 1px; width: 22px; transform: none; }
+.rc-section--cream .rc-pill { color: color-mix(in srgb, var(--c) 70%, #10161D); }
+.rc-dark .rc-pill, .rc-dap-hero .rc-pill, .rc-chain .rc-pill { color: color-mix(in srgb, var(--c) 40%, #fff); }
+
+/* the legend line reads as a scale */
+.rc-statusline { gap: 6px 4px; }
+.rc-statusline > span:first-child { font: italic 400 .95rem/1 var(--f-serif); color: var(--muted); margin-right: 8px; }
+
+/* ---------- open editorial columns (replaces boxed cards) ---------- */
+.rc-card {
+	background: none; border: 0; border-radius: 0; box-shadow: none;
+	padding: 30px 4px 6px 0; position: relative; isolation: isolate;
+}
+.rc-card::before {
+	content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+	background: linear-gradient(90deg, var(--gold) 0, rgba(213, 177, 103, .45) 38%, rgba(213, 177, 103, .08));
+	transform-origin: 0 50%; transition: transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+.rc-card::after {
+	content: ""; position: absolute; left: 0; top: -5px; width: 9px; height: 11px;
+	background: var(--gold); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+	transition: left .7s cubic-bezier(.16, 1, .3, 1), box-shadow .4s;
+}
+.rc-card:hover::after { left: calc(100% - 9px); }
+.rc-card:hover { background: radial-gradient(120% 80% at 0 0, rgba(213, 177, 103, .07), transparent 60%); }
+.rc-card h3 { margin-top: 2px; }
+.rc-card__foot { border-top: 0; padding-top: 4px; margin-top: 18px; }
+.rc-card__icon { border-radius: 0; border: 0; width: auto; height: auto; justify-content: start; margin-bottom: 14px; }
+.rc-card--link { padding-right: 34px; }
+.rc-card--link::before { background: linear-gradient(90deg, var(--gold) 0, rgba(213, 177, 103, .45) 38%, rgba(213, 177, 103, .08)); }
+.rc-card--link::after { }
+.rc-card--link > :last-child::after { content: none; }
+.rc-card--link .rc-card__arrow, .rc-card--link h3::after { content: " \2192"; color: var(--gold); font-family: var(--f-sans); transition: margin .3s; }
+.rc-card--link:hover h3::after { margin-left: 6px; }
+.rc-card--link:hover { transform: none; box-shadow: none; }
+.rc-card--alert::before { background: linear-gradient(90deg, var(--red) 0, rgba(224, 106, 92, .35) 40%, transparent); }
+.rc-card--alert::after { background: var(--red); }
+.rc-section--dark .rc-card, .rc-dark .rc-card { background: none; border: 0; }
+.rc-section--cream .rc-card { background: none; border: 0; }
+.rc-section--cream .rc-card::before { background: linear-gradient(90deg, var(--gold-deep), rgba(180, 132, 48, .15)); }
+.rc-section--cream .rc-card::after { background: var(--gold-deep); }
+.rc-grid > .rc-card { padding-right: 18px; }
+/* cards that hold a form or heavy content keep a quiet panel */
+.rc-card:has(form, .rc-ftable, .rc-table-wrap, .rc-assay) { background: var(--white); padding: 30px 26px 24px; }
+
+/* ---------- seals instead of side stripes ---------- */
+.rc-por__prog { border-radius: 22px; padding: 26px 24px 22px; overflow: hidden; }
+.rc-por__prog::before { content: ""; position: absolute; left: 24px; right: 24px; top: 0; bottom: auto; width: auto; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.rc-por__prog--cu::before { background: linear-gradient(90deg, transparent, var(--copper-light), transparent); }
+.rc-por__prog--ni::before { background: linear-gradient(90deg, transparent, var(--nickel-light), transparent); }
+.rc-por__prog::after { content: attr(data-el); position: absolute; right: -6px; bottom: -40px; font: 400 11rem/1 var(--f-serif); letter-spacing: -.05em; color: rgba(255, 255, 255, .025); pointer-events: none; }
+.rc-por__el {
+	width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .12), transparent 60%), var(--ink-3);
+	box-shadow: inset 0 0 0 1px currentColor, inset 0 0 0 4px var(--ink-3), inset 0 0 0 5px color-mix(in srgb, currentColor 45%, transparent);
+	font: 500 1.15rem/1 var(--f-serif); color: var(--gold);
+}
+.rc-por__prog--cu .rc-por__el { color: var(--copper-light); }
+.rc-por__prog--ni .rc-por__el { color: var(--nickel-light); }
+.rc-por__grid { border-radius: 14px; }
+
+.rc-pcard { border-radius: 18px; }
+.rc-pcard::before { left: 18px; right: 18px; top: 0; bottom: auto; width: auto; height: 1px; background: linear-gradient(90deg, transparent, var(--c), transparent); }
+.rc-pcard__el { font-size: 3.4rem; right: 14px; top: 8px; color: color-mix(in srgb, var(--c) 22%, transparent); }
+
+/* callout: corner brackets instead of a left bar */
+.rc-callout { border-left: 0; border-radius: 0; background: rgba(213, 177, 103, .04); position: relative; padding: 22px 26px; }
+.rc-callout::before, .rc-callout::after { content: ""; position: absolute; width: 18px; height: 18px; border: 1px solid var(--gold); }
+.rc-callout::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.rc-callout::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+
+/* hero microcopy: hallmark bullet instead of a rule */
+.rc-hero__micro { border-left: 0; padding-left: 22px; position: relative; }
+.rc-hero__micro::before { content: ""; position: absolute; left: 0; top: .35em; width: 10px; height: 12px; background: var(--gold); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+/* claim board rows: hairline + hallmark, no boxed table feel */
+.rc-claims { background: none; border: 0; border-radius: 0; }
+.rc-claims > div { border-bottom: 1px solid rgba(213, 177, 103, .14); padding: 18px 0; }
+.rc-claims > div:first-child { border-top: 1px solid rgba(213, 177, 103, .14); }
