@@ -1,0 +1,40 @@
+      ✔ blocks frozen senders and receivers
+      ✔ blocks expired approvals
+      ✔ blocks unregistered addresses and disabling the hook lifts restrictions
+      ✔ clearing the registry auto-disables the hook
+    reserve guard hook
+      ✔ cannot enable without guard; only admin
+      ✔ unset ratio blocks all minting when guard enabled
+      ✔ mints within guard headroom, rejects above it
+      ✔ stale attestation blocks minting
+    recoverERC20
+      ✔ treasury role recovers foreign tokens; others cannot
+      ✔ recovers own token sent to the contract (recipient screened under compliance) (73ms)
+    permit (EIP-2612)
+      ✔ sets allowance via signature and rejects replay / expired
+    admin handover (AccessControlDefaultAdminRules)
+      ✔ two-step transfer with delay; direct grant of DEFAULT_ADMIN is refused
+
+  Deployment tooling
+    network safety guard
+      ✔ allows hardhat, sepolia, amoy
+      ✔ refuses Ethereum and Polygon mainnet and unknown chains
+      ✔ only the exact written-authorisation value overrides (and still warns)
+    config helpers
+      ✔ shipped configs load and keep every tokenomics field unset (53ms)
+      ✔ rejects invalid configs
+      ✔ conversions
+
+  Treasury
+    ✔ defaults: no immediate limit, timelock disabled, no grace (60ms)
+    ✔ enforces per-token daily limit and resets next day
+    ✔ validates inputs and roles
+    ✔ timelock queue: queue → wait → execute; not before eta; not twice
+    ✔ grace period expires queued withdrawals
+    ✔ cancel by treasurer or limit admin only
+    ✔ pause blocks withdraw/queue/execute
+    ✔ works with ReserveToken under compliance (treasury registered)
+
+
+  83 passing (2s)
+

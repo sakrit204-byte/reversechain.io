@@ -714,3 +714,11 @@ a.rc-element:hover { transform: translateY(-6px) rotateX(4deg); color: var(--ink
 .rc-nav__list > li.menu-item-has-children > a { padding-right: 22px; }
 @media (max-width: 1560px) and (min-width: 1121px) { .rc-logo__tag { display: none; } .rc-nav__portal { display: none; } }
 @media (max-width: 1320px) and (min-width: 1121px) { .rc-nav__extra .rc-btn:not(.rc-btn--primary) { display: none; } .rc-nav__list > li > a { padding: 8px 7px; font-size: .86rem; } .rc-nav__list > li.menu-item-has-children > a { padding-right: 18px; } .rc-nav__list > li.menu-item-has-children > a::after { right: 6px; } }
+
+/* dark live components keep light text inside cream bands */
+.rc-section--cream :is(.rc-drop, .rc-vres, .rc-form, .rc-ftable, .rc-doc, .rc-kv, .rc-por, .rc-chain, .rc-locked, .rc-claims, .rc-table, .rc-coa, .rc-disclosure, .rc-pcard, .rc-diagram, .rc-faq, .rc-stats, .rc-evidence, .rc-alert) { color: var(--text); }
+.rc-section--cream :is(.rc-drop, .rc-vres, .rc-form, .rc-coa, .rc-diagram) :is(h2, h3, strong, b) { color: #fff; }
+.rc-section--cream .rc-faq summary { color: #0A1018; }
+.rc-section--cream .rc-faq details > div { color: #4A525C; }
+.rc-section--cream .rc-field > span, .rc-section--cream .rc-field legend { color: inherit; }
+.rc-section--cream .rc-verify__manual .rc-field > span { color: #1A2028; }
