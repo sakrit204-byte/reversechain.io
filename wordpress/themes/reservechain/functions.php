@@ -47,6 +47,7 @@ add_action(
 		wp_enqueue_script( 'rct-main', RCT_URI . '/assets/js/main.js', array(), RCT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 		wp_enqueue_script( 'rct-lenis', RCT_URI . '/assets/js/lenis.min.js', array(), '1.3.4', array( 'strategy' => 'defer', 'in_footer' => true ) );
 		wp_enqueue_script( 'rct-motion', RCT_URI . '/assets/js/motion.js', array( 'rct-lenis' ), RCT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_enqueue_script( 'rct-icons', RCT_URI . '/assets/js/icons.js', array(), RCT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 		if ( is_front_page() ) {
 			wp_enqueue_script( 'rct-dust', RCT_URI . '/assets/js/dust.js', array( 'rct-motion' ), RCT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 		}
