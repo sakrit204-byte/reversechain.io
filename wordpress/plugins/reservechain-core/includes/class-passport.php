@@ -451,6 +451,14 @@ final class Passport {
 		if ( ! empty( $args['type'] ) && in_array( $args['type'], Schema::PASSPORT_TYPES, true ) ) {
 			$q['post_type'] = $args['type'];
 		}
-		return array_map( array( __CLASS__, 'summary' ), get_posts( $q ) );
+		// Stable, meaningful order: lots → batches → containers → coils, then by record number.
+		$rank  = array_flip( Schema::PASSPORT_TYPES );
+		$limit = $q['posts_per_page'];
+		$q['posts_per_page'] = 500;
+		$q['paged']          = 1;
+		$posts = get_posts( $q );
+		usort( $posts, static fn( $a, $b ) => ( $rank[ $a->post_type ] <=> $rank[ $b->post_type ] ) ?: strnatcmp( (string) get_post_meta( $a->ID, '_rc_record_no', true ), (string) get_post_meta( $b->ID, '_rc_record_no', true ) ) );
+		$page  = max( 1, (int) ( $args['page'] ?? 1 ) );
+		return array_map( array( __CLASS__, 'summary' ), array_slice( $posts, ( $page - 1 ) * $limit, $limit ) );
 	}
 }

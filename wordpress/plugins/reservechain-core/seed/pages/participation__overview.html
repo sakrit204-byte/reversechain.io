@@ -1,0 +1,148 @@
+<!--
+title: Early Participation Program Overview
+excerpt: The proposed structure of the Early Participation Program: which assets it would reference, how access would be gated, which parameters remain unset, and what must be approved before anything activates.
+kicker: Participation · Program structure · Proposed
+order: 1
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Program at a glance</p>
+        <h2>Structure first, <em>parameters later</em></h2>
+      </div>
+      <p class="rc-lead">This overview sets out the architecture of the proposed program. Every commercial parameter is deliberately left unset until definitive documentation is approved. Token issuance remains inactive until formally launched.</p>
+    </div>
+    <dl class="rc-kv" data-reveal>
+      <div><dt>Program name</dt><dd>Early Participation Program (working title)</dd></div>
+      <div><dt>Program stage</dt><dd>Framework design · pre-launch · [rc_status s="in_development"]</dd></div>
+      <div><dt>Proposed issuer</dt><dd>Swiss corporate and issuance structure in development. Subject to final legal review.</dd></div>
+      <div><dt>Reference assets</dt><dd>Ultra-High-Purity Copper Powder (Cu) and High-Purity Nickel Wire 0.025 mm (Ni), both pending verification</dd></div>
+      <div><dt>Access route</dt><dd>Token-acquisition module, built but inactive, gated by eligibility and written authorisation</dd></div>
+      <div><dt>Token name, symbol, supply, ratio</dt><dd><span class="rc-pending">Not yet determined. Subject to written approval.</span></dd></div>
+      <div><dt>Early-participation discount parameter</dt><dd><span class="rc-pending">Proposed in the project brief; not approved.</span> See <a href="/participation/discount-methodology/">methodology</a>.</dd></div>
+      <div><dt>Excluded participants</dt><dd>EU/EEA residents and persons located there; restricted jurisdictions; sanctioned persons</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Structural layers</p>
+      <h2>Four layers that <em>must align</em></h2>
+      <p class="rc-lead">The program only works if the physical, legal, compliance and digital layers describe the same thing at the same time. Each layer has its own owner and its own evidence.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">L1</span><h3>Physical asset</h3><p>Identified lots, containers and coils with Certificates of Analysis, custody records and independent verification.</p><div class="rc-card__foot">[rc_status s="pending_verification"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L2</span><h3>Legal linkage</h3><p>The definitive documents that set out what, if anything, a token represents and under which law.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L3</span><h3>Compliance gate</h3><p>Jurisdiction, KYC/KYB, AML, sanctions and PEP outcomes mirrored on-chain without personal data.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">L4</span><h3>Digital record</h3><p>Digital Asset Passports, registry entries and reserve-gated issuance controls on testnet.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Token-program parameters</p>
+      <h2>Live from the registry, <em>all pending</em></h2>
+      <p class="rc-lead">These panels read directly from the program configuration. Nothing here is typed into the page. Where a parameter has no written approval reference, it is shown as pending.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>
+        <h3>Copper Powder program</h3>
+        [rc_token_params program="copper-powder"]
+      </div>
+      <div data-reveal>
+        <h3>Nickel Wire program</h3>
+        [rc_token_params program="nickel-wire"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Allocation and acquisition logic</p>
+      <h2>How access would be ordered, <em>where approved</em></h2>
+      <p class="rc-lead">Allocation rules are not approved. The table records the design questions the definitive documentation must answer, so that no rule is improvised at launch.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Design question</th><th>Proposed approach</th><th>Decision status</th></tr></thead>
+        <tbody>
+          <tr><td>Program capacity</td><td>Capped by attested eligible reserve units and an approved asset-to-token ratio. No capacity exists before attestation.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Per-participant limits</td><td>Minimum and maximum participation per approved account, set in configuration.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Ordering of requests</td><td>Only approved accounts may submit; ordering method (e.g. time-stamped or pro-rata) to be fixed in the documents.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Waitlist position</td><td>Waitlist registration confers no priority, allocation or entitlement.</td><td>[rc_status s="not_applicable" label="No priority"]</td></tr>
+          <tr><td>Early-participation terms</td><td>Any discount parameter applies only within a published window and cap, under the <a href="/participation/discount-methodology/">proposed methodology</a>.</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Settlement method</td><td>To be defined in definitive documentation. No payment is accepted through this website.</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Participant journey</p>
+      <h2>Five gates <em>in summary</em></h2>
+      <p class="rc-lead">The full nine-step journey is described on <a href="/participation/how-token-acquisition-will-work/">How Token Acquisition Will Work</a>.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Register interest</h3><p>Join the waitlist for updates. Double opt-in. No funds or wallet details.</p></div>[rc_status s="in_development" label="Open · updates only"]</li>
+      <li><div><h3>Establish eligibility</h3><p>Jurisdiction check, then KYC for individuals or KYB for organisations, with AML, sanctions and PEP screening.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Review evidence and documents</h3><p>Digital Asset Passports, Certificates of Analysis, reserve reports and the definitive offering documents.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Request participation</h3><p>Through the token-acquisition module, only once it is authorised and activated.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Hold, monitor, redeem</h3><p>Portfolio view, reserve information and a proposed physical-redemption route.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-split">
+      <div>
+        <p class="rc-kicker">Documentation set</p>
+        <h2>What must exist <em>before launch</em></h2>
+        <ul class="rc-list">
+          <li>Definitive offering or program documentation</li>
+          <li>Terms describing what a token does and does not represent</li>
+          <li>Independent verification and valuation reports for each referenced lot</li>
+          <li>Custody agreement and chain-of-custody records</li>
+          <li>Proof of Reserves methodology and first reconciliation</li>
+          <li>Redemption terms, thresholds and fees (where approved)</li>
+          <li>Jurisdiction-specific disclosures and the final restricted list</li>
+        </ul>
+        <p><a class="rc-btn rc-btn--sm" href="/resources/documentation/">View Documents</a></p>
+      </div>
+      <div>
+        <p class="rc-kicker">Principal risk factors</p>
+        <h2>Material uncertainties <em>today</em></h2>
+        <div class="rc-claims">
+          <div><strong>Launch risk</strong>[rc_status s="proposed"]<small>The program may not launch, or may change materially.</small></div>
+          <div><strong>Asset and valuation risk</strong>[rc_status s="pending_verification"]<small>Specifications and quantities are owner-supplied and not yet independently confirmed.</small></div>
+          <div><strong>Regulatory risk</strong>[rc_status s="in_development"]<small>Classification and permitted jurisdictions remain subject to legal advice.</small></div>
+          <div><strong>Exit risk</strong>[rc_status s="proposed"]<small>No market, transferability or exit route is assured.</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Continue to the participant journey</h2><p>Review the eligibility requirements, follow the <a href="/participation/how-token-acquisition-will-work/">planned acquisition steps</a>, or register for updates.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn" href="/assets/initial-programs/">View Initial Programs</a>
+      </div>
+    </div>
+  </div>
+</section>

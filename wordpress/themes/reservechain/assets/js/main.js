@@ -67,7 +67,7 @@
       set('head', h.chain_head);
       set('triggers', h.db_triggers ? 'UPDATE/DELETE blocked' : 'not active');
       var assets = ['rc_lot', 'rc_batch', 'rc_container', 'rc_coil'].reduce(function (n, k) { return n + ((e[k] && e[k].published) || 0); }, 0);
-      set('passports', assets + ' (' + 'specimen)');
+      set('passports', assets + ' · pending verification');
       set('docs', ((e.rc_document && e.rc_document.published) || 0) + ' SHA-256 fingerprinted');
       set('verified', String(s.verified_records || 0));
       ledger.classList.add('is-live');

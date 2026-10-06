@@ -1,0 +1,150 @@
+<!--
+title: How Token Acquisition Will Work
+excerpt: The planned nine-step participant journey, from account creation to physical redemption. Every step after account creation is planned, inactive and subject to final legal, technical and operational approval.
+kicker: Participation · Planned journey · Not active
+order: 2
+-->
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Read this first</p>
+        <h2>A described process, <em>not an open one</em></h2>
+      </div>
+      <p class="rc-lead">This page explains how the token-acquisition module is designed to work if, and only if, it is authorised. Token issuance remains inactive until formally launched. No step below can be completed today except registering interest and creating a basic account, neither of which confers any right.</p>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 1000 210" role="img" aria-labelledby="ta-t ta-d" font-family="Inter Tight, sans-serif">
+        <title id="ta-t">Planned token-acquisition journey</title>
+        <desc id="ta-d">Nine stages in sequence: Create Account, Eligibility, KYC or KYB, Review Program, Review Documents, Acquisition and Settlement, Account and Wallet, Portfolio, Redemption. Stages two to nine are gated and inactive.</desc>
+        <g fill="none" stroke="#1C2A38" stroke-width="2">
+          <path d="M100 80 H112 M210 80 H222 M320 80 H332 M430 80 H442 M540 80 H552 M650 80 H662 M760 80 H772 M870 80 H882"/>
+        </g>
+        <g stroke-width="1.5">
+          <rect x="4" y="40" width="96" height="80" rx="10" fill="#0B1621" stroke="#D5B167"/>
+          <rect x="112" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="222" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="332" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="442" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="552" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+          <rect x="662" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+          <rect x="772" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#A9BBC8" stroke-dasharray="4 3"/>
+          <rect x="882" y="40" width="98" height="80" rx="10" fill="#0B1621" stroke="#C9773F" stroke-dasharray="4 3"/>
+        </g>
+        <g fill="#D5B167" font-size="11" font-family="IBM Plex Mono, monospace" text-anchor="middle">
+          <text x="52" y="60">01</text><text x="161" y="60">02</text><text x="271" y="60">03</text><text x="381" y="60">04</text><text x="491" y="60">05</text><text x="601" y="60">06</text><text x="711" y="60">07</text><text x="821" y="60">08</text><text x="931" y="60">09</text>
+        </g>
+        <g fill="#E7EBEE" font-size="12.5" text-anchor="middle">
+          <text x="52" y="84">Create</text><text x="52" y="100">account</text>
+          <text x="161" y="92">Eligibility</text>
+          <text x="271" y="92">KYC / KYB</text>
+          <text x="381" y="84">Review</text><text x="381" y="100">program</text>
+          <text x="491" y="84">Review</text><text x="491" y="100">documents</text>
+          <text x="601" y="84">Acquisition /</text><text x="601" y="100">settlement</text>
+          <text x="711" y="84">Account /</text><text x="711" y="100">wallet</text>
+          <text x="821" y="92">Portfolio</text>
+          <text x="931" y="92">Redemption</text>
+        </g>
+        <g font-size="11" fill="#8E99A5">
+          <text x="4" y="150">Gold border: built, basic function only</text>
+          <text x="4" y="168">Dashed nickel border: planned, compliance-gated</text>
+          <text x="4" y="186">Dashed copper border: planned, locked module requiring written authorisation and a deployment action</text>
+        </g>
+      </svg>
+      <figcaption>Planned sequence. No stage auto-activates; each gated stage depends on the one before it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Step by step</p>
+      <h2>Nine steps, <em>each with a status</em></h2>
+      <p class="rc-lead">The status at the right of each step reflects what exists today. A step marked proposed is a design, not a service.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Create account</h3><p>A participant account with email verification and optional TOTP multi-factor authentication. The account itself gives access to notices and status only, and confers no right to participate.</p></div>[rc_status s="in_development" label="Built · limited"]</li>
+      <li><div><h3>Eligibility</h3><p>Country of residence is checked against the EU/EEA restriction and the configurable restricted list. An edge-network location signal is recorded to flag mismatches. Restricted accounts stop here.</p></div>[rc_status s="proposed" label="Planned"]</li>
+      <li><div><h3>KYC / KYB</h3><p>Identity verification for individuals, or business verification with beneficial-ownership checks for organisations, plus AML, sanctions and PEP screening by an external provider (not yet selected).</p></div>[rc_status s="proposed" label="Planned"]</li>
+      <li><div><h3>Review available program</h3><p>Approved accounts would see only programs that have passed verification, custody and reserve attestation, with their Digital Asset Passports and reserve status.</p></div>[rc_status s="proposed" label="Planned"]</li>
+      <li><div><h3>Review documents</h3><p>Definitive offering documentation, terms, risk disclosures and jurisdiction-specific notices, each with a SHA-256 fingerprint. Acknowledgement would be recorded against the exact document version.</p></div>[rc_status s="proposed" label="Planned"]</li>
+      <li><div><h3>Acquisition / settlement</h3><p>A request through the token-acquisition module within published limits. Settlement method, timing and any early-participation parameter are not approved. No payment can be made through this website.</p></div>[rc_status s="proposed" label="Planned · locked"]</li>
+      <li><div><h3>Account / wallet</h3><p>Tokens, if issued, would be delivered only to an address registered as approved in the ComplianceRegistry contract. Wallet connection is not available in pre-launch.</p></div>[rc_status s="proposed" label="Planned · locked"]</li>
+      <li><div><h3>Portfolio</h3><p>Holdings, transaction history, linked passports, reserve information and notices in the participant portal.</p></div>[rc_status s="proposed" label="Planned"]</li>
+      <li><div><h3>Redemption</h3><p>A proposed route to request physical delivery or collection of the underlying metal, subject to thresholds, fees, compliance review and logistics that are not yet defined.</p></div>[rc_status s="proposed" label="Planned · locked"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Locked modules</p>
+      <h2>Built, tested, <em>switched off</em></h2>
+      <p class="rc-lead">The software for these steps exists so that it can be reviewed and tested on testnet. It is hidden from participants and cannot be activated by a content edit.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <div data-reveal>[rc_module module="purchase" title="Token-acquisition module"]</div>
+      <div data-reveal>[rc_module module="wallet" title="Wallet connection"]</div>
+      <div data-reveal>[rc_module module="holdings" title="Portfolio: holdings and transaction history"]</div>
+      <div data-reveal>[rc_module module="redemption" title="Physical-redemption requests"]</div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--white">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Activation conditions</p>
+      <h2>What must be true <em>before step 6 opens</em></h2>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead><tr><th>Condition</th><th>Evidence required</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Corporate and issuance structure</td><td>Incorporated issuer and approved legal structure</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Definitive documentation</td><td>Approved offering documents, terms and risk disclosures</td><td>[rc_status s="in_development"]</td></tr>
+          <tr><td>Asset verification</td><td>Independent verification of lots, ownership and specifications</td><td>[rc_status s="pending_verification"]</td></tr>
+          <tr><td>Custody</td><td>Executed custody arrangement and chain-of-custody records</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Reserve attestation</td><td>Attested eligible units posted to the reserve-guard contract</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Compliance provider</td><td>Selected and integrated KYC/KYB, AML and sanctions provider</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Smart-contract review</td><td>Independent security review of the contract suite and approved mainnet deployment</td><td>[rc_status s="proposed"]</td></tr>
+          <tr><td>Written authorisation</td><td>Admin activation plus a separate deployment flag, both recorded in the audit trail</td><td>[rc_status s="proposed"]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Questions</p>
+      <h2>Common questions <em>about the journey</em></h2>
+    </div>
+    <div class="rc-faq">
+      <h3>Today</h3>
+      <details><summary>Can I acquire tokens now?</summary><div><p>No. No tokens are offered or sold through this website, and the token-acquisition module is inactive. Any message claiming otherwise should be treated as fraud. See the <a href="/legal/anti-fraud/">Anti-Fraud Notice</a>.</p></div></details>
+      <details><summary>Does creating an account or joining the waitlist reserve anything?</summary><div><p>No. Neither creates a reservation, allocation, price reservation or priority of any kind.</p></div></details>
+      <h3>Later</h3>
+      <details><summary>Will I be able to use any wallet?</summary><div><p>The design allows delivery only to addresses approved in the ComplianceRegistry. Supported wallet types have not been decided.</p></div></details>
+      <details><summary>Will tokens be freely transferable?</summary><div><p>Transfers are designed to succeed only between approved, unfrozen addresses outside blocked jurisdictions. Whether any market will exist is not known, and none is promised.</p></div></details>
+      <details><summary>Will redemption always be possible?</summary><div><p>Redemption is a proposed framework. Thresholds, fees, logistics and eligibility are not defined, and redemption may not be possible in every jurisdiction. See <a href="/platform/redemption/">How Redemption Works</a>.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    [rc_disclosure]
+    <div class="rc-cta">
+      <div><h2>Start with the gates you can review today</h2><p>Understand eligibility requirements and register for updates. Nothing else is open.</p></div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/eligibility-kyc/">Check Eligibility</a>
+        <a class="rc-btn rc-btn--cream" href="/participation/waitlist/">Join Waitlist</a>
+        <a class="rc-btn" href="/platform/redemption/">How Redemption Works</a>
+      </div>
+    </div>
+  </div>
+</section>

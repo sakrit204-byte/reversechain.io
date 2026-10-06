@@ -1,0 +1,397 @@
+<!--
+title: Home
+excerpt: ReserveChain is developing an institutional platform intended to connect documented industrial-metal assets with digital tokenization, verification, custody and physical-redemption infrastructure.
+order: 0
+-->
+<section class="rc-hero">
+  <div class="rc-wrap rc-hero__grid">
+    <div>
+      <p class="rc-kicker">Swiss corporate and issuance structure in development</p>
+      <h1>Building the Infrastructure for <em>Tokenized Industrial Metals</em></h1>
+      <p class="rc-lead">ReserveChain is developing an institutional platform intended to connect documented industrial-metal assets with digital tokenization, verification, custody and physical-redemption infrastructure. The corporate, legal, custody, asset-verification and technical arrangements are currently being finalized.</p>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/participation/waitlist/">Join the Project Waitlist</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/how-it-works/">Explore the Proposed Model</a>
+      </div>
+      <div class="rc-btn-row rc-btn-row--quiet">
+        <a class="rc-btn rc-btn--sm rc-btn--ghost-light" href="/assets/industrial-metals/">View Industrial Metal Programs</a>
+        <a class="rc-btn rc-btn--sm rc-btn--ghost-light" href="/enterprise/">Request Enterprise Information</a>
+      </div>
+      <p class="rc-hero__micro">Receive project-development updates and future eligibility information. Registration does not constitute an investment, token purchase or reservation of industrial metals.</p>
+    </div>
+    <div class="rc-hero__visual">
+      <div class="rc-elements rc-elements--hero">
+        <a class="rc-element" href="/assets/industrial-metals/copper-powder/"><span class="rc-element__n">29</span><span class="rc-element__s">Cu</span><span class="rc-element__l">Copper Powder <small>99.9999 %*<br>Lot #03-K-07</small></span></a>
+        <a class="rc-element rc-element--ni" href="/assets/industrial-metals/nickel-wire/"><span class="rc-element__n">28</span><span class="rc-element__s">Ni</span><span class="rc-element__l">Nickel Wire <small>99.9807 %*<br>0.025 mm</small></span></a>
+      </div>
+      <div class="rc-ledger" data-rc-ledger data-api="/wp-json/rc/v1">
+        <div class="rc-ledger__head"><span>Live integrity ledger</span><span class="rc-ledger__live">read from API</span></div>
+        <dl>
+          <div><dt>Audit chain</dt><dd data-k="seq">—</dd></div>
+          <div><dt>Chain head</dt><dd data-k="head">—</dd></div>
+          <div><dt>Immutability</dt><dd data-k="triggers">—</dd></div>
+          <div><dt>Registered units</dt><dd data-k="passports">—</dd></div>
+          <div><dt>Evidence files</dt><dd data-k="docs">—</dd></div>
+          <div><dt>Verified records</dt><dd data-k="verified">—</dd></div>
+        </dl>
+      </div>
+      <p class="rc-hero__foot">* Purity as stated on owner-supplied Certificates of Analysis — subject to documentary verification, independent assessment and final approval.</p>
+    </div>
+  </div>
+  <div class="rc-wrap">
+    <ul class="rc-trustbar" aria-label="Proposed trust framework">
+      <li><span>01</span>Industrial Asset Verification Framework</li>
+      <li><span>02</span>Custody Structure in Development</li>
+      <li><span>03</span>Reserve Reconciliation Architecture</li>
+      <li><span>04</span>Planned ERC-20 Infrastructure</li>
+    </ul>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tight">
+  <div class="rc-wrap">
+    [rc_disclosure]
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">The proposed ReserveChain model</p>
+        <h2>Evidence first. <em>Tokens only if approved.</em></h2>
+      </div>
+      <p class="rc-lead">ReserveChain is designing one coherent chain of trust between a physical lot of industrial metal and any future digital representation of it. Every claim on this platform carries a status, every document carries a fingerprint, and nothing is shown as confirmed until the evidence behind it is approved.</p>
+    </div>
+    <div class="rc-grid rc-grid--4">
+      <article class="rc-card" data-reveal><span class="rc-card__num">01 · Physical</span><h3>Documented material</h3><p>Ultra-high-purity copper powder and high-purity nickel wire, identified down to the container and the individual bobbin.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">02 · Evidence</span><h3>Fingerprinted documents</h3><p>Certificates, custody and ownership records are hashed with SHA-256 on upload; anyone can check a file against the registry.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">03 · Identity</span><h3>Digital Asset Passports</h3><p>Each lot, container and coil receives a passport assembled from evidence — never typed by hand — with a Merkle root over its documents.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">04 · Tokenization</span><h3>Planned ERC-20 layer</h3><p>Testnet smart contracts in which minting is fail-closed and bound to attested reserves. No token exists; nothing is offered.</p></article>
+    </div>
+    <div class="rc-statusline">
+      <span>Status of each claim:</span>
+      [rc_status s="proposed"] [rc_status s="in_development"] [rc_status s="pending_verification"] [rc_status s="verified"] [rc_status s="not_applicable"]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">How the proposed model will work</p>
+      <h2>From physical lot <em>to digital record</em></h2>
+      <p class="rc-lead">The proposed industrial-metals tokenization workflow. Each stage produces evidence; the next stage cannot begin until that evidence is reviewed under the four-eyes principle.</p>
+    </div>
+    <figure class="rc-diagram rc-diagram--chain" data-reveal>
+      <svg viewBox="0 0 1180 150" role="img" aria-label="Chain of trust: physical asset, verify, value, custody, digital asset passport, tokenize, reconcile, participate, redeem" font-family="Inter Tight, sans-serif">
+        <defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#C9773F"/><stop offset=".5" stop-color="#D5B167"/><stop offset="1" stop-color="#A9BBC8"/></linearGradient></defs>
+        <line x1="60" y1="60" x2="1120" y2="60" stroke="url(#hg)" stroke-width="2" stroke-dasharray="4 6"/>
+        <g text-anchor="middle" fill="#E7EBEE" font-size="13">
+          <g><circle cx="60" cy="60" r="26" fill="#0B1621" stroke="#C9773F" stroke-width="2"/><text x="60" y="65" fill="#E8A06A" font-size="14">1</text><text x="60" y="118">Physical asset</text></g>
+          <g><circle cx="192" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="192" y="65" fill="#D5B167" font-size="14">2</text><text x="192" y="118">Verify</text></g>
+          <g><circle cx="324" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="324" y="65" fill="#D5B167" font-size="14">3</text><text x="324" y="118">Value</text></g>
+          <g><circle cx="456" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="456" y="65" fill="#D5B167" font-size="14">4</text><text x="456" y="118">Custody</text></g>
+          <g><circle cx="588" cy="60" r="30" fill="#D5B167"/><text x="588" y="65" fill="#0B1621" font-size="14" font-weight="700">DAP</text><text x="588" y="118" fill="#fff">Digital Asset Passport</text></g>
+          <g><circle cx="720" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="720" y="65" fill="#D5B167" font-size="14">6</text><text x="720" y="118">Tokenize</text></g>
+          <g><circle cx="852" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="852" y="65" fill="#D5B167" font-size="14">7</text><text x="852" y="118">Reconcile</text></g>
+          <g><circle cx="984" cy="60" r="26" fill="#0B1621" stroke="#D5B167" stroke-width="2"/><text x="984" y="65" fill="#D5B167" font-size="14">8</text><text x="984" y="118">Participate</text></g>
+          <g><circle cx="1116" cy="60" r="26" fill="#0B1621" stroke="#A9BBC8" stroke-width="2"/><text x="1116" y="65" fill="#D2DDE5" font-size="14">9</text><text x="1116" y="118">Redeem</text></g>
+        </g>
+      </svg>
+      <figcaption>Chain of trust. Stages 6–9 are proposed and inactive until formally authorized.</figcaption>
+    </figure>
+    <ol class="rc-steps">
+      <li><div><h3>Asset Program Selection</h3><p>A defined industrial-metal program is selected with its product specification, unit structure (lot, container, coil) and documentation requirements.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Independent Material Verification</h3><p>Accredited laboratories test sampled material against the declared specification; certificates are fingerprinted and linked to the exact physical units sampled.</p></div>[rc_status s="pending_verification"]</li>
+      <li><div><h3>Ownership and Custody Documentation</h3><p>Title, chain-of-title and custody records are collected and reviewed before any asset can be considered for a reserve.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Digital Asset Passport</h3><p>Each approved unit receives a persistent passport combining specification, evidence, custody and status history — with QR access and machine-readable export.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Tokenization</h3><p>ERC-20 tokens or asset-program token series may be issued under the final legal and corporate structure, only against attested reserves and only after written authorization.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Administration and Reserve Reconciliation</h3><p>Token supply, physical inventory and custody records are reconciled; discrepancies surface as exceptions rather than being smoothed away.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Transfer and Redemption</h3><p>Eligible holders may, under the final terms, request physical redemption by container or coil, with tokens burned on release.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/how-it-works/">How ReserveChain Works</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div data-reveal>
+      <p class="rc-kicker">Initial asset program · Cu 29</p>
+      <h2>Ultra-High-Purity <em class="rc-cu">Copper Powder</em></h2>
+      <p class="rc-lead">An ultrafine copper powder documented by an owner-supplied Certificate of Analysis stating a chemical purity of 99.9999 % on a defined impurity basis.</p>
+      <dl class="rc-kv">
+        <div><dt>Lot</dt><dd class="rc-mono">#03-K-07</dd></div>
+        <div><dt>Declared quantity</dt><dd>2000 kg* — glass ampoules in cardboard boxes</dd></div>
+        <div><dt>Certificate</dt><dd>CoA No. 0004512 · 04.07.2022 · ICP/OES</dd></div>
+        <div><dt>Sampled unit</dt><dd>Box no. 20 · <a href="/passport/RC-CU-CTN-000001/">passport RC-CU-CTN-000001</a></dd></div>
+        <div><dt>Status</dt><dd>[rc_status s="pending_verification" label="Owner-supplied — pending verification"]</dd></div>
+      </dl>
+      <p class="rc-fine">* Net weight as declared by the customer to the laboratory. Particle size, morphology, density, oxygen and moisture are pending.</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/industrial-metals/copper-powder/">View Copper Program</a><a class="rc-btn" href="/passport/RC-CU-LOT-000001/">View Digital Asset Passport</a></div>
+    </div>
+    <div class="rc-program-visual rc-program-visual--cu" aria-hidden="true">
+      <svg viewBox="0 0 400 320"><defs><radialGradient id="cupile" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#F0B38A"/><stop offset=".55" stop-color="#C9773F"/><stop offset="1" stop-color="#5B2B10"/></radialGradient></defs><ellipse cx="200" cy="262" rx="150" ry="22" fill="#000" opacity=".45"/><path d="M60 258 C110 150, 160 92, 200 88 C240 92, 290 150, 340 258 Z" fill="url(#cupile)"/><g fill="#F6C9A6" opacity=".7"><circle cx="150" cy="200" r="1.6"/><circle cx="180" cy="160" r="1.2"/><circle cx="230" cy="180" r="1.4"/><circle cx="260" cy="220" r="1.2"/><circle cx="205" cy="130" r="1.1"/><circle cx="120" cy="236" r="1.3"/><circle cx="290" cy="240" r="1.5"/></g><text x="200" y="304" text-anchor="middle" fill="#8E99A5" font-family="Inter Tight" font-size="11" letter-spacing="2">SCHEMATIC — NOT A PRODUCT PHOTOGRAPH</text></svg>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div class="rc-program-visual rc-program-visual--ni" aria-hidden="true">
+      <svg viewBox="0 0 400 320"><defs><linearGradient id="nispool" x1="0" x2="1"><stop offset="0" stop-color="#5F7686"/><stop offset=".5" stop-color="#E1E9EF"/><stop offset="1" stop-color="#5F7686"/></linearGradient></defs><ellipse cx="200" cy="270" rx="120" ry="16" fill="#000" opacity=".45"/><rect x="110" y="70" width="180" height="190" rx="10" fill="#101C29" stroke="#2A3542"/><rect x="128" y="86" width="144" height="158" rx="6" fill="url(#nispool)"/><g stroke="#C9D6DF" stroke-width=".6" opacity=".55"><line x1="128" y1="96" x2="272" y2="96"/><line x1="128" y1="108" x2="272" y2="108"/><line x1="128" y1="120" x2="272" y2="120"/><line x1="128" y1="132" x2="272" y2="132"/><line x1="128" y1="144" x2="272" y2="144"/><line x1="128" y1="156" x2="272" y2="156"/><line x1="128" y1="168" x2="272" y2="168"/><line x1="128" y1="180" x2="272" y2="180"/><line x1="128" y1="192" x2="272" y2="192"/><line x1="128" y1="204" x2="272" y2="204"/><line x1="128" y1="216" x2="272" y2="216"/><line x1="128" y1="228" x2="272" y2="228"/></g><path d="M272 150 C 320 140, 340 120, 372 60" stroke="#D2DDE5" stroke-width=".5" fill="none"/><text x="200" y="304" text-anchor="middle" fill="#8E99A5" font-family="Inter Tight" font-size="11" letter-spacing="2">SCHEMATIC — NOT A PRODUCT PHOTOGRAPH</text></svg>
+    </div>
+    <div data-reveal>
+      <p class="rc-kicker">Initial asset program · Ni 28</p>
+      <h2>High-Purity <em class="rc-ni">Nickel Wire 0.025 mm</em></h2>
+      <p class="rc-lead">An ultrafine nickel wire described on its owner-supplied certificate as "Nickel wire 0,025 mm dia, DKRNT NP1", with a stated purity grade of 99.9807 %.</p>
+      <dl class="rc-kv">
+        <div><dt>Lot</dt><dd class="rc-mono">120/NP1</dd></div>
+        <div><dt>Declared quantity</dt><dd>5000 g* on 30 bobbins in 1 box</dd></div>
+        <div><dt>Certificate</dt><dd>CoA No. 0004368 · 19.10.2021 · ICP/MS and ICP/OES</dd></div>
+        <div><dt>Coil-level control</dt><dd>30 bobbin passports · sampled bobbins 8, 10, 19, 27 · <a href="/passport/RC-NI-COL-000008/">bobbin 8</a></dd></div>
+        <div><dt>Status</dt><dd>[rc_status s="pending_verification" label="Owner-supplied — pending verification"]</dd></div>
+      </dl>
+      <p class="rc-fine">* Net weight according to information given by the customer. Diameter tolerance, temper, tensile strength and elongation are pending.</p>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/assets/industrial-metals/nickel-wire/">View Nickel Program</a><a class="rc-btn" href="/passport/RC-NI-LOT-000001/">View Digital Asset Passport</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Illustrative asset-program presentation</p>
+        <h2>Every unit, <em>its own passport</em></h2>
+      </div>
+      <p class="rc-lead">These passports are generated live from the registry. Gaps are shown as gaps: the completeness meter counts only evidence that exists. The Illustrative Industrial Metal Asset Template shows the future format of a fully documented record.</p>
+    </div>
+    [rc_passports limit="6"]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/asset-registry/">View Asset Registry</a><a class="rc-btn" href="/passport/RC-LOT-000001/">Illustrative template <span class="rc-demo-badge">Illustrative</span></a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">Proposed independent verification framework</p>
+      <h2>Trust is built <em>before</em> an asset is tokenized</h2>
+      <p class="rc-lead">This describes a proposed framework subject to final legal, contractual, technical and operational confirmation.</p>
+      <ul class="rc-checks">
+        <li>Sampling by the laboratory itself, with the sampled container or bobbin recorded</li>
+        <li>Accredited methods (e.g. ISO/IEC 17025) — no laboratory has yet been appointed by ReserveChain</li>
+        <li>Certificates distinguished by provenance: owner-supplied, laboratory-direct, independently verified</li>
+        <li>Re-verification on custody transfer, ageing or any discrepancy</li>
+      </ul>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/verification/">View Verification Process</a></div>
+    </div>
+    <div class="rc-card" data-reveal>
+      <p class="rc-kicker">Try it now</p>
+      <h3>Verify a document without uploading it</h3>
+      <p>Drop any ReserveChain document — such as a Certificate of Analysis scan — on the verification page. Your browser computes its SHA-256 fingerprint locally and checks only the fingerprint against the registry. Change a single pixel and the check fails.</p>
+      <div class="rc-card__foot"><span class="rc-mono">SHA-256 · client-side</span><a href="/platform/verification/#verify">Open the verifier →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Proposed custody and storage framework</p>
+      <h2>Secure. Controlled. <em>Auditable.</em></h2>
+      <p class="rc-lead">This describes a proposed framework subject to final legal, contractual, technical and operational confirmation. No custodian, warehouse or insurer has been appointed.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Segregated, unit-level storage</h3><p>Materials intended to be held segregated and identified by container or bobbin, with tamper-seal numbers recorded at intake.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+      <article class="rc-card" data-reveal><h3>Chain of custody</h3><p>Every intake, transfer and release creates a custody record linked to the unit's passport and to a fingerprinted receipt.</p><div class="rc-card__foot">[rc_status s="in_development"]</div></article>
+      <article class="rc-card" data-reveal><h3>Inspection & release controls</h3><p>Periodic inspection, custodian reconciliation and dual-control release procedures for any future redemption.</p><div class="rc-card__foot">[rc_status s="proposed"]</div></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/platform/custody/">Explore Custody</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Proposed Proof-of-Reserves framework</p>
+        <h2>Reserves computed, <em>never claimed</em></h2>
+      </div>
+      <p class="rc-lead">The dashboard below is calculated in real time from the registry. Declared quantities stay separate from verified ones, and reserve coverage is only computed from an independent attestation — none has been published.</p>
+    </div>
+    [rc_por]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/proof-of-reserves/">View Reserve Report</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Proposed legal and asset-holding structure</p>
+      <h2>A structure designed <em>around the asset</em></h2>
+      <p class="rc-lead">ReserveChain is completing its Swiss corporate, legal and issuance structure. The roles shown are proposed and subject to legal advice; no party has been appointed and no entity named here should be assumed to exist.</p>
+      <div class="rc-btn-row"><a class="rc-btn" href="/company/legal-structure/">Proposed Legal &amp; Asset-Holding Structure</a></div>
+    </div>
+    <figure class="rc-diagram" data-reveal>
+      <svg viewBox="0 0 520 300" role="img" aria-label="Proposed structure: issuer, asset-holding vehicle, custodian, laboratory, token holders — all proposed" font-family="Inter Tight, sans-serif" font-size="12">
+        <g fill="#0B1621" stroke="#D5B167" stroke-width="1.2">
+          <rect x="190" y="18" width="140" height="52" rx="10"/><rect x="18" y="124" width="150" height="52" rx="10"/><rect x="352" y="124" width="150" height="52" rx="10"/><rect x="190" y="124" width="140" height="52" rx="10" stroke="#C9773F"/><rect x="190" y="228" width="140" height="52" rx="10" stroke="#A9BBC8"/>
+        </g>
+        <g fill="#E7EBEE" text-anchor="middle">
+          <text x="260" y="42">Issuer (Swiss)</text><text x="260" y="58" fill="#8E99A5" font-size="10">proposed · in formation</text>
+          <text x="93" y="148">Laboratory</text><text x="93" y="164" fill="#8E99A5" font-size="10">to be appointed</text>
+          <text x="427" y="148">Custodian</text><text x="427" y="164" fill="#8E99A5" font-size="10">to be appointed</text>
+          <text x="260" y="148">Asset-holding vehicle</text><text x="260" y="164" fill="#8E99A5" font-size="10">proposed</text>
+          <text x="260" y="252">Eligible holders</text><text x="260" y="268" fill="#8E99A5" font-size="10">future · subject to approval</text>
+        </g>
+        <g stroke="#3A4856" stroke-width="1.2" stroke-dasharray="4 5" fill="none"><path d="M260 70 V124"/><path d="M168 150 H190"/><path d="M330 150 H352"/><path d="M260 176 V228"/></g>
+      </svg>
+      <figcaption>Every box is proposed. Final roles, parties and rights depend on the definitive legal structure.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Proposed ERC-20 tokenization architecture</p>
+      <h2>Contracts that <em>fail closed</em></h2>
+      <p class="rc-lead">A testnet suite with automated tests. Nothing is deployed to Ethereum mainnet, no contract address is published and every tokenomics parameter is deliberately unset pending written approval.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><span class="rc-card__num">ReserveToken</span><h3>Controlled issuance</h3><p>Configurable name, symbol and cap. Minting is blocked unless backed by the reserve guard or an explicitly approved cap. Pausable, role-based, multisig-ready.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">ReserveGuard</span><h3>Mint ≤ attested reserve</h3><p>Attestors post reserve reports by hash; the mintable amount is derived from them and expires when an attestation goes stale.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">ComplianceRegistry</span><h3>Transfer restrictions</h3><p>Eligibility status, jurisdiction codes, expiry and freeze flags checked on every transfer, with EU/EEA codes blockable by configuration.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">RedemptionManager</span><h3>Escrow, then burn</h3><p>Redemption requests escrow tokens, pass compliance review and burn only on approved physical release. Disabled by default.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">Treasury</span><h3>Limits & timelock</h3><p>Daily withdrawal limits and an optional timelock queue for large movements, administered by role.</p></article>
+      <article class="rc-card" data-reveal><span class="rc-card__num">AuditAnchor</span><h3>Audit trail on-chain</h3><p>Periodically commits the head of the platform's hash-chained audit log, so even a full database rewrite would be detectable.</p></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/platform/tokenization/">Learn About Tokenization</a><a class="rc-btn" href="/resources/contract-addresses/">Contract addresses: not deployed</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Proposed physical-redemption process</p>
+      <h2>From digital position <em>to physical delivery</em></h2>
+      <p class="rc-lead">This describes a proposed framework subject to final legal, contractual, technical and operational confirmation. Redemption is not available.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Redemption request</h3><p>An eligible holder selects a program and, where permitted, specific containers or coils.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Eligibility & compliance re-check</h3><p>KYC/KYB, sanctions and jurisdiction are re-screened at the time of request.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Unit verification</h3><p>The selected units' passports, seals and custody records are reconciled before release.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Settlement and burn</h3><p>Escrowed tokens are burned on-chain; the burn transaction is written to the unit's passport.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Custody release, logistics and delivery</h3><p>Release under dual control, customs documentation and delivery confirmation. Fees and thresholds to be determined.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+    <div class="rc-btn-row"><a class="rc-btn" href="/platform/redemption/">How Redemption Works</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap rc-split">
+    <div>
+      <p class="rc-kicker">Enterprise tokenization services</p>
+      <h2>The same evidence engine, <em>for your assets</em></h2>
+      <p class="rc-lead">The registry, passport engine, verification tooling and compliance controls behind ReserveChain are being designed as modules that institutions could license or use as a managed service.</p>
+      <ul class="rc-list"><li>Asset registry and Digital Asset Passports</li><li>Document fingerprinting and public verification</li><li>Tamper-evident audit trail with on-chain anchoring</li><li>Compliance controls, eligibility and transfer restrictions</li><li>APIs, white-label portals and reporting</li></ul>
+      <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/enterprise/">Enterprise Services</a><a class="rc-btn" href="/enterprise/licensing-white-label/">Technology Licensing</a></div>
+    </div>
+    <div class="rc-card" data-reveal>
+      <p class="rc-kicker">Asset owners &amp; originators</p>
+      <h3>Bring documented material into the registry</h3>
+      <p>Producers, owners and institutional holders of industrial metals can submit a program for due diligence: documentation review, independent testing, valuation, custody and passport creation — before any tokenization path is considered.</p>
+      <div class="rc-card__foot"><span>Due diligence first</span><a href="/enterprise/asset-owners/">Submit an Asset →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Risks and limitations</p>
+      <h2>Understand the risks <em>before participating</em></h2>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal><h3>Development stage</h3><p>The corporate and legal structure, custody, insurance, valuation and token terms are not final and may change or not proceed.</p></article>
+      <article class="rc-card" data-reveal><h3>Evidence risk</h3><p>Current certificates are owner-supplied and not yet independently verified. Declared weights come from the customer, not the laboratory.</p></article>
+      <article class="rc-card" data-reveal><h3>Market & liquidity</h3><p>Industrial-metal values move; no liquidity, price, return or appreciation is promised or implied.</p></article>
+      <article class="rc-card" data-reveal><h3>Regulatory</h3><p>Token classification and permitted jurisdictions are subject to legal review; EU/EEA residents are not intended participants.</p></article>
+      <article class="rc-card" data-reveal><h3>Technology</h3><p>Smart contracts, wallets and blockchains carry technical risk. Contracts are unaudited and testnet-only.</p></article>
+      <article class="rc-card" data-reveal><h3>Redemption & logistics</h3><p>Any future physical redemption depends on custody, logistics, customs and fees that are yet to be determined.</p></article>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/legal/risk-disclosure/">Read the full Risk Disclosure</a></div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div><p class="rc-kicker">Documentation centre</p><h2>Every document, <em>fingerprinted</em></h2></div>
+      <p class="rc-lead">Each file in the library carries its SHA-256 fingerprint. Status pills show whether a document is a template, owner-supplied evidence or verified.</p>
+    </div>
+    [rc_documents]
+    <div class="rc-btn-row"><a class="rc-btn rc-btn--primary" href="/resources/documentation/">View Documents</a><a class="rc-btn" href="/resources/whitepaper/">View Whitepaper</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-split rc-split--wide">
+    <div>
+      <p class="rc-kicker">FAQ</p>
+      <h2>Questions, <em>answered plainly</em></h2>
+      <div class="rc-faq">
+        <details><summary>Can I buy ReserveChain tokens today?</summary><div><p>No. ReserveChain is in development. No tokens exist, none are offered or sold, and registering interest creates no allocation, reservation or entitlement.</p></div></details>
+        <details><summary>Are the copper and nickel materials verified?</summary><div><p>The programs are documented by owner-supplied Certificates of Analysis, which are fingerprinted and published with an exact transcription. They have not yet been independently verified by ReserveChain; their status is shown as pending verification.</p></div></details>
+        <details><summary>Where are the metals stored and are they insured?</summary><div><p>No custodian, warehouse or insurer has been appointed. Custody and insurance are proposed arrangements, subject to final approval.</p></div></details>
+        <details><summary>What is a Digital Asset Passport?</summary><div><p>A public, evidence-derived record for a lot, container or coil: specification, certificates, custody and status history, a Merkle root over its documents, a QR code and a JSON export.</p></div></details>
+        <details><summary>Can residents of the EU or EEA participate?</summary><div><p>ReserveChain does not currently intend to offer tokens to residents of, or persons located in, the EU/EEA.</p></div></details>
+        <details><summary>How do I know a document really comes from ReserveChain?</summary><div><p>Check its SHA-256 fingerprint on the Verification page. The check runs in your browser; the file is never uploaded.</p></div></details>
+      </div>
+      <div class="rc-btn-row"><a class="rc-btn" href="/resources/faq/">All FAQs</a></div>
+    </div>
+    <div id="waitlist">
+      <p class="rc-kicker">Project waitlist</p>
+      <h2>Receive <em>project updates</em></h2>
+      <p class="rc-lead">Receive project-development updates and future eligibility information. Registration does not constitute an investment, token purchase or reservation of industrial metals.</p>
+      [rc_waitlist]
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div><p class="rc-kicker">Corporate development status</p><h2>Transparent development, <em>stated precisely</em></h2></div>
+      <p class="rc-lead">What exists today, what is in progress and what has not started. Statuses on this site never run ahead of the evidence.</p>
+    </div>
+    <div class="rc-claims">
+      <div><strong>Swiss corporate and issuance structure</strong>[rc_status s="in_development"]<small>In development with advisers; no entity details are published until final.</small></div>
+      <div><strong>Website, CMS, Industrial Metals Registry and Digital Asset Passports</strong>[rc_status s="in_development" label="Built — pre-launch"]<small>Operational in this pre-launch environment, with four-eyes publication workflow.</small></div>
+      <div><strong>Tamper-evident audit trail</strong>[rc_status s="in_development" label="Built — pre-launch"]<small>Hash-chained, append-only, database-enforced; on-chain anchoring prepared for testnet.</small></div>
+      <div><strong>ERC-20 smart-contract suite</strong>[rc_status s="in_development"]<small>Automated tests passing; testnet only; independent audit required before any use.</small></div>
+      <div><strong>iOS and Android applications</strong>[rc_status s="in_development"]<small>Connected to the same API; TestFlight and Google Play testing pending.</small></div>
+      <div><strong>Independent verification, custody, insurance, valuation</strong>[rc_status s="proposed"]<small>No laboratory, custodian, insurer or valuer has been appointed.</small></div>
+      <div><strong>Token issuance, participation, redemption</strong>[rc_status s="proposed"]<small>Inactive until formally authorized.</small></div>
+    </div>
+    <div class="rc-btn-row"><a class="rc-btn" href="/company/development-status/">Corporate Development Status</a><a class="rc-btn" href="/company/roadmap/">Roadmap</a></div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap rc-grid rc-grid--2">
+    <article class="rc-card" data-reveal>
+      <p class="rc-kicker">Official contact information</p>
+      <h3>Contact ReserveChain.io</h3>
+      <p>The only official website is <strong>reservechain.io</strong>. Use the contact form for general, enterprise, asset-owner, media, compliance or security enquiries. Additional official channels will be listed in the Official Channels Directory once confirmed.</p>
+      <div class="rc-card__foot"><a href="/company/official-channels/">Official Channels Directory</a><a href="/company/contact/">Contact ReserveChain →</a></div>
+    </article>
+    <article class="rc-card rc-card--alert" data-reveal>
+      <p class="rc-kicker">Anti-fraud notice</p>
+      <h3>No tokens are being sold — anywhere</h3>
+      <p>ReserveChain never asks for private keys, seed phrases, passwords or payments, and there is no presale. Anyone offering ReserveChain tokens, allocations or discounts is not acting for ReserveChain. Verify any document's fingerprint before trusting it.</p>
+      <div class="rc-card__foot"><span>Report suspicious activity</span><a href="/legal/anti-fraud/">Anti-Fraud Notice →</a></div>
+    </article>
+  </div>
+</section>

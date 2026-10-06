@@ -14,6 +14,7 @@ while ( have_posts() ) :
 	$slug    = get_post_field( 'post_name' );
 	$excerpt = has_excerpt() ? get_the_excerpt() : '';
 	$kicker  = get_post_meta( get_the_ID(), '_rct_kicker', true );
+	$kicker  = ( 'en' !== rct_lang() ? get_post_meta( get_the_ID(), '_rc_i18n_' . rct_lang() . '_kicker', true ) : '' ) ?: $kicker;
 	?>
 	<section class="rc-pagehero rc-pagehero--<?php echo esc_attr( $slug ); ?>">
 		<div class="rc-wrap">

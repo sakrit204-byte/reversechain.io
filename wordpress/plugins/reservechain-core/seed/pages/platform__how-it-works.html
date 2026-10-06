@@ -1,0 +1,213 @@
+<!--
+title: How ReserveChain Works
+excerpt: From physical asset to digital ownership infrastructure. Eight gated stages take an industrial-metal unit from source to redemption. Each stage has a named performer, the evidence it must produce, the controls that apply and what participants are able to see.
+kicker: Platform · Proposed operating lifecycle
+order: 1
+-->
+
+<section class="rc-section rc-section--dark">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">The lifecycle</p>
+      <h2>Eight stages. <em>Each one gated by evidence.</em></h2>
+      <p class="rc-lead">A unit moves to the next stage only when the evidence for the current stage exists and has been approved. Stages one to five act on the physical asset and its records. Stages six to eight act on the digital layer and can never run ahead of the physical record.</p>
+    </div>
+    <figure class="rc-diagram">
+      <svg viewBox="0 0 1000 250" role="img" aria-labelledby="rc-lc-title rc-lc-desc" font-family="Inter Tight, sans-serif">
+        <title id="rc-lc-title">ReserveChain asset lifecycle</title>
+        <desc id="rc-lc-desc">Eight linked nodes: Identify and Source, Verify, Value, Custody, Passport, Tokenize, Reconcile, Redeem. A return arrow runs from Reconcile back to Custody, and a burn arrow runs from Redeem back to Tokenize.</desc>
+        <defs>
+          <marker id="rc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D5B167"/></marker>
+          <marker id="rc-arr-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C9773F"/></marker>
+        </defs>
+        <rect x="20" y="48" width="470" height="104" rx="14" fill="none" stroke="#1C2A38" stroke-dasharray="3 5"/>
+        <rect x="510" y="48" width="470" height="104" rx="14" fill="none" stroke="#1C2A38" stroke-dasharray="3 5"/>
+        <text x="30" y="40" fill="#A9BBC8" font-size="11" letter-spacing="1.2">PHYSICAL AND EVIDENCE LAYER</text>
+        <text x="520" y="40" fill="#A9BBC8" font-size="11" letter-spacing="1.2">DIGITAL AND LEDGER LAYER</text>
+        <g stroke="#D5B167" stroke-width="2" marker-end="url(#rc-arr)">
+          <line x1="96" y1="100" x2="132" y2="100"/>
+          <line x1="216" y1="100" x2="252" y2="100"/>
+          <line x1="336" y1="100" x2="372" y2="100"/>
+          <line x1="456" y1="100" x2="544" y2="100"/>
+          <line x1="628" y1="100" x2="664" y2="100"/>
+          <line x1="748" y1="100" x2="784" y2="100"/>
+          <line x1="868" y1="100" x2="904" y2="100"/>
+        </g>
+        <g fill="#0E1620" stroke-width="2">
+          <circle cx="60" cy="100" r="34" stroke="#C9773F"/>
+          <circle cx="180" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="300" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="420" cy="100" r="34" stroke="#D5B167"/>
+          <circle cx="580" cy="100" r="34" stroke="#D5B167" stroke-width="3"/>
+          <circle cx="700" cy="100" r="34" stroke="#A9BBC8"/>
+          <circle cx="820" cy="100" r="34" stroke="#A9BBC8"/>
+          <circle cx="940" cy="100" r="34" stroke="#C9773F"/>
+        </g>
+        <g fill="#E7EBEE" font-size="12" font-weight="600" text-anchor="middle">
+          <text x="60" y="96">Identify</text><text x="60" y="111">Source</text>
+          <text x="180" y="104">Verify</text>
+          <text x="300" y="104">Value</text>
+          <text x="420" y="104">Custody</text>
+          <text x="580" y="104">Passport</text>
+          <text x="700" y="104">Tokenize</text>
+          <text x="820" y="104">Reconcile</text>
+          <text x="940" y="104">Redeem</text>
+        </g>
+        <path d="M820 136 C 820 200, 420 200, 420 140" fill="none" stroke="#A9BBC8" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#rc-arr)"/>
+        <text x="620" y="196" fill="#A9BBC8" font-size="11" text-anchor="middle">custodian count and passport records reconciled against supply</text>
+        <path d="M940 66 C 940 14, 700 14, 700 62" fill="none" stroke="#C9773F" stroke-width="1.5" marker-end="url(#rc-arr-c)"/>
+        <text x="820" y="22" fill="#C9773F" font-size="11" text-anchor="middle">burn on redemption</text>
+        <g fill="#A9BBC8" font-size="10.5" text-anchor="middle">
+          <text x="60" y="160">owner</text><text x="180" y="160">laboratory</text><text x="300" y="160">valuer</text><text x="420" y="160">custodian</text>
+          <text x="580" y="160">registry</text><text x="700" y="160">contracts</text><text x="820" y="160">reserve engine</text><text x="940" y="160">participant</text>
+        </g>
+      </svg>
+      <figcaption>Proposed lifecycle. Every arrow is a gate that needs approved evidence. The two loops show the controls that keep the ledger and the physical inventory consistent: reconciliation, and the burn performed before release. The performers shown are roles; no third party has been appointed.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head rc-section__head--split">
+      <div>
+        <p class="rc-kicker">Stage by stage</p>
+        <h2>What happens, <em>and what it proves</em></h2>
+      </div>
+      <p class="rc-lead">This describes a proposed operating framework, subject to final legal, contractual, technical and operational confirmation. The status at the right of each stage shows how far that stage has been built today.</p>
+    </div>
+    <ol class="rc-steps">
+      <li><div><h3>Identify and source</h3><p>The asset owner or originator submits the unit: material, form, lot or batch reference, declared quantity, packaging, origin and the documents they hold. The registry gives it a permanent identifier, for example <span class="rc-mono">RC-CU-LOT-000001</span>, before any claim is published.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Verify</h3><p>Sampling and testing are carried out by an accredited laboratory independent of the owner. The certificate is checked against the issuer, and its document fingerprint is recorded. Until this is done, owner-supplied certificates are shown as owner-supplied.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Value</h3><p>A qualified valuer applies a stated methodology and benchmark to the verified specification. The valuation records its date, currency and source, and each valuation carries an expiry.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Custody</h3><p>The unit is received into segregated custody, weighed, sealed and recorded down to container or bobbin level. The custodian issues a receipt that links back to the registry identifier.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Digital Asset Passport</h3><p>The registry assembles every approved evidence record for the unit into a passport. The passport is sealed with a SHA-256 Merkle root and published only after four-eyes approval.</p></div>[rc_status s="in_development"]</li>
+      <li><div><h3>Tokenize</h3><p>If the final legal structure permits it, ERC-20 units could be minted against attested reserves only. Minting is blocked by default and limited by the reserve guard.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Reconcile</h3><p>Token supply, burned supply, custodian inventory and passport records are compared on a fixed cycle. Any difference opens an exception and blocks further minting.</p></div>[rc_status s="proposed"]</li>
+      <li><div><h3>Redeem</h3><p>An eligible holder requests physical delivery. Tokens are escrowed and then burned, and only after that is the specific unit released from custody.</p></div>[rc_status s="proposed"]</li>
+    </ol>
+  </div>
+</section>
+
+<section class="rc-section rc-section--tint">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Responsibility matrix</p>
+      <h2>Who performs it, what it produces, <em>who can see it</em></h2>
+      <p class="rc-lead">Separating duties is the main control. No single party can identify, verify, hold and release the same unit. Third-party roles below are functions to be appointed; no laboratory, valuer or custodian has been engaged.</p>
+    </div>
+    <div class="rc-table-wrap">
+      <table class="rc-table">
+        <thead>
+          <tr><th>Stage</th><th>Performed by</th><th>Evidence generated</th><th>Controls</th><th>Participant visibility</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Identify / Source</strong></td><td>Asset owner or originator; registry manager</td><td>Registry record, declared quantity, owner documents, chain-of-title records</td><td>KYB on the owner; unique ID issued; fields stay unpublished until evidenced</td><td>Program and lot identifiers; declared figures labelled "declared"</td></tr>
+          <tr><td><strong>Verify</strong></td><td>Accredited independent laboratory (to be appointed)</td><td>Sampling record, Certificate of Analysis, method and standard reference, document hash</td><td>Sampling witnessed and sealed; issuer confirmation; fingerprint recorded</td><td>Certificate, assay grid and fingerprint; verification status per unit</td></tr>
+          <tr><td><strong>Value</strong></td><td>Qualified independent valuer (to be appointed)</td><td>Valuation report: methodology, benchmark, currency, date</td><td>Reviewer approval; stale-valuation alert at expiry</td><td>Valuation date and status; amounts only once approved for publication</td></tr>
+          <tr><td><strong>Custody</strong></td><td>Professional custodian (to be appointed)</td><td>Warehouse receipt, seal numbers, weights, inventory report, inspection log</td><td>Segregation; dual control; periodic counts</td><td>Custody status and inspection dates; location shown at the level approved</td></tr>
+          <tr><td><strong>Passport</strong></td><td>ReserveChain registry; reviewer; compliance officer</td><td>Digital Asset Passport, SHA-256 Merkle root, version history</td><td>Four-eyes approval bound to a content fingerprint; audit-trail entry</td><td>Full public passport, QR link and downloadable JSON evidence</td></tr>
+          <tr><td><strong>Tokenize</strong></td><td>Issuer under the final legal structure; multisig signers</td><td>Mint transaction, reserve attestation hash, token-program record</td><td>Reserve guard limit; compliance hook; pause; role separation</td><td>Supply figures and program parameters once approved; currently "Pending"</td></tr>
+          <tr><td><strong>Reconcile</strong></td><td>Reserve engine; compliance officer; independent attestor (to be appointed)</td><td>Reserve report, reconciliation log, exception register</td><td>Exception blocks minting; attestation required before "verified" is shown</td><td>Proof-of-Reserves dashboard: declared and verified shown separately</td></tr>
+          <tr><td><strong>Redeem</strong></td><td>Eligible holder; compliance officer; custodian; logistics provider</td><td>Request, eligibility decision, burn transaction, release order, delivery record</td><td>Escrow before burn; burn before release; unit-level selection</td><td>Request status in the portal; passport history updated at completion</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-split rc-split--wide">
+      <div>
+        <p class="rc-kicker">Gate conditions</p>
+        <h2>What must be true <em>before a unit moves on</em></h2>
+        <p class="rc-lead">Each gate is a condition the software checks. It is not left to judgement in the moment. If a condition is unmet, the unit stays at its current stage and the passport shows why.</p>
+      </div>
+      <div>
+        <ul class="rc-checks">
+          <li><strong>Into Verify:</strong> a registry identifier exists and the owner's KYB and chain-of-title documents are on file.</li>
+          <li><strong>Into Value:</strong> an approved verification record links to a certificate whose fingerprint matches the stored file.</li>
+          <li><strong>Into Custody:</strong> the custodian's received weight and seal numbers match the verified lot, within tolerance.</li>
+          <li><strong>Into Passport:</strong> each stage record is approved by someone other than the person who entered it.</li>
+          <li><strong>Into Tokenize:</strong> a current reserve attestation exists, and the guard's ratio and staleness window are configured and approved.</li>
+          <li><strong>Into Redeem:</strong> the holder is eligible, the unit is unencumbered, and the tokens are held in escrow.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section rc-section--cream">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Applied to the initial programs</p>
+      <h2>Where each program <em>sits today</em></h2>
+      <p class="rc-lead">The two initial programs have completed stage one and hold owner-supplied evidence that belongs to stage two. That evidence still has to pass independent verification. Nothing beyond that point has started.</p>
+    </div>
+    <div class="rc-grid rc-grid--2">
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Cu 29</span>
+        <h3>Copper Powder · Lot #03-K-07</h3>
+        <p>The owner-supplied IGAS Certificate of Analysis 0004512 (04.07.2022) records a 10 g sample taken from Box no. 20 and analysed by ICP/OES. It states a purity of 99.9999 %. The 2000 kg net weight is as declared by the customer.</p>
+        <dl class="rc-kv">
+          <div><dt>Identify / Source</dt><dd>[rc_status s="in_development" label="Registered"]</dd></div>
+          <div><dt>Verify</dt><dd>[rc_status s="pending_verification"]</dd></div>
+          <div><dt>Value · Custody · Tokenize</dt><dd>[rc_status s="proposed"]</dd></div>
+        </dl>
+        <div class="rc-card__foot"><a href="/passport/RC-CU-LOT-000001/">View Digital Asset Passport →</a></div>
+      </article>
+      <article class="rc-card" data-reveal>
+        <span class="rc-card__num">Ni 28</span>
+        <h3>Nickel Wire 0.025 mm · Lot 120/NP1</h3>
+        <p>The owner-supplied IGAS Certificate of Analysis 0004368 (19.10.2021) records a 0.8 g sample taken from bobbins 8, 10, 19 and 27 and analysed by ICP/MS and ICP/OES. It states a purity of 99.9807 %. The 5000 g net weight across 30 bobbins is as declared by the customer.</p>
+        <dl class="rc-kv">
+          <div><dt>Identify / Source</dt><dd>[rc_status s="in_development" label="Registered"]</dd></div>
+          <div><dt>Verify</dt><dd>[rc_status s="pending_verification"]</dd></div>
+          <div><dt>Value · Custody · Tokenize</dt><dd>[rc_status s="proposed"]</dd></div>
+        </dl>
+        <div class="rc-card__foot"><a href="/passport/RC-NI-LOT-000001/">View Digital Asset Passport →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-section__head">
+      <p class="rc-kicker">Participant visibility</p>
+      <h2>Public, participant <em>and restricted</em></h2>
+      <p class="rc-lead">Transparency does not mean everything is published. Record fields carry their own visibility, so commercially sensitive or personal data stays restricted while the evidence that supports a claim remains open to inspection.</p>
+    </div>
+    <div class="rc-grid rc-grid--3">
+      <article class="rc-card" data-reveal>
+        <h3>Public</h3>
+        <ul class="rc-list"><li>Passport identifiers and specifications</li><li>Certificates and their SHA-256 fingerprints</li><li>Verification, custody and reserve status</li><li>Proof-of-Reserves summary</li><li>Audit-trail chain head</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Eligible participants (planned)</h3>
+        <ul class="rc-list"><li>Own holdings and transaction history</li><li>Redemption requests and their status</li><li>Program documentation behind the portal</li><li>Notices relevant to their holdings</li></ul>
+      </article>
+      <article class="rc-card" data-reveal>
+        <h3>Restricted</h3>
+        <ul class="rc-list"><li>KYC/KYB files and screening results</li><li>Acquisition cost and commercial terms</li><li>Exact vault references, where withheld</li><li>Internal reviewer notes</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="rc-section">
+  <div class="rc-wrap">
+    <div class="rc-cta">
+      <div>
+        <h2>See the evidence behind each stage</h2>
+        <p>Each stage has its own page with the detailed controls. The verification framework is the place to start.</p>
+      </div>
+      <div class="rc-btn-row">
+        <a class="rc-btn rc-btn--primary" href="/platform/verification/">View Verification Process</a>
+        <a class="rc-btn rc-btn--cream" href="/platform/custody/">Explore Custody</a>
+        <a class="rc-btn" href="/platform/redemption/">How Redemption Works</a>
+      </div>
+    </div>
+  </div>
+</section>
